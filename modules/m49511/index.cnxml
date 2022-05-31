@@ -1,0 +1,3745 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0120-Moving Your Sprite and using the Debug Class</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49511</md:content-id>
+  <md:title>Xna0120-Moving Your Sprite and using the Debug Class</md:title>
+  <md:abstract>Learn how to move your sprite. Also learn how to use methods of the Debug class.</md:abstract>
+  <md:uuid>0d4ca499-a1ce-4fc4-8e1e-5584ce0b341b</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Sun May 08 09:19:08 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="Skeleton_code">
+
+Skeleton code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Override_some_or_all_of_five_methods">
+
+Override some or all of five methods
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1009">
+<link id="a1010" target-id="Moving_and_bouncing_sprite">
+
+Moving and bouncing sprite
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="The_Debug_class">
+
+The Debug class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1012">
+<link id="a1013" target-id="Making_the_sprite_move">
+
+Making the sprite move
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1013">
+<link id="a1014" target-id="The_game_loop">
+
+The game loop
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="Distance_to_move">
+
+Distance to move
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="How_often_is_the_Update_method_called">
+
+How often is the Update method called?
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1016">
+<link id="a1017" target-id="If_the_IsFixedTimeStep_property_is_false">
+
+If the IsFixedTimeStep property is false...
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="If_the_IsFixedTimeStep_property_is_true">
+
+If the IsFixedTimeStep property is true...
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="If_the_Draw_method_is_not_called">
+
+If the Draw method is not called...
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="The_overridden_Update_method">
+
+The overridden Update method
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1020">
+<link id="a1021" target-id="Xbox_360_code">
+
+Xbox 360 code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="Test_for_sprite_out_of_bounds_horizontally">
+
+Test for sprite out of bounds horizontally
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="Test_for_a_collision_of_the_sprite_with_an_edge">
+
+Test for a collision of the sprite with an edge
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Test_for_sprite_out_of_bounds_vertically">
+
+Test for sprite out of bounds vertically
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Change_the_current_position_of_the_sprite">
+
+Change the current position of the sprite
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="Move_to_the_right_and_down">
+
+Move to the right and down
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="Reverse_the_direction_of_motion">
+
+Reverse the direction of motion
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="No_visible_movement_at_this_time">
+
+No visible movement at this time
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="The_remainder_of_the_overridden_Update_method">
+
+The remainder of the overridden Update method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="Using_the_Debug_class">
+
+Using the Debug class
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1030">
+<link id="a1031" target-id="Namespace_considerations">
+
+Namespace considerations
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Overridden_LoadContent_method">
+
+Overridden LoadContent method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="Overloaded_WriteLine_methods">
+
+Overloaded WriteLine methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="Execute_once_only">
+
+Execute once only
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="The_output">
+
+The output
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1041" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+	
+
+<section id="h21000">
+<title>
+
+          
+
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+          
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1010" list-type="bulleted">
+
+		
+
+<item id="li1040">
+<link id="a1042" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Moving and bouncing sprite.
+
+</item>
+
+
+		
+
+<item id="li1041">
+<link id="a1043" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Debug output window.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1011" list-type="bulleted">
+
+		
+
+<item id="li1042">
+<link id="a1044" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Skeleton code for a new Windows Game project.
+
+</item>
+
+
+		
+
+<item id="li1043">
+<link id="a1045" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Declare variables that specify the incremental distance to move.
+
+</item>
+
+
+		
+
+<item id="li1044">
+<link id="a1046" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Beginning of the overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1045">
+<link id="a1047" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Test for sprite out of bounds horizontally.
+
+</item>
+
+
+		
+
+<item id="li1046">
+<link id="a1048" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Test for sprite out of bounds vertically.
+
+</item>
+
+
+		
+
+<item id="li1047">
+<link id="a1049" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Change the current position of the sprite.
+
+</item>
+
+
+		
+
+<item id="li1048">
+<link id="a1050" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. The remainder of the overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1049">
+<link id="a1051" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1050">
+<link id="a1052" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. The class named Game1 for the project named XNA0120Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+The earlier module titled 
+
+<link id="a1053" url="http://cnx.org/contents/GY804-eY:iAGEPWAd">
+
+Xna0118-The XNA Framework and the Game Class
+
+</link>
+
+
+<emphasis id="em1001" effect="italics">
+ 
+
+</emphasis>
+used a very 
+simple XNA program to teach many of the details regarding the incorporation of 
+the XNA framework into the object-oriented C# programming language.
+
+</para>
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="Skeleton_code" effect="bold">
+
+Skeleton code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1006">
+When you create a new 
+
+<emphasis id="strong1001" effect="bold">
+Windows Game
+
+</emphasis>
+ project using Visual C#, 
+a source code file named 
+
+<emphasis id="strong1002" effect="bold">
+Game1.cs
+
+</emphasis>
+ is automatically created and 
+opened in the editor window. The file contains skeleton code for a windows game 
+based on XNA. 
+
+<link id="a1054" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ shows the skeleton code contained in the file named
+
+
+<emphasis id="strong1003" effect="bold">
+Game1
+
+</emphasis>
+ (with most of the comments deleted for brevity).
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1007">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Skeleton code for a new Windows Game project.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+namespace WindowsGame2
+{
+    public class Game1 : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // TODO: use this.Content to load your game content here
+        }
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Back==ButtonState.Pressed)
+                this.Exit();
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
+        }
+    }
+}</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Override_some_or_all_of_five_methods" effect="bold">
+
+Override some or all of five methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+To create a new game program, you override some or all of the five methods shown in 
+
+<link id="a1055" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1009">
+The program that I explained in the earlier module overrode the 
+
+<emphasis id="strong1004" effect="bold">
+
+LoadContent
+
+</emphasis>
+ and 
+
+<emphasis id="strong1005" effect="bold">
+Draw
+
+</emphasis>
+ methods in such a way as to 
+create a sprite and display it in the upper-left corner of the game window. 
+However, that program did not override the 
+
+<emphasis id="strong1006" effect="bold">
+Update
+
+</emphasis>
+ method. The 
+sprite did not move and was not animated.
+
+</para>
+
+
+
+
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<section id="h21003">
+<title>
+<emphasis id="Moving_and_bouncing_sprite" effect="bold">
+
+Moving and bouncing sprite
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+The 
+
+<emphasis id="strong1007" effect="bold">
+Update
+
+</emphasis>
+ method is used to implement game logic. The
+
+
+<emphasis id="strong1008" effect="bold">
+Draw
+
+</emphasis>
+ method is used to render the current state of the game on 
+the computer screen. In this module, I will override the 
+
+<emphasis id="strong1009" effect="bold">
+Update
+
+</emphasis>
+ 
+method to cause the sprite to move around the game window and to bounce off the 
+edges of the game window.
+
+</para>
+
+
+
+
+
+<para id="p1011">
+<link id="a1056" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows a reduced screen shot of the sprite moving in the game window.
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1012">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Moving and bouncing sprite.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0120ax.jpg" width="407" height="255"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="The_Debug_class" effect="bold">
+
+The Debug class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1013">
+On a completely unrelated note, I will introduce you to the 
+
+<emphasis id="strong1010" effect="bold">
+Debug
+
+</emphasis>
+ 
+class and show you how to use the 
+
+<emphasis id="strong1011" effect="bold">
+WriteLine
+
+</emphasis>
+ method of the
+
+
+<emphasis id="strong1012" effect="bold">
+Debug
+
+</emphasis>
+ class to display information while the program is 
+running.
+
+</para>
+
+
+
+
+
+<para id="p1014">
+<link id="a1057" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ shows a screen shot of the 
+
+<emphasis id="strong1013" effect="bold">
+Debug
+
+</emphasis>
+ output window in 
+the lower left corner of the Visual C# IDE. I will explain the values that you 
+see in 
+
+<link id="a1058" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ later in this module.
+
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1015">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. Debug output window.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="Missing image" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0120bx.jpg" width="501" height="189"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1016">
+I will explain the code in fragments, and I will only explain those fragments 
+that are different from the code that I explained in the earlier module titled
+
+
+<link id="a1059" url="http://cnx.org/contents/GY804-eY:iAGEPWAd">
+
+Xna0118-The XNA Framework and the Game Class
+
+</link>
+
+. A complete listing of the code 
+for the class named 
+
+<emphasis id="strong1014" effect="bold">
+Game1
+
+</emphasis>
+ is provided in 
+
+<link id="a1060" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ near the end 
+of the module.
+
+</para>
+
+
+
+
+
+<section id="h21005">
+<title>
+<emphasis id="Making_the_sprite_move" effect="bold">
+
+Making the sprite move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1017">
+Sprite motion in an XNA game is accomplished by changing the current position 
+coordinates of the sprite in the 
+
+<emphasis id="strong1015" effect="bold">
+Update
+
+</emphasis>
+ method and drawing the 
+sprite in its new position in the 
+
+<emphasis id="strong1016" effect="bold">
+Draw
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="The_game_loop" effect="bold">
+
+The game loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+You learned about the XNA game loop in the earlier module
+
+<emphasis id="em1002" effect="italics">
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1019">
+In order to make the sprite move, we need to override the 
+
+<emphasis id="strong1017" effect="bold">
+Update
+
+</emphasis>
+ 
+method to cause the sprite's position coordinates to change during each 
+iteration of the game loop. The code to accomplish this begins in 
+
+<link id="a1061" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1020">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Declare variables that specify the incremental distance to move.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">    //Specify the distance in pixels that the sprite
+    // will move during each iteration.
+    int stepsX = 5;
+    int stepsY = 3;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="Distance_to_move" effect="bold">
+
+Distance to move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1021">
+<link id="a1062" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ declares and populates two instance variables that specify the 
+incremental distance that the sprite will move each time the 
+
+<emphasis id="strong1018" effect="bold">
+Update
+
+</emphasis>
+ 
+method is called. The horizontal and vertical incremental distances are 5 pixels 
+and 3 pixels respectively.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+Note that these two variables are 
+	physically declared between the 
+
+<emphasis id="strong1019" effect="bold">
+UnloadContent
+
+</emphasis>
+ and 
+
+<emphasis id="strong1020" effect="bold">
+
+	Update
+
+</emphasis>
+ methods. Because they are declared inside a class but 
+	outside of a method or constructor, they are 
+
+<emphasis id="em1003" effect="italics">
+instance
+
+</emphasis>
+ variables.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="How_often_is_the_Update_method_called" effect="bold">
+
+How often is the Update method called?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+In this program, the computer will do its best to cause the 
+
+<emphasis id="strong1021" effect="bold">
+Update
+
+</emphasis>
+ 
+method to be called once every 16.67 milliseconds or 60 times per second.
+
+</para>
+
+
+
+
+
+<para id="p1023">
+The 
+
+<emphasis id="strong1022" effect="bold">
+Update
+
+</emphasis>
+ and 
+
+<emphasis id="strong1023" effect="bold">
+Draw
+
+</emphasis>
+ methods are called at 
+different rates depending on whether the 
+
+<emphasis id="strong1024" effect="bold">
+Game
+
+</emphasis>
+ property named
+
+
+<emphasis id="strong1025" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ is true or false.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="If_the_IsFixedTimeStep_property_is_false" effect="bold">
+
+If the IsFixedTimeStep property is false...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1024">
+If the 
+
+<emphasis id="strong1026" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ property is false, the 
+
+<emphasis id="strong1027" effect="bold">
+Update
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1028" effect="bold">
+Draw
+
+</emphasis>
+ methods will be called in a continuous loop. The 
+repetition rate of the loop will depend on how long it takes the code in the 
+loop to execute. That is not the case in this program because the value of the
+
+
+<emphasis id="strong1029" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ property is true, which is the default value.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="If_the_IsFixedTimeStep_property_is_true" effect="bold">
+
+If the IsFixedTimeStep property is true...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+If the 
+
+<emphasis id="strong1030" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ property is true, the 
+
+<emphasis id="strong1031" effect="bold">
+Update
+
+</emphasis>
+ 
+method will be called at the interval specified in the property named 
+
+<emphasis id="strong1032" effect="bold">
+
+TargetElapsedTime
+
+</emphasis>
+, while the 
+
+<emphasis id="strong1033" effect="bold">
+Draw
+
+</emphasis>
+ method will only be 
+called if an 
+
+<emphasis id="strong1034" effect="bold">
+Update
+
+</emphasis>
+ is not due.
+
+</para>
+
+
+
+
+
+<para id="p1026">
+In this program, the value of the 
+
+<emphasis id="strong1035" effect="bold">
+TargetElapsedTime
+
+</emphasis>
+ property 
+is 0.0166667 seconds, which is the default value.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="If_the_Draw_method_is_not_called" effect="bold">
+
+If the Draw method is not called...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1027">
+If the 
+
+<emphasis id="strong1036" effect="bold">
+Draw
+
+</emphasis>
+ method is not called (meaning that the computer 
+can't keep up with the demands of the 
+
+<emphasis id="strong1037" effect="bold">
+Update
+
+</emphasis>
+ method), the 
+property named 
+
+<emphasis id="strong1038" effect="bold">
+IsRunningSlowly
+
+</emphasis>
+ will be set to true. This 
+property can be tested by the program during development to expose potential 
+timing problems in the game loop.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31005">
+<title>
+<emphasis id="The_overridden_Update_method" effect="bold">
+
+The overridden Update method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1028">
+The overridden Update method begins in 
+
+<link id="a1063" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1029">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Beginning of the overridden Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">    protected override void Update(GameTime gameTime) {
+      // Allows the game to exit
+      if(GamePad.GetState(PlayerIndex.One).Buttons.Back
+                                  == ButtonState.Pressed)
+        this.Exit();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1030">
+If you compare 
+
+<link id="a1064" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ with 
+
+<link id="a1065" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+, you will see that the code in 
+	
+
+<link id="a1066" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ is contained in the skeleton code for the 
+
+<emphasis id="strong1039" effect="bold">
+Game1
+
+</emphasis>
+ 
+	class that is generated by Visual C#. 
+
+</para>
+
+
+
+
+
+<section id="h41003">
+<title>
+<emphasis id="Xbox_360_code" effect="bold">
+
+Xbox 360 code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+The code in 
+
+<link id="a1067" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+, which references a method of the
+
+
+<link id="a1068" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.gamepad.aspx">
+
+
+GamePad
+
+</link>
+
+ class "Allows retrieval of user interaction with an Xbox 360 
+Controller." Since we are working on a PC game, we aren't really interested in 
+the code in the body of the 
+
+<emphasis id="strong1040" effect="bold">
+Update
+
+</emphasis>
+ method in 
+
+<link id="a1069" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. The new 
+code in our program begins in 
+
+<link id="a1070" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Test_for_sprite_out_of_bounds_horizontally" effect="bold">
+
+Test for sprite out of bounds horizontally
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+The code in 
+
+<link id="a1071" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ tests to determine if the sprite has encountered the 
+right or left sides of the game window. If so, the sign is changed on 
+
+<emphasis id="strong1041" effect="bold">
+
+stepsX
+
+</emphasis>
+ to cause the sprite to reverse its horizontal direction of 
+motion.
+
+</para>
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1033">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Test for sprite out of bounds horizontally.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">      if(((spritePosition.X + myTexture.Width) &gt; 
+                            Window.ClientBounds.Width) ||
+                                 (spritePosition.X &lt; 0)){
+        stepsX *= -1;//Out of bounds, reverse direction
+      }//end if
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1034">
+The value of 
+
+<emphasis id="strong1042" effect="bold">
+Window.ClientBounds.Width
+
+</emphasis>
+ is the width of the 
+game window in pixels.
+
+</para>
+
+
+
+
+
+<para id="p1035">
+The value of 
+
+<emphasis id="strong1043" effect="bold">
+spritePosition.X
+
+</emphasis>
+ specifies the current 
+horizontal position of the upper-left corner of the sprite relative to the 
+upper-left corner of the game window.
+
+</para>
+
+
+
+
+
+<note id="note1007" type="">
+
+
+Even though the sprite appears to have an elliptical shape in 
+
+<link id="a1072" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+, 
+	it actually has a rectangular shape with all of the pixels outside the blue 
+	elliptical shape being almost transparent. You learned about this in the 
+	earlier module titled Xna0118-The XNA Framework and the Game Class
+
+</note>
+
+
+
+
+
+
+
+<para id="p1036">
+The value of 
+
+<emphasis id="strong1044" effect="bold">
+myTexture.Width
+
+</emphasis>
+ is the width of the sprite. 
+Therefore, the sum of 
+
+<emphasis id="strong1045" effect="bold">
+spritePosition.X
+
+</emphasis>
+ and 
+
+<emphasis id="strong1046" effect="bold">
+
+myTexture.Width
+
+</emphasis>
+ specifies the current position of the upper-right 
+corner of the sprite.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="Test_for_a_collision_of_the_sprite_with_an_edge" effect="bold">
+
+Test for a collision of the sprite with an edge
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+<link id="a1073" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ tests to determine if the upper-right corner of the sprite has 
+encountered the right edge of the game window or if the upper-left corner of the 
+sprite has encountered the left edge of the game window. If so, the sign of
+
+
+<emphasis id="strong1047" effect="bold">
+stepsX
+
+</emphasis>
+ is changed to cause the direction of motion of the 
+sprite to be reversed. You will see how the change in sign causes a reversal in 
+the direction of motion shortly.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Test_for_sprite_out_of_bounds_vertically" effect="bold">
+
+Test for sprite out of bounds vertically
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+The code in 
+
+<link id="a1074" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ tests to determine if the sprite has encountered the 
+bottom or top edges of the game window. If so, the sign is changed on 
+
+<emphasis id="strong1048" effect="bold">
+
+stepsY
+
+</emphasis>
+ to cause the sprite to reverse its vertical direction of motion.
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1039">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Test for sprite out of bounds vertically.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">      if(((spritePosition.Y + myTexture.Height) &gt; 
+                           Window.ClientBounds.Height) ||
+                                (spritePosition.Y &lt; 0)) {
+        stepsY *= -1;//Out of bounds, reverse direction
+      }//end if
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1040">
+The logic in 
+
+<link id="a1075" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ is essentially the same as the logic in 
+
+<link id="a1076" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ with 
+the difference being that 
+
+<link id="a1077" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ deals with vertical motion and the top and 
+bottom edges of the game window instead of horizontal motion and the left and 
+right edges of the game window.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="Change_the_current_position_of_the_sprite" effect="bold">
+
+Change the current position of the sprite
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+<link id="a1078" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ changes the current position of the sprite by adding the 
+incremental distances, 
+
+<emphasis id="strong1049" effect="bold">
+stepX
+
+</emphasis>
+ and 
+
+<emphasis id="strong1050" effect="bold">
+stepY
+
+</emphasis>
+, to the 
+current horizontal and vertical coordinates of the sprite.
+
+</para>
+
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1042">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Change the current position of the sprite.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">      spritePosition.X += stepsX;//move horizontal
+      spritePosition.Y += stepsY;//move vertical
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41008">
+<title>
+<emphasis id="Move_to_the_right_and_down" effect="bold">
+
+Move to the right and down
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+The incremental distances were initialized with positive values in 
+
+<link id="a1079" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. 
+Adding positive incremental distance values to the current coordinate values 
+causes the position of the sprite to move to the right and down.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41009">
+<title>
+<emphasis id="Reverse_the_direction_of_motion" effect="bold">
+
+Reverse the direction of motion
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+The logic in 
+
+<link id="a1080" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ and 
+
+<link id="a1081" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ reverses the sign on the incremental 
+distance values when the sprite encounters a left, right, top, or bottom edge of 
+the game window.
+
+</para>
+
+
+
+
+
+<para id="p1045">
+Adding a negative incremental distance value to the current horizontal 
+coordinate of the sprite causes it to be moved to the left. Adding a negative 
+incremental distance value to the current vertical coordinate of the sprite 
+causes it to be moved up the screen.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41010">
+<title>
+<emphasis id="No_visible_movement_at_this_time" effect="bold">
+
+No visible movement at this time
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+Simply changing the current horizontal and vertical coordinates of the sprite 
+does not produce a visible change in position. The visible change in position 
+happens later in the 
+
+<emphasis id="strong1051" effect="bold">
+Draw
+
+</emphasis>
+ method when the game window is 
+cleared to a constant color and the sprite is redrawn in the game window in its 
+new position.
+
+</para>
+
+
+
+
+
+<para id="p1047">
+The 
+
+<emphasis id="strong1052" effect="bold">
+Draw
+
+</emphasis>
+ method in this program was not modified relative to 
+the version in the earlier module titled 
+
+<link id="a1082" url="http://cnx.org/contents/GY804-eY:iAGEPWAd">
+
+Xna0118-The XNA Framework and the Game Class
+
+</link>
+
+. You can view the code in the 
+
+<emphasis id="strong1053" effect="bold">
+Draw
+
+</emphasis>
+ method in Listing 
+9 near the end of the module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41011">
+<title>
+<emphasis id="The_remainder_of_the_overridden_Update_method" effect="bold">
+
+The remainder of the overridden Update method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1048">
+The remainder of the overridden 
+
+<emphasis id="strong1054" effect="bold">
+Update
+
+</emphasis>
+ method is shown in 
+
+
+<link id="a1083" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1049">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. The remainder of the overridden Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">      //The following statement is always required.
+      base.Update(gameTime);
+    }//end Update
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1050">
+The statement in 
+
+<link id="a1084" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+, which calls the 
+
+<emphasis id="strong1055" effect="bold">
+Update
+
+</emphasis>
+ 
+	method of the superclass, is always required in the overridden version. This 
+	code is placed in the overridden 
+
+<emphasis id="strong1056" effect="bold">
+Update
+
+</emphasis>
+ method in the 
+	skeleton code that is generated by Visual C# (see 
+
+<link id="a1085" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+) when you create 
+	a new Windows Game project.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21006">
+<title>
+<emphasis id="Using_the_Debug_class" effect="bold">
+
+Using the Debug class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+One of the must useful debugging tools for relatively simple programs is the 
+ability to get information displayed while the program is running. First I will 
+introduce you to the Microsoft Support website titled
+
+
+<link id="a1086" url="http://support.microsoft.com/kb/815788#5">
+
+How to trace and debug in 
+Visual C#
+
+</link>
+
+. You will find a great deal of useful information there.
+
+</para>
+
+
+
+
+
+<para id="p1052">
+Next
+
+
+<link id="a1087" url="http://msdn.microsoft.com/en-us/library/system.diagnostics.debug(lightweight).aspx">
+
+
+
+
+</link>
+
+I will introduce you to the
+
+
+<link id="a1088" url="http://msdn.microsoft.com/en-us/library/system.diagnostics.debug(lightweight).aspx">
+
+
+Debug
+
+</link>
+
+ class, which "Provides a set of methods and properties that help debug 
+your code." There are some very useful tools there also.
+
+</para>
+
+
+
+
+
+<para id="p1053">
+Finally, I will show you some examples of using methods from the 
+
+<emphasis id="strong1057" effect="bold">
+
+Debug
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<section id="h31006">
+<title>
+<emphasis id="Namespace_considerations" effect="bold">
+
+Namespace considerations
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The 
+
+<emphasis id="strong1058" effect="bold">
+Debug
+
+</emphasis>
+ class is in the 
+
+<emphasis id="strong1059" effect="bold">
+System.Diagnostics
+
+</emphasis>
+ 
+namespace. Therefore, you will either need to include that namespace in your 
+"using" list or qualify every reference to the 
+
+<emphasis id="strong1060" effect="bold">
+Debug
+
+</emphasis>
+ class with 
+the name of the namespace. I chose to include the namespace in my "using" list 
+for this example.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="Overridden_LoadContent_method" effect="bold">
+
+Overridden LoadContent method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+<link id="a1089" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ shows my overridden 
+
+<emphasis id="strong1061" effect="bold">
+LoadContent
+
+</emphasis>
+ method. Only the 
+code near the end of the method is different from the version of the 
+
+<emphasis id="strong1062" effect="bold">
+
+LoadContent
+
+</emphasis>
+ method that I explained in the earlier module titled 
+
+<link id="a1090" url="http://cnx.org/contents/GY804-eY:iAGEPWAd">
+
+Xna0118-The XNA Framework and the Game Class
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1056">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Overridden LoadContent method.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">    protected override void LoadContent() {
+      //Create a new SpriteBatch, which can be used to
+      // draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+      //Load the image
+      myTexture = Content.Load&lt;Texture2D&gt;(
+                                         "gorightarrow");
+      //Debug code for illustration purposes.
+      Debug.WriteLine(myTexture.Width);
+      Debug.WriteLine(myTexture.Height);
+      Debug.WriteLine(Window.ClientBounds.Width);
+      Debug.WriteLine(Window.ClientBounds.Height);
+      Debug.WriteLine(IsFixedTimeStep);
+      Debug.WriteLine(TargetElapsedTime);
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31008">
+<title>
+<emphasis id="Overloaded_WriteLine_methods" effect="bold">
+
+Overloaded WriteLine methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1057">
+The 
+
+<emphasis id="strong1063" effect="bold">
+Debug
+
+</emphasis>
+ class provides overloaded versions of the
+
+
+<emphasis id="strong1064" effect="bold">
+WriteLine
+
+</emphasis>
+ method, which can be used to display information in 
+the lower-left corner of the Visual C# IDE. These are static methods so they can 
+be called simply by joining the name of the class to the name of the method as 
+shown in 
+
+<link id="a1091" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="Execute_once_only" effect="bold">
+
+Execute once only
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1058">
+I elected to put the code to illustrate this capability in the 
+
+<emphasis id="strong1065" effect="bold">
+
+LoadContent
+
+</emphasis>
+ method so that it would execute once and only once. Had I 
+put it in either the 
+
+<emphasis id="strong1066" effect="bold">
+Update
+
+</emphasis>
+ method or the 
+
+<emphasis id="strong1067" effect="bold">
+Draw
+
+</emphasis>
+ 
+method, it would have tried to execute during every iteration of the game loop 
+which would not be satisfactory.
+
+</para>
+
+
+
+
+
+<para id="p1059">
+If you need to display information from inside the game loop, you will 
+probably also need to use a counter with some logic to cause the information to 
+be displayed only every nth iteration.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+<emphasis id="The_output" effect="bold">
+
+The output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+The output from each of the six 
+
+<emphasis id="strong1068" effect="bold">
+WriteLine
+
+</emphasis>
+ statements in 
+
+
+<link id="a1092" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ (plus some other stuff) is shown in 
+
+<link id="a1093" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. As you can see, the sprite referred to by 
+
+<emphasis id="strong1069" effect="bold">
+
+myTexture
+
+</emphasis>
+ is 143 pixels wide and 107 pixels high. The game window is 
+800 pixels wide and 480 pixels high. As I mentioned earlier, the value of the
+
+
+<emphasis id="strong1070" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ property is True, and the value of the 
+
+<emphasis id="strong1071" effect="bold">
+
+TargetElapsedTime
+
+</emphasis>
+ property is 0.0166667 seconds.
+
+</para>
+
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1061">
+I encourage you to copy the code from 
+
+<link id="a1094" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Use that code to create an 
+XNA project. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+Click 
+
+<link id="a1095" url="XNA0120Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1072" effect="bold">
+XNA0120Proj
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1073" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1074" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1075" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1076" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1096" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+In this module, you learned how to make it appear that a sprite is moving by 
+changing the current position coordinates of the sprite in the 
+
+<emphasis id="strong1077" effect="bold">
+Update
+
+</emphasis>
+ 
+method and drawing the sprite in the new position in the 
+
+<emphasis id="strong1078" effect="bold">
+Draw
+
+</emphasis>
+ 
+method. This takes place once during each iteration of the game loop.
+
+</para>
+
+
+
+
+
+<para id="p1064">
+You also learned how to use the 
+
+<emphasis id="strong1079" effect="bold">
+WriteLine
+
+</emphasis>
+ method of the
+
+
+<emphasis id="strong1080" effect="bold">
+Debug
+
+</emphasis>
+ class to display information while the program is 
+running.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1065">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1012" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1081" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1012" list-type="bulleted">
+
+					
+
+<item id="li1051">
+Module name: Xna0120-Moving Your Sprite and using the 
+					Debug Class
+
+</item>
+
+
+					
+
+<item id="li1052">
+File: Xna0120.htm
+
+
+</item>
+
+
+					
+
+<item id="li1053">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1013" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1082" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1066">
+<emphasis id="strong1083" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1067">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1068">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1069">
+<emphasis id="strong1084" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+A complete listing of the XNA program discussed in this module is provided in 
+
+<link id="a1097" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. 
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1071">
+<emphasis id="Listing_9" effect="bold">
+
+
+</emphasis>
+
+Listing 9. The class named Game1 for the project named XNA0120Proj.
+
+</para>
+
+
+
+
+
+<code id="pre1008" display="block">
+/*Project XNA0120Proj
+ * 12/27/09 R.G.Baldwin
+ *******************************************************/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.Storage;
+using System.Diagnostics;//to access Debug
+
+namespace XNA0120Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    public Game1() {
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+    }// end constructor
+
+    protected override void Initialize() {
+      //No initialization needed
+      base.Initialize();
+    }//end Initialize
+
+    //Declare two variables
+    Texture2D myTexture;
+    Vector2 spritePosition = new Vector2(10.0f,15.0f);
+
+    protected override void LoadContent() {
+      //Create a new SpriteBatch, which can be used to
+      // draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+      //Load the image
+      myTexture = Content.Load&lt;Texture2D&gt;(
+                                         "gorightarrow");
+
+      //Debug code for illustration purposes.
+      Debug.WriteLine(myTexture.Width);
+      Debug.WriteLine(myTexture.Height);
+      Debug.WriteLine(Window.ClientBounds.Width);
+      Debug.WriteLine(Window.ClientBounds.Height);
+      Debug.WriteLine(IsFixedTimeStep);
+      Debug.WriteLine(TargetElapsedTime);
+    }//end LoadContent
+
+    protected override void UnloadContent() {
+      //No unload code needed.
+    }//end UnloadContent
+
+    //Specify the distance in pixels that the sprite
+    // will move during each iteration.
+    int stepsX = 5;
+    int stepsY = 3;
+    protected override void Update(GameTime gameTime) {
+      // Allows the game to exit
+      if(GamePad.GetState(PlayerIndex.One).Buttons.Back
+                                  == ButtonState.Pressed)
+        this.Exit();
+      //New code begins here.
+
+      //Test to determine if the sprite moves out of the
+      // game window on the right or the left.
+      if(((spritePosition.X + myTexture.Width) &gt; 
+                            Window.ClientBounds.Width) ||
+                                 (spritePosition.X &lt; 0)){
+        stepsX *= -1;//Out of bounds, reverse direction
+      }//end if
+
+      //Test to determine if the sprite moves out of the
+      // game window on the bottom or the top.
+      if(((spritePosition.Y + myTexture.Height) &gt; 
+                           Window.ClientBounds.Height) ||
+                                (spritePosition.Y &lt; 0)) {
+        stepsY *= -1;//Out of bounds, reverse direction
+      }//end if
+      spritePosition.X += stepsX;//move horizontal
+      spritePosition.Y += stepsY;//move vertical
+
+      //The following statement is always required.
+      base.Update(gameTime);
+    }//end Update
+
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      // Draw the sprite.
+      spriteBatch.Begin();
+      spriteBatch.Draw(
+                   myTexture,spritePosition,Color.White);
+      spriteBatch.End();
+
+      //This statement is always required.
+      base.Draw(gameTime);
+    }//end Draw method
+  }//End class
+}//End namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1072">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

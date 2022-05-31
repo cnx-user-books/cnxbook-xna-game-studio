@@ -1,0 +1,2162 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0100-Getting Started</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49467</md:content-id>
+  <md:title>Xna0100-Getting Started</md:title>
+  <md:abstract>Learn how to download, install, and test Microsoft's XNA Game Studio.</md:abstract>
+  <md:uuid>83ee6847-342e-4603-bf62-a681490fad45</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Fri May 19 17:26:11 CDT 2017
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1005">
+
+
+
+
+<link id="a1006" target-id="Download_and_installation_instructions">
+
+Download and installation instructions
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="Introduction">
+
+Introduction
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Software_upgrade">
+
+Software upgrade
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="XNA_Installation_instructions">
+
+XNA installation instructions
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Clean_off_the_old_software">
+
+Cleaning off the old software
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Download_Microsoft_Visual_C_2010_Express_Edition">
+
+Downloading 
+Microsoft Visual C# 2010 Express Edition
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Preparing_the_ISO_file_for_software_installation">
+
+Preparing the ISO 
+file for software installation
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Installing_Microsoft_Visual_C_2010_Express_Edition">
+
+Installing 
+Microsoft Visual C# 2010 Express Edition
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Download_XNA_40_Refresh">
+
+Downloading and installing XNA 4.0 Refresh
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="Test_your_installation">
+
+Test 
+your installation
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="Skeleton_code">
+
+Skeleton code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="Run_your_program">
+
+Run your program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Run_your_program_outside_the_IDE">
+
+Run your program outside the IDE
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for teaching 
+	
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at Austin 
+	Community College in Austin, TX. These modules are intended to supplement 
+	and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+The modules were originally published for use with 
+
+<emphasis id="em1001" effect="italics">
+XNA 3.1
+
+</emphasis>
+, were 
+upgraded for use with 
+
+<emphasis id="em1002" effect="italics">
+XNA 4.0
+
+</emphasis>
+, and as of May 2016 are being upgraded 
+for use with 
+
+<emphasis id="em1003" effect="italics">
+XNA 4.0 Refresh
+
+</emphasis>
+.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1005" list-type="bulleted">
+
+		
+
+<item id="li1020">
+<link id="a1021" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. XNA 4.0 IDE.  
+
+</item>
+
+
+		
+
+<item id="li1021">
+<link id="a1022" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. XNA game window.
+
+</item>
+
+
+		
+
+<item id="li1022">
+<link id="a1023" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Project file structure. 
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1005">
+According to Microsoft, 
+
+<emphasis id="em1004" effect="italics">
+"Microsoft XNA Game Studio 4.0 makes it easier than ever to create great video games for Windows-based PCs, Xbox 360 consoles, and Windows Phone."
+
+</emphasis>
+</para>
+
+
+
+	
+
+<para id="p1006">
+The purpose of this module is to help you get started programming using 
+	the XNA Game Studio.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11003">
+<title>
+
+	
+
+<emphasis id="Download_and_installation_instructions" effect="bold">
+
+Download and installation instructions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+The download and installation information regarding the Microsoft website 
+changes frequently. The information in this section is current as of May 2016
+
+
+<emphasis id="em1005" effect="italics">
+(as updated in May 2017)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="Introduction" effect="bold">
+
+Introduction
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+I typically teach this course once each year in the 
+Summer session via Distance Learning. For the past several years, students have 
+reported that it has become increasingly difficult to find and download the 
+necessary Microsoft software for the course. In preparation for the Summer 2016 
+session, I decided to do the following:
+
+</para>
+
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+
+	
+
+<item id="li1023">
+Clean the old software off of my computer.
+
+</item>
+
+
+	
+
+<item id="li1024">
+Download and install new software.
+
+</item>
+
+
+	
+
+<item id="li1025">
+Document the process for the benefit of students who may need to do the 
+	same.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Software_upgrade" effect="bold">
+
+Software upgrade
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+I also decided to upgrade from XNA 4.0 to a newer product 
+named 
+
+<link id="a1024" url="https://www.microsoft.com/en-us/download/details.aspx?id=27599">
+
+
+Microsoft XNA Game Studio 4.0 Refresh
+
+</link>
+
+. Here is what Microsoft has to say 
+about the newer product:
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+
+	
+
+<emphasis id="em1006" effect="italics">
+Microsoft XNA Game Studio 4.0 Refresh updates XNA Game Studio 4.0 to fix 
+	bugs and add support for developing games that target Windows Phone OS 7.1 
+	and developing games in Visual Basic. 
+
+</emphasis>
+
+
+
+</note>
+
+
+
+
+
+
+<para id="p1010">
+This course doesn't address Visual Basic or Windows Phone, but bug fixes are always welcome.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="XNA_Installation_instructions" effect="bold">
+
+XNA installation instructions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+Microsoft's
+
+
+<link id="a1025" url="https://www.microsoft.com/en-us/download/details.aspx?id=27599">
+
+
+installation instructions
+
+</link>
+
+ for the new software read as follows:
+
+</para>
+
+
+
+
+
+<list id="ol1000" list-type="enumerated">
+
+	
+
+<item id="li1026">
+<emphasis id="em1007" effect="italics">
+Install Microsoft Visual Studio 2010. 
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1027">
+<emphasis id="em1008" effect="italics">
+Obtain the latest updates for Visual Studio from Microsoft Update.
+	
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1028">
+<emphasis id="em1009" effect="italics">
+Download and run the Microsoft XNA Game Studio 4.0 Refresh 
+	installer. 
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1029">
+<emphasis id="em1010" effect="italics">
+Follow the setup instructions. 
+
+</emphasis>
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1012">
+As you can see from the installation instructions, 
+
+<emphasis id="em1011" effect="italics">
+
+Microsoft Visual Studio 2010
+
+</emphasis>
+ is required. This has been a big part of the 
+student's problems in downloading and installing the software in previous 
+semesters.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+However, a
+
+
+<link id="a1026" url="https://msdn.microsoft.com/en-us/library/bb203916.aspx">
+
+different page
+
+</link>
+
+ 
+indicates that 
+
+<emphasis id="em1012" effect="italics">
+Microsoft Visual C# 2010 Express Edition
+
+</emphasis>
+ will suffice in 
+place of 
+
+<emphasis id="em1013" effect="italics">
+Microsoft Visual Studio 2010
+
+</emphasis>
+. That page reads as follows:
+
+</para>
+
+
+
+
+
+<para id="p1014">
+<emphasis id="em1014" effect="italics">
+XNA Game Studio 4.0 Refresh works with any of the following Microsoft 
+Visual Studio 2010 products.
+
+</emphasis>
+</para>
+
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+
+	
+
+<item id="li1030">
+<emphasis id="em1015" effect="italics">
+Microsoft Visual Studio 2010 Express for Windows Phone 
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1031">
+<emphasis id="em1016" effect="italics">
+Microsoft Visual C# 2010 Express Edition 
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1032">
+<emphasis id="em1017" effect="italics">
+Microsoft Visual Studio 2010 Professional Edition
+
+</emphasis>
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1015">
+I will have more to say about this
+later.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Clean_off_the_old_software" effect="bold">
+
+Cleaning off the old software
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+I began by using the software removal procedures in the 
+Control Panel to remove three different 
+
+<emphasis id="em1018" effect="italics">
+Microsoft XNA
+
+</emphasis>
+ items and one 
+item titled 
+
+<emphasis id="em1019" effect="italics">
+Microsoft Visual C# 2010 Express - ENU. 
+
+</emphasis>
+At that point, my 
+computer had no XNA capability and no Visual C# capability.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Download_Microsoft_Visual_C_2010_Express_Edition" effect="bold">
+
+Downloading 
+Microsoft Visual C# 2010 Express Edition
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1017">
+A big part of the student's problems in previous 
+semesters has been the difficulty of finding and downloading 
+
+<emphasis id="em1020" effect="italics">
+Microsoft 
+Visual C# 2010 Express Edition
+
+</emphasis>
+.
+
+<emphasis id="em1021" effect="italics">
+ 
+
+</emphasis>
+The only way that I have found to 
+download it is by clicking the following link:
+
+
+<link id="a1027" url="http://download.microsoft.com/download/1/E/5/1E5F1C0A-0D5B-426A-A603-1798B951DDAE/VS2010Express1.iso">
+
+
+Visual Studio 2010 Express All-in-One ISO
+
+</link>
+
+ 
+
+<emphasis id="em1022" effect="italics">
+(see update below)
+
+</emphasis>
+ and saving the file named 
+
+<emphasis id="strong1001" effect="bold">
+
+VS2010Express1.iso
+
+</emphasis>
+ that is downloaded. 
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+
+	
+
+<para id="p1018">
+Author's update: May 19, 2017
+
+</para>
+
+
+
+
+
+<para id="p1019">
+In preparation for the Summer 2017 teaching session, I needed to install Visual C# Express 
+2010 on my Dell XPS 14 Z laptop computer running Windows 7 Home Premium in order to use 
+
+
+<emphasis id="strong1002" effect="bold">
+XNA 
+4.0 Refresh Game Studio
+
+</emphasis>
+ for the course. This 
+required downloading the file named 
+
+<emphasis id="strong1003" effect="bold">
+VS2010Express1.iso
+
+</emphasis>
+ 
+mentioned above followed by some 
+additional steps that are explained later in this module.
+
+</para>
+
+
+
+
+
+<para id="p1020">
+While I still had a copy of the file named 
+
+<emphasis id="strong1004" effect="bold">
+VS2010Express1.iso
+
+</emphasis>
+ from the 
+previous year that I could have used, I decided to start from scratch, download, 
+and install the software on my Dell XPS laptop to confirm the installation 
+process described in this module. In so doing, I discovered that the following link given 
+above was broken:
+
+</para>
+
+
+
+
+
+<para id="p1021">
+
+
+
+<link id="a1028" url="http://download.microsoft.com/download/1/E/5/1E5F1C0A-0D5B-426A-A603-1798B951DDAE/VS2010Express1.iso">
+
+
+Visual Studio 2010 Express All-in-One ISO 
+
+</link>
+
+
+</para>
+
+
+
+
+
+<para id="p1022">
+Apparently Microsoft is discouraging the use of Visual C# 2010 and is 
+recommending 
+
+<link id="a1029" url="https://www.visualstudio.com/vs/community/">
+
+Visual Studio 
+Community
+
+</link>
+
+ as a replacement. However, rather than to face the requirement of testing a new software 
+suite, I decided to stick with what I knew would work for all of the 
+instructional material and assignments for this course and began searching for an 
+alternative source for the software. A Google search identified the following MediaFire site as an alternative download site 
+for this iso file:
+
+</para>
+
+
+
+
+
+<para id="p1023">
+<link id="a1030" url="http://www.mediafire.com/file/bbouvxhumaho8qr/VS2010Express1.iso">
+
+
+http://www.mediafire.com/file/bbouvxhumaho8qr/VS2010Express1.iso
+
+</link>
+
+ 
+
+</para>
+
+
+
+
+
+<para id="p1024">
+While I cannot guarantee the integrity of the 
+
+<emphasis id="strong1005" effect="bold">
+MediaFire
+
+</emphasis>
+ site, 
+
+<emphasis id="strong1006" effect="bold">
+Norton SafeSearch
+
+</emphasis>
+ showed 
+the site to be safe. I downloaded and saved the file. Then I performed a Norton 
+virus scan 
+on the file, which showed the file to contain 
+
+
+<emphasis id="em1023" effect="italics">
+"No Threats."
+
+</emphasis>
+ The size of the file downloaded from 
+
+<emphasis id="strong1007" effect="bold">
+MediaFire
+
+</emphasis>
+ was exactly the 
+same as the file that I had downloaded from Microsoft a year earlier 
+(710,304 KB).
+
+</para>
+
+
+
+
+
+<para id="p1025">
+Having downloaded the iso file, I successfully installed and tested 
+
+<emphasis id="strong1008" effect="bold">
+Visual C# 
+Express 2010
+
+</emphasis>
+ and 
+
+<emphasis id="strong1009" effect="bold">
+XNA 4.0 Refresh 
+
+</emphasis>
+on my Dell XPS 14 
+Z laptop running Windows 7 
+Home Premium according to the instructions provided in the remainder of this 
+module. Thus, the download and installation process is confirmed for the Summer 
+session of 2017.
+
+</para>
+
+
+
+
+
+</note>
+
+
+
+
+
+
+<para id="p1026">
+The file named 
+
+<emphasis id="strong1010" effect="bold">
+
+VS2010Express1.iso
+
+</emphasis>
+ not only contains 
+
+<emphasis id="em1024" effect="italics">
+Microsoft Visual C# 2010 
+Express Edition
+
+</emphasis>
+, it also contains the express editions for several other 
+languages as well. However, it is 
+
+<emphasis id="strong1011" effect="bold">
+not
+
+</emphasis>
+ an installable product at 
+this point.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="Preparing_the_ISO_file_for_software_installation" effect="bold">
+
+Preparing the ISO 
+file for software installation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1027">
+There is more than one way to install the software in the 
+ISO file. You might benefit by doing some online research into how to install 
+the software in an ISO file. Here is how I did it with Windows 7:
+
+</para>
+
+
+
+
+
+<list id="ol1001" list-type="enumerated">
+
+	
+
+<item id="li1033">
+Insert a blank DVD in the DVD burner. 
+
+<emphasis id="em1025" effect="italics">
+(A blank CD would probably 
+	also work but I didn't have one.)
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1034">
+Right-click on the ISO file.
+
+</item>
+
+
+	
+
+<item id="li1035">
+Select 
+
+<emphasis id="strong1012" effect="bold">
+<emphasis id="em1026" effect="italics">
+Open With...
+
+</emphasis>
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1036">
+Select 
+
+<emphasis id="strong1013" effect="bold">
+<emphasis id="em1027" effect="italics">
+Windows Disk Image Burner
+
+</emphasis>
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1037">
+Follow the disk burning instructions.
+
+</item>
+
+
+	
+
+<item id="li1038">
+Remove the DVD from the burner when complete and label it 
+
+<emphasis id="em1028" effect="italics">
+Visual 
+	Studio 2010 Express
+
+</emphasis>
+ or something similar.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1028">
+The resulting DVD contains an installable version of 
+
+<emphasis id="em1029" effect="italics">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and some other programs as well.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Installing_Microsoft_Visual_C_2010_Express_Edition" effect="bold">
+
+Installing 
+Microsoft Visual C# 2010 Express Edition
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+Insert the DVD in the DVD reader and select 
+
+<emphasis id="strong1014" effect="bold">
+
+Setup.hta
+
+</emphasis>
+. You should then be given a choice as to which of the express 
+edition programs you want to install. 
+
+</para>
+
+
+
+
+
+<para id="p1030">
+Select 
+
+<emphasis id="em1030" effect="italics">
+Visual C#
+
+</emphasis>
+ and follow the installation 
+instructions. 
+
+</para>
+
+
+
+
+
+<para id="p1031">
+When the installation is complete, you should be able to 
+see 
+
+<emphasis id="em1031" effect="italics">
+Microsoft Visual C# 2010 Express
+
+</emphasis>
+ if you open the 
+
+<emphasis id="strong1015" effect="bold">
+Start
+
+</emphasis>
+ 
+menu and enter 2010 in the search box. 
+
+</para>
+
+
+
+
+
+<para id="p1032">
+At this point, you can run the program, open the 
+
+<emphasis id="strong1016" effect="bold">
+
+Help
+
+</emphasis>
+ menu, and select 
+
+<emphasis id="em1032" effect="italics">
+Check for Updates
+
+</emphasis>
+ to satisfy the second 
+item under
+
+
+<link id="a1031" target-id="XNA_Installation_instructions">
+
+XNA installation instructions
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+<emphasis id="Download_XNA_40_Refresh" effect="bold">
+
+Downloading and installing XNA 4.0 Refresh
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+This is the easy part. Click
+
+
+<link id="a1032" url="https://www.microsoft.com/en-us/download/details.aspx?id=27599">
+
+here
+
+</link>
+
+ 
+to visit a page where you can download the setup file named 
+
+<emphasis id="strong1017" effect="bold">
+
+XNAGS40_setup.exe
+
+</emphasis>
+ for 
+
+<emphasis id="em1033" effect="italics">
+Microsoft XNA Game Studio 4.0 Refresh
+
+</emphasis>
+. 
+Download, save, double click the file, and follow instructions to install the 
+software.
+
+</para>
+
+
+
+
+
+<para id="p1034">
+When the installation is complete, XNA should be merged 
+with Visual C# and you should be able to begin creating the programs for the 
+course.
+
+</para>
+
+
+
+
+
+<para id="p1035">
+I have confirmed that all of the assignment and sample 
+program for this course, which were originally written using 
+
+<emphasis id="em1034" effect="italics">
+XNA 4.0
+
+</emphasis>
+ 
+execute properly under 
+
+<emphasis id="em1035" effect="italics">
+XNA 4.0 Refresh
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Test_your_installation" effect="bold">
+
+Test 
+your installation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+Once you have the software installed, start Visual C# from the Windows 
+
+<emphasis id="strong1018" effect="bold">
+Start
+
+</emphasis>
+ menu. Pull down the 
+
+<emphasis id="strong1019" effect="bold">
+File
+
+</emphasis>
+ menu and select
+
+
+<emphasis id="strong1020" effect="bold">
+New Project
+
+</emphasis>
+. A dialog box will appear. Select 
+
+<emphasis id="em1036" effect="italics">
+"XNA Game 
+Studio 4.0"
+
+</emphasis>
+ on the left side of the dialog and select 
+
+<emphasis id="em1037" effect="italics">
+"Windows Game 
+(4.0)"
+
+</emphasis>
+ on the right side of the dialog."
+
+</para>
+
+
+
+
+
+<para id="p1037">
+Name your project 
+
+<emphasis id="strong1021" effect="bold">
+First Project
+
+</emphasis>
+, specify a location for your 
+new project and click the 
+
+<emphasis id="strong1022" effect="bold">
+OK
+
+</emphasis>
+ button. An IDE should appear 
+looking something like 
+
+<link id="a1033" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. 
+
+<emphasis id="em1038" effect="italics">
+(Note that 
+
+<link id="a1034" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ has been reduced, which 
+causes the text to be difficult to read.)
+
+</emphasis>
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+
+
+
+<para id="p1038">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. XNA 4.0 IDE.
+
+</para>
+
+
+
+
+
+
+<media id="media1000" alt="Missing Figure" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0100-01.jpg" width="860" height="767"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+<section id="h21009">
+<title>
+<emphasis id="Skeleton_code" effect="bold">
+
+Skeleton code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1039">
+Skeleton code for a Windows game project will have been created in the editor 
+portion of the IDE. I will explain this code in detail in a future module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21010">
+<title>
+<emphasis id="Run_your_program" effect="bold">
+
+Run your program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1040">
+Run your program by selecting 
+
+<emphasis id="strong1023" effect="bold">
+Start Debugging
+
+</emphasis>
+ on the 
+
+<emphasis id="strong1024" effect="bold">
+
+Debug
+
+</emphasis>
+ menu. If everything is working properly, the game window shown in 
+
+
+<link id="a1035" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ should appear on your computer screen.
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+
+
+
+<para id="p1041">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. XNA game window.
+
+</para>
+
+
+
+
+
+
+<media id="media1001" alt="Missing Figure" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0100-02.jpg" width="807" height="506"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h21011">
+<title>
+<emphasis id="Run_your_program_outside_the_IDE" effect="bold">
+
+Run your program outside the IDE
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+Once you have run your program successfully from inside the IDE, your project 
+file structure should look similar to 
+
+<link id="a1036" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+
+
+
+<para id="p1043">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. Project file structure.
+
+</para>
+
+
+
+
+		
+
+<media id="media1002" alt="Missing Figure" display="block">
+<image id="img1002" mime-type="image/jpeg" src="../../media/xna0100-03.jpg" width="388" height="152"/>
+</media>
+
+
+		
+
+</note>
+
+
+
+
+
+
+<para id="p1044">
+At that point, you should be able to double click the exe file highlighted in 
+
+
+<link id="a1037" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ and cause your program to run.
+
+</para>
+
+
+
+
+
+<para id="p1045">
+Congratulations. You're now ready to start learning how to program using XNA.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+Click 
+
+<link id="a1038" url="FirstProject.zip">
+
+here
+
+</link>
+
+ to download a zip file 
+containing my version of the program. Extract the folder named 
+
+<emphasis id="strong1025" effect="bold">
+First 
+Project
+
+</emphasis>
+ from the zip file and save it somewhere on your disk. Start
+
+
+<emphasis id="strong1026" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1027" effect="bold">
+Open Project...
+
+</emphasis>
+ 
+from the 
+
+<emphasis id="strong1028" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file named
+
+
+<emphasis id="strong1029" effect="bold">
+First Project.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described above.
+
+</para>
+
+
+
+
+
+<para id="p1047">
+Many of the modules in this collection will provide my version of a project 
+that can be downloaded and run in this manner.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1048">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1005" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1030" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1008" list-type="bulleted">
+
+					
+
+<item id="li1039">
+Module name: Xna0100-Getting Started
+
+</item>
+
+
+					
+
+<item id="li1040">
+File: Xna0100.htm
+
+
+</item>
+
+
+					
+
+<item id="li1041">
+Published: 02/24/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1006" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1031" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1049">
+<emphasis id="strong1032" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1050">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1051">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1052">
+<emphasis id="strong1033" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+<para id="p1053">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

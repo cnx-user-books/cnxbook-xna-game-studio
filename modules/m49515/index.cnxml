@@ -1,0 +1,5433 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0124-Using Background Images and Color Key Transparency</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49515</md:content-id>
+  <md:title>Xna0124-Using Background Images and Color Key Transparency</md:title>
+  <md:abstract>Learn how to display a sprite in front of a background image and how to cause the background image to change at runtime. Learn the difference between the position and origin parameters of the SpriteBatch.Draw method. Also learn how to deal with and use color key transparency.</md:abstract>
+  <md:uuid>a65d3a18-69c6-4b0b-837e-24401b846f07</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Sun May 08 15:53:42 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="Layer_depth">
+
+Layer depth
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Color_key_transparency">
+
+Color key transparency
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Transparent_green">
+
+Transparent green
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Store_your_image_in_a_lossless_image_file">
+
+Store your image in a lossless image file
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Be_aware_of_the_default_values">
+
+Be aware of the default values
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1012">
+<link id="a1013" target-id="The_UFO_image">
+
+The UFO image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Image_of_the_planet">
+
+Image of the planet
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="The_screen_output">
+
+The screen output
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="Flying_a_relatively_straight_path">
+
+Flying a relatively straight path
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="The_background_is_moving">
+
+The background is moving
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Preparing_to_change_course">
+
+Preparing to change course
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="Flying_towards_the_camera">
+
+Flying towards the camera
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="Heading_for_home">
+
+Heading for home
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1021">
+<link id="a1022" target-id="The_class_named_Game1_">
+
+The class named Game1 
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="The_constructor_for_the_class_named_Game1_">
+
+The constructor for the class named Game1
+    
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1023">
+<link id="a1024" target-id="Setting_the_size_of_the_game_window">
+
+Setting the size of the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Maintaining_the_aspect_ratio">
+
+Maintaining the aspect ratio
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="The_overridden_LoadContent_method">
+
+The overridden LoadContent method
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1026">
+<link id="a1027" target-id="The_new_material">
+
+The new material
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="Compute_the_position_of_the_UFO_relative_to_the_game_window">
+
+Compute the position of the UFO relative to the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="Compute_the_base_scale_factor_for_the_background_image">
+
+Compute the base scale factor for the background image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="Not_the_only_scale_factor">
+
+Not the only scale factor
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="An_optical_illusion">
+
+An optical illusion
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="The_overridden_Update_method_">
+
+The overridden Update method 
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1032">
+<link id="a1033" target-id="Controlling_the_animation_speed">
+
+Controlling the animation speed
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="Draw_new_material_every_83_milliseconds">
+
+Draw new material every 83 milliseconds
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Apply_dynamic_scaling_to_the_background_image">
+
+Apply dynamic scaling to the background image
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1035">
+<link id="a1036" target-id="Two_components_in_the_scale_factor">
+
+Two components in the scale factor
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="AnOpticalIllusion">
+
+An optical illusion
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="The_dynamic_portion_of_the_overall_scale_factor">
+
+The dynamic portion of the overall scale factor
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="Changing_the_origin_of_the_background_image">
+
+Changing the origin of the background image
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1039">
+<link id="a1040" target-id="Increasing_the_scale_alone_is_insufficient">
+
+Increasing the scale alone is insufficient
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="Need_to_stabilize_the_location_of_the_planet_in_the_game_window">
+
+Need to stabilize the location of the planet in the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Examples">
+
+Examples
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="The_end_of_the_Update_method">
+
+The end of the Update method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="The_overridden_GameDraw_method_">
+
+The overridden Game.Draw method
+	
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1044">
+<link id="a1045" target-id="No_need_to_clear_the_game_window">
+
+No need to clear the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Two_main_sections_of_code">
+
+Two main sections of code
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1046">
+<link id="a1047" target-id="Draw_the_background_image_showing_the_planet">
+
+Draw the background image showing the planet
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Draw_the_UFO">
+
+Draw the UFO
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1048">
+<link id="a1049" target-id="Center_the_UFO_image_on_the_position">
+
+Center the UFO image on the position
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="The_UFO_does_not_move">
+
+The UFO does not move
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="The_front_of_the_zOrder_stack">
+
+The front of the z-order stack
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1052">
+<link id="a1053" target-id="Recap_on_the_origin_and_position_parameters_">
+
+Recap on the origin and position parameters
+	
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1056">
+<link id="a1057" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1057">
+<link id="a1058" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1059" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1058">
+<link id="a1060" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Property settings for green transparency.
+
+</item>
+
+
+		
+
+<item id="li1059">
+<link id="a1061" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. The UFO image.
+
+</item>
+
+
+		
+
+<item id="li1060">
+<link id="a1062" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Reduced version of the alien planet image.
+
+</item>
+
+
+		
+
+<item id="li1061">
+<link id="a1063" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+. The UFO approaching the planet from some distance away.
+
+</item>
+
+
+		
+
+<item id="li1062">
+<link id="a1064" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+. Flying over the planet.
+
+</item>
+
+
+		
+
+<item id="li1063">
+<link id="a1065" target-id="Figure_6">
+
+Figure 6
+
+</link>
+
+. Flying over the planet.
+
+</item>
+
+
+		
+
+<item id="li1064">
+<link id="a1066" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+. Flying over the planet.
+
+</item>
+
+
+		
+
+<item id="li1065">
+<link id="a1067" target-id="Figure_8">
+
+Figure 8
+
+</link>
+
+. Preparing to change course.
+
+</item>
+
+
+		
+
+<item id="li1066">
+<link id="a1068" target-id="Figure_9">
+
+Figure 9
+
+</link>
+
+. Flying towards the camera very close to the surface of the planet.
+
+</item>
+
+
+		
+
+<item id="li1067">
+<link id="a1069" target-id="Figure_10">
+
+Figure 10
+
+</link>
+
+. Still flying towards the camera very close to the surface of the planet.
+
+</item>
+
+
+		
+
+<item id="li1068">
+<link id="a1070" target-id="Figure_11">
+
+Figure 11
+
+</link>
+
+. Almost touching the rings around the planet.
+
+</item>
+
+
+		
+
+<item id="li1069">
+<link id="a1071" target-id="Figure_12">
+
+Figure 12
+
+</link>
+
+. Heading for home.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1017" list-type="bulleted">
+
+		
+
+<item id="li1070">
+<link id="a1072" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the class named Game1.
+
+</item>
+
+
+		
+
+<item id="li1071">
+<link id="a1073" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The constructor for the class named Game1.
+
+</item>
+
+
+		
+
+<item id="li1072">
+<link id="a1074" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Beginning of the overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1073">
+<link id="a1075" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Compute the position of the UFO relative to the game window.
+
+</item>
+
+
+		
+
+<item id="li1074">
+<link id="a1076" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Compute the base scale factor for the background image.
+
+</item>
+
+
+		
+
+<item id="li1075">
+<link id="a1077" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Beginning of the overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1076">
+<link id="a1078" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Apply dynamic scaling to the background image.
+
+</item>
+
+
+		
+
+<item id="li1077">
+<link id="a1079" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Adjust the origin for the background image.
+
+</item>
+
+
+		
+
+<item id="li1078">
+<link id="a1080" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Beginning of the overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1079">
+<link id="a1081" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Draw the UFO.
+
+</item>
+
+
+		
+
+<item id="li1080">
+<link id="a1082" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. The class named Game1 for the project named XNA0124Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="Layer_depth" effect="bold">
+
+Layer depth
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+When you draw two or more sprites using the 
+
+<emphasis id="strong1001" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method, you can specify the 
+
+<emphasis id="em1001" effect="italics">
+z-order
+
+</emphasis>
+ as the last (
+
+<link id="a1083" url="http://msdn.microsoft.com/en-us/library/bb196412.aspx">
+
+layerDepth
+
+</link>
+
+) 
+parameter to the 
+
+<emphasis id="strong1002" effect="bold">
+Draw
+
+</emphasis>
+ method. By default, a non-transparent 
+sprite that is drawn with a 
+
+<emphasis id="strong1003" effect="bold">
+layerDepth
+
+</emphasis>
+ value of 0.0 will hide 
+sprites drawn with greater 
+
+<emphasis id="strong1004" effect="bold">
+layerDepth
+
+</emphasis>
+ values. The greater the
+
+
+<emphasis id="strong1005" effect="bold">
+layerDepth
+
+</emphasis>
+ value, the further back will be the sprite in the 
+z-order, up to a maximum value of 1.0, which represents the extreme back of the 
+z-order.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Color_key_transparency" effect="bold">
+
+Color key transparency
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1006">
+During the design phase of project development, you can cause the program to 
+interpret one specific color as being transparent by setting the 
+
+<emphasis id="strong1006" effect="bold">
+Color 
+Key Color
+
+</emphasis>
+ property to that color and setting the 
+
+<emphasis id="strong1007" effect="bold">
+Color Key 
+Enabled
+
+</emphasis>
+ property to true as shown in 
+
+<link id="a1084" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Although I have never 
+tried to do it, you can also apparently accomplish this at runtime by setting 
+properties of the
+
+
+<link id="a1085" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.content.pipeline.processors.textureprocessor.aspx">
+
+
+TextureProcessor
+
+</link>
+
+ class.
+
+</para>
+
+
+
+
+	
+	
+
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1007">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Property settings for green transparency.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0124a.jpg" width="402" height="458"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Transparent_green" effect="bold">
+
+Transparent green
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+<link id="a1086" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows the property settings required to cause every pixel having a 
+color of pure green (0,255,0) to be replaced with transparent black, regardless 
+of the actual alpha value of the green pixel.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Store_your_image_in_a_lossless_image_file" effect="bold">
+
+Store your image in a lossless image file
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+If you use this capability, you must be careful not to store your image in a 
+file that uses lossy compression, such as a JPEG file. If you do, the pure color 
+that went into the file is not likely to be pure when you later extract the 
+image from the file. Instead, you should store your image in a lossless file 
+such as a BMP file or a PNG file.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Be_aware_of_the_default_values" effect="bold">
+
+Be aware of the default values
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+Even if you don't plan to use this capability, you need to be aware of it. It 
+seems that any time you add an existing image file to the content folder, the
+
+
+<emphasis id="strong1008" effect="bold">
+Color Key Enabled
+
+</emphasis>
+ property will be true by default and the
+
+
+<emphasis id="strong1009" effect="bold">
+Color Key Color
+
+</emphasis>
+ property value will be magenta (255,0,255). If 
+you fail to disable the 
+
+<emphasis id="strong1010" effect="bold">
+Color Key Enabled
+
+</emphasis>
+ property, all of 
+your pure magenta pixels will be replaced by transparent black pixels.
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+In the early days of computer graphics, magenta was the defacto 
+standard transparency color. It was referred to as "magic pink."
+
+</note>
+
+
+
+
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1011">
+In this module, I will present and explain an animated sequence in which 
+	a UFO flies over an alien planet. You will view the action as if the camera 
+	is trained on the UFO while maintaining a constant position relative to the 
+	UFO. 
+
+</para>
+
+
+
+
+
+<para id="p1012">
+As the program runs, the planet gets larger and larger creating the illusion 
+that the UFO is getting closer and closer to the surface of the planet. Finally, 
+the program resets and the sequence repeats.
+
+</para>
+
+
+
+
+
+<section id="h21006">
+<title>
+<emphasis id="The_UFO_image" effect="bold">
+
+The UFO image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1013">
+The UFO image is shown in 
+
+<link id="a1087" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Note the green background. All of the 
+green pixels in the UFO image will be replaced by transparent black pixels when 
+the program runs. I took advantage of the 
+
+<emphasis id="strong1011" effect="bold">
+Color Key
+
+</emphasis>
+ 
+transparency feature by setting the properties for the UFO image as shown in 
+
+
+<link id="a1088" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1014">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. The UFO image.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="missing image" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0124b.jpg" width="64" height="33"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Image_of_the_planet" effect="bold">
+
+Image of the planet
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+<link id="a1089" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ shows a reduced view of the image showing the planet that I used as a 
+background image.
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1016">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. Reduced version of the alien planet image.
+
+</para>
+
+
+
+		
+
+<media id="media1002" alt="missing image" display="block">
+<image id="img1002" mime-type="image/jpeg" src="../../media/xna0124c.jpg" width="450" height="338"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1017">
+The version that I used in the program was 640 pixels wide and 480 pixels 
+high. However, that is too large to publish comfortably in this narrow publication format, 
+so I reduced the image in 
+
+<link id="a1090" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ to 450x338 for publication purposes only. The 
+source code that you will see later is based on an image size of 640x480.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+<emphasis id="The_screen_output" effect="bold">
+
+The screen output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+ 
+
+<link id="a1091" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ through 
+
+<link id="a1092" target-id="Figure_12">
+
+Figure 12
+
+</link>
+
+ show nine screen shots taken while the animation was 
+running.
+
+</para>
+
+
+
+
+
+<para id="p1019">
+In 
+
+<link id="a1093" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+, the UFO is approaching the planet from some distance away. Note 
+that the green portion of the UFO image has become transparent. Also note the size 
+of the planet and its moon for comparison with subsequent screen shots.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1020">
+<emphasis id="Figure_4" effect="bold">
+
+Figure 4
+
+</emphasis>
+
+. The UFO approaching the planet from some distance away.
+
+</para>
+
+
+
+		
+
+<media id="media1003" alt="missing image" display="block">
+<image id="img1003" mime-type="image/jpeg" src="../../media/xna0124d.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="Flying_a_relatively_straight_path" effect="bold">
+
+Flying a relatively straight path
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1021">
+In 
+
+<link id="a1094" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+ through 
+
+<link id="a1095" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+, the UFO continues along a relatively straight path 
+flying over the planet and getting closer to the surface of the planet all the 
+time. Note how the planet increases in size from one image to the next, giving 
+the illusion that the UFO is getting closer to the surface of the planet.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="The_background_is_moving" effect="bold">
+
+The background is moving
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+Note also that the position of the UFO in the game window is not changing. 
+Instead an illusion of motion is created by causing the background to change. 
+This is a technique that was used for many years in the movies to create the 
+illusion that actors were in a car driving along the highway when in fact, the 
+car was standing still inside a studio. The image of the stationary car was 
+superimposed on a moving background image.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1023">
+<emphasis id="Figure_5" effect="bold">
+
+Figure 5
+
+</emphasis>
+
+. Flying over the planet.
+
+</para>
+
+
+
+		
+
+<media id="media1004" alt="missing image" display="block">
+<image id="img1004" mime-type="image/jpeg" src="../../media/xna0124e.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1024">
+<emphasis id="Figure_6" effect="bold">
+
+Figure 6
+
+</emphasis>
+
+. Flying over the planet.
+
+</para>
+
+
+
+		
+
+<media id="media1005" alt="missing image" display="block">
+<image id="img1005" mime-type="image/jpeg" src="../../media/xna0124f.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1025">
+<emphasis id="Figure_7" effect="bold">
+
+Figure 7
+
+</emphasis>
+
+. Flying over the planet.
+
+</para>
+
+
+
+		
+
+<media id="media1006" alt="missing image" display="block">
+<image id="img1006" mime-type="image/jpeg" src="../../media/xna0124g.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="Preparing_to_change_course" effect="bold">
+
+Preparing to change course
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1026">
+In 
+
+<link id="a1096" target-id="Figure_8">
+
+Figure 8
+
+</link>
+
+, the UFO has gone about as far as it is going to go along the 
+original course. It is preparing to change course and come back towards the 
+camera getting ever closer to the surface of the planet.
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1027">
+<emphasis id="Figure_8" effect="bold">
+
+Figure 8
+
+</emphasis>
+
+. Preparing to change course.
+
+</para>
+
+
+
+		
+
+<media id="media1007" alt="missing image" display="block">
+<image id="img1007" mime-type="image/jpeg" src="../../media/xna0124h.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="Flying_towards_the_camera" effect="bold">
+
+Flying towards the camera
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1028">
+In 
+
+<link id="a1097" target-id="Figure_9">
+
+Figure 9
+
+</link>
+
+ and 
+
+<link id="a1098" target-id="Figure_10">
+
+Figure 10
+
+</link>
+
+, the UFO has changed course. It is now flying towards the 
+camera very close to the surface of the planet. You can even see some surface 
+features on the planet (due to the distortion that is produced when a bitmap 
+image is enlarged).
+
+</para>
+
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1029">
+<emphasis id="Figure_9" effect="bold">
+
+Figure 9
+
+</emphasis>
+
+. Flying towards the camera very close to the surface of the planet.
+
+</para>
+
+
+
+		
+
+<media id="media1008" alt="missing image" display="block">
+<image id="img1008" mime-type="image/jpeg" src="../../media/xna0124i.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1030">
+<emphasis id="Figure_10" effect="bold">
+
+Figure 10
+
+</emphasis>
+
+. Still flying towards the camera very close to the surface of the planet.
+
+</para>
+
+
+
+
+
+<media id="media1009" alt="missing image" display="block">
+<image id="img1009" mime-type="image/jpeg" src="../../media/xna0124j.jpg" width="457" height="367"/>
+</media>
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1031">
+In 
+
+<link id="a1099" target-id="Figure_11">
+
+Figure 11
+
+</link>
+
+, the UFO is almost touching the rings around the planet.
+
+</para>
+
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1032">
+<emphasis id="Figure_11" effect="bold">
+
+Figure 11
+
+</emphasis>
+
+. Almost touching the rings around the planet.
+
+</para>
+
+
+
+		
+
+<media id="media1010" alt="missing image" display="block">
+<image id="img1010" mime-type="image/jpeg" src="../../media/xna0124k.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Heading_for_home" effect="bold">
+
+Heading for home
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+In 
+
+<link id="a1100" target-id="Figure_12">
+
+Figure 12
+
+</link>
+
+, the UFO leaves the planet and heads for home. Shortly after 
+this, the program will reset and repeat the animation sequence.
+
+</para>
+
+
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1034">
+<emphasis id="Figure_12" effect="bold">
+
+Figure 12
+
+</emphasis>
+
+. Heading for home.
+
+</para>
+
+
+
+		
+
+<media id="media1011" alt="missing image" display="block">
+<image id="img1011" mime-type="image/jpeg" src="../../media/xna0124l.jpg" width="457" height="367"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+	
+	
+
+</section>
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1035">
+As usual, I will explain the code in this program in fragments. A complete 
+listing of the class named 
+
+<emphasis id="strong1012" effect="bold">
+Game1
+
+</emphasis>
+ is provided in 
+
+<link id="a1101" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ near 
+the end of the module.
+
+</para>
+
+
+
+	
+
+
+
+<section id="h21009">
+<title>
+
+    
+
+<emphasis id="The_class_named_Game1_" effect="bold">
+
+The class named Game1 
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1036">
+
+    The class named 
+
+<emphasis id="strong1013" effect="bold">
+Game1
+
+</emphasis>
+ begins in 
+
+<link id="a1102" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1013" type="">
+
+
+<para id="p1037">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Beginning of the class named Game1.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">namespace XNA0124Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    private Viewport viewport;
+    private Vector2 ufoPosition;
+    private float backgroundScale;
+    private float backgroundBaseScale;
+    private float dynamicScale = 0.0f;
+    int msElapsed;//Time since last new frame.
+    int msPerFrame = 83;//30 updates per second
+    Texture2D spaceTexture;//background image
+    Texture2D ufoTexture;//ufo image
+    Vector2 spaceOrigin;//origin for drawing background
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1038">
+<link id="a1103" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ contains the declarations of several instance variables that 
+	will be used later in the program. I will explain their purpose when they 
+	are used later.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21010">
+<title>
+
+    
+
+<emphasis id="The_constructor_for_the_class_named_Game1_" effect="bold">
+
+The constructor for the class named Game1
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1039">
+
+    The constructor for the class is shown in 
+
+<link id="a1104" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1040">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. The constructor for the class named Game1.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window, causing the
+      // aspect ratio of the game window to match the 
+      // aspect ratio of the background image, which is 
+      // 640 wide by 480 high.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 
+                                   (int)(450.0*480/640);
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31007">
+<title>
+<emphasis id="Setting_the_size_of_the_game_window" effect="bold">
+
+Setting the size of the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+The last two statements in 
+
+<link id="a1105" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ set the size of the game 
+window. You have seen code like this before in an earlier module. The only thing 
+new here is the expression used to compute the value for the height of the game 
+window.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31008">
+<title>
+<emphasis id="Maintaining_the_aspect_ratio" effect="bold">
+
+Maintaining the aspect ratio
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+The background image shown in 
+
+<link id="a1106" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ is 640 pixels wide by 480 pixels high. 
+When it is initially drawn, it will be scaled to a width of 450 pixels keeping 
+the same width to height ratio (the aspect ratio). The intent is that it will 
+initially just fit inside the game window.
+
+</para>
+
+
+
+
+
+<para id="p1043">
+The expression used to compute the new height of the game window in 
+
+<link id="a1107" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ 
+causes the aspect ratio of the game window to match the aspect ratio of the 
+background image.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h21011">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method" effect="bold">
+
+The overridden LoadContent method
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1044">
+
+    The overridden 
+
+<emphasis id="strong1014" effect="bold">
+LoadContent
+
+</emphasis>
+ method begins in 
+
+<link id="a1108" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1015" type="">
+
+
+<para id="p1045">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Beginning of the overridden LoadContent method.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">    protected override void LoadContent() {
+      // Create a new SpriteBatch, which can be used to
+      // draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Load the two images.
+      spaceTexture = Content.Load&lt;Texture2D&gt;("space");
+      ufoTexture = Content.Load&lt;Texture2D&gt;("ufo");
+
+      //Get a reference to the viewport.
+      viewport = graphics.GraphicsDevice.Viewport;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31009">
+<title>
+<emphasis id="The_new_material" effect="bold">
+
+The new material
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+The only thing that is new in 
+
+<link id="a1109" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ is the last statement.
+
+</para>
+
+
+
+
+
+<para id="p1047">
+<emphasis id="strong1015" effect="bold">
+Viewport
+
+</emphasis>
+ is a property of the
+
+
+<link id="a1110" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.graphicsdevice_properties.aspx">
+
+
+GraphicsDevice
+
+</link>
+
+ class and is a
+
+
+<link id="a1111" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.viewport.aspx">
+
+
+Structure
+
+</link>
+
+ named 
+
+<emphasis id="strong1016" effect="bold">
+Viewport
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1048">
+The description in the
+
+
+<link id="a1112" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.graphicsdevice.viewport.aspx">
+
+
+documentation
+
+</link>
+
+ doesn't make a lot of sense to me. I believe it is safe to 
+say, however, that in this XNA program, the viewport is synonymous with the game 
+window. However, that is not always the case. A game window can contain more 
+than one viewport. See
+
+
+<link id="a1113" url="http://msdn.microsoft.com/en-us/library/bb313965.aspx">
+
+How To: Use 
+Viewports for Split Screen Gaming
+
+</link>
+
+ for an example.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+<emphasis id="Compute_the_position_of_the_UFO_relative_to_the_game_window" effect="bold">
+
+Compute the position of the UFO relative to the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+The code in 
+
+<link id="a1114" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ computes a position vector which, when applied during 
+the drawing of the UFO, will cause the UFO to occupy a position approximately 
+like that shown in 
+
+<link id="a1115" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1016" type="">
+
+
+<para id="p1050">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Compute the position of the UFO relative to the game window.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">      ufoPosition.X = viewport.Width / 2;
+      ufoPosition.Y = viewport.Height - 70;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1051">
+I say approximately because one additional adjustment to the position of 
+	the UFO will be made later using the 
+
+<emphasis id="strong1017" effect="bold">
+origin
+
+</emphasis>
+ parameter of 
+	the 
+
+<emphasis id="strong1018" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method. If that adjustment were not 
+	made, the upper left corner of the rectangle that contains the UFO would be 
+	placed at the position computed in 
+
+<link id="a1116" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. The origin property will be 
+	used to center the UFO on the position that is computed in 
+
+<link id="a1117" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31011">
+<title>
+<emphasis id="Compute_the_base_scale_factor_for_the_background_image" effect="bold">
+
+Compute the base scale factor for the background image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1052">
+<link id="a1118" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ computes a scale factor which, when applied to the background image 
+during the drawing process, will cause the 640x480 background image to just fit 
+the game window. Recall that the size of the game window was set in the 
+constructor of 
+
+<link id="a1119" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ taking the aspect ratio of the background image into 
+account.
+
+</para>
+
+
+
+
+
+<note id="note1017" type="">
+
+
+<para id="p1053">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Compute the base scale factor for the background image.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">      backgroundBaseScale = (float)(450.0 / 640.0);
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31012">
+<title>
+<emphasis id="Not_the_only_scale_factor" effect="bold">
+
+Not the only scale factor
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The scale factor computed in 
+
+<link id="a1120" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ will be applied to the background 
+image when the program first starts running. However, during most of the running 
+of the program, a different scale factor will be applied to the background image 
+and the scale factor computed in 
+
+<link id="a1121" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ will be only one component of that 
+overall scale factor.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31013">
+<title>
+<emphasis id="An_optical_illusion" effect="bold">
+
+An optical illusion
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+The application of a scale factor to the background 
+image that changes with time is what causes the planet to grow in size giving the illusion that the UFO 
+is approaching the surface of the planet.
+
+</para>
+
+
+
+
+
+<para id="p1056">
+<link id="a1122" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ signals the end of the 
+
+<emphasis id="strong1019" effect="bold">
+LoadContent
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h21012">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method 
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1057">
+
+    The overridden 
+
+<emphasis id="strong1020" effect="bold">
+Update
+
+</emphasis>
+ method begins in 
+
+<link id="a1123" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1018" type="">
+
+
+				
+
+<para id="p1058">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Beginning of the overridden Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">    protected override void Update(GameTime gameTime) {
+
+      //Compute the elapsed time since the last update.
+      // Draw new data only if this time exceeds the
+      // desired frame interval given by msPerFrame
+      msElapsed += gameTime.ElapsedGameTime.Milliseconds;
+      if(msElapsed &gt; msPerFrame) {
+        //Reset the elapsed time and draw the frame with
+        // new data.
+        msElapsed = 0;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31014">
+<title>
+<emphasis id="Controlling_the_animation_speed" effect="bold">
+
+Controlling the animation speed
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1059">
+The code in 
+
+<link id="a1124" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is not new to this module. I explained code like this 
+in an earlier module.
+
+</para>
+
+
+
+
+
+<para id="p1060">
+Briefly, the 
+
+<emphasis id="strong1021" effect="bold">
+Update
+
+</emphasis>
+ method is called sixty times per second 
+by default (I didn't change the default). That is too fast to produce an 
+animation that looks the way I wanted it to look.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="Draw_new_material_every_83_milliseconds" effect="bold">
+
+Draw new material every 83 milliseconds
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+The code in 
+
+<link id="a1125" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ causes the sprites to be drawn sixty times per second, 
+but new material is drawn only once every 
+
+<emphasis id="strong1022" effect="bold">
+msPerFrame
+
+</emphasis>
+ 
+milliseconds. The value for 
+
+<emphasis id="strong1023" effect="bold">
+msPerFrame
+
+</emphasis>
+ is set to 83 
+milliseconds in 
+
+<link id="a1126" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+, but as you learned in an earlier module, its value 
+could be changed by program code as the program is running.
+
+</para>
+
+
+
+
+
+<para id="p1062">
+Therefore, in this program, new material is drawn 30 times per second. Every 
+other frame that is drawn looks exactly like the one before it, but the human 
+eye is not fast enough to be able to detect that.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="Apply_dynamic_scaling_to_the_background_image" effect="bold">
+
+Apply dynamic scaling to the background image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+A different and ever increasing scale factor is applied to the background 
+image each time the body of the 
+
+<emphasis id="strong1024" effect="bold">
+if
+
+</emphasis>
+ statement in the 
+
+<emphasis id="strong1025" effect="bold">
+
+Update
+
+</emphasis>
+ method in 
+
+<link id="a1127" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is executed.
+
+</para>
+
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="Two_components_in_the_scale_factor" effect="bold">
+
+Two components in the scale factor
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+This overall scale factor is composed of the fixed 
+
+<emphasis id="strong1026" effect="bold">
+
+backgroundBaseScale
+
+</emphasis>
+ factor computed in 
+
+<link id="a1128" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ and a dynamic scale 
+factor named 
+
+<emphasis id="strong1027" effect="bold">
+dynamicScale
+
+</emphasis>
+ that is computed in 
+
+<link id="a1129" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="AnOpticalIllusion" effect="bold">
+
+An optical illusion
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+This is what causes the size of the planet to continue to increase during the 
+animation sequence creating the illusion that the UFO is getting closer to the 
+surface of the planet.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51002">
+<title>
+<emphasis id="The_dynamic_portion_of_the_overall_scale_factor" effect="bold">
+
+The dynamic portion of the overall scale factor
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+The value of the dynamic portion of the overall scale factor increases by 
+0.03 each time this code is executed. Once the dynamic portion reaches a value 
+of 10, it is reset to zero and the animation sequence plays again from the 
+beginning.
+
+</para>
+
+
+
+
+
+<para id="p1067">
+This is accomplished by the scaling algorithm shown in 
+
+<link id="a1130" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1019" type="">
+
+
+<para id="p1068">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Apply dynamic scaling to the background image.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">        //Reset the animation if the dynamicScale factor
+        // is greater than 10.
+        if(dynamicScale &gt; 10) {
+          dynamicScale = 0.0f;
+        } else {
+          //Increase the dynamicScale factor and use it
+          // to compute a new scale factor that will be
+          // applied to the background image in the next
+          // call to the Draw method.
+          dynamicScale += 0.03f;
+          backgroundScale = 
+                backgroundBaseScale * (1 + dynamicScale);
+        }//end if-else on dynamicScale
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h31015">
+<title>
+<emphasis id="Changing_the_origin_of_the_background_image" effect="bold">
+
+Changing the origin of the background image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+The 
+
+<emphasis id="strong1028" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method has one parameter named 
+
+<emphasis id="strong1029" effect="bold">
+
+position
+
+</emphasis>
+ and another parameter named 
+
+<emphasis id="strong1030" effect="bold">
+origin
+
+</emphasis>
+. You can 
+cause the 
+
+<emphasis id="strong1031" effect="bold">
+origin
+
+</emphasis>
+ to be any point in the image relative to its 
+upper left corner.
+
+</para>
+
+
+
+
+
+<note id="note1020" type="">
+
+
+Important: The 
+
+<emphasis id="strong1032" effect="bold">
+position
+
+</emphasis>
+ parameter specifies the position in 
+the game window where the image's 
+
+<emphasis id="strong1033" effect="bold">
+origin
+
+</emphasis>
+ will be drawn.
+
+</note>
+
+
+
+
+
+
+<para id="p1070">
+If you hold the 
+
+<emphasis id="strong1034" effect="bold">
+position
+
+</emphasis>
+ parameter constant and vary the
+
+
+<emphasis id="strong1035" effect="bold">
+origin
+
+</emphasis>
+, the image will appear to slide around within the game 
+window.
+
+</para>
+
+
+
+
+
+<section id="h41002">
+<title>
+<emphasis id="Increasing_the_scale_alone_is_insufficient" effect="bold">
+
+Increasing the scale alone is insufficient
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+Consider the background image shown in 
+
+<link id="a1131" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Assume that the 
+
+<emphasis id="strong1036" effect="bold">
+
+origin
+
+</emphasis>
+ of the image is the upper left corner of the image. Also assume 
+that the image will be drawn with that 
+
+<emphasis id="strong1037" effect="bold">
+origin
+
+</emphasis>
+ in the upper left 
+corner of the game window.
+
+</para>
+
+
+
+
+
+<para id="p1072">
+If we were to scale the image to make it larger, the planet would be pushed 
+down and to the right and would exit the game window near the bottom right 
+corner of the game window. That is not what we are looking for.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="Need_to_stabilize_the_location_of_the_planet_in_the_game_window" effect="bold">
+
+Need to stabilize the location of the planet in the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+To achieve the effect we are looking for, we need to cause the planet to 
+remain in pretty much the same location within the game window as it gets 
+larger. One way to accomplish that is by causing the origin to move down and to 
+the right within the background image as the planet becomes larger. (Obviously 
+that is not the only way to accomplish it.)
+
+</para>
+
+
+
+
+
+<para id="p1074">
+That effect is accomplished by the algorithm shown in 
+
+<link id="a1132" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1021" type="">
+
+
+<para id="p1075">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Adjust the origin for the background image.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">        //Also use the dynamicScale factor to compute a
+        // new value for the origin of the background.
+        // The origin is the point in the image that is
+        // drawn at the point in the game window that is
+        // passed as the second (position) parameter in
+        // the call to the SpriteBatch.Draw method. This
+        // has the effect of causing the background
+        // image to slide up and to the left at the same
+        // time that it is getting larger.
+        spaceOrigin = 
+          new Vector2((float)(450 * (dynamicScale) / 12),
+                     (float)(338 * (dynamicScale) / 10));
+      }//end if on msElapsed
+
+      base.Update(gameTime);
+    }//end Update
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Examples" effect="bold">
+
+Examples
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+For example, in 
+
+<link id="a1133" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+, the origin of the image (the point drawn in the 
+upper left corner of the game window) was out in space far removed from the 
+planet. By 
+
+<link id="a1134" target-id="Figure_10">
+
+Figure 10
+
+</link>
+
+ the origin had shifted to the surface of the planet causing 
+a point on the surface of the planet to be drawn in the upper left corner of the 
+game window. By 
+
+<link id="a1135" target-id="Figure_12">
+
+Figure 12
+
+</link>
+
+, the origin had shifted all the way down and to the 
+right to be on the surface of the ring that surrounds the planet.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31016">
+<title>
+<emphasis id="The_end_of_the_Update_method" effect="bold">
+
+The end of the Update method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+<link id="a1136" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ signals the end of the overridden 
+
+<emphasis id="strong1038" effect="bold">
+Update
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21013">
+<title>
+
+    
+
+<emphasis id="The_overridden_GameDraw_method_" effect="bold">
+
+The overridden Game.Draw method
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1078">
+To avoid confusion, I want to remind you that when programming in XNA, you 
+override the 
+
+<emphasis id="strong1039" effect="bold">
+Game.Draw
+
+</emphasis>
+ method. Within that method, you make 
+calls to the 
+
+<emphasis id="strong1040" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method. These are entirely 
+different methods belonging to different objects even though they have the same 
+name.
+
+</para>
+
+
+
+
+
+<section id="h31017">
+<title>
+<emphasis id="No_need_to_clear_the_game_window" effect="bold">
+
+No need to clear the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1079">
+The overridden 
+
+<emphasis id="strong1041" effect="bold">
+Game.Draw
+
+</emphasis>
+ method begins in 
+
+<link id="a1137" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Unlike 
+the programs in earlier modules in this book, there is no need to clear the 
+game window to a constant color in this program because the background image of 
+the planet completely fills the game window.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31018">
+<title>
+<emphasis id="Two_main_sections_of_code" effect="bold">
+
+Two main sections of code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+In this program, the overridden 
+
+<emphasis id="strong1042" effect="bold">
+Game.Draw
+
+</emphasis>
+ method consists of 
+two main sections of code. The first section consists of a 
+
+<emphasis id="strong1043" effect="bold">
+Begin
+
+</emphasis>
+,
+
+
+<emphasis id="strong1044" effect="bold">
+Draw
+
+</emphasis>
+, 
+
+<emphasis id="strong1045" effect="bold">
+End
+
+</emphasis>
+ sequence with alpha blending turned 
+off. This code is used to draw the background image. Alpha blending is turned 
+off to prevent any areas of the background image that may have a low alpha value 
+or any green pixels from appearing to be transparent.
+
+</para>
+
+
+
+
+
+<para id="p1081">
+The second section consists of another 
+
+<emphasis id="strong1046" effect="bold">
+Begin
+
+</emphasis>
+,
+
+<emphasis id="strong1047" effect="bold">
+Draw
+
+</emphasis>
+,
+
+<emphasis id="strong1048" effect="bold">
+End
+
+</emphasis>
+ 
+sequence with alpha blending turned on. This code is used to draw the UFO. Alpha 
+blending is turned on to cause the green areas in the UFO sprite shown in 
+
+<link id="a1138" target-id="Figure_2">
+
+ Figure 2
+
+</link>
+
+ to be transparent and to let the background image show through.
+
+</para>
+
+
+
+
+
+<section id="h41005">
+<title>
+<emphasis id="Draw_the_background_image_showing_the_planet" effect="bold">
+
+Draw the background image showing the planet
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+The first major section of code is shown in 
+
+<link id="a1139" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<note id="note1022" type="">
+
+
+Note the change that 
+was made in the call to the 
+
+<emphasis id="strong1049" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ method to upgrade 
+the program from XNA 3.1 to XNA 4.0.
+
+</note>
+
+
+
+
+
+
+
+<note id="note1023" type="">
+
+
+<para id="p1083">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Beginning of the overridden Game.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1008" display="block">    protected override void Draw(GameTime gameTime) {
+
+      // Turn off blending to draw the planet in the
+      // background. Note the update for XNA 4.0.
+//      spriteBatch.Begin(SpriteBlendMode.None);
+        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+
+      //Draw the background.
+      spriteBatch.Draw(spaceTexture,//sprite
+                       Vector2.Zero,//position re window
+                       null,//rectangle
+                       Color.White,//tint
+                       0,//rotation
+                       spaceOrigin,//origin
+                       backgroundScale,//scale
+                       SpriteEffects.None,
+                       1.0f);//layer, near the back
+
+      spriteBatch.End();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1084">
+The only things that are new here are the interactions among the 
+
+<emphasis id="strong1050" effect="bold">
+
+position
+
+</emphasis>
+ parameter, the 
+
+<emphasis id="strong1051" effect="bold">
+origin
+
+</emphasis>
+ parameter, and the
+
+
+<emphasis id="strong1052" effect="bold">
+scale
+
+</emphasis>
+ parameter that I explained 
+earlier.
+
+</para>
+
+
+
+
+
+<para id="p1085">
+It is probably also worth noting that the last parameter has a value of 1.0, 
+which causes this image to be displayed behind every other image.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Draw_the_UFO" effect="bold">
+
+Draw the UFO
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1086">
+The code in 
+
+<link id="a1140" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ draws the UFO image with alpha blending turned on to 
+cause the green areas of the image to be transparent.
+
+</para>
+
+
+
+	
+
+<note id="note1024" type="">
+
+
+Again, note the change that 
+was made in the call to the 
+
+<emphasis id="strong1053" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ method to upgrade 
+	the program from XNA 3.1 to XNA 4.0.
+
+</note>
+
+
+
+
+
+
+
+<note id="note1025" type="">
+
+
+<para id="p1087">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. Draw the UFO.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">      // Turn on blending to draw the UFO in the 
+      // foreground. Note the update for XNA 4.0.
+//      spriteBatch.Begin(SpriteBlendMode.AlphaBlend);
+      spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+      //Center the UFO at the point in the window
+      // identified as UFO position. The UFO image is
+      // 64x33 pixels.
+      Vector2 origin = new Vector2(32,16);
+      spriteBatch.Draw(ufoTexture,//sprite
+                       ufoPosition,//position re window
+                       null,//rectangle
+                       Color.White,//tine
+                       0,//rotation
+                       origin,//origin
+                       1,//scale
+                       SpriteEffects.None,
+                       0f);//layer, 0 is in front
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h51003">
+<title>
+<emphasis id="Center_the_UFO_image_on_the_position" effect="bold">
+
+Center the UFO image on the position
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1088">
+The UFO image is 64 pixels wide and 33 pixels high. The origin is set to the 
+center of the image with coordinates of (32,16) relative to the upper left 
+corner of the image.
+
+</para>
+
+
+
+
+
+<para id="p1089">
+Then the image is drawn with the 
+
+<emphasis id="strong1054" effect="bold">
+origin
+
+</emphasis>
+ at the 
+
+<emphasis id="strong1055" effect="bold">
+
+ufoPosition
+
+</emphasis>
+, which was computed in 
+
+<link id="a1141" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1090">
+The value of 
+
+<emphasis id="strong1056" effect="bold">
+ufoPosition
+
+</emphasis>
+ specifies a point that is in the 
+horizontal center of the game window and 70 pixels from the bottom of the game 
+window. Therefore, the center of the UFO is positioned at the horizontal center 
+of the game window and 70 pixels up from the bottom of the game window as shown 
+in 
+
+<link id="a1142" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ through 
+
+<link id="a1143" target-id="Figure_12">
+
+Figure12
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51004">
+<title>
+<emphasis id="The_UFO_does_not_move" effect="bold">
+
+The UFO does not move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1091">
+The UFO doesn't move. It stays in one place and the background image is 
+animated behind it.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51005">
+<title>
+<emphasis id="The_front_of_the_zOrder_stack" effect="bold">
+
+The front of the z-order stack
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1092">
+The value of the last parameter in 
+
+<link id="a1144" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ is zero. This places the UFO in 
+front of every other image. Of course, in this case, there are only two images: 
+the background image at the back and the UFO image at the front.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+</section>
+<section id="h21014">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1093">
+<link id="a1145" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ signals the end of the overridden Draw method, the end of the 
+class, and the end of the program.
+
+</para>
+
+
+
+
+	
+	
+
+
+</section>
+<section id="h21015">
+<title>
+
+    
+
+<emphasis id="Recap_on_the_origin_and_position_parameters_" effect="bold">
+
+Recap on the origin and position parameters
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1094">
+The 
+
+<emphasis id="strong1057" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method has an 
+
+<emphasis id="strong1058" effect="bold">
+origin
+
+</emphasis>
+ 
+parameter and a 
+
+<emphasis id="strong1059" effect="bold">
+position
+
+</emphasis>
+ parameter.
+
+</para>
+
+
+
+
+
+<para id="p1095">
+The 
+
+<emphasis id="strong1060" effect="bold">
+origin
+
+</emphasis>
+ parameter specifies a point somewhere in the 
+image being drawn relative to the upper left corner of the image. The 
+
+<emphasis id="strong1061" effect="bold">
+
+position
+
+</emphasis>
+ parameter specifies where that point will be drawn relative to 
+the upper left corner of the game window.
+
+</para>
+
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1096">
+I encourage you to download
+
+<link id="a1146" target-id="Figure_2">
+
+ Figure 2
+
+</link>
+
+ and
+
+
+<link id="a1147" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ and to copy the code from 
+
+<link id="a1148" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. Use that code to create an 
+XNA project. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. Note that the image that you 
+download from 
+
+<link id="a1149" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ will be smaller than the image that 
+I used. Therefore, your scaling will probably need to be different.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1097">
+Click 
+
+<link id="a1150" url="XNA0124Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1062" effect="bold">
+XNA0124Proj
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1063" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1064" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1065" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to that folder and select 
+the file with the extension of 
+
+<emphasis id="strong1066" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1151" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1098">
+You learned about the following major topics in this module:
+
+</para>
+
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+
+	
+
+<item id="li1081">
+How to display a sprite in front of a background image.
+
+</item>
+
+
+	
+
+<item id="li1082">
+The difference between the 
+
+<emphasis id="strong1067" effect="bold">
+position
+
+</emphasis>
+ and 
+
+<emphasis id="strong1068" effect="bold">
+origin
+
+</emphasis>
+ 
+	parameters of the 
+
+<emphasis id="strong1069" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method.
+
+</item>
+
+
+	
+
+<item id="li1083">
+How to cause the background image to change at runtime.
+
+</item>
+
+
+	
+
+<item id="li1084">
+How to deal with and use color key transparency.
+
+</item>
+
+
+
+
+</list>
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1099">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1026" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1070" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1019" list-type="bulleted">
+
+					
+
+<item id="li1085">
+Module name: Xna0124-Using Background Images and Color 
+					Key Transparency
+
+</item>
+
+
+					
+
+<item id="li1086">
+File: Xna0124.htm
+
+
+</item>
+
+
+					
+
+<item id="li1087">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1027" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1071" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1100">
+<emphasis id="strong1072" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1101">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1102">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1103">
+<emphasis id="strong1073" effect="bold">
+Affiliation
+
+</emphasis>
+: I: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1104">
+A complete listing of the XNA program discussed in this module is provided in 
+
+<link id="a1152" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. 
+Note the changes that were made in the calls to the 
+
+<emphasis id="strong1074" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ 
+method to upgrade the program from XNA 3.1 to XNA 4.0. Blending was turned off 
+in the first call just in case there were pixels in the background image having 
+a color that matches the key color value.
+
+</para>
+
+
+
+
+
+	
+
+
+
+<note id="note1028" type="">
+
+
+<para id="p1105">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. The class named Game1 for the project named XNA0124Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1010" display="block">/*Project XNA0124Proj
+ * Illustrates displaying a sprite with color key
+ * transparency in front of a background image.
+ * Must modify the color key property value for the ufo 
+ * sprite, changing the key color from the default of
+ * 255,0,255 (magenta or magic pink) to 0,255,0 (green).
+ * The scale and the origin of the background image is
+ * changed over time giving the illusion of a ufo 
+ * flying over a planet.
+********************************************************/
+
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace XNA0124Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    private Viewport viewport;
+    private Vector2 ufoPosition;
+    private float backgroundScale;
+    private float backgroundBaseScale;
+    private float dynamicScale = 0.0f;
+    int msElapsed;//Time since last new frame.
+    int msPerFrame = 83;//30 updates per second
+    Texture2D spaceTexture;//background image
+    Texture2D ufoTexture;//ufo image
+    Vector2 spaceOrigin;//origin for drawing background
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window, causing the
+      // aspect ratio of the game window to match the 
+      // aspect ratio of the background image, which is 
+      // 640 wide by 480 high.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 
+                                   (int)(450.0*480/640);
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      // No initialization required
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      // Create a new SpriteBatch, which can be used to
+      // draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Load the two images.
+      spaceTexture = Content.Load&lt;Texture2D&gt;("space");
+      ufoTexture = Content.Load&lt;Texture2D&gt;("ufo");
+
+      //Get a reference to the viewport.
+      viewport = graphics.GraphicsDevice.Viewport;
+
+      //Compute the position of the ufo relative to the
+      // game window.
+      ufoPosition.X = viewport.Width / 2;
+      ufoPosition.Y = viewport.Height - 70;
+
+      //Set the backgroundBaseScale factor such that
+      // the entire background image will fit in the
+      // game window. Note that the aspect ratio of the
+      // game window was set to match the aspect ratio 
+      // of the background image in the constructor.
+      backgroundBaseScale = (float)(450.0 / 640.0);
+    }//end LoadContent
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      // No unload required
+    }//end UnloadContent
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+
+      //Compute the elapsed time since the last update.
+      // Draw new data only if this time exceeds the
+      // desired frame interval given by msPerFrame
+      msElapsed += gameTime.ElapsedGameTime.Milliseconds;
+      if(msElapsed &gt; msPerFrame) {
+        //Reset the elapsed time and draw the frame with
+        // new data.
+        msElapsed = 0;
+
+        //Reset the animation if the dynamicScale factor
+        // is greater than 10.
+        if(dynamicScale &gt; 10) {
+          dynamicScale = 0.0f;
+        } else {
+          //Increase the dynamicScale factor and use it
+          // to compute a new scale factor that will be
+          // applied to the background image in the next
+          // call to the Draw method.
+          dynamicScale += 0.03f;
+          backgroundScale = 
+                backgroundBaseScale * (1 + dynamicScale);
+        }//end if-else on dynamicScale
+
+        //Also use the dynamicScale factor to compute a
+        // new value for the origin of the background.
+        // The origin is the point in the image that is
+        // drawn at the point in the game window that is
+        // passed as the second (position) parameter in
+        // the call to the SpriteBatch.Draw method. This
+        // has the effect of causing the background
+        // image to slide up and to the left at the same
+        // time that it is getting larger.
+        spaceOrigin = 
+          new Vector2((float)(450 * (dynamicScale) / 12),
+                     (float)(338 * (dynamicScale) / 10));
+      }//end if on msElapsed
+
+      base.Update(gameTime);
+    }//end Update
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+
+      // Turn off blending to draw the planet in the
+      // background. Note the update for XNA 4.0.
+//      spriteBatch.Begin(SpriteBlendMode.None);
+        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+
+      //Draw the background.
+      spriteBatch.Draw(spaceTexture,//sprite
+                       Vector2.Zero,//position re window
+                       null,//rectangle
+                       Color.White,//tint
+                       0,//rotation
+                       spaceOrigin,//origin
+                       backgroundScale,//scale
+                       SpriteEffects.None,
+                       1.0f);//layer, near the back
+
+      spriteBatch.End();
+
+      // Turn on blending to draw the UFO in the 
+      // foreground. Note the update for XNA 4.0.
+//      spriteBatch.Begin(SpriteBlendMode.AlphaBlend);
+      spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+      //Center the UFO at the point in the window
+      // identified as UFO position. The UFO image is
+      // 64x33 pixels.
+      Vector2 origin = new Vector2(32,16);
+      spriteBatch.Draw(ufoTexture,//sprite
+                       ufoPosition,//position re window
+                       null,//rectangle
+                       Color.White,//tine
+                       0,//rotation
+                       origin,//origin
+                       1,//scale
+                       SpriteEffects.None,
+                       0f);//layer, 0 is in front
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+  }//end class
+}//end namespace
+
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1106">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

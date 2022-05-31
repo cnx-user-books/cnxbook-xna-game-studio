@@ -1,0 +1,129 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0095-Preface</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49466</md:content-id>
+  <md:title>Xna0095-Preface</md:title>
+  <md:abstract>This module is the first in a collection of modules designed primarily for teaching GAME 1343 Game and Simulation Programming I at Austin Community College in Austin, TX.</md:abstract>
+  <md:uuid>d8de6a1c-1165-4249-b80c-aeac683b2d30</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Wed May 04 09:58:08 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+	
+
+<section id="h11000">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface to XNA Game Studio Collection
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is the first in a collection of modules designed primarily 
+	for teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+The modules were originally published for use with 
+
+<emphasis id="em1001" effect="italics">
+XNA 3.1
+
+</emphasis>
+, were 
+upgraded for use with 
+
+<emphasis id="em1002" effect="italics">
+XNA 4.0
+
+</emphasis>
+, and as of May 2016 are being upgraded 
+for use with 
+
+<emphasis id="em1003" effect="italics">
+XNA 4.0 Refresh
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1004">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

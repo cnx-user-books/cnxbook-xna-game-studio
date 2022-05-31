@@ -1,0 +1,6610 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0106-Encapsulation in C#</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49472</md:content-id>
+  <md:title>Xna0106-Encapsulation in C#</md:title>
+  <md:abstract>Learn about encapsulation, abstraction, abstract data types, information hiding, class member access control, instance variables, local variables, class variables, reference variables, primitive variables, how C# identifies properties, and how to set and get properties in C#. Also learn about public accessor methods, public manipulator methods, data validation by property setters and public access methods, and a few other things along the way.</md:abstract>
+  <md:uuid>48f3d2d1-d278-40b2-b8b8-866cea6348ca</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Thu May 05 12:44:19 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="The_three_main_characteristics_of_an_objectoriented_program">
+
+The three main characteristics of an 
+object-oriented program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1003">
+<link id="a1004" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1004">
+<link id="a1005" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1006">
+<link id="a1007" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1007">
+<link id="a1008" target-id="Abstraction">
+
+Abstraction
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1008">
+<link id="a1009" target-id="How_does_abstraction_relate_to_encapsulation">
+
+How does abstraction relate to 
+encapsulation?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Some_analogies">
+
+Some analogies
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="A_new_type">
+
+A new type
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Already_known_to_the_compiler">
+
+Already known to the compiler
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Not_known_to_the_compiler">
+
+Not known to the compiler
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Define_data_representation_and_behavior_in_a_class">
+
+Define data representation and behavior 
+in a class
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1014">
+<link id="a1015" target-id="Create_instances_of_the_new_type">
+
+Create instances of the new type
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="Objects_have_state_and_behavior">
+
+Objects have state and behavior
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="The_state_and_behavior_of_a_GUI_Button_object">
+
+The state and behavior of a GUI Button 
+object
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1017">
+<link id="a1018" target-id="A_C_class_named_Button">
+
+A C# class named Button
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="The_state_of_Button_objects">
+
+The state of Button objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="The_behavior_of_a_Button_object">
+
+The behavior of a Button object
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Encapsulation">
+
+Encapsulation
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1021">
+<link id="a1022" target-id="Expose_the_interface_and_hide_the_implementation">
+
+Expose the interface and hide the 
+implementation
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="Should_be_able_to_change_the_implementation_later">
+
+Should be able to change the 
+implementation later
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Class_member_access_control">
+
+Class member access control
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1024">
+<link id="a1025" target-id="Five_levels_of_access_control">
+
+Five levels of access control
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="A_different_interpretation">
+
+A different interpretation
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="What_is_an_assembly">
+
+What is an assembly?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="Public_private_and_protected">
+
+Public, private, and protected
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="A_public_user_interface">
+
+A public user interface
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="A_set_Accessor_method">
+
+A set 
+Accessor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="A_get_Accessor_method">
+
+A get 
+Accessor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Not_a_good_design_by_default">
+
+Not a good design by default
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="Not_bound_to_the_implementation">
+
+Not bound to the implementation
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1035">
+<link id="a1036" target-id="Will_explain_in_fragments">
+
+Will explain in fragments
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Two_classes">
+
+Two classes
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Will_switch_between_classes">
+
+Will switch between classes
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="The_declarations">
+
+The declarations
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Beginning_of_the_class_named_Props01">
+
+Beginning of the class named Props01
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1040">
+<link id="a1041" target-id="Access_a_public_instance_variable_in_the_object">
+
+Access a public instance variable in the object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Store_a_string_value_in_the_objects_instance_variable">
+
+Store a string value in the object's instance 
+variable
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Get_and_display_the_value_in_the_objects_instance_variable">
+
+Get and display the value in the object's 
+instance variable
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Beginning_of_the_class_named_TargetClass">
+
+Beginning of the class named TargetClass
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1044">
+<link id="a1045" target-id="Declare_a_public_instance_variable">
+
+Declare a public instance variable
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Different_kinds_of_variables">
+
+Different kinds of variables
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1046">
+<link id="a1047" target-id="Instance_variables">
+
+Instance variables
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1047">
+<link id="a1048" target-id="The_public_access_modifier">
+
+The public access modifier
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="The_private_access_modifier">
+
+The private access modifier
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="The_protected_access_modifier">
+
+The protected access modifier
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="Local_variables">
+
+Local variables
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="Class_variables">
+
+Class variables
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1052">
+<link id="a1053" target-id="More_bad_programming_practice">
+
+More bad programming practice
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Reference_variables">
+
+Reference variables
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="Primitive_variables">
+
+Primitive variables
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1055">
+<link id="a1056" target-id="An_analogy">
+
+An analogy
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1056">
+<link id="a1057" target-id="Call_the_objects_public_accessor_methods">
+
+Call the object's public accessor methods
+
+</link>
+
+
+
+
+<list id="ul1016" list-type="bulleted">
+<item id="li1057">
+<link id="a1058" target-id="The_setColor_method">
+
+The setColor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1058">
+<link id="a1059" target-id="The_getColor_method">
+
+The getColor method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1059">
+<link id="a1060" target-id="Would_be_a_property_in_Java">
+
+Would be a property in Java
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1060">
+<link id="a1061" target-id="The_definition_of_setColor_and_getColor_in_TargetClass">
+
+The definition of setColor and getColor in 
+TargetClass
+
+</link>
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+<item id="li1061">
+<link id="a1062" target-id="Typical_method_definitions">
+
+Typical method definitions
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1062">
+<link id="a1063" target-id="Data_validation">
+
+Data validation
+
+</link>
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+<item id="li1063">
+<link id="a1064" target-id="What_do_you_do_with_invalid_data">
+
+What do you do with invalid data
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1064">
+<link id="a1065" target-id="Program_output">
+
+Program output
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1065">
+<link id="a1066" target-id="Set_get_and_display_a_property_value_with_a_valid_value">
+
+Set, get, and display a property value with a 
+valid value
+
+</link>
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+<item id="li1066">
+<link id="a1067" target-id="Looks_can_be_deceiving">
+
+Looks can be deceiving
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1067">
+<link id="a1068" target-id="ASetAccessorMethod">
+
+A set Accessor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1068">
+<link id="a1069" target-id="AGetAccessorMethod">
+
+A get Accessor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1069">
+<link id="a1070" target-id="The_set_Accessor_and_get_Accessor_methods_for_the_property_named_height">
+
+The set Accessor and get Accessor methods 
+for the property named height
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1070">
+<link id="a1071" target-id="A_hidden_parameter_named_value">
+
+A hidden parameter named value
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1071">
+<link id="a1072" target-id="Validating_code">
+
+Validating code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1072">
+<link id="a1073" target-id="A_readOnly_property">
+
+A read-only property
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1073">
+<link id="a1074" target-id="Little_more_to_say_about_this">
+
+Little more to say about this
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1074">
+<link id="a1075" target-id="Call_manipulator_method_and_display_results">
+
+Call manipulator method and display 
+results
+
+</link>
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+<item id="li1075">
+<link id="a1076" target-id="A_manipulator_method_named_doubleHeight">
+
+A manipulator method named 
+	doubleHeight
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1076">
+<link id="a1077" target-id="Set_and_get_the_property_with_an_invalid_value">
+
+Set and get the property with an invalid 
+value
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1077">
+<link id="a1078" target-id="Pause_until_the_user_presses_any_key">
+
+Pause until the user presses any key
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1078">
+<link id="a1079" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1079">
+<link id="a1080" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1080">
+<link id="a1081" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1081">
+<link id="a1082" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1082">
+<link id="a1083" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1083">
+<link id="a1084" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1085" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+<section id="h21000">
+<title>
+<emphasis id="The_three_main_characteristics_of_an_objectoriented_program" effect="bold">
+
+The three main characteristics of an 
+object-oriented program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1004">
+Object-oriented programs exhibit three main characteristics:
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1084">
+Encapsulation
+
+</item>
+
+
+	
+
+<item id="li1085">
+Inheritance
+
+</item>
+
+
+	
+
+<item id="li1086">
+Polymorphism
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1005">
+In this and the next two modules, I will explain and illustrate those three 
+characteristics plus some related topics.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h21001">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1006">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1022" list-type="bulleted">
+
+		
+
+<item id="li1087">
+<link id="a1086" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Output from the program named 
+		Props01.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1023" list-type="bulleted">
+
+		
+
+<item id="li1088">
+<link id="a1087" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the class named 
+		Props01.
+
+</item>
+
+
+		
+
+<item id="li1089">
+<link id="a1088" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Beginning of the class named 
+		TargetClass.
+
+</item>
+
+
+		
+
+<item id="li1090">
+<link id="a1089" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Call the object's public 
+		accessor methods. 
+
+</item>
+
+
+		
+
+<item id="li1091">
+<link id="a1090" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Definition of setColor and 
+		getColor methods in TargetClass.
+
+</item>
+
+
+		
+
+<item id="li1092">
+<link id="a1091" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Set, get, and display a property 
+		value with a valid value.
+
+</item>
+
+
+		
+
+<item id="li1093">
+<link id="a1092" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. The set Accessor and get 
+		Accessor methods for the property named height.
+
+</item>
+
+
+		
+
+<item id="li1094">
+<link id="a1093" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Call manipulator method and 
+		display results.
+
+</item>
+
+
+		
+
+<item id="li1095">
+<link id="a1094" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. A simple manipulator method 
+		named doubleHeight.
+
+</item>
+
+
+		
+
+<item id="li1096">
+<link id="a1095" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Set and get the property named 
+		height with an invalid value.
+
+</item>
+
+
+		
+
+<item id="li1097">
+<link id="a1096" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Pause until the user presses 
+		any key.
+
+</item>
+
+
+		
+
+<item id="li1098">
+<link id="a1097" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. The program named Props01.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+In addition to the three explicit characteristics of encapsulation, 
+inheritance, and polymorphism, an object-oriented program also has an implicit 
+characteristic of 
+
+<emphasis id="em1001" effect="italics">
+abstraction
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h21002">
+<title>
+<emphasis id="Abstraction" effect="bold">
+
+Abstraction
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+Abstraction is the process by which we specify a new data type, often 
+referred to as an abstract data type or ADT. This includes a specification of 
+the type's data representation and its behavior. In particular,
+
+</para>
+
+
+
+
+
+<list id="ul1024" list-type="bulleted">
+
+	
+
+<item id="li1099">
+What kind of data can be stored in an entity of the new type?
+
+</item>
+
+
+	
+
+<item id="li1100">
+What are all the ways that the data can be manipulated?
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="How_does_abstraction_relate_to_encapsulation" effect="bold">
+
+How does abstraction relate to 
+encapsulation?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+Encapsulation is the process of gathering an ADT's data representation and 
+behavior into one encapsulated entity. In other words, encapsulation converts 
+from the 
+
+<emphasis id="em1002" effect="italics">
+abstract
+
+</emphasis>
+ to the 
+
+<emphasis id="em1003" effect="italics">
+concrete
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="Some_analogies" effect="bold">
+
+Some analogies
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+You might think of this as being similar to converting an idea for an 
+invention into a set of blueprints from which it can be built, or converting a 
+set of written specifications for a widget into a set of drawings that can be 
+used by the machine shop to build the widget.
+
+</para>
+
+
+
+
+
+<para id="p1011">
+Automotive engineers encapsulated the specifications for the steering 
+mechanism of my car into a set of manufacturing drawings. Then manufacturing 
+personnel used those drawings to produce an object where they exposed the 
+interface (steering wheel) and hid the implementation (levers, bolts, etc.).
+
+</para>
+
+
+
+
+
+<para id="p1012">
+In all likelihood, the steering mechanism contains a number of other 
+more-specialized embedded objects, each of which has state and behavior and each 
+of which also 
+has an interface and an implementation.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+The interfaces for those embedded objects aren't exposed to me, but they are 
+exposed to the other parts of the steering mechanism that use them.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="A_new_type" effect="bold">
+
+A new type
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+For our purposes, an abstract data type is a new type (not intrinsic to the 
+C# language). It is not one of the primitive data types that are built into the
+programming 
+language such as 
+
+<emphasis id="strong1001" effect="bold">
+sbyte
+
+</emphasis>
+, 
+
+<emphasis id="strong1002" effect="bold">
+short
+
+</emphasis>
+, 
+
+<emphasis id="strong1003" effect="bold">
+int
+
+</emphasis>
+,
+
+
+<emphasis id="strong1004" effect="bold">
+long
+
+</emphasis>
+, 
+
+<emphasis id="strong1005" effect="bold">
+float
+
+</emphasis>
+, 
+
+<emphasis id="strong1006" effect="bold">
+double
+
+</emphasis>
+, etc.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="Already_known_to_the_compiler" effect="bold">
+
+Already known to the compiler
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+The distinction in the previous paragraph is very important. The data 
+representation and behavior of the intrinsic or primitive types is already known 
+to the compiler and cannot normally be modified by the programmer.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Not_known_to_the_compiler" effect="bold">
+
+Not known to the compiler
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+The representation and behavior of an abstract type is not known to the 
+compiler until it is defined by the programmer and presented to the compiler in 
+an appropriate manner.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Define_data_representation_and_behavior_in_a_class" effect="bold">
+
+Define data representation and behavior 
+in a class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1017">
+C# programmers define the data representation and the behavior of a new type 
+(present the specification to the compiler) using the keyword 
+
+<emphasis id="strong1007" effect="bold">
+class
+
+</emphasis>
+. 
+In other words, the keyword 
+
+<emphasis id="strong1008" effect="bold">
+class
+
+</emphasis>
+ is used to convert the 
+specification of a new type into something that the compiler can work with; a 
+set of plans as it were. To define a class is to go from the abstract to the 
+concrete.
+
+</para>
+
+
+
+
+
+<section id="h31007">
+<title>
+<emphasis id="Create_instances_of_the_new_type" effect="bold">
+
+Create instances of the new type
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+Once the new type (class) is defined, one or more objects of that type can be 
+brought into being (instantiated, caused to occupy memory).
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31008">
+<title>
+<emphasis id="Objects_have_state_and_behavior" effect="bold">
+
+Objects have state and behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+Once instantiated, the object is said to have 
+
+<emphasis id="em1004" effect="italics">
+state
+
+</emphasis>
+ and 
+
+<emphasis id="em1005" effect="italics">
+behavior
+
+</emphasis>
+. 
+The state of an object is determined by the current values of the data that it 
+contains. The behavior of an object is determined by its methods.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="The_state_and_behavior_of_a_GUI_Button_object" effect="bold">
+
+The state and behavior of a GUI Button 
+object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1020">
+For example, if we think of a GUI 
+
+<emphasis id="strong1009" effect="bold">
+Button
+
+</emphasis>
+ as an object, it is 
+fairly easy to visualize the object's state and behavior.
+
+</para>
+
+
+
+
+
+<para id="p1021">
+A GUI 
+
+<emphasis id="strong1010" effect="bold">
+Button
+
+</emphasis>
+ can usually manifest many different states 
+based on size, position, depressed image, not depressed image, label, etc. Each 
+of these states is determined by data stored in the instance variables of the
+
+
+<emphasis id="strong1011" effect="bold">
+Button
+
+</emphasis>
+ object at any given point in time. (The combination of 
+one or more instance variables that determine a particular state is often 
+referred to as a 
+
+<emphasis id="em1006" effect="italics">
+property
+
+</emphasis>
+ of the object.)
+
+</para>
+
+
+
+
+
+<para id="p1022">
+Similarly, it is not too difficult to visualize the behavior of a GUI Button. 
+When you click it with the mouse, some specific action usually occurs.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="A_C_class_named_Button" effect="bold">
+
+A C# class named Button
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1023">
+If you dig deeply enough into the C#
+
+
+<link id="a1098" url="http://msdn.microsoft.com/en-us/library/ms229335.aspx">
+
+class library
+
+</link>
+
+, 
+you will find that there is a class named
+
+
+<link id="a1099" url="http://msdn.microsoft.com/en-us/library/system.windows.forms.button.aspx">
+
+
+Button
+
+</link>
+
+ in the 
+
+<emphasis id="strong1012" effect="bold">
+System.Windows.Forms
+
+</emphasis>
+ namespace. Each 
+individual 
+
+<emphasis id="strong1013" effect="bold">
+Button
+
+</emphasis>
+ object in a 
+
+<emphasis id="strong1014" effect="bold">
+C# Windows Forms 
+Application
+
+</emphasis>
+ is an instance of the C# class named 
+
+<emphasis id="strong1015" effect="bold">
+Button
+
+</emphasis>
+. 
+A 
+
+<emphasis id="strong1016" effect="bold">
+Button
+
+</emphasis>
+ object has a single constructor, dozens of methods, dozens of 
+properties, and dozens of events.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="The_state_of_Button_objects" effect="bold">
+
+The state of Button objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1024">
+Each 
+
+<emphasis id="strong1017" effect="bold">
+Button
+
+</emphasis>
+ object has instance variables, which it does not 
+share with other 
+
+<emphasis id="strong1018" effect="bold">
+Button
+
+</emphasis>
+ objects. The values of the instance 
+variables define the state of the button at any given time. Other 
+
+<emphasis id="strong1019" effect="bold">
+Button
+
+</emphasis>
+ 
+objects in the same scope can have different values in their instance variables. 
+Hence every 
+
+<emphasis id="strong1020" effect="bold">
+Button
+
+</emphasis>
+ object can have a different state.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="The_behavior_of_a_Button_object" effect="bold">
+
+The behavior of a Button object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+Each Button object also has certain fundamental behaviors such as responding 
+to a mouse 
+
+<emphasis id="strong1021" effect="bold">
+Click
+
+</emphasis>
+ event or responding to a 
+
+<emphasis id="strong1022" effect="bold">
+GotFocus
+
+</emphasis>
+ 
+event.
+
+</para>
+
+
+
+
+
+<para id="p1026">
+The C# programmer has control over the code that is executed in response to 
+the event. However, the C# programmer has no control over the fact that a 
+
+<emphasis id="strong1023" effect="bold">
+Button
+
+</emphasis>
+ object will respond 
+to such an event. The fact that a 
+
+<emphasis id="strong1024" effect="bold">
+Button
+
+</emphasis>
+ will respond to 
+certain event types is an inherent part of the type specification for the
+
+
+<emphasis id="strong1025" effect="bold">
+Button
+
+</emphasis>
+ class and can only be modified by modifying the source 
+code for the 
+
+<emphasis id="strong1026" effect="bold">
+Button
+
+</emphasis>
+  class.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Encapsulation" effect="bold">
+
+Encapsulation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1027">
+If abstraction is the design or specification of a new type, then 
+encapsulation is its definition and implementation.
+
+</para>
+
+
+
+
+
+<para id="p1028">
+A programmer defines the data representation and the behavior of an abstract 
+data type into a class, thereby defining its implementation and its interface. 
+That data representation and behavior is then encapsulated in objects that are 
+instantiated from the class.
+
+</para>
+
+
+
+
+
+<section id="h31010">
+<title>
+<emphasis id="Expose_the_interface_and_hide_the_implementation" effect="bold">
+
+Expose the interface and hide the 
+implementation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+According to good object-oriented programming practice, an encapsulated 
+design usually exposes the interface and hides the implementation. This is 
+accomplished in different ways with different languages.
+
+</para>
+
+
+
+
+
+<para id="p1030">
+Just as most of us don't usually need to care about how the steering 
+mechanism of a car is implemented, a user of a class should not need to care 
+about the details of implementation for that class.
+
+</para>
+
+
+
+
+
+<para id="p1031">
+The user of the class (the using programmer) should only need to care that it 
+works as advertised. Of course this assumes that the user of the class has 
+access to good documentation describing the interface and the behavior of 
+objects instantiated from the class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31011">
+<title>
+<emphasis id="Should_be_able_to_change_the_implementation_later" effect="bold">
+
+Should be able to change the 
+implementation later
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+For a properly designed class, the class designer should be able to come back 
+later and change the implementation, perhaps changing the type of data structure 
+used to store data in the object, and the using programs should not be affected 
+by the change.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31012">
+<title>
+<emphasis id="Class_member_access_control" effect="bold">
+
+Class member access control
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+Object-oriented programming languages usually provide the ability to control 
+access to the members of a class. For example, C#, C++ and Java all use the 
+keywords 
+
+<emphasis id="strong1027" effect="bold">
+public
+
+</emphasis>
+, 
+
+<emphasis id="strong1028" effect="bold">
+private
+
+</emphasis>
+, and 
+
+<emphasis id="strong1029" effect="bold">
+
+protected
+
+</emphasis>
+ to control access to the individual members of a class. In 
+addition, Java adds a fourth level of access control, which is called 
+
+<emphasis id="strong1030" effect="bold">
+
+package-private
+
+</emphasis>
+. C# adds two levels of access control that are not 
+included in Java or C++ (see the next section).
+
+</para>
+
+
+
+
+
+<section id="h41003">
+<title>
+<emphasis id="Five_levels_of_access_control" effect="bold">
+
+Five levels of access control
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1034">
+According to the C#
+
+
+<link id="a1100" url="http://msdn.microsoft.com/en-us/vcsharp/aa336809.aspx">
+
+specifications
+
+</link>
+
+, 
+"Each member of a class has an associated accessibility, which controls the 
+regions of program text that are able to access the member." There are five 
+levels of access control in C#:
+
+</para>
+
+
+
+
+
+<list id="ul1025" list-type="bulleted">
+
+	
+
+<item id="li1101">
+<emphasis id="strong1031" effect="bold">
+public
+
+</emphasis>
+ - Access not limited
+
+</item>
+
+
+	
+
+<item id="li1102">
+<emphasis id="strong1032" effect="bold">
+protected
+
+</emphasis>
+ - Access limited to this class or classes 
+	derived from this class
+
+</item>
+
+
+	
+
+<item id="li1103">
+<emphasis id="strong1033" effect="bold">
+internal
+
+</emphasis>
+ - Access limited to this program
+
+</item>
+
+
+	
+
+<item id="li1104">
+<emphasis id="strong1034" effect="bold">
+protected internal
+
+</emphasis>
+ - Access limited to this program or 
+	classes derived from this class
+
+</item>
+
+
+	
+
+<item id="li1105">
+<emphasis id="strong1035" effect="bold">
+private
+
+</emphasis>
+ - Access limited to this class
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="A_different_interpretation" effect="bold">
+
+A different interpretation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+Another online
+
+
+<link id="a1101" url="http://www.java2s.com/Tutorial/CSharp/0140__Class/CsAccessSpecifiers.htm">
+
+
+source
+
+</link>
+
+ provides a different interpretation for two of the access levels:
+
+</para>
+
+
+
+
+
+<list id="ul1026" list-type="bulleted">
+
+	
+
+<item id="li1106">
+The 
+
+<emphasis id="strong1036" effect="bold">
+internal
+
+</emphasis>
+ modifier declares that a member is known 
+	throughout all files in an assembly, but unknown outside that assembly.
+
+</item>
+
+
+	
+
+<item id="li1107">
+The 
+
+<emphasis id="strong1037" effect="bold">
+protected internal
+
+</emphasis>
+ access level can be given only 
+	to class members.
+
+</item>
+
+
+	
+
+<item id="li1108">
+A member declared with 
+
+<emphasis id="strong1038" effect="bold">
+protected internal
+
+</emphasis>
+ access is 
+	accessible within its own assembly or to derived types.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="What_is_an_assembly" effect="bold">
+
+What is an assembly?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+You can learn more about an assembly
+
+
+<link id="a1102" url="http://www.codeguru.com/columns/csharp_learning/article.php/c5845/">
+
+
+here
+
+</link>
+
+. Frankly, I'm not absolutely certain at this time how to interpret the 
+access levels of 
+
+<emphasis id="em1007" effect="italics">
+internal
+
+</emphasis>
+ and 
+
+<emphasis id="em1008" effect="italics">
+protected internal
+
+</emphasis>
+. However, I 
+believe that an assembly in C# is similar to a package in Java, and if so, then 
+I do know how to interpret these two access levels.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Public_private_and_protected" effect="bold">
+
+Public, private, and protected
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+To a first approximation, you can probably guess what 
+
+<emphasis id="strong1039" effect="bold">
+public
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1040" effect="bold">
+private
+
+</emphasis>
+ mean. 
+
+<emphasis id="strong1041" effect="bold">
+Public
+
+</emphasis>
+ members are 
+accessible by all code that has access to an object of the class. 
+
+<emphasis id="strong1042" effect="bold">
+
+Private
+
+</emphasis>
+ members are accessible only by members belonging to the class.
+
+</para>
+
+
+
+
+
+<para id="p1038">
+The 
+
+<emphasis id="strong1043" effect="bold">
+protected
+
+</emphasis>
+ keyword is used to provide inherited classes 
+with special access to the members of their base classes.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31013">
+<title>
+<emphasis id="A_public_user_interface" effect="bold">
+
+A public user interface
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1039">
+In general, the user interface for a class consists of the 
+
+<emphasis id="strong1044" effect="bold">
+public
+
+</emphasis>
+ 
+methods. 
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+The variables in a class can also be declared 
+
+<emphasis id="strong1045" effect="bold">
+public
+
+</emphasis>
+ 
+	but this is generally considered to be bad programming practice unless they 
+	are actually constants.
+
+</note>
+
+
+
+
+
+
+<para id="p1040">
+For a properly designed class, the class user stores, reads, and modifies 
+values in the object's data by calling the 
+
+<emphasis id="strong1046" effect="bold">
+public
+
+</emphasis>
+ methods on a 
+specific instance (object) of the class. (This is sometimes referred to as 
+sending a message to the object asking it to change its state).
+
+</para>
+
+
+
+
+
+<para id="p1041">
+Normally, if the class is properly designed and the implementation is hidden, 
+the user cannot modify the values contained in the private instance variables of 
+the object without going through the prescribed public methods in the interface.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31014">
+<title>
+<emphasis id="A_set_Accessor_method" effect="bold">
+
+A set 
+Accessor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+C# has a special form of method, often called a 
+
+<emphasis id="em1009" effect="italics">
+set Accessor 
+
+</emphasis>
+method. 
+The use of this type of method makes it appear that an assignment is being made 
+to store a value in a private instance variable belonging to an object when in 
+fact, the assignment operation is automatically converted to a call to a 
+
+<emphasis id="em1010" effect="italics">
+set 
+Accessor
+
+</emphasis>
+ method. I discuss this more fully in my earlier tutorial titled
+
+
+<link id="a1103" url="http://www.dickbaldwin.com/csharp/Cs000106a.htm">
+
+Learning C# and OOP, 
+Properties, Part 1
+
+</link>
+
+. I will also show an example of a 
+
+<emphasis id="em1011" effect="italics">
+set Accessor
+
+</emphasis>
+ 
+method later.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31015">
+<title>
+<emphasis id="A_get_Accessor_method" effect="bold">
+
+A get 
+Accessor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+C# also has a special form of method often called a 
+
+<emphasis id="em1012" effect="italics">
+get Accessor 
+
+</emphasis>
+
+method that operates like a 
+
+<emphasis id="em1013" effect="italics">
+set Accessor 
+
+</emphasis>
+method but in the reverse 
+direction. A 
+
+<emphasis id="em1014" effect="italics">
+get Accessor
+
+</emphasis>
+ method makes it appear that the value of a 
+private instance variable can be obtained by referencing the name of the object 
+joined to the name of the variable. In fact, that reference is automatically 
+converted to a call to a 
+
+<emphasis id="em1015" effect="italics">
+get Accessor 
+
+</emphasis>
+method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31016">
+<title>
+<emphasis id="Not_a_good_design_by_default" effect="bold">
+
+Not a good design by default
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+An object-oriented design is not a good design by default. In an attempt to 
+produce good designs, experienced object-oriented programmers generally agree on 
+certain design standards for classes. For example, the data members (instance 
+variables) are usually private unless they are constants. The user interface 
+usually consists only of public methods and includes few if any data members.
+
+</para>
+
+
+
+
+
+<para id="p1045">
+Of course, there are exceptions to every rule. One exception to this general 
+rule is that data members that are intended to be used as symbolic constants are 
+made public and defined in such a way that their values cannot be modified.
+
+</para>
+
+
+
+
+
+<para id="p1046">
+The methods in the interface should control access to, or provide a pathway 
+to the private instance variables.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31017">
+<title>
+<emphasis id="Not_bound_to_the_implementation" effect="bold">
+
+Not bound to the implementation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+The interface should be generic in that it is not bound to any particular 
+implementation. Hence, the class author should be able to change the 
+implementation without affecting the using programs so long as the interface 
+doesn't change.
+
+</para>
+
+
+
+
+
+<para id="p1048">
+In practice, this means that the signatures of the interface methods should 
+not change, and that the interface methods and their arguments should continue 
+to have the same meaning even if the author of the class changes the internal 
+implementation.
+
+</para>
+
+
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1049">
+I will present and explain a simple C# console program named
+	
+
+<emphasis id="strong1047" effect="bold">
+Probs01
+
+</emphasis>
+ that illustrates 
+	encapsulation and C# properties in the remainder of this module. The 
+	output from the program is shown in 
+
+<link id="a1104" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+<note id="note1001" type="">
+
+
+
+
+
+<para id="p1050">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Output from the program named Props01.
+
+</para>
+
+
+
+
+
+<code id="pre1000" display="block">text: Quit
+color: Red
+color: Bad color
+height: 20
+double height: 40
+height: 0
+</code>
+
+
+
+
+</note>
+
+
+
+	
+	
+
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<section id="h21005">
+<title>
+<emphasis id="Will_explain_in_fragments" effect="bold">
+
+Will explain in fragments
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+I will explain the code in this program in fragments. A complete listing of 
+the program is provided in 
+
+<link id="a1105" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="Two_classes" effect="bold">
+
+Two classes
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1052">
+The program contains two separate class definitions. One class, named 
+
+<emphasis id="strong1048" effect="bold">
+
+TargetClass
+
+</emphasis>
+, illustrates encapsulation and properties. The other class 
+named 
+
+<emphasis id="strong1049" effect="bold">
+Props01
+
+</emphasis>
+ instantiates an object of 
+
+<emphasis id="strong1050" effect="bold">
+TargetClass
+
+</emphasis>
+ 
+and exercises its interface. For simplicity, both classes were defined in the 
+same physical file, but that is not a requirement.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Will_switch_between_classes" effect="bold">
+
+Will switch between classes
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1053">
+In an attempt to help you understand how the program works, I will switch 
+back and forth between the two classes showing the cause and effect relationship 
+between the code in one class and the code in the other class.
+
+</para>
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1054">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Beginning of the class named Props01.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">using System;
+namespace Props01{
+
+  class Props01{
+
+    static void Main(string[] args){
+      TargetClass obj = new TargetClass();
+
+      //Access a public instance variable
+      obj.text = "Quit";
+      Console.WriteLine("text: " + obj.text);
+</code>
+
+
+
+
+</note>
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+<emphasis id="The_declarations" effect="bold">
+
+The declarations
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+The first two statements in 
+
+<link id="a1106" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ apply equally to both classes. The 
+first statement 
+
+<emphasis id="em1016" effect="italics">
+"uses"
+
+</emphasis>
+ the namespace named 
+
+<emphasis id="strong1051" effect="bold">
+System
+
+</emphasis>
+. 
+This eliminates the requirement to qualify every reference to the 
+
+<emphasis id="strong1052" effect="bold">
+
+Console
+
+</emphasis>
+ class with the name of the namespace containing the 
+
+<emphasis id="strong1053" effect="bold">
+
+Console
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<para id="p1056">
+The second statement in 
+
+<link id="a1107" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ establishes the namespace for the new 
+program code, which is actually the name of the folder containing the source 
+code file.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21009">
+<title>
+<emphasis id="Beginning_of_the_class_named_Props01" effect="bold">
+
+Beginning of the class named Props01
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1057">
+The class definition for the class named 
+
+<emphasis id="strong1054" effect="bold">
+Props01
+
+</emphasis>
+ begins with 
+the keyword 
+
+<emphasis id="strong1055" effect="bold">
+class
+
+</emphasis>
+ shown in 
+
+<link id="a1108" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1058">
+As you will see when we get to the end of the explanation, the only thing 
+that is contained in this class is the 
+
+<emphasis id="strong1056" effect="bold">
+Main
+
+</emphasis>
+ method. The 
+required signature for the 
+
+<emphasis id="strong1057" effect="bold">
+Main
+
+</emphasis>
+ method is shown 
+in 
+
+<link id="a1109" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. I'm not going to explain all of the ramifications for the syntax 
+of the method signature. At this point, I will simply tell you to memorize the 
+syntax.
+
+</para>
+
+
+
+
+
+<para id="p1059">
+The first statement in the 
+
+<emphasis id="strong1058" effect="bold">
+Main
+
+</emphasis>
+ method uses the 
+
+<emphasis id="strong1059" effect="bold">
+new
+
+</emphasis>
+ 
+operator to instantiate an object of the class named 
+
+<emphasis id="strong1060" effect="bold">
+TargetClass
+
+</emphasis>
+ 
+and save a reference to that object in a local reference variable named 
+
+<emphasis id="strong1061" effect="bold">
+
+obj
+
+</emphasis>
+. This reference will be used later to access the object.
+
+</para>
+
+
+
+
+
+<section id="h31018">
+<title>
+<emphasis id="Access_a_public_instance_variable_in_the_object" effect="bold">
+
+Access a public instance variable in the object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+The last two statements in 
+
+<link id="a1110" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ access a public instance variable 
+belonging to the object. The first of the two statements assigns the string 
+value "Quit" to the variable. The second statement retrieves and displays that 
+value.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31019">
+<title>
+<emphasis id="Store_a_string_value_in_the_objects_instance_variable" effect="bold">
+
+Store a string value in the object's instance 
+variable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+Note the syntax of the first of these two statements. The value of the 
+reference variable named 
+
+<emphasis id="strong1062" effect="bold">
+obj
+
+</emphasis>
+ is joined to the name of the 
+object's public instance variable. (The name of the instance variable is 
+
+<emphasis id="strong1063" effect="bold">
+
+text
+
+</emphasis>
+.) The assignment operator is used to store a string value in that 
+instance variable.
+
+</para>
+
+
+
+
+
+<para id="p1062">
+You can think of this operation as involving the following steps:
+
+</para>
+
+
+
+
+
+<list id="ol1000" list-type="enumerated">
+
+	
+
+<item id="li1109">
+Get the object's reference from the variable named 
+
+<emphasis id="strong1064" effect="bold">
+obj
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1110">
+Use that reference to locate the object in memory.
+
+</item>
+
+
+	
+
+<item id="li1111">
+Knock on the object's door and ask for access to the instance variable 
+	named 
+
+<emphasis id="strong1065" effect="bold">
+text
+
+</emphasis>
+. (Access will be granted because the instance 
+	variable is declared 
+
+<emphasis id="strong1066" effect="bold">
+public
+
+</emphasis>
+ as you will see shortly.)
+
+</item>
+
+
+	
+
+<item id="li1112">
+Store the string value "Quit" in the instance variable using an 
+	assignment operator.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31020">
+<title>
+<emphasis id="Get_and_display_the_value_in_the_objects_instance_variable" effect="bold">
+
+Get and display the value in the object's 
+instance variable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+The last statement does essentially the same thing in reverse.
+
+</para>
+
+
+
+
+
+<list id="ol1001" list-type="enumerated">
+
+	
+
+<item id="li1113">
+Get and use the object's reference to gain access to the object's public 
+	instance variable.
+
+</item>
+
+
+	
+
+<item id="li1114">
+Get the value stored in that instance variable.
+
+</item>
+
+
+	
+
+<item id="li1115">
+Concatenate that value to the literal string value "text".
+
+</item>
+
+
+	
+
+<item id="li1116">
+Pass the concatenated string to the 
+
+<emphasis id="strong1067" effect="bold">
+WriteLine
+
+</emphasis>
+ method of 
+	the static 
+
+<emphasis id="strong1068" effect="bold">
+Console
+
+</emphasis>
+ class to have it displayed on the 
+	standard output device (the black screen).
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1064">
+This produces the first line of output shown in 
+
+<link id="a1111" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21010">
+<title>
+<emphasis id="Beginning_of_the_class_named_TargetClass" effect="bold">
+
+Beginning of the class named TargetClass
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+The class definition for the class named 
+
+<emphasis id="strong1069" effect="bold">
+TargetClass
+
+</emphasis>
+ begins in 
+
+<link id="a1112" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1066">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Beginning of the class named TargetClass.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">  public class TargetClass{
+    
+    public string text;
+</code>
+
+
+
+
+</note>
+
+
+
+	
+
+<section id="h31021">
+<title>
+<emphasis id="Declare_a_public_instance_variable" effect="bold">
+
+Declare a public instance variable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1067">
+The code in the class begins by declaring a public instance variable. This is 
+considered to be bad programming practice in most quarters unless the public 
+variable is actually a constant, (which it is not).
+
+</para>
+
+
+
+
+
+<para id="p1068">
+This is the variable that is accessed by the last two statements in 
+
+<link id="a1113" target-id="Listing_1">
+
+ Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1069">
+In most cases, instance variables should be declared private and should be 
+made accessible through public accessor methods or public set and get methods. You 
+will see examples of public access, set, and get methods later.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21011">
+<title>
+<emphasis id="Different_kinds_of_variables" effect="bold">
+
+Different kinds of variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+I will generally refer to three kinds of variables:
+
+</para>
+
+
+
+
+
+<list id="ol1002" list-type="enumerated">
+
+	
+
+<item id="li1117">
+<emphasis id="strong1070" effect="bold">
+Instance variables
+
+</emphasis>
+ - declared inside a class but 
+	outside of a method or constructor. (All variables in C# must be declared 
+	inside a class. Unlike C++, there are no global variables or global 
+	functions in C#.)
+
+</item>
+
+
+	
+
+<item id="li1118">
+<emphasis id="strong1071" effect="bold">
+Local variables
+
+</emphasis>
+ - declared inside a method or 
+	constructor.
+
+</item>
+
+
+	
+
+<item id="li1119">
+<emphasis id="strong1072" effect="bold">
+Class variable
+
+</emphasis>
+ - declared inside a static class.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1071">
+Any of these can be further qualified as follows:
+
+</para>
+
+
+
+
+
+<list id="ol1003" list-type="enumerated">
+
+	
+
+<item id="li1120">
+<emphasis id="strong1073" effect="bold">
+Reference variable
+
+</emphasis>
+ - contains a reference to an object 
+	or contains null.
+
+</item>
+
+
+	
+
+<item id="li1121">
+<emphasis id="strong1074" effect="bold">
+Primitive variable
+
+</emphasis>
+ - contains a value of a primitive 
+	type (int, float, double, etc.).
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h31022">
+<title>
+<emphasis id="Instance_variables" effect="bold">
+
+Instance variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1072">
+An instance variable belongs to a specific object. The lifetime of an 
+instance variable is the same as the lifetime of the object to which it belongs. 
+The scope of an instance variable depends on its access modifier such as 
+
+<emphasis id="strong1075" effect="bold">
+
+public
+
+</emphasis>
+, 
+
+<emphasis id="strong1076" effect="bold">
+private
+
+</emphasis>
+, or 
+
+<emphasis id="strong1077" effect="bold">
+protected
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h41007">
+<title>
+<emphasis id="The_public_access_modifier" effect="bold">
+
+The public access modifier
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+A 
+
+<emphasis id="strong1078" effect="bold">
+public
+
+</emphasis>
+ instance variable can be accessed by any code in 
+any method in any object that can obtain a reference to the object to which the 
+variable belongs. However, you must first gain access to the object in order to 
+gain access to the variable. Normally you gain access to the object using a 
+reference to the object and then gain access to a member of the object such as a 
+variable or method. This is 
+
+<emphasis id="em1017" effect="italics">
+indirection
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41008">
+<title>
+<emphasis id="The_private_access_modifier" effect="bold">
+
+The private access modifier
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1074">
+A 
+
+<emphasis id="strong1079" effect="bold">
+private
+
+</emphasis>
+ instance variable can be accessed by any code in 
+any method that is defined in the class of the object to which the variable 
+belongs.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41009">
+<title>
+<emphasis id="The_protected_access_modifier" effect="bold">
+
+The protected access modifier
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+A 
+
+<emphasis id="strong1080" effect="bold">
+protected
+
+</emphasis>
+ instance variable can be accessed by the same 
+methods that can access a 
+
+<emphasis id="strong1081" effect="bold">
+private
+
+</emphasis>
+ instance variable plus 
+methods in subclasses of the class of the object to which the instance variable 
+belongs.
+
+</para>
+
+
+
+
+
+<para id="p1076">
+I'm not going to try to explain the scope of 
+
+<emphasis id="strong1082" effect="bold">
+internal
+
+</emphasis>
+ and
+
+
+<emphasis id="strong1083" effect="bold">
+protected internal
+
+</emphasis>
+ instance variables for the reasons that I 
+discussed earlier.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31023">
+<title>
+<emphasis id="Local_variables" effect="bold">
+
+Local variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+A local variable is declared inside a method or constructor. The lifetime of 
+a local variable is limited to the time that control remains within the block of 
+code in which the variable is declared. The scope of the variable is limited to 
+the code block in which it is declared and then only to the statements following 
+the declaration statement.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31024">
+<title>
+<emphasis id="Class_variables" effect="bold">
+
+Class variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+A class variable belongs to a static class. I believe that the lifetime of a 
+class variable is the same as the lifetime of the program in which the class is 
+loaded.
+
+</para>
+
+
+
+
+
+<para id="p1079">
+It is not necessary to instantiate an object of the static class in order to 
+access the variable. Assuming that you have access rights to the variable, you 
+can access it simply by joining the name of the class to the name of the 
+variable using the dot operator.
+
+</para>
+
+
+
+
+
+<section id="h41010">
+<title>
+<emphasis id="More_bad_programming_practice" effect="bold">
+
+More bad programming practice
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+I personally consider it bad programming practice to use class variables in 
+most cases unless the variables are actually constants. However, there are a few 
+situations where you have no choice but to use a non-constant class variable.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31025">
+<title>
+<emphasis id="Reference_variables" effect="bold">
+
+Reference variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1081">
+A reference variable contains a reference to an object or contains null. You 
+typically use the value stored in a reference variable to locate an object in 
+memory. Once you locate the object, you typically use the dot operator along 
+with the name of a variable or a method to ask the object to do something. This 
+is called 
+
+<emphasis id="em1018" effect="italics">
+indirection
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31026">
+<title>
+<emphasis id="Primitive_variables" effect="bold">
+
+Primitive variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+Primitive variables contain primitive values. No indirection is required to 
+access the primitive value stored in a primitive variable.
+
+</para>
+
+
+
+
+
+<section id="h41011">
+<title>
+<emphasis id="strong1084" effect="bold">
+<emphasis id="An_analogy" effect="bold">
+
+An analogy
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1083">
+An analogy that I often use to explain the difference between a reference 
+variable and a primitive variable goes as follows.
+
+</para>
+
+
+
+
+
+<para id="p1084">
+A primitive variable is analogous to your wallet.
+
+</para>
+
+
+
+
+
+<para id="p1085">
+If you get robbed and the robber takes your wallet, he has your money because 
+the wallet contains your money just like a primitive variable contains a 
+primitive value.
+
+</para>
+
+
+
+
+
+<para id="p1086">
+A reference variable is analogous to your check book.
+
+</para>
+
+
+
+
+
+<para id="p1087">
+If the robber takes your checkbook, he doesn't have your money -- not yet 
+anyway. The checkbook doesn't contain your money. Instead, it contains a 
+reference to your bank where your money is stored. A reference variable doesn't 
+contain an object; it contains a reference to an object. Furthermore, two or 
+more reference variables can contain references to the same object but this is 
+usually not a good idea.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21012">
+<title>
+<emphasis id="Call_the_objects_public_accessor_methods" effect="bold">
+
+Call the object's public accessor methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1088">
+Returning to the 
+
+<emphasis id="strong1085" effect="bold">
+Main
+
+</emphasis>
+ method in the class named 
+
+<emphasis id="strong1086" effect="bold">
+
+Props01
+
+</emphasis>
+, 
+
+<link id="a1114" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ calls the object's public accessor methods named 
+
+<emphasis id="strong1087" effect="bold">
+setColor
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1088" effect="bold">
+getColor
+
+</emphasis>
+ twice in succession.
+
+</para>
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1089">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Call the object's public accessor methods.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">      //Call public accessor methods 
+      obj.setColor("Red");
+      Console.WriteLine("color: " + obj.getColor());
+
+      //Call public accessor methods again with an
+      // invalid input value.
+      obj.setColor("Green");
+      Console.WriteLine("color: " + obj.getColor());
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31027">
+<title>
+<emphasis id="The_setColor_method" effect="bold">
+
+The setColor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1090">
+The purpose of the method named 
+
+<emphasis id="strong1089" effect="bold">
+setColor
+
+</emphasis>
+ is to store a 
+string value in the object. The calling code has no way of knowing how the value 
+is stored because the implementation is hidden behind a 
+
+<emphasis id="strong1090" effect="bold">
+public
+
+</emphasis>
+ 
+interface method. This is an example of encapsulation.
+
+</para>
+
+
+
+
+
+<para id="p1091">
+The string value to be stored is passed as a parameter to the method each 
+time the method is called. An invalid string value was purposely passed as a 
+parameter on the second call to the 
+
+<emphasis id="strong1091" effect="bold">
+setColor
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31028">
+<title>
+<emphasis id="The_getColor_method" effect="bold">
+
+The getColor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1092">
+The purpose of the 
+
+<emphasis id="strong1092" effect="bold">
+getColor
+
+</emphasis>
+ method is to retrieve the string 
+value previously stored in the object by the 
+
+<emphasis id="strong1093" effect="bold">
+setColor
+
+</emphasis>
+ method. 
+Once again, the calling code has no way of knowing how the value is retrieved 
+and returned because the implementation is hidden behind a 
+
+<emphasis id="strong1094" effect="bold">
+public
+
+</emphasis>
+ 
+interface method.
+
+</para>
+
+
+
+
+
+<para id="p1093">
+The value that is retrieved by each call to the 
+
+<emphasis id="strong1095" effect="bold">
+getColor
+
+</emphasis>
+ 
+method is displayed on the standard output device (the black screen).
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21013">
+<title>
+<emphasis id="Would_be_a_property_in_Java" effect="bold">
+
+Would be a property in Java
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1094">
+If this were a Java program, the combination of these two methods would 
+constitute a property named 
+
+<emphasis id="strong1096" effect="bold">
+color
+
+</emphasis>
+ because the pair of methods 
+matches the design pattern for properties in Java. However, that is not the case 
+in C#. As you will see later, C# uses a different approach to identify 
+properties. In C#, these are simply public accessor methods used for information 
+hiding.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21014">
+<title>
+<emphasis id="The_definition_of_setColor_and_getColor_in_TargetClass" effect="bold">
+
+The definition of setColor and getColor in 
+TargetClass
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1095">
+<link id="a1115" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ defines the public 
+
+<emphasis id="strong1097" effect="bold">
+setColor
+
+</emphasis>
+ and 
+
+<emphasis id="strong1098" effect="bold">
+getColor
+
+</emphasis>
+ 
+methods in the class named 
+
+<emphasis id="strong1099" effect="bold">
+TargetClass
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1096">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Definition of setColor and getColor methods in TargetClass.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">    private string colorData = "";
+
+    public void setColor(string data){
+      //Validating code
+      if(data.Equals("Red") || data.Equals("Blue")){
+        //Accept incoming data value
+        colorData = data;
+      }else{
+        //Reject incoming data value
+        colorData = "Bad color";
+      }//end if-else
+    }//end setColor
+    //--------------------------------------------------//
+
+    public string getColor(){
+      return colorData;
+    }//end getColor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31029">
+<title>
+<emphasis id="Typical_method_definitions" effect="bold">
+
+Typical method definitions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1097">
+These two methods are typical of the method definition syntax in C#. The 
+syntax is not too different from a function definition in C++ so you should have 
+no trouble understanding the syntax.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31030">
+<title>
+<emphasis id="Data_validation" effect="bold">
+
+Data validation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1098">
+One of the reasons for hiding the 
+implementation behind public accessor methods is to assure that only valid data is 
+stored in the object. Therefore, public accessor methods that store data in the 
+object often contain code that validates the incoming data (as shown in 
+
+<link id="a1116" target-id="Listing_4">
+
+ Listing 4
+
+</link>
+
+) before actually storing the data in the object.
+
+</para>
+
+
+
+
+
+<para id="p1099">
+The validation code in 
+
+<link id="a1117" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ will only accept incoming color data of 
+"Red" or "Blue". If the incoming string doesn't match one of those two values, 
+the string "Bad color" is stored in the object in place of the incoming value.
+
+</para>
+
+
+
+
+
+<section id="h41012">
+<title>
+<emphasis id="What_do_you_do_with_invalid_data" effect="bold">
+
+What do you do with invalid data
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1100">
+It usually isn't too difficult to write code to implement a set of rules to 
+validate the incoming data. The hard part is figuring out what to do if the 
+incoming data is not valid. The choices range all the way from flagging the data 
+as invalid as shown in 
+
+<link id="a1118" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ to throwing an exception which, if not properly 
+handled, will cause the program to terminate. The circumstances dictate the 
+action to be taken.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41013">
+<title>
+<emphasis id="Program_output" effect="bold">
+
+Program output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1101">
+The code in 
+
+<link id="a1119" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1100" effect="bold">
+setColor
+
+</emphasis>
+ method twice. The first call passes 
+a valid string, "Red", as a parameter. The second call passes an invalid string, 
+"Green", as a parameter. This causes the second and third lines of text in 
+
+<link id="a1120" target-id="Figure_1">
+
+ Figure 1
+
+</link>
+
+ to be displayed by the program.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31031">
+<title>
+<emphasis id="Set_get_and_display_a_property_value_with_a_valid_value" effect="bold">
+
+Set, get, and display a property value with a 
+valid value
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1102">
+As mentioned earlier, C# uses a special approach to identify properties. (You 
+will see the code in 
+
+<emphasis id="strong1101" effect="bold">
+TargetClass
+
+</emphasis>
+ that accomplishes this 
+shortly.) In the meantime, the code in 
+
+<link id="a1121" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ (which is still part of the
+
+
+<emphasis id="strong1102" effect="bold">
+Main
+
+</emphasis>
+ method) first sets, then gets, and 
+finally displays the value of a property named 
+
+<emphasis id="strong1103" effect="bold">
+height
+
+</emphasis>
+ belonging 
+to the object referenced by the contents of the variable named 
+
+<emphasis id="strong1104" effect="bold">
+obj
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1103">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Set, get, and display a property value with a valid value.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">      obj.height = 20;
+      Console.WriteLine("height: " + obj.height);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41014">
+<title>
+<emphasis id="Looks_can_be_deceiving" effect="bold">
+
+Looks can be deceiving
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1104">
+If you compare 
+
+<link id="a1122" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ with 
+
+<link id="a1123" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+, you will see that there is 
+essentially no difference in the syntax of the code in the two listings. The syntax in both listings suggests that a value is being 
+directly assigned to a public instance variable belonging to the object. As we 
+already know, that is true for 
+
+<link id="a1124" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. However, that is not true for 
+
+<link id="a1125" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41015">
+<title>
+<emphasis id="ASetAccessorMethod" effect="bold">
+
+A set Accessor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1105">
+Although it doesn't look like it, the code in 
+
+
+<link id="a1126" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ is actually calling a special 
+
+<link id="a1127" url="Xna0106revised.htm#Accessor">
+
+
+set Accessor
+
+</link>
+
+ method that hides the implementation behind a public interface. 
+As you will see shortly, this special method contains validation code similar 
+what you saw in 
+
+<link id="a1128" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41016">
+<title>
+<emphasis id="AGetAccessorMethod" effect="bold">
+
+A get Accessor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1106">
+Once again, although it doesn't look like it, the last statement in 
+
+<link id="a1129" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ 
+is actually calling a special 
+
+<link id="a1130" url="Xna0106revised.htm#Accessor1">
+
+get 
+Accessor
+
+</link>
+
+ method belonging to the object to get the current value of the 
+property. That method returns the value stored in the property. As before, the 
+returned value is concatenated with a literal string and passed to the 
+
+<emphasis id="strong1105" effect="bold">
+
+WriteLine
+
+</emphasis>
+ method of the 
+
+<emphasis id="strong1106" effect="bold">
+Console
+
+</emphasis>
+ class for display on 
+the black screen.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41017">
+<title>
+
+
+
+<emphasis id="The_set_Accessor_and_get_Accessor_methods_for_the_property_named_height" effect="bold">
+
+The set Accessor and get Accessor methods 
+for the property named height
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1107">
+Returning to the class named 
+
+<emphasis id="strong1107" effect="bold">
+TargetClass
+
+</emphasis>
+, the special 
+
+<emphasis id="em1019" effect="italics">
+set Accessor
+
+</emphasis>
+ and 
+
+<emphasis id="em1020" effect="italics">
+get Accessor
+
+</emphasis>
+ methods for the 
+property named 
+
+<emphasis id="strong1108" effect="bold">
+height
+
+</emphasis>
+ are shown in 
+
+<link id="a1131" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+
+<note id="note1007" type="">
+
+
+<para id="p1108">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. The set Accessor and get Accessor methods for the property named height.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">    private int heightData;
+
+    public int height{
+      get{
+        return heightData;
+      }//end get
+
+      set{
+        //Validating code
+        if(value &lt; 84){
+          heightData = value;
+        }else{
+          heightData = 0;
+        }//end else
+      }//end set
+
+    }//end height property
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41018">
+<title>
+<emphasis id="A_hidden_parameter_named_value" effect="bold">
+
+A hidden parameter named value
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1109">
+The value on the right side of the assignment operator in 
+
+<link id="a1132" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ arrives 
+on the 
+
+<emphasis id="strong1109" effect="bold">
+set
+
+</emphasis>
+ side of the code in 
+
+<link id="a1133" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ as a hidden parameter 
+named 
+
+<emphasis id="strong1110" effect="bold">
+value
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41019">
+<title>
+<emphasis id="Validating_code" effect="bold">
+
+Validating code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1110">
+You can write whatever validating code is appropriate before assigning the 
+incoming value to a private instance variable or perhaps storing it in a private 
+data structure of some other type.
+
+</para>
+
+
+
+
+
+<para id="p1111">
+In this case, the value is accepted and stored in the private instance 
+variable named 
+
+<emphasis id="strong1111" effect="bold">
+heightData
+
+</emphasis>
+ if it is less than 84 (the height in 
+inches of a person that is seven feet tall). If the incoming value is greater 
+than 83, it is not accepted and instead is flagged as invalid by storing 0 in 
+the private instance variable.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41020">
+<title>
+<emphasis id="A_readOnly_property" effect="bold">
+
+A read-only property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1112">
+You can omit the code on the 
+
+<emphasis id="strong1112" effect="bold">
+set
+
+</emphasis>
+ side if you need a 
+read-only property.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41021">
+<title>
+<emphasis id="Little_more_to_say_about_this" effect="bold">
+
+Little more to say about this
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1113">
+There isn't much more that I can say to explain this syntax other than to 
+tell you to memorize it. The code in 
+
+<link id="a1134" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ causes the fourth line of text 
+shown in 
+
+<link id="a1135" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ to be displayed on the black screen.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21015">
+<title>
+<emphasis id="Call_manipulator_method_and_display_results" effect="bold">
+
+Call manipulator method and display 
+results
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1114">
+In addition to making it possible to set and get property values, objects 
+often provide other public interface methods of varying complexity that make it 
+possible to manipulate the data stored in the object in a variety of ways. In 
+those cases, the using programmer needs access to good documentation that 
+explains the behavior of such manipulator methods.
+
+</para>
+
+
+
+
+
+<para id="p1115">
+Returning to the 
+
+<emphasis id="strong1113" effect="bold">
+Main
+
+</emphasis>
+ method, 
+
+<link id="a1136" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ calls a manipulator method named 
+
+<emphasis id="strong1114" effect="bold">
+doubleHeight
+
+</emphasis>
+ 
+(belonging to the object of type 
+
+<emphasis id="strong1115" effect="bold">
+TargetClass
+
+</emphasis>
+) that 
+is designed to double the value of the 
+
+<emphasis id="strong1116" effect="bold">
+
+height
+
+</emphasis>
+ property. Then 
+
+<link id="a1137" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ 
+accesses and displays the new value of the 
+
+<emphasis id="strong1117" effect="bold">
+height
+
+</emphasis>
+ property.
+
+</para>
+
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1116">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Call manipulator method and display results.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">      obj.doubleHeight();
+      Console.WriteLine("double height: " + obj.height);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31032">
+<title>
+<emphasis id="A_manipulator_method_named_doubleHeight" effect="bold">
+
+A manipulator method named 
+	doubleHeight
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1117">
+<link id="a1138" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ shows the manipulator method named 
+
+<emphasis id="strong1118" effect="bold">
+doubleHeight
+
+</emphasis>
+ that 
+is defined in the class named 
+
+<emphasis id="strong1119" effect="bold">
+TargetClass
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1118">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. A simple manipulator method named doubleHeight.
+
+</para>
+
+
+
+				
+
+<code id="pre1008" display="block">    public void doubleHeight(){
+      heightData *= 2;
+    }//end doubleHeight
+    //--------------------------------------------------//
+
+  }//end TargetClass
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1119">
+The method multiplies the current value in the private instance variable 
+	that is used to store the property named 
+
+<emphasis id="strong1120" effect="bold">
+height
+
+</emphasis>
+ by a factor 
+	of two, stores the modified value back into the same variable, and returns
+	
+
+<emphasis id="strong1121" effect="bold">
+void
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1120">
+The code in 
+
+<link id="a1139" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ causes the fifth line of text shown in 
+
+<link id="a1140" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ to be 
+displayed.
+
+</para>
+
+
+
+
+
+<para id="p1121">
+<link id="a1141" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ also signals the end of the class named 
+
+<emphasis id="strong1122" effect="bold">
+TargetClass
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21016">
+<title>
+<emphasis id="Set_and_get_the_property_with_an_invalid_value" effect="bold">
+
+Set and get the property with an invalid 
+value
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1122">
+Returning once more to the 
+
+<emphasis id="strong1123" effect="bold">
+Main
+
+</emphasis>
+ method, 
+
+<link id="a1142" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ attempts to set an invalid value into the property named 
+
+<emphasis id="strong1124" effect="bold">
+
+height
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1123">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Set and get the property named height with an invalid value.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">      obj.height = 100;
+      Console.WriteLine("height: " + obj.height);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1124">
+Then it retrieves and displays the value currently stored in that 
+	property.
+
+</para>
+
+
+
+
+
+<para id="p1125">
+As you saw in 
+
+<link id="a1143" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+, when an attempt is made to set a value greater than 
+83 in the property, a value of 0 is set in the property to flag it as invalid.
+
+</para>
+
+
+
+
+
+<para id="p1126">
+The code in 
+
+<link id="a1144" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ causes the last line of text in 
+
+<link id="a1145" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ to be displayed 
+on the black screen.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21017">
+<title>
+<emphasis id="Pause_until_the_user_presses_any_key" effect="bold">
+
+Pause until the user presses any key
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1127">
+The last statement in the 
+
+<emphasis id="strong1125" effect="bold">
+Main
+
+</emphasis>
+ method, shown in 
+
+<link id="a1146" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+, 
+causes the program to block and wait until the user presses a key. This causes 
+the black screen to remain on the desktop until the user is finished viewing it.
+
+</para>
+
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1128">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. Pause until the user presses any key.
+
+</para>
+
+
+
+				
+
+<code id="pre1010" display="block">      Console.ReadKey();
+    }//end Main
+
+  }//end class Props01
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h21018">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1129">
+<link id="a1147" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ signals the end of the 
+
+<emphasis id="strong1126" effect="bold">
+Main
+
+</emphasis>
+ method, the end of 
+the class named 
+
+<emphasis id="strong1127" effect="bold">
+Props01
+
+</emphasis>
+, and the end of the program. When the 
+user presses a key, the black screen disappears from the desktop and the program 
+terminates.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1130">
+I encourage you to copy the code from 
+
+<link id="a1148" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. Use that code to create a 
+C# console application. Build and run the program. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that 
+you can explain why your changes behave as they do.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1131">
+Click 
+
+<link id="a1149" url="Props01.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1128" effect="bold">
+Props01
+
+</emphasis>
+ from the zip file and save it 
+somewhere on your disk. Start 
+
+<emphasis id="strong1129" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select
+
+
+<emphasis id="strong1130" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1131" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate 
+to the project folder and select the file with the extension of 
+
+<emphasis id="strong1132" effect="bold">
+.sln
+
+</emphasis>
+. 
+This should cause the project to open and be ready to run or debug as described 
+in the earlier module titled
+
+
+<link id="a1150" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1132">
+You learned about abstraction, abstract data types, encapsulation, 
+information hiding, class member access control, instance variables, local 
+variables, class variables, reference variables, primitive variables, how C# 
+identifies properties, and how to set and get properties in C#.
+
+</para>
+
+
+
+
+
+<para id="p1133">
+You also learned about public accessor methods, public manipulator methods, 
+data validation by property setters and public accessor methods, and a few other 
+things along the way.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1134">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1012" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1133" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1027" list-type="bulleted">
+
+					
+
+<item id="li1122">
+Module name: Xna0106-Encapsulation in C#
+
+</item>
+
+
+					
+
+<item id="li1123">
+File: Xna0106.htm
+
+
+</item>
+
+
+					
+
+<item id="li1124">
+Published: 02/24/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1013" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1134" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1135">
+<emphasis id="strong1135" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1136">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1137">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1138">
+<emphasis id="strong1136" effect="bold">
+Affiliation
+
+</emphasis>
+:: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1139">
+A complete listing of the C# program discussed in this module is provided in 
+
+
+<link id="a1151" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+	
+
+
+<note id="note1014" type="">
+
+
+<para id="p1140">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. The program named Props01.
+
+</para>
+
+
+
+				
+
+<code id="pre1011" display="block">/*Project Props01
+Copyright 2009, R.G.Baldwin
+
+This program is designed to explore and explain the use 
+of encapsulation and properties in C#.
+
+Program output is:
+text: Quit
+color: Red
+color: Bad color
+height: 20
+double height: 40
+height: 0
+*********************************************************/
+
+using System;
+
+namespace Props01{
+  class Props01{
+    static void Main(string[] args){
+      TargetClass obj = new TargetClass();
+
+      //Access a public instance variable
+      obj.text = "Quit";
+      Console.WriteLine("text: " + obj.text);
+
+      //Call public accessor methods 
+      obj.setColor("Red");
+      Console.WriteLine("color: " + obj.getColor());
+
+      //Call public accessor methods again with an
+      // invalid input value.
+      obj.setColor("Green");
+      Console.WriteLine("color: " + obj.getColor());
+
+      //Set and get a property
+      obj.height = 20;
+      Console.WriteLine("height: " + obj.height);
+
+      //Call manipulator method and display results.
+      obj.doubleHeight();
+      Console.WriteLine("double height: " + obj.height);
+
+      //Set and get the property again with an invalid
+      // input value.
+      obj.height = 100;
+      Console.WriteLine("height: " + obj.height);
+      
+      //Pause until user presses any key.
+      Console.ReadKey();
+    }//end Main
+
+  }//end class Props01
+  //====================================================//
+
+  public class TargetClass{
+    //A public instance variable - not good practice
+    public string text;
+
+    //This would be a property named color in Java, but
+    // not in C#
+    private string colorData = "";
+    public void setColor(string data){
+      //Validating code
+      if(data.Equals("Red") || data.Equals("Blue")){
+        //Accept incoming data value
+        colorData = data;
+      }else{
+        //Reject incoming data value
+        colorData = "Bad color";
+      }//end if-else
+    }//end setColor
+    //--------------------------------------------------//
+
+    public string getColor(){
+      return colorData;
+    }//end getColor
+    //--------------------------------------------------//
+
+    //This is a C# property named height
+    private int heightData;
+    public int height{
+      get{
+        return heightData;
+      }//end get
+      set{
+        //Validating code
+        if(value &lt; 84){
+          heightData = value;
+        }else{
+          heightData = 0;
+        }//end else
+      }//end set
+    }//end height property
+    //--------------------------------------------------//
+
+    //This is a manipulator method
+    public void doubleHeight(){
+      heightData *= 2;
+    }//end doubleHeight
+    //--------------------------------------------------//
+
+  }//end TargetClass
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+<para id="p1141">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

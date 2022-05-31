@@ -1,0 +1,5750 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0126-Using OOP - A Simple Sprite Class</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49520</md:content-id>
+  <md:title>Xna0126-Using OOP - A Simple Sprite Class</md:title>
+  <md:abstract>Learn to design, create, and use a simple Sprite class. Also learn to use a generic List object.</md:abstract>
+  <md:uuid>bfca7e2e-692a-48be-830b-292337a84b6e</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Mon May 09 13:00:37 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="The_three_pillars_of_OOP">
+
+The three pillars of OOP
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Wanted_lots_of_sprites">
+
+Wanted, lots of sprites
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Encapsulation_to_the_rescue">
+
+Encapsulation to the rescue
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1010">
+<link id="a1011" target-id="Demonstrate_how_to_use_the_Sprite_class">
+
+Demonstrate how to use the 
+Sprite class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Instantiate_Sprite_objects_on_the_move">
+
+Instantiate Sprite objects on the move
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Seven_Sprite_objects">
+
+Seven Sprite objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Move_to_the_right_and_down">
+
+Move to the right and down
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="The_Sprite_class_">
+
+The Sprite class
+        
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1016">
+<link id="a1017" target-id="Two_instance_variables_and_a_property_accessor_method">
+
+Two instance variables and a property accessor method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Two_overloaded_constructors_">
+
+Two overloaded constructors
+        
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1018">
+<link id="a1019" target-id="image">
+
+No image when instantiated
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="Image_loaded_during_construction">
+
+Image loaded during construction
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1020">
+<link id="a1021" target-id="The_first_parameter">
+
+The first parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="The_second_parameter">
+
+The second parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="Loading_the_image">
+
+Loading the image
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="The_SetImage_method_">
+
+The SetImage method
+        
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1024">
+<link id="a1025" target-id="Load_an_image_into_a_Sprite_object">
+
+Load an image into a Sprite object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="The_parameters_and_the_body">
+
+The parameters and the body
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_Draw_method_of_the_Sprite_class_">
+
+The Draw method of the Sprite class
+    
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="A_single_parameter">
+
+A single parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="The_body_of_the_SpriteDraw_method">
+
+The body of the Sprite.Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="The_end_of_the_class">
+
+The end of the class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="The_Game1_class_">
+
+The Game1 class
+        
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1031">
+<link id="a1032" target-id="The_generic_List_class_">
+
+The generic List class
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="The_modified_Game1_constructor_">
+
+The modified Game1 constructor 
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="The_overridden_LoadContent_method_">
+
+The overridden LoadContent method
+        
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1034">
+<link id="a1035" target-id="A_new_Sprite_object">
+
+A new Sprite object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="List_capacity_considerations">
+
+List capacity considerations
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Assign_an_image_to_the_Sprite_object">
+
+Assign an image to the Sprite object
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="The_overridden_Update_method_">
+
+The overridden Update method
+        
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1038">
+<link id="a1039" target-id="The_Count_property_of_the_List_object">
+
+The Count property of the List object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="The_remaining_23_Sprite_objects">
+
+The remaining 23 Sprite objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="Adding_Sprite_object_references_to_the_list">
+
+Adding Sprite object references to the list
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Instantiate_new_Sprite_objects">
+
+Instantiate new Sprite objects
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1042">
+<link id="a1043" target-id="The_modulus_operator">
+
+The modulus operator
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Every_eighth_iteration">
+
+Every eighth iteration
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="Even_and_odd_sprite_images">
+
+Even and odd sprite images
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Make_all_the_existing_sprites_move">
+
+Make all the existing sprites move
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1046">
+<link id="a1047" target-id="Use_a_for_loop">
+
+Use a for loop
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Put_a_new_value_in_the_Position_property">
+
+Put a new value in the Position property
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="Load_a_green_ball_image_in_the_topmost_Sprite_object">
+
+Load a green ball image in the topmost Sprite object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="Maintain_the_frame_counter">
+
+Maintain the frame counter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="The_end_of_the_overridden_Update_method">
+
+The end of the overridden Update method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="The_overridden_Game1Draw_method_">
+
+The overridden Game1.Draw method
+	
+
+</link>
+
+
+
+
+<list id="ul1016" list-type="bulleted">
+<item id="li1052">
+<link id="a1053" target-id="Draw_all_Sprite_objects">
+
+Draw all Sprite objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Call_the_SpriteBatchDraw_method">
+
+Call the SpriteBatch.Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="The_end_of_the_Game1Draw_method">
+
+The end of the Game1.Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1056">
+<link id="a1057" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1057">
+<link id="a1058" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1058">
+<link id="a1059" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1059">
+<link id="a1060" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1061" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1017" list-type="bulleted">
+
+		
+
+<item id="li1060">
+<link id="a1062" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Seven Sprite objects.
+
+</item>
+
+
+		
+
+<item id="li1061">
+<link id="a1063" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Twenty-four Sprite objects with a green one at the top.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1018" list-type="bulleted">
+
+		
+
+<item id="li1062">
+<link id="a1064" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1063">
+<link id="a1065" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Two overloaded constructors.
+
+</item>
+
+
+		
+
+<item id="li1064">
+<link id="a1066" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. The SetImage method.
+
+</item>
+
+
+		
+
+<item id="li1065">
+<link id="a1067" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. The Draw method of the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1066">
+<link id="a1068" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Beginning of the class named Game1.
+
+</item>
+
+
+		
+
+<item id="li1067">
+<link id="a1069" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. The modified constructor for the Game1 class.
+
+</item>
+
+
+		
+
+<item id="li1068">
+<link id="a1070" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. The overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1069">
+<link id="a1071" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Beginning of the overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1070">
+<link id="a1072" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Instantiate new Sprite objects.
+
+</item>
+
+
+		
+
+<item id="li1071">
+<link id="a1073" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Make all the existing sprites move.
+
+</item>
+
+
+		
+
+<item id="li1072">
+<link id="a1074" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. Load a green ball image in the topmost Sprite object.
+
+</item>
+
+
+		
+
+<item id="li1073">
+<link id="a1075" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+. Maintain the frame counter.
+
+</item>
+
+
+		
+
+<item id="li1074">
+<link id="a1076" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. The overridden Game1.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1075">
+<link id="a1077" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Contents of the file named Sprite.cs
+
+</item>
+
+
+		
+
+<item id="li1076">
+<link id="a1078" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+. Contents of the file named Game1.cs.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="The_three_pillars_of_OOP" effect="bold">
+
+The three pillars of OOP
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+An object-oriented programming language like C# supports 
+
+<emphasis id="em1001" effect="italics">
+encapsulation
+
+</emphasis>
+,
+
+
+<emphasis id="em1002" effect="italics">
+inheritance
+
+</emphasis>
+, and 
+
+<emphasis id="em1003" effect="italics">
+polymorphism
+
+</emphasis>
+. In this module, you will learn 
+how to take advantage of encapsulation.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Wanted_lots_of_sprites" effect="bold">
+
+Wanted, lots of sprites
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1006">
+Assume that you are writing a game program in which you need to have several 
+dozen similar sprites on the screen at the same time. Creating and controlling 
+that many sprites without using encapsulation would require you to write a lot 
+of program code.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Encapsulation_to_the_rescue" effect="bold">
+
+Encapsulation to the rescue
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+However, by encapsulating the characteristics of a sprite into a class, which 
+is a blueprint for an object, you can instantiate sprite objects just like 
+cutting out cookies with a cookie cutter.
+
+</para>
+
+
+
+
+
+<para id="p1008">
+In this module, you will learn to define and use a very simple 
+
+<emphasis id="strong1001" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class. In future modules, you will learn how to modify the 
+
+<emphasis id="strong1002" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class to make it more sophisticated by making use of inheritance and 
+polymorphism in addition to encapsulation
+
+</para>
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1009">
+The XNA project that I will explain in this module is named 
+
+<emphasis id="strong1003" effect="bold">
+
+	XNA0126Proj
+
+</emphasis>
+. This project demonstrates how to design and use a very 
+	simple version of a 
+
+<emphasis id="strong1004" effect="bold">
+Sprite
+
+</emphasis>
+ class. An object instantiated 
+	from the 
+
+<emphasis id="strong1005" effect="bold">
+Sprite
+
+</emphasis>
+ class has the following general 
+	characteristics:
+
+</para>
+
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+
+	
+
+<item id="li1077">
+It can be instantiated without an image.
+
+</item>
+
+
+	
+
+<item id="li1078">
+It can be instantiated with an image.
+
+</item>
+
+
+	
+
+<item id="li1079">
+It can have its image set.
+
+</item>
+
+
+	
+
+<item id="li1080">
+It can have its position within the game window set.
+
+</item>
+
+
+	
+
+<item id="li1081">
+It can cause itself to be drawn.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h21004">
+<title>
+<emphasis id="Demonstrate_how_to_use_the_Sprite_class" effect="bold">
+
+Demonstrate how to use the 
+Sprite class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+Methods are overridden in the standard XNA 
+
+<emphasis id="strong1006" effect="bold">
+Game1
+
+</emphasis>
+ class that 
+demonstrate the use of the 
+
+<emphasis id="strong1007" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<para id="p1011">
+One 
+
+<emphasis id="strong1008" effect="bold">
+Sprite
+
+</emphasis>
+ object is instantiated in the overridden 
+
+<emphasis id="strong1009" effect="bold">
+
+LoadContent
+
+</emphasis>
+ method of the 
+
+<emphasis id="strong1010" effect="bold">
+Game1
+
+</emphasis>
+ class. The object's 
+reference is saved in a generic 
+
+<emphasis id="strong1011" effect="bold">
+List
+
+</emphasis>
+ object. Twenty-three more
+
+
+<emphasis id="strong1012" effect="bold">
+Sprite
+
+</emphasis>
+ objects are instantiated in the overridden 
+
+<emphasis id="strong1013" effect="bold">
+
+Update
+
+</emphasis>
+ method while the game loop is running. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Instantiate_Sprite_objects_on_the_move" effect="bold">
+
+Instantiate Sprite objects on the move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1012">
+A new 
+
+<emphasis id="strong1014" effect="bold">
+Sprite
+
+</emphasis>
+ object is instantiated in the 
+
+<emphasis id="strong1015" effect="bold">
+Update
+
+</emphasis>
+ 
+method every 8th iteration of the game loop until
+
+
+<emphasis id="twentyFour" effect="bold">
+
+twenty-four
+
+</emphasis>
+
+ 
+
+<emphasis id="strong1016" effect="bold">
+Sprite
+
+</emphasis>
+ 
+objects have been instantiated. The object's references are saved in the same 
+generic 
+
+<emphasis id="strong1017" effect="bold">
+List
+
+</emphasis>
+ object mentioned above.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+An image of a blue ball is stored in 12 of the objects and an image of a red 
+ball is stored in the other 12 objects. The red and blue balls alternate and the
+
+
+<emphasis id="strong1018" effect="bold">
+Sprite
+
+</emphasis>
+ objects are drawn in a diagonal line as shown in 
+
+
+<link id="a1079" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1014">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Seven Sprite objects.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0126a.jpg" width="454" height="480"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="Seven_Sprite_objects" effect="bold">
+
+Seven Sprite objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+<link id="a1080" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows the game window after seven of the twenty-four 
+
+<emphasis id="strong1019" effect="bold">
+Sprite
+
+</emphasis>
+ 
+objects have been instantiated and drawn in the game window.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Move_to_the_right_and_down" effect="bold">
+
+Move to the right and down
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+The line of 
+
+<emphasis id="strong1020" effect="bold">
+Sprite
+
+</emphasis>
+ objects moves across the game window from 
+upper left to lower right as the 
+
+<emphasis id="strong1021" effect="bold">
+Sprite
+
+</emphasis>
+ objects are being 
+instantiated. They stop moving when they reach the bottom right corner of the 
+game window.
+
+</para>
+
+
+
+
+
+<para id="p1017">
+When the objects stop moving, the image in the topmost 
+
+<emphasis id="strong1022" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object is changed from a blue ball to a green ball as shown in 
+
+<link id="a1081" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1018">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. Twenty-four Sprite objects with a green one at the top.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="missing image" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0126b.jpg" width="457" height="480"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1019">
+As usual, I will explain the program code in fragments. A complete listing of 
+the class named 
+
+<emphasis id="strong1023" effect="bold">
+Sprite
+
+</emphasis>
+ is provided in 
+
+<link id="a1082" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and a complete 
+listing of the class named 
+
+<emphasis id="strong1024" effect="bold">
+Game1
+
+</emphasis>
+ is provided in 
+
+<link id="a1083" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1020">
+I will begin my explanation with the class named 
+
+<emphasis id="strong1025" effect="bold">
+Sprite
+
+</emphasis>
+.
+
+</para>
+
+
+
+	
+
+
+
+<section id="h21008">
+<title>
+
+    
+
+<emphasis id="The_Sprite_class_" effect="bold">
+
+The Sprite class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1021">
+The file named 
+
+<emphasis id="strong1026" effect="bold">
+Sprite.cs
+
+</emphasis>
+ (see 
+
+<link id="a1084" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+) defines a simple 
+version of a 
+
+<emphasis id="strong1027" effect="bold">
+Sprite
+
+</emphasis>
+ class from which multiple 
+
+<emphasis id="strong1028" effect="bold">
+Sprite
+
+</emphasis>
+ 
+objects can be instantiated, loaded with an image, and drawn in the game window. 
+The 
+
+<emphasis id="strong1029" effect="bold">
+Position
+
+</emphasis>
+ property of each 
+
+<emphasis id="strong1030" effect="bold">
+Sprite
+
+</emphasis>
+ object 
+can be accessed by the user to control the position at which the sprite is 
+drawn.
+
+</para>
+
+
+
+
+
+<para id="p1022">
+The definition of the 
+
+<emphasis id="strong1031" effect="bold">
+Sprite
+
+</emphasis>
+ class begins in 
+
+<link id="a1085" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1023">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Beginning of the Sprite class.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">namespace XNA0126Proj {
+  class Sprite {
+    private Texture2D texture;
+    private Vector2 position = new Vector2(0,0);
+    //-------------------------------------------------//
+
+    public Vector2 Position {
+      get {
+        return position;
+      }//end get
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31002">
+<title>
+<emphasis id="Two_instance_variables_and_a_property_accessor_method" effect="bold">
+
+Two instance variables and a property accessor method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1024">
+<link id="a1086" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ declares two instance variables and defines an accessor for the
+
+
+<emphasis id="strong1032" effect="bold">
+Position
+
+</emphasis>
+ property.
+
+</para>
+
+
+
+
+
+<para id="p1025">
+The first instance variable named 
+
+<emphasis id="strong1033" effect="bold">
+texture
+
+</emphasis>
+ will be used to 
+store the image for the sprite. The second instance variable named 
+
+<emphasis id="strong1034" effect="bold">
+
+position
+
+</emphasis>
+ will be used to store the value for the 
+
+<emphasis id="strong1035" effect="bold">
+Position
+
+</emphasis>
+ 
+property.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+
+    
+
+<emphasis id="Two_overloaded_constructors_" effect="bold">
+
+Two overloaded constructors
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1026">
+<link id="a1087" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ defines two overloaded constructors for the 
+
+<emphasis id="strong1036" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class.
+
+</para>
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1027">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Two overloaded constructors.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1001" display="block">    public Sprite() {//constructor
+    }//end noarg constructor
+    //-------------------------------------------------//
+
+    public Sprite(String assetName,
+                  ContentManager contentManager) {
+      texture = 
+              contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41000">
+<title>
+<emphasis id="image" effect="bold">
+
+No image when instantiated
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1028">
+The first overloaded constructor, which requires no parameters, makes it 
+possible to instantiate a 
+
+<emphasis id="strong1037" effect="bold">
+Sprite
+
+</emphasis>
+ object without loading an 
+image for the object when it is constructed. A method named 
+
+<emphasis id="strong1038" effect="bold">
+SetImage
+
+</emphasis>
+ 
+can be called later to load an image for the object.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+Be aware that if you instantiate a 
+
+<emphasis id="strong1039" effect="bold">
+Sprite
+
+</emphasis>
+ object using 
+this constructor and then attempt to draw the object without first calling the
+
+
+<emphasis id="strong1040" effect="bold">
+SetImage
+
+</emphasis>
+ method to load an image into the object, the program 
+	will fail with a runtime error.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="Image_loaded_during_construction" effect="bold">
+
+Image loaded during construction
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+The second overloaded constructor, which requires two parameters, makes it 
+possible to load an image for the 
+
+<emphasis id="strong1041" effect="bold">
+Sprite
+
+</emphasis>
+ object when it is 
+constructed.
+
+</para>
+
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="The_first_parameter" effect="bold">
+
+The first parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1030">
+The first parameter required by the second constructor is the 
+
+<emphasis id="strong1042" effect="bold">
+Asset 
+Name
+
+</emphasis>
+ property for an image file that is added to the 
+
+<emphasis id="strong1043" effect="bold">
+Content
+
+</emphasis>
+ 
+folder during the project design phase.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="The_second_parameter" effect="bold">
+
+The second parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+The second parameter is a reference to the 
+
+<emphasis id="strong1044" effect="bold">
+ContentManager
+
+</emphasis>
+ 
+object that is inherited into the 
+
+<emphasis id="strong1045" effect="bold">
+Game1
+
+</emphasis>
+ object from the 
+
+<emphasis id="strong1046" effect="bold">
+
+Game
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51002">
+<title>
+<emphasis id="Loading_the_image" effect="bold">
+
+Loading the image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+You are already familiar with the code in the body of the constructor that is 
+used to load the image into the object.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h31004">
+<title>
+
+    
+
+<emphasis id="The_SetImage_method_" effect="bold">
+
+The SetImage method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1033">
+
+    The 
+
+<emphasis id="strong1047" effect="bold">
+SetImage
+
+</emphasis>
+ method is shown in its entirety in 
+
+<link id="a1088" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1034">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. The SetImage method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1002" display="block">    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      texture = 
+              contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end SetImage
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41002">
+<title>
+<emphasis id="Load_an_image_into_a_Sprite_object" effect="bold">
+
+Load an image into a Sprite object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+The 
+
+<emphasis id="strong1048" effect="bold">
+SetImage
+
+</emphasis>
+ method makes it possible to load an image into 
+a 
+
+<emphasis id="strong1049" effect="bold">
+Sprite
+
+</emphasis>
+ object that was originally
+
+
+<link id="a1089" target-id="image">
+
+constructed without an image
+
+</link>
+
+, or to 
+change the image in a 
+
+<emphasis id="strong1050" effect="bold">
+Sprite
+
+</emphasis>
+ object that already contains an 
+image.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="The_parameters_and_the_body" effect="bold">
+
+The parameters and the body
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+The parameters required by this method and the body of the method are the 
+same as for the 
+
+<link id="a1090" target-id="image">
+
+first constructor
+
+</link>
+
+ 
+discussed above.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31005">
+<title>
+
+    
+
+<emphasis id="The_Draw_method_of_the_Sprite_class_" effect="bold">
+
+The Draw method of the Sprite class
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1037">
+
+    
+
+<link id="a1091" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ shows the 
+
+<emphasis id="strong1051" effect="bold">
+Draw
+
+</emphasis>
+ method of the 
+
+<emphasis id="strong1052" effect="bold">
+Sprite
+
+</emphasis>
+ 
+	class in its entirety.
+
+</para>
+
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1038">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. The Draw method of the Sprite class.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1003" display="block">    public void Draw(SpriteBatch spriteBatch) {
+      spriteBatch.Draw(texture,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end Sprite class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1039">
+This method should be called after a call to the 
+
+<emphasis id="strong1053" effect="bold">
+
+	SpriteBatch.Begin
+
+</emphasis>
+ method and before a call to the 
+
+<emphasis id="strong1054" effect="bold">
+
+	SpriteBatch.End
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<section id="h41004">
+<title>
+<emphasis id="A_single_parameter" effect="bold">
+
+A single parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1040">
+The method requires a single parameter, which is a reference to the 
+
+<emphasis id="strong1055" effect="bold">
+
+SpriteBatch
+
+</emphasis>
+ object on which the 
+
+<emphasis id="strong1056" effect="bold">
+Begin
+
+</emphasis>
+ method has been 
+called.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="The_body_of_the_SpriteDraw_method" effect="bold">
+
+The body of the Sprite.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+You should recognize the single statement in the method as a call to 
+the simplest available 
+
+<emphasis id="strong1057" effect="bold">
+Draw
+
+</emphasis>
+ method belonging to the 
+
+<emphasis id="strong1058" effect="bold">
+
+SpriteBatch
+
+</emphasis>
+ object. This version of the 
+
+<emphasis id="strong1059" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method allows the caller to specify
+
+</para>
+
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+
+	
+
+<item id="li1082">
+The texture or image to be drawn.
+
+</item>
+
+
+	
+
+<item id="li1083">
+The position in the game window relative to the upper left corner of the 
+	window at which the image will be drawn.
+
+</item>
+
+
+	
+
+<item id="li1084">
+A color tint that will be applied to the image with White being no 
+	change in color.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+</section>
+<section id="h31006">
+<title>
+<emphasis id="The_end_of_the_class" effect="bold">
+
+The end of the class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+<link id="a1092" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ signals the end of the 
+
+<emphasis id="strong1060" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h21009">
+<title>
+
+    
+
+<emphasis id="The_Game1_class_" effect="bold">
+
+The Game1 class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1043">
+Methods of the 
+
+<emphasis id="strong1061" effect="bold">
+Game1
+
+</emphasis>
+ class were overridden to demonstrate 
+the use of the 
+
+<emphasis id="strong1062" effect="bold">
+Sprite
+
+</emphasis>
+ class to produce the output described
+
+
+<link id="a1093" target-id="Demonstrate_how_to_use_the_Sprite_class">
+
+earlier
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1044">
+The class named 
+
+<emphasis id="strong1063" effect="bold">
+Game1
+
+</emphasis>
+ begins in 
+
+<link id="a1094" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1045">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Beginning of the class named Game1.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1004" display="block">namespace XNA0126Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //References to the Sprite objects are stored in this
+    // List object.
+    List&lt;Sprite&gt; sprites = new List&lt;Sprite&gt;();
+
+    int maxSprites = 24;//Max number of sprites.
+    int frameCnt = 0;//Game loop frame counter
+
+    //This is the limit on the number of frames in which
+    // the sprites are moved.
+    int moveLim = 200;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1046">
+<link id="a1095" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ simply declares several instance variables, most of which you 
+	should recognize. The others are well described by the comments. However, 
+	one of the instance variables, 
+
+<emphasis id="strong1064" effect="bold">
+sprites
+
+</emphasis>
+, introduces a 
+	concept that is new to this module.
+
+</para>
+
+
+
+	
+
+
+<section id="h31007">
+<title>
+
+    
+
+<emphasis id="The_generic_List_class_" effect="bold">
+
+The generic List class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1047">
+<link id="a1096" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ declares a variable named 
+
+<emphasis id="strong1065" effect="bold">
+sprites
+
+</emphasis>
+ and populates it 
+with a reference to a new generic 
+
+<emphasis id="strong1066" effect="bold">
+List
+
+</emphasis>
+ object that is 
+conditioned to store and retrieve references to objects of the class 
+
+<emphasis id="strong1067" effect="bold">
+
+Sprite
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1048">
+Here is some of what the
+
+
+<link id="a1097" url="http://msdn.microsoft.com/en-us/library/6sh2ey19.aspx">
+
+documentation
+
+</link>
+
+ 
+has to say about the generic 
+
+<emphasis id="strong1068" effect="bold">
+List
+
+</emphasis>
+ class:
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+"Represents a strongly typed list of objects that can be accessed by index. 
+Provides methods to search, sort, and manipulate lists."
+
+</note>
+
+
+
+
+
+
+<para id="p1049">
+The generic 
+
+<emphasis id="strong1069" effect="bold">
+List
+
+</emphasis>
+ class provides many more capabilities than 
+I will use in this program. I will use an object of the generic 
+
+<emphasis id="strong1070" effect="bold">
+List
+
+</emphasis>
+ 
+class to store references to 
+
+<emphasis id="strong1071" effect="bold">
+Sprite
+
+</emphasis>
+ objects that I can later 
+access using a zero-based index. This will eliminate the requirement to declare 
+a separate reference variable for each of the 
+
+<emphasis id="strong1072" effect="bold">
+Sprite
+
+</emphasis>
+ objects 
+that I instantiate.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31008">
+<title>
+
+    
+
+<emphasis id="The_modified_Game1_constructor_" effect="bold">
+
+The modified Game1 constructor 
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1050">
+The constructor for the 
+
+<emphasis id="strong1073" effect="bold">
+Game1
+
+</emphasis>
+ class was modified to set the size of the game 
+window as shown in 
+
+<link id="a1098" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1051">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. The modified constructor for the Game1 class.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1005" display="block">    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 450;
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1052">
+You have seen code identical to this code in earlier modules so there is 
+	nothing new to discuss here.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method_" effect="bold">
+
+The overridden LoadContent method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1053">
+
+    The overridden 
+
+<emphasis id="strong1074" effect="bold">
+LoadContent
+
+</emphasis>
+ method is shown in 
+
+<link id="a1099" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1054">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. The overridden LoadContent method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1006" display="block">    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create the first sprite in the LoadContent
+      // method using the noarg constructor.
+      sprites.Add(new Sprite());
+
+      //Assign an image to the sprite.
+      sprites[0].SetImage("blueball",Content);
+      
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41006">
+<title>
+<emphasis id="A_new_Sprite_object" effect="bold">
+
+A new Sprite object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+A statement near the center of 
+
+<link id="a1100" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ instantiates a new
+
+
+<emphasis id="strong1075" effect="bold">
+Sprite
+
+</emphasis>
+ object with no image and calls the 
+
+<emphasis id="strong1076" effect="bold">
+Add
+
+</emphasis>
+ 
+method of the generic 
+
+<emphasis id="strong1077" effect="bold">
+List
+
+</emphasis>
+ object to add the object's reference 
+to the end of the list.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="List_capacity_considerations" effect="bold">
+
+List capacity considerations
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+One advantage of using a generic 
+
+<emphasis id="strong1078" effect="bold">
+List
+
+</emphasis>
+ object as an 
+alternative to a simple array is that it is not necessary to declare the 
+capacity of the 
+
+<emphasis id="strong1079" effect="bold">
+List
+
+</emphasis>
+ object when the program is compiled. The 
+capacity of the 
+
+<emphasis id="strong1080" effect="bold">
+List
+
+</emphasis>
+ object increases automatically as 
+necessary to accommodate all of the references that are added to the list.
+
+</para>
+
+
+
+
+
+<para id="p1057">
+Since this is the first reference added to the list, it can be accessed later 
+using an index value of 0.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41008">
+<title>
+<emphasis id="Assign_an_image_to_the_Sprite_object" effect="bold">
+
+Assign an image to the Sprite object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1058">
+The last statement in 
+
+<link id="a1101" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ retrieves the reference 
+from the list at index 0 and uses that reference to call the 
+
+<emphasis id="strong1081" effect="bold">
+SetImage
+
+</emphasis>
+ 
+method on the 
+
+<emphasis id="strong1082" effect="bold">
+Sprite
+
+</emphasis>
+ object to which it refers.
+
+</para>
+
+
+
+
+
+<para id="p1059">
+You learned about the 
+
+<emphasis id="strong1083" effect="bold">
+SetImage
+
+</emphasis>
+ method in the discussion of 
+the code in 
+
+<link id="a1102" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. This call causes the 
+
+<emphasis id="strong1084" effect="bold">
+Sprite
+
+</emphasis>
+ object whose 
+reference is stored at index 0 in the list to load the image from the image file 
+with the 
+
+<emphasis id="strong1085" effect="bold">
+Asset Name
+
+</emphasis>
+ property value of "blueball".
+
+</para>
+
+
+
+
+
+<para id="p1060">
+As mentioned earlier, the second parameter named 
+
+<emphasis id="strong1086" effect="bold">
+Content
+
+</emphasis>
+ is 
+a reference to a 
+
+<emphasis id="strong1087" effect="bold">
+ContentManager
+
+</emphasis>
+ object that is inherited from 
+the 
+
+<emphasis id="strong1088" effect="bold">
+Game
+
+</emphasis>
+ class. 
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31010">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1061">
+As you learned 
+
+<link id="a1103" target-id="twentyFour">
+
+earlier
+
+</link>
+
+, this 
+program creates, manipulates, and draws 24 objects of the 
+
+<emphasis id="strong1089" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class in the game window as shown in 
+
+<link id="a1104" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. The first 
+
+<emphasis id="strong1090" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object was created in the overridden 
+
+<emphasis id="strong1091" effect="bold">
+LoadContent
+
+</emphasis>
+ method when it 
+was called earlier.
+
+</para>
+
+
+
+
+
+<section id="h41009">
+<title>
+<emphasis id="The_Count_property_of_the_List_object" effect="bold">
+
+The Count property of the List object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+The generic 
+
+<emphasis id="strong1092" effect="bold">
+List
+
+</emphasis>
+ object referred to by 
+
+<emphasis id="strong1093" effect="bold">
+sprites
+
+</emphasis>
+ 
+has a property named 
+
+<emphasis id="strong1094" effect="bold">
+Count
+
+</emphasis>
+ that keeps track of the number of 
+references contained in the object. The first time the 
+
+<emphasis id="strong1095" effect="bold">
+Update
+
+</emphasis>
+ 
+method is called, the value of 
+
+<emphasis id="strong1096" effect="bold">
+Count
+
+</emphasis>
+ is 1 as a result of the
+
+
+<emphasis id="strong1097" effect="bold">
+Sprite
+
+</emphasis>
+ object's reference having been added to the list in the
+
+
+<emphasis id="strong1098" effect="bold">
+LoadContent
+
+</emphasis>
+ method earlier.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41010">
+<title>
+<emphasis id="The_remaining_23_Sprite_objects" effect="bold">
+
+The remaining 23 Sprite objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+This program creates the remaining 23 sprites in the 
+
+<emphasis id="strong1099" effect="bold">
+Update
+
+</emphasis>
+ 
+method to simulate a game in which sprites come and go as the game progresses.
+
+</para>
+
+
+
+
+
+<para id="p1064">
+The overridden 
+
+<emphasis id="strong1100" effect="bold">
+Update
+
+</emphasis>
+ method begins in 
+
+<link id="a1105" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1065">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Beginning of the overridden Update method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1007" display="block">    protected override void Update(GameTime gameTime) {
+
+      if(sprites.Count &lt; (maxSprites)) {
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41011">
+<title>
+<emphasis id="Adding_Sprite_object_references_to_the_list" effect="bold">
+
+Adding Sprite object references to the list
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+<link id="a1106" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ shows the beginning of an 
+
+<emphasis id="strong1101" effect="bold">
+if
+
+</emphasis>
+ statement in which a 
+new 
+
+<emphasis id="strong1102" effect="bold">
+Sprite
+
+</emphasis>
+ objects reference will be added to the list every 
+eighth iteration 
+
+<emphasis id="em1004" effect="italics">
+(frame)
+
+</emphasis>
+ of the game loop until all 24 sprites have 
+been added.
+
+</para>
+
+
+
+
+
+<para id="p1067">
+Note that a frame counter named 
+
+<emphasis id="strong1103" effect="bold">
+frameCnt
+
+</emphasis>
+ is declared and 
+initialized to zero in 
+
+<link id="a1107" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ and is incremented near the end of the 
+overridden 
+
+<emphasis id="strong1104" effect="bold">
+Update
+
+</emphasis>
+ method in 
+
+<link id="a1108" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41012">
+<title>
+<emphasis id="Instantiate_new_Sprite_objects" effect="bold">
+
+Instantiate new Sprite objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+The code in 
+
+<link id="a1109" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ uses the modulus (%) operator to identify every eighth 
+iteration of the game loop and to instantiate a new 
+
+<emphasis id="strong1105" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object during those iterations.
+
+</para>
+
+
+
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1069">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+.  Instantiate new Sprite objects.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1008" display="block">        if(frameCnt % 8 == 0) {
+          //Instantiate a new sprite every 8th frame.
+          if((sprites.Count) % 2 == 0) {
+            //Even numbered sprites
+            sprites.Add(new Sprite("blueball",Content));
+          }
+          else {
+            //Odd numbered sprites
+            sprites.Add(new Sprite("redball",Content));
+          }//end else 
+        }//end if on frameCnt
+      }//end if on sprites.Count
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h51003">
+<title>
+<emphasis id="The_modulus_operator" effect="bold">
+
+The modulus operator
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+In case you have forgotten, the modulus operator returns the remainder of a 
+division instead of returning the quotient. If an integer value is divided by 8, 
+the returned value is 0 only when the integer value is a multiple of 8. 
+
+<emphasis id="em1005" effect="italics">
+
+(Also by definition, 0 % 8 returns 0.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h51004">
+<title>
+<emphasis id="Every_eighth_iteration" effect="bold">
+
+Every eighth iteration
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+Therefore, the conditional expression in the first 
+
+<emphasis id="strong1106" effect="bold">
+if
+
+</emphasis>
+ 
+statement 
+in 
+
+<link id="a1110" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ will allow the statements contained in the 
+body of the 
+
+<emphasis id="strong1107" effect="bold">
+if
+
+</emphasis>
+ statement, (which instantiate new 
+
+<emphasis id="strong1108" effect="bold">
+Sprite
+
+</emphasis>
+ objects), to be executed only 
+during every eighth iteration of the game loop. 
+
+</para>
+
+
+
+
+
+<para id="p1072">
+Further, the conditional expression in 
+
+<link id="a1111" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ will not allow the code in 
+
+
+<link id="a1112" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ to be executed after 24 
+
+<emphasis id="strong1109" effect="bold">
+Sprite
+
+</emphasis>
+ objects have been 
+instantiated.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51005">
+<title>
+<emphasis id="Even_and_odd_sprite_images" effect="bold">
+
+Even and odd sprite images
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+The conditional expression in the second 
+
+<emphasis id="strong1110" effect="bold">
+if
+
+</emphasis>
+ statement in 
+
+
+<link id="a1113" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ causes the new 
+
+<emphasis id="strong1111" effect="bold">
+Sprite
+
+</emphasis>
+ objects that are instantiated to 
+alternate between the "blueball" and "redball" images shown in 
+
+<link id="a1114" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41013">
+<title>
+<emphasis id="Make_all_the_existing_sprites_move" effect="bold">
+
+Make all the existing sprites move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1074">
+<link id="a1115" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ declares an instance variable named 
+
+<emphasis id="strong1112" effect="bold">
+moveLim
+
+</emphasis>
+ and 
+sets its value to 200. The code in 
+
+<link id="a1116" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ causes all of the existing sprites 
+to move to the right and down if the value of the frame counter is less than 200.
+
+</para>
+
+
+
+
+
+
+<note id="note1013" type="">
+
+
+<para id="p1075">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. Make all the existing sprites move.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1009" display="block">      if(frameCnt &lt; moveLim) {
+        for(int cnt = 0;cnt &lt; sprites.Count;cnt++) {
+          sprites[cnt].Position = new Vector2(
+                10 * cnt + frameCnt,10 * cnt + frameCnt);
+        }//end for loop
+      }//end if
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h51006">
+<title>
+<emphasis id="Use_a_for_loop" effect="bold">
+
+Use a for loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+The code in 
+
+<link id="a1117" target-id="Listing_10">
+
+ Listing 10
+
+</link>
+
+ uses a 
+
+<emphasis id="strong1113" effect="bold">
+for
+
+</emphasis>
+ loop to access each of the
+
+
+<emphasis id="strong1114" effect="bold">
+Sprite
+
+</emphasis>
+ object references currently stored in the list, 
+iterating from 0 to one less than the count of references stored in the list 
+given by 
+
+<emphasis id="strong1115" effect="bold">
+sprites.Count
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51007">
+<title>
+<emphasis id="Put_a_new_value_in_the_Position_property" effect="bold">
+
+Put a new value in the Position property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+Once a 
+
+<emphasis id="strong1116" effect="bold">
+Sprite
+
+</emphasis>
+ object's reference has been accessed, 
+
+<link id="a1118" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ sets the 
+
+<emphasis id="strong1117" effect="bold">
+Position
+
+</emphasis>
+ property stored in the object to a new
+
+
+<emphasis id="strong1118" effect="bold">
+Vector2
+
+</emphasis>
+ object for which the 
+
+<emphasis id="strong1119" effect="bold">
+X
+
+</emphasis>
+ and 
+
+<emphasis id="strong1120" effect="bold">
+Y
+
+</emphasis>
+ 
+values have been modified on the basis of the frame counter.
+
+</para>
+
+
+
+
+
+<para id="p1078">
+The new 
+
+<emphasis id="strong1121" effect="bold">
+X
+
+</emphasis>
+ and 
+
+<emphasis id="strong1122" effect="bold">
+Y
+
+</emphasis>
+ values cause the object to 
+be drawn a little further down and to the right the next time it is drawn 
+relative to its current position. This causes the entire diagonal line of
+
+
+<emphasis id="strong1123" effect="bold">
+Sprite
+
+</emphasis>
+ objects to move down and to the right in the game 
+window.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41014">
+<title>
+<emphasis id="Load_a_green_ball_image_in_the_topmost_Sprite_object" effect="bold">
+
+Load a green ball image in the topmost Sprite object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1079">
+<link id="a1119" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1124" effect="bold">
+SetImage
+
+</emphasis>
+ method to change the image in 
+the topmost sprite at the end of the run from a blue ball to a green ball.
+
+</para>
+
+
+
+
+	
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1080">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. Load a green ball image in the topmost Sprite object.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1010" display="block">      if(frameCnt == moveLim) {
+        sprites[0].SetImage("greenball",Content);
+      }//end if
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1081">
+This capability would be useful, for example to change a sprite's image 
+	into a fireball in the event of a collision with another sprite.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41015">
+<title>
+<emphasis id="Maintain_the_frame_counter" effect="bold">
+
+Maintain the frame counter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+The code in 
+
+<link id="a1120" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ keeps track of the count of the first 
+
+<emphasis id="strong1125" effect="bold">
+moveLim
+
+</emphasis>
+ 
+iterations of the game loop.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1015" type="">
+
+
+<para id="p1083">
+<emphasis id="Listing_12" effect="bold">
+
+Listing 12
+
+</emphasis>
+
+. Maintain the frame counter.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1011" display="block">      if(frameCnt &lt; moveLim) {
+        frameCnt++;
+      }//end if
+
+      base.Update(gameTime);
+    }//end Update method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41016">
+<title>
+<emphasis id="The_end_of_the_overridden_Update_method" effect="bold">
+
+The end of the overridden Update method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1084">
+Then 
+
+<link id="a1121" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ makes the required call to the 
+
+<emphasis id="strong1126" effect="bold">
+Update
+
+</emphasis>
+ method 
+in the superclass and signals the end of the method.
+
+</para>
+
+
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h31011">
+<title>
+
+    
+
+<emphasis id="The_overridden_Game1Draw_method_" effect="bold">
+
+The overridden Game1.Draw method
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1085">
+
+    The overridden 
+
+<emphasis id="strong1127" effect="bold">
+Game1.Draw
+
+</emphasis>
+ method is shown in its entirety 
+	in 
+
+<link id="a1122" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1016" type="">
+
+
+<para id="p1086">
+<emphasis id="Listing_13" effect="bold">
+
+Listing 13
+
+</emphasis>
+
+. The overridden Game1.Draw method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1012" display="block">    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      //Draw all sprites.
+      for(int cnt = 0;cnt &lt; sprites.Count;cnt++) {
+        sprites[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41017">
+<title>
+<emphasis id="Draw_all_Sprite_objects" effect="bold">
+
+Draw all Sprite objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1087">
+After calling the 
+
+<emphasis id="strong1128" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ method and before 
+calling the 
+
+<emphasis id="strong1129" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ method, 
+
+<link id="a1123" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ uses a 
+
+<emphasis id="strong1130" effect="bold">
+
+for
+
+</emphasis>
+ loop to call the 
+
+<emphasis id="strong1131" effect="bold">
+Sprite.Draw
+
+</emphasis>
+ method on every
+
+
+<emphasis id="strong1132" effect="bold">
+Sprite
+
+</emphasis>
+ object whose reference is stored in the list, passing a 
+reference to the 
+
+<emphasis id="strong1133" effect="bold">
+SpriteBatch
+
+</emphasis>
+ object as a parameter in each 
+call.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41018">
+<title>
+<emphasis id="Call_the_SpriteBatchDraw_method" effect="bold">
+
+Call the SpriteBatch.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1088">
+This causes each object to execute the single statement belonging to the
+
+
+<emphasis id="strong1134" effect="bold">
+Draw
+
+</emphasis>
+ method shown in 
+
+
+<link id="a1124" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Thus, the code in 
+
+<link id="a1125" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ causes 
+each 
+
+<emphasis id="strong1135" effect="bold">
+Sprite
+
+</emphasis>
+ object 
+to call the 
+
+<emphasis id="strong1136" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method to draw itself at the 
+position specified by the current value of its 
+
+<emphasis id="strong1137" effect="bold">
+Position
+
+</emphasis>
+ 
+property.
+
+</para>
+
+
+
+
+
+<para id="p1089">
+Note that there are three different methods named 
+
+<emphasis id="strong1138" effect="bold">
+Draw
+
+</emphasis>
+ being 
+used here:
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1085">
+Game1.Draw
+
+</item>
+
+
+	
+
+<item id="li1086">
+SpriteBatch.Draw
+
+</item>
+
+
+	
+
+<item id="li1087">
+Sprite.Draw
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h41019">
+<title>
+<emphasis id="The_end_of_the_Game1Draw_method" effect="bold">
+
+The end of the Game1.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1090">
+After calling the 
+
+<emphasis id="strong1139" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ method, 
+
+<link id="a1126" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ makes 
+the required call to the superclass' 
+
+<emphasis id="strong1140" effect="bold">
+Game.Draw
+
+</emphasis>
+ method and then 
+signals the end of the 
+
+<emphasis id="strong1141" effect="bold">
+Game1.Draw
+
+</emphasis>
+ method. 
+
+<link id="a1127" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ also 
+signals the end of the class and the end of the program.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1091">
+I encourage you to copy the code from 
+
+<link id="a1128" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and 
+
+<link id="a1129" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+. Use that 
+code to create an XNA project. Compile and run the project. Experiment with 
+the code, making changes, and observing the results of your changes. Make 
+certain that you can explain why your changes behave as they do.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1092">
+Click 
+
+<link id="a1130" url="XNA0126Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1142" effect="bold">
+XNA0126Proj
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1143" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1144" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1145" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select 
+the file with the extension of 
+
+<emphasis id="strong1146" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled
+
+
+<link id="a1131" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1093">
+You learned how to design, create, and use a simple 
+
+<emphasis id="strong1147" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class. You also learned how to use a generic 
+
+<emphasis id="strong1148" effect="bold">
+List
+
+</emphasis>
+ object.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1094">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+
+<note id="note1017" type="">
+
+
+
+
+
+<emphasis id="strong1149" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1022" list-type="bulleted">
+
+					
+
+<item id="li1088">
+Module name: Xna0126-Using OOP - A Simple Sprite Class
+
+</item>
+
+
+					
+
+<item id="li1089">
+File: Xna0126.htm
+
+
+</item>
+
+
+					
+
+<item id="li1090">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1018" type="">
+
+
+		
+
+
+			
+
+
+
+
+<emphasis id="strong1150" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1095">
+<emphasis id="strong1151" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1096">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1097">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1098">
+<emphasis id="strong1152" effect="bold">
+Affiliation
+
+</emphasis>
+: : I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1099">
+Complete listings of the XNA program files discussed in this module are provided in 
+
+<link id="a1132" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and 
+
+<link id="a1133" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ below. 
+
+</para>
+
+
+
+
+
+
+
+<note id="note1019" type="">
+
+
+
+
+
+<para id="p1100">
+<emphasis id="Listing_14" effect="bold">
+
+Listing 14
+
+</emphasis>
+
+. Contents of the file named Sprite.cs
+
+</para>
+
+
+
+
+				
+
+<code id="pre1013" display="block">/*Project XNA0126Proj
+ * This file defines a very simple version of a Sprite
+ * class from which multiple Sprite objects can be
+ * instantiated, loaded with an image, and drawn.
+ * The Position property can be accessed by the user
+ * to control the position at which the sprite is drawn.
+ *******************************************************/
+
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace XNA0126Proj {
+  class Sprite {
+    private Texture2D texture;
+    private Vector2 position = new Vector2(0,0);
+    //-------------------------------------------------//
+
+    public Vector2 Position {
+      get {
+        return position;
+      }
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+    //-------------------------------------------------//
+
+    //This constructor makes it possible to instantiate
+    // a sprite without assigning an image to the sprite.
+    public Sprite() {//constructor
+    }//end noarg constructor
+    //-------------------------------------------------//
+
+    //This constructor makes it possible to assign an
+    // image to the sprite when it is instantiated.
+    public Sprite(String assetName,
+                  ContentManager contentManager) {
+      texture = 
+              contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end constructor
+    //-------------------------------------------------//
+
+    //This method makes it possible to assign a new image
+    // to the sprite.
+    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      texture = 
+              contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end SetImage
+    //-------------------------------------------------//
+
+    public void Draw(SpriteBatch spriteBatch) {
+      //Call the simplest available version of
+      // SpriteBatch.Draw
+      spriteBatch.Draw(texture,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+
+
+<note id="note1020" type="">
+
+
+<para id="p1101">
+
+
+
+<emphasis id="Listing_15" effect="bold">
+
+Listing 15
+
+</emphasis>
+
+. Contents of the file named Game1.cs.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1014" display="block">/*Project XNA0126Proj
+ * This project demonstrates how to design and use a very
+ * simple version of a Sprite class.
+ * 
+ * One Sprite object is instantiated in the LoadContent
+ * method. The object's reference is saved in a generic
+ * List object.
+ * 
+ * Twenty-three more Sprite objects are instantiated 
+ * while the game loop is running. A new object is
+ * instantiated every 8th iteration of the game loop 
+ * until 24 objects have been instantiated. Their 
+ * references are saved in a generic List object.
+ * 
+ * An image of a blueball is stored in 12 of the objects
+ * and an image of a redball is stored in the other 12
+ * objects.
+ * 
+ * The Sprite objects are drawn in a diagonal line in 
+ * the game window. The line of Sprite objects moves 
+ * across the game window from upper left to lower right.
+ * The Sprite objects stop moving when they reach the
+ * bottom right corner of the game window.
+ * 
+ * When the objects stop moving, the image in the 
+ * topmost Sprite object is changed from a blueball to a 
+ * greenball.
+ * *****************************************************/
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using XNA0126Proj;
+
+namespace XNA0126Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //References to the Sprite objects are stored in this
+    // List object.
+    List&lt;Sprite&gt; sprites = new List&lt;Sprite&gt;();
+
+    int maxSprites = 24;//Max number of sprites.
+    int frameCnt = 0;//Game loop frame counter
+
+    //This is the limit on the number of frames in which
+    // the sprites are moved.
+    int moveLim = 200;
+    //-------------------------------------------------//
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 450;
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      //No initialization required.
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create the first sprite in the LoadContent
+      // method using the noarg constructor.
+      sprites.Add(new Sprite());
+      //Assign an image to the sprite.
+      sprites[0].SetImage("blueball",Content);
+      //More content is loaded in the Update method.
+    }//end LoadContent
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      //No content unload required.
+    }//end unloadContent
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+
+      //Create remaining sprites in the Update method to
+      // simulate a game in which sprites come and go as
+      // the game progresses.
+      if(sprites.Count &lt; (maxSprites)) {
+        if(frameCnt % 8 == 0) {
+          //Instantiate a new sprite every 8th frame.
+          if((sprites.Count) % 2 == 0) {
+            //Even numbered sprites
+            sprites.Add(new Sprite("blueball",Content));
+          }
+          else {
+            //Odd numbered sprites
+            sprites.Add(new Sprite("redball",Content));
+          }//end else 
+        }//end if on frameCnt
+      }//end if on sprites.Count
+
+      //Make all the sprites move.
+      if(frameCnt &lt; moveLim) {
+        for(int cnt = 0;cnt &lt; sprites.Count;cnt++) {
+          sprites[cnt].Position = new Vector2(
+                10 * cnt + frameCnt,10 * cnt + frameCnt);
+        }//end for loop
+      }//end if
+
+      //Change the image on the first sprite at the end
+      // of the run. Could be used, for example to 
+      // change a sprite's image to a fireball in the
+      // event of a collision.
+      if(frameCnt == moveLim) {
+        sprites[0].SetImage("greenball",Content);
+      }//end if
+
+      //Keep track of the count of the first moveLim
+      // iterations of the game loop.
+      if(frameCnt &lt; moveLim) {
+        frameCnt++;
+      }//end if
+
+      base.Update(gameTime);
+    }//end Update method
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      //Draw all sprites.
+      for(int cnt = 0;cnt &lt; sprites.Count;cnt++) {
+        sprites[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+<para id="p1102">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

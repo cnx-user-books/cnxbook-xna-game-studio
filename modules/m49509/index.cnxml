@@ -1,0 +1,10517 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0118-The XNA Framework and the Game Class</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49509</md:content-id>
+  <md:title>Xna0118-The XNA Framework and the Game Class</md:title>
+  <md:abstract>Use a very simple XNA program to learn many of the details regarding the incorporation of the XNA framework into the object-oriented C# programming language. Also learn about constructors, the this keyword, the base keyword, and some of the differences between a Console Application and a Windows Game application.</md:abstract>
+  <md:uuid>8801843d-601d-4690-a16a-1177ae3bfbb5</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Sat May 07 18:29:12 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Moving_from_C_to_XNA">
+
+Moving from C# to XNA
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="My_objective">
+
+My objective
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Fasten_your_seatbelt">
+
+Fasten your seatbelt
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1009">
+<link id="a1010" target-id="A_software_framework">
+
+A software framework
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1010">
+<link id="a1011" target-id="What_is_a_software_framework">
+
+What is a software framework?
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="New_project_choices_in_Visual_C">
+
+New project choices in Visual 
+C#
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="A_Console_Application_">
+
+A Console Application
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1013">
+<link id="a1014" target-id="Start_debugging">
+
+Start debugging
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="The_Main_method">
+
+The Main method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="The_starting_point_for_a_Console_Application">
+
+The starting point for a Console Application
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="A_Windows_Game_Application_">
+
+A Windows Game Application
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1017">
+<link id="a1018" target-id="Source_code_files">
+
+Source code files
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="Build_and_debug">
+
+Build and debug
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="The_file_named_Programcs">
+
+The file named Program.cs
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1020">
+<link id="a1021" target-id="Instantiate_a_Game1_object_and_call_the_Run_method">
+
+Instantiate a Game1 object and call the Run method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="What_do_we_know_about_the_class_named_Game1">
+
+What do we know about the class named Game1?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="The_using_directive">
+
+The using directive
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Memory_management">
+
+Memory management
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Dont_modify_the_file_named_Programcs">
+
+Don't modify the file named Program.cs
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="The_Game1_class">
+
+The Game1 class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="How_to_create_a_game_">
+
+How to create a game
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="Game1_extends_Game">
+
+Game1 extends Game
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="Main_method_calls_the_Run_method">
+
+Main method calls the Run method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="The_Run_method">
+
+The Run method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="Override_five_methods">
+
+Override five methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Initialization">
+
+Initialization
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="The_game_loop">
+
+The game loop
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="Override_Update_for_game_logic">
+
+Override Update for game logic
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Override_the_Draw_method">
+
+Override the Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1036">
+<link id="a1037" target-id="Program_output">
+
+Program output
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="What_if_you_dont_honor_the_transparent_background">
+
+What if you don't honor the transparent background?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="Not_a_very_exciting_program">
+
+Not a very exciting program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1040">
+<link id="a1041" target-id="Creating_a_new_Windows_Game_project">
+
+Creating a new Windows Game project
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1041">
+<link id="a1042" target-id="Step_1_Create_a_new_Windows_Game_project_named_XNA0118Proj">
+
+Step 1: Create a new Windows Game project named XNA0118Proj
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1042">
+<link id="a1043" target-id="Select_a_Windows_Game_project">
+
+Select a Windows Game project
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Step2">
+
+Step 2: Add your image file to the Content 
+folder
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1044">
+<link id="a1045" target-id="Add_your_image_to_the_Content_folder">
+
+Add your image to the Content folder
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="The_Asset_Name">
+
+The Asset Name
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Steps_3">
+
+Steps 3, 4, and 5: Write code
+
+</link>
+
+
+
+
+<list id="ul1016" list-type="bulleted">
+<item id="li1047">
+<link id="a1048" target-id="Modify_two_overridden_methods">
+
+Modify two overridden methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="Will_discuss_in_fragments">
+
+Will discuss in fragments
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="Beginning_of_the_class_named_Game1">
+
+Beginning of the class named Game1
+
+</link>
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+<item id="li1050">
+<link id="a1051" target-id="The_namespace">
+
+The namespace
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="General_information">
+
+General information
+
+</link>
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+<item id="li1052">
+<link id="a1053" target-id="The_superclass_named_Game">
+
+The superclass named Game
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Overridden_methods">
+
+Overridden methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="TheGameLoop">
+
+The game loop
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="The_big_picture">
+
+The big picture
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1056">
+<link id="a1057" target-id="The_constructor_for_the_Game1_class">
+
+The constructor for the Game1 class
+
+</link>
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+<item id="li1057">
+<link id="a1058" target-id="What_is_a_constructor">
+
+What is a constructor?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1058">
+<link id="a1059" target-id="A_new_GraphicsDeviceManager_object">
+
+A new GraphicsDeviceManager object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1059">
+<link id="a1060" target-id="Passing_the_this_keyword_as_a_parameter">
+
+Passing the this keyword as a parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1060">
+<link id="a1061" target-id="The_ContentManager">
+
+The ContentManager
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1061">
+<link id="a1062" target-id="When_the_constructor_in_Listing_5_terminates">
+
+When the constructor in Listing 5 terminates...
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1062">
+<link id="a1063" target-id="The_Run_method_of_the_Game_class">
+
+The Run method of the Game class
+
+</link>
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+<item id="li1063">
+<link id="a1064" target-id="The_BeginRun_method">
+
+The BeginRun method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1064">
+<link id="a1065" target-id="theGameLoop2">
+
+The game loop
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1065">
+<link id="a1066" target-id="The_overridden_LoadContent_method">
+
+The overridden LoadContent method
+
+</link>
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+<item id="li1066">
+<link id="a1067" target-id="Two_new_instance_variables">
+
+Two new instance variables
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1067">
+<link id="a1068" target-id="The_Texture2D_class">
+
+The Texture2D class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1068">
+<link id="a1069" target-id="The_SurfaceFormat_enumeration">
+
+The SurfaceFormat enumeration
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1069">
+<link id="a1070" target-id="The_Texture_Format_of_my_image">
+
+The Texture Format of my image
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1070">
+<link id="a1071" target-id="A_new_SpriteBatch_object">
+
+A new SpriteBatch object
+
+</link>
+
+
+
+
+<list id="ul1022" list-type="bulleted">
+<item id="li1071">
+<link id="a1072" target-id="The_SpriteBatch_class">
+
+The SpriteBatch class
+
+</link>
+
+
+
+
+<list id="ul1023" list-type="bulleted">
+<item id="li1072">
+<link id="a1073" target-id="This_can_be_confusing">
+
+This can be confusing
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1073">
+<link id="a1074" target-id="The_inherited_property">
+
+The inherited property
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1074">
+<link id="a1075" target-id="The_new_code">
+
+The new code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1075">
+<link id="a1076" target-id="Generic_methods">
+
+Generic methods
+
+</link>
+
+
+
+
+<list id="ul1024" list-type="bulleted">
+<item id="li1076">
+<link id="a1077" target-id="Required_syntax_for_the_Load_method">
+
+Required syntax for the Load method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1077">
+<link id="a1078" target-id="What_do_the_angle_brackets_mean">
+
+What do the angle brackets mean?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1078">
+<link id="a1079" target-id="Calling_the_Load_method_of_the_current_ContentManager">
+
+Calling the Load method of the current ContentManager
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1079">
+<link id="a1080" target-id="Populate_the_variable_named_myTexture">
+
+Populate the variable named myTexture
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1080">
+<link id="a1081" target-id="The_Vector2_structure">
+
+The Vector2 structure
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1081">
+<link id="a1082" target-id="The_overridden_GameDraw_method">
+
+The overridden Game.Draw method
+
+</link>
+
+
+
+
+<list id="ul1025" list-type="bulleted">
+<item id="li1082">
+<link id="a1083" target-id="Game_loop_timing">
+
+Game loop timing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1083">
+<link id="a1084" target-id="More_general_information">
+
+More general information
+
+</link>
+
+
+
+
+<list id="ul1026" list-type="bulleted">
+<item id="li1084">
+<link id="a1085" target-id="What_is_a_sprite">
+
+What is a sprite?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1085">
+<link id="a1086" target-id="What_is_a_bitmap">
+
+What is a bitmap?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1086">
+<link id="a1087" target-id="What_is_GDI">
+
+What is GDI+?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1087">
+<link id="a1088" target-id="What_about_our_image">
+
+What about our image?
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1088">
+<link id="a1089" target-id="Beginning_of_the_GameDraw_method">
+
+Beginning of the Game.Draw method
+
+</link>
+
+
+
+
+<list id="ul1027" list-type="bulleted">
+<item id="li1089">
+<link id="a1090" target-id="GameTime_information">
+
+GameTime information
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1090">
+<link id="a1091" target-id="The_call_to_the_GraphicsDeviceClear_method">
+
+The call to the GraphicsDevice.Clear method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1091">
+<link id="a1092" target-id="The_Color_class">
+
+The Color class
+
+</link>
+
+
+
+
+<list id="ul1028" list-type="bulleted">
+<item id="li1092">
+<link id="a1093" target-id="Type_ARGB">
+
+Type ARGB
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1093">
+<link id="a1094" target-id="Constructors_methods_and_constants">
+
+Constructors, methods, and constants
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1094">
+<link id="a1095" target-id="Code_to_draw_the_sprite">
+
+Code to draw the sprite
+
+</link>
+
+
+
+
+<list id="ul1029" list-type="bulleted">
+<item id="li1095">
+<link id="a1096" target-id="Honor_the_alpha_values">
+
+Honor the alpha values
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1096">
+<link id="a1097" target-id="Ignore_the_alpha_values">
+
+Ignore the alpha values
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1097">
+<link id="a1098" target-id="Drawing_the_sprites">
+
+Drawing the sprite(s)
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1098">
+<link id="a1099" target-id="Overloaded_Draw_methods">
+
+Overloaded Draw methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1099">
+<link id="a1100" target-id="The_SpriteBatchEnd_method">
+
+The SpriteBatch.End method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1100">
+<link id="a1101" target-id="Call_GameDraw_on_the_superclass">
+
+Call Game.Draw on the superclass
+
+</link>
+
+
+
+
+<list id="ul1030" list-type="bulleted">
+<item id="li1101">
+<link id="a1102" target-id="Execute_both_versions_of_the_overridden_method">
+
+Execute both 
+versions of the overridden method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1102">
+<link id="a1103" target-id="A_required_statement">
+
+A required statement
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1103">
+<link id="a1104" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1104">
+<link id="a1105" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1105">
+<link id="a1106" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1106">
+<link id="a1107" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1107">
+<link id="a1108" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1108">
+<link id="a1109" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook. 
+
+</para>
+
+
+
+
+
+<para id="p1003">
+The modules were originally published for use with XNA 3.1 and have been 
+upgraded for XNA 4.0. This upgrade had very little impact on earlier modules in 
+this collection. However, beginning with this module, we begin to see major 
+differences between version 3.1 and version 4.0 of 
+XNA. In May of 2016, the modules are being updated for use with version 
+
+<emphasis id="strong1001" effect="bold">
+
+4.0 Refresh
+
+</emphasis>
+. This will have very little impact on the modules. Here is 
+what Microsoft has to say about the newer product:
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+	
+
+
+		
+
+<emphasis id="em1001" effect="italics">
+Microsoft XNA Game Studio 4.0 Refresh updates XNA Game Studio 
+		4.0 to fix bugs and add support for developing games that target Windows 
+		Phone OS 7.1 and developing games in Visual Basic. 
+
+</emphasis>
+</note>
+
+	
+
+
+
+
+
+
+
+
+<para id="p1004">
+This course doesn't address Visual Basic or Windows Phone, but bug fixes are 
+always welcome.
+
+</para>
+
+
+
+
+
+<para id="p1005">
+An earlier module titled 
+
+
+<link id="a1110" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+<section id="h21000">
+<title>
+<emphasis id="Moving_from_C_to_XNA" effect="bold">
+
+Moving from C# to XNA
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1006">
+All of the modules prior to this one have been preparing you for this module. 
+This is the module where we will begin applying what you have learned about C# 
+and OOP to the XNA framework.
+
+</para>
+
+
+
+
+
+<section id="h31000">
+<title>
+<emphasis id="My_objective" effect="bold">
+
+My objective
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+My objective is that you fully understand what you are doing when you write 
+C# programs using the XNA framework. I don't want you to simply be filling in 
+the blanks and hacking something together in hopes that you can find a 
+combination of statements that seems to work. If we can accomplish that, you will be prepared to go much further into the sophisticated use of the XNA 
+framework on your own after you complete the course.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Fasten_your_seatbelt" effect="bold">
+
+Fasten your seatbelt
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+This module may be a rough ride from a technical viewpoint, so fasten your 
+seatbelt, arm yourself with a pot of coffee, and let's go.
+
+</para>
+
+
+
+	
+
+</section>
+</section>
+<section id="h21001">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1009">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31002">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1031" list-type="bulleted">
+
+		
+
+<item id="li1109">
+<link id="a1111" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Initial game window.
+
+</item>
+
+
+		
+
+<item id="li1110">
+<link id="a1112" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Raw image with an (almost) transparent background.
+
+</item>
+
+
+		
+
+<item id="li1111">
+<link id="a1113" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Cropped upper-left corner of the game window
+
+</item>
+
+
+		
+
+<item id="li1112">
+<link id="a1114" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+. Cropped upper-left corner of the game window without honoring alpha transparency.
+
+</item>
+
+
+		
+
+<item id="li1113">
+<link id="a1115" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+. Select New Project on the Visual C# File menu.
+
+</item>
+
+
+		
+
+<item id="li1114">
+<link id="a1116" target-id="Figure_6">
+
+Figure 6
+
+</link>
+
+. Select a Windows Game project.
+
+</item>
+
+
+		
+
+<item id="li1115">
+<link id="a1117" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+. Solutions explorer and properties window exposed.
+
+</item>
+
+
+		
+
+<item id="li1116">
+<link id="a1118" target-id="Figure_8">
+
+Figure 8
+
+</link>
+
+. The Load method of the ContentManager class. 
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1032" list-type="bulleted">
+
+		
+
+<item id="li1117">
+<link id="a1119" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Initial contents of the file named Program.cs for a Console Application.
+
+</item>
+
+
+		
+
+<item id="li1118">
+<link id="a1120" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The file named Program.cs for a Windows Game project.
+
+</item>
+
+
+		
+
+<item id="li1119">
+<link id="a1121" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Initial contents of the file named Game1.cs.
+
+</item>
+
+
+		
+
+<item id="li1120">
+<link id="a1122" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Beginning of the class named Game1.
+
+</item>
+
+
+		
+
+<item id="li1121">
+<link id="a1123" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Constructor for the Game1 class.
+
+</item>
+
+
+		
+
+<item id="li1122">
+<link id="a1124" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. The overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1123">
+<link id="a1125" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Beginning of the Game.Draw 
+		method.
+
+</item>
+
+
+		
+
+<item id="li1124">
+<link id="a1126" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Draw the sprite.
+
+</item>
+
+
+		
+
+<item id="li1125">
+<link id="a1127" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Call Game.Draw on the superclass.
+
+</item>
+
+
+		
+
+<item id="li1126">
+<link id="a1128" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. The Game1 class for the project named XNA0118Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21002">
+<title>
+<emphasis id="A_software_framework" effect="bold">
+
+A software framework
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+XNA is a very sophisticated C# application. It isn't simply a program in the 
+sense of the programs that you have seen so far in this course or a 
+word processor or a spread sheet. Instead, it is a software 
+
+<emphasis id="em1002" effect="italics">
+<emphasis id="strong1002" effect="bold">
+
+framework
+
+</emphasis>
+</emphasis>
+ designed specifically to make it easier for you to 
+create computer games using the C# programming language.
+
+</para>
+
+
+
+
+
+<section id="h31004">
+<title>
+<emphasis id="What_is_a_software_framework" effect="bold">
+
+What is a software framework?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+Here is part of what
+
+
+<link id="a1129" url="http://en.wikipedia.org/wiki/Software_framework">
+
+Wikipedia
+
+</link>
+
+ has to 
+say about a software framework:
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+A software framework, in computer programming, is an abstraction in which 
+common code providing generic functionality can be selectively overridden or 
+specialized by user code providing specific functionality. Frameworks are a 
+special case of software libraries in that they are reusable abstractions of 
+code wrapped in a well-defined API, yet they contain some key distinguishing 
+features that separate them from normal libraries.
+
+</note>
+
+
+
+
+
+
+<para id="p1012">
+Software frameworks have these distinguishing features that separate them 
+from libraries or normal user applications:
+
+</para>
+
+
+
+
+
+<list id="ol1000" list-type="enumerated">
+
+	
+
+<item id="li1127">
+<emphasis id="strong1003" effect="bold">
+inversion of control
+
+</emphasis>
+ - In a framework, unlike in libraries or normal 
+	user applications, the overall program's flow of control is not dictated by 
+	the caller, but by the framework.
+
+</item>
+
+
+	
+
+<item id="li1128">
+<emphasis id="strong1004" effect="bold">
+default behavior
+
+</emphasis>
+ - A framework has a default behavior. This default 
+	behavior must actually be some useful behavior and not a series of no-ops.
+
+</item>
+
+
+	
+
+<item id="li1129">
+<emphasis id="strong1005" effect="bold">
+extensibility
+
+</emphasis>
+ - A framework can be extended by the user usually by 
+	selective overriding or specialized by user code providing specific 
+	functionality
+
+</item>
+
+
+	
+
+<item id="li1130">
+<emphasis id="strong1006" effect="bold">
+non-modifiable framework code
+
+</emphasis>
+ - The framework code, in general, is not 
+	allowed to be modified. Users can extend the framework, but not modify its 
+	code.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1013">
+In short, a framework is 
+
+<emphasis id="em1003" effect="italics">
+a computer program that helps you to write computer 
+programs
+
+</emphasis>
+. The description given above is a good match for the XNA framework.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21003">
+<title>
+<emphasis id="New_project_choices_in_Visual_C" effect="bold">
+
+New project choices in Visual 
+C#
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+Up to this point in this collection of modules, all of the programs that I have explained 
+have been Visual C# 
+
+<emphasis id="em1004" effect="italics">
+Console Applications
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1015">
+Assuming that you have Visual C# 2010 and XNA Game Studio 4.0 Refresh installed on 
+your computer, if you start Visual C# and select 
+
+<emphasis id="strong1007" effect="bold">
+New Project
+
+</emphasis>
+ 
+from the 
+
+<emphasis id="strong1008" effect="bold">
+File
+
+</emphasis>
+ menu, you have a choice of about a dozen 
+different kinds of projects that you can create within Visual C#. One of those 
+choices is to create a 
+
+<emphasis id="strong1009" effect="bold">
+Console Application
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="A_Console_Application_" effect="bold">
+
+A Console Application
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+When you create a Console Application, a project tree is created on your disk 
+containing numerous folders and files. One of those files is a C# 
+source code file named 
+
+<emphasis id="strong1010" effect="bold">
+Program.cs
+
+</emphasis>
+. This file, which is the 
+skeleton of a new class named 
+
+<emphasis id="strong1011" effect="bold">
+Program
+
+</emphasis>
+, is opened in 
+the editor pane in Visual C#. 
+
+</para>
+
+
+
+
+
+<para id="p1017">
+The skeleton code in the file looks something like 
+
+<link id="a1130" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ when it first opens.
+
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1018">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Initial contents of the file named Program.cs for a Console Application.
+
+</para>
+
+
+
+
+
+<code id="pre1000" display="block">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31005">
+<title>
+<emphasis id="Start_debugging" effect="bold">
+
+Start debugging
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+If you select 
+
+<emphasis id="strong1012" effect="bold">
+Start Debugging
+
+</emphasis>
+ on the 
+
+<emphasis id="strong1013" effect="bold">
+Debug
+
+</emphasis>
+ 
+menu, the program will run and terminate almost immediately. At that point, the 
+project tree will have expanded to contain more files and folders 
+even though the program hasn't yet done anything useful.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="The_Main_method" effect="bold">
+
+The Main method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1020">
+As you have learned in earlier modules, every C# program must have a 
+
+<emphasis id="strong1014" effect="bold">
+
+Main
+
+</emphasis>
+ method. Program execution begins and ends in the 
+
+<emphasis id="strong1015" effect="bold">
+Main
+
+</emphasis>
+ 
+method. When control is in the 
+
+<emphasis id="strong1016" effect="bold">
+Main
+
+</emphasis>
+ method and it no longer has 
+any code to execute, the program terminates. The 
+
+<emphasis id="strong1017" effect="bold">
+Main
+
+</emphasis>
+ method in 
+
+
+<link id="a1131" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ is empty, which explains why the program runs and terminates almost 
+immediately.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="The_starting_point_for_a_Console_Application" effect="bold">
+
+The starting point for a Console Application
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1021">
+This is the starting point for creating a Console Application in Visual C#. 
+To cause your program to exhibit some useful behavior, you may add code inside 
+the 
+
+<emphasis id="strong1018" effect="bold">
+Main
+
+</emphasis>
+ method, add new methods to the 
+
+<emphasis id="strong1019" effect="bold">
+Program
+
+</emphasis>
+ 
+class, define new classes, instantiate objects, call methods on those objects 
+etc.
+
+</para>
+
+
+
+
+
+
+<para id="p1022">
+
+    If you have studied the earlier modules in this collection, this will not be 
+	new information for you.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21005">
+<title>
+<emphasis id="A_Windows_Game_Application_" effect="bold">
+
+A Windows Game Application
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1023">
+Another choice that you have when creating a new project is a 
+
+<emphasis id="strong1020" effect="bold">
+Windows 
+Game (4.0)
+
+</emphasis>
+ application. 
+
+</para>
+
+
+
+
+
+<para id="p1024">
+Once again, a project tree is created on your disk but it contains more 
+folders and files than the tree that is created for a console 
+application. (Some of the files are initially empty.)
+
+</para>
+
+
+
+
+
+<section id="h31008">
+<title>
+<emphasis id="Source_code_files" effect="bold">
+
+Source code files
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+As before, there is a C# source code file named 
+
+<emphasis id="strong1021" effect="bold">
+Program.cs
+
+</emphasis>
+ 
+along with another C# source code file named 
+
+<emphasis id="strong1022" effect="bold">
+Game1.cs
+
+</emphasis>
+. Unlike 
+before, however, the file named 
+
+<emphasis id="strong1023" effect="bold">
+Program.cs
+
+</emphasis>
+ is not opened in the 
+editor pane of Visual C#. Instead, the file named 
+
+<emphasis id="strong1024" effect="bold">
+Game1.cs
+
+</emphasis>
+ is 
+opened in the editor pane.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="Build_and_debug" effect="bold">
+
+Build and debug
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1026">
+If you debug this program at this point, it does not run and 
+terminate immediately like a console application. Instead it runs and displays a 
+game window like the one shown in 
+
+<link id="a1132" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ (except that it is quite a bit 
+larger).
+
+</para>
+
+
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+
+
+
+<para id="p1027">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Initial game window.
+
+</para>
+
+
+
+
+
+<media id="media1000" alt="Missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0118bx.jpg" width="475" height="371"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1028">
+The game window will remain on your computer screen until you terminate the 
+program by clicking the X in the upper-right corner or terminate it in some 
+other way.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+<emphasis id="The_file_named_Programcs" effect="bold">
+
+The file named Program.cs
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+The file named 
+
+<emphasis id="strong1025" effect="bold">
+Program.cs
+
+</emphasis>
+ doesn't automatically open in the 
+editor for one simple reason. The creators of XNA didn't intend for us to modify 
+it. However, it will be instructive for us to take a look at it anyway. The 
+source code contained in the file named 
+
+<emphasis id="strong1026" effect="bold">
+Program.cs 
+
+</emphasis>
+is 
+shown in 
+
+<link id="a1133" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1030">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. The file named Program.cs for a Windows Game project.
+
+</para>
+
+
+
+
+
+<code id="pre1001" display="block">
+using System;
+
+namespace WindowsGame2
+{
+#if WINDOWS || XBOX
+    static class Program
+    {
+        /// &lt;summary&gt;
+        /// The main entry point for the application.
+        /// &lt;/summary&gt;
+        static void Main(string[] args)
+        {
+            using (Game1 game = new Game1())
+            {
+                game.Run();
+            }
+        }
+    }
+#endif
+}
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41000">
+<title>
+<emphasis id="Instantiate_a_Game1_object_and_call_the_Run_method" effect="bold">
+
+Instantiate a Game1 object and call the Run method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+The code in 
+
+<link id="a1134" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+:
+
+</para>
+
+
+
+
+
+<list id="ul1033" list-type="bulleted">
+
+	
+
+<item id="li1131">
+Instantiates a new object of a class named 
+
+<emphasis id="strong1027" effect="bold">
+Game1
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1132">
+Saves the object's reference in a reference variable named 
+
+<emphasis id="strong1028" effect="bold">
+game
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1133">
+Calls the 
+
+<emphasis id="strong1029" effect="bold">
+Run
+
+</emphasis>
+ method on the reference to the 
+
+<emphasis id="strong1030" effect="bold">
+
+	Game1
+
+</emphasis>
+ object
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1032">
+This code is inside the 
+
+<emphasis id="strong1031" effect="bold">
+Main
+
+</emphasis>
+ method in the file named
+
+
+<emphasis id="strong1032" effect="bold">
+Program.cs
+
+</emphasis>
+. The 
+
+<emphasis id="strong1033" effect="bold">
+Main
+
+</emphasis>
+ method runs when the 
+program is started. The call to the 
+
+<emphasis id="strong1034" effect="bold">
+Run
+
+</emphasis>
+ method starts the game 
+portion of the program running.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="What_do_we_know_about_the_class_named_Game1" effect="bold">
+
+What do we know about the class named Game1?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+We don't know anything about the class named 
+
+<emphasis id="strong1035" effect="bold">
+Game1
+
+</emphasis>
+ yet, but 
+we will learn about it shortly. Before we get to that, however, I need to 
+explain some unusual syntax in 
+
+<link id="a1135" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="The_using_directive" effect="bold">
+
+The using directive
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1034">
+You learned earlier that one of the benefits of the 
+
+<emphasis id="strong1036" effect="bold">
+using
+
+</emphasis>
+ 
+directive is to eliminate the requirement to always type the namespace (such as
+
+
+<emphasis id="strong1037" effect="bold">
+System
+
+</emphasis>
+) when referring to a class that belongs to that 
+namespace. That is the purpose of the 
+
+<emphasis id="strong1038" effect="bold">
+using
+
+</emphasis>
+ directive 
+at the top of 
+
+<link id="a1136" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1035">
+However, there is another benefit that derives from the 
+
+<emphasis id="strong1039" effect="bold">
+using
+
+</emphasis>
+ 
+directive that may be more important.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="Memory_management" effect="bold">
+
+Memory management
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+One of the big issues in game programming (or any kind of programming that 
+makes use of graphics files, sound files, or other large resource files) is to 
+make certain that the memory occupied by those resources is freed up as soon as 
+the resource is no longer needed.
+
+</para>
+
+
+
+
+
+<para id="p1037">
+Without going into a lot of detail, the use of the 
+
+<emphasis id="strong1040" effect="bold">
+using
+
+</emphasis>
+ 
+keyword inside the 
+
+<emphasis id="strong1041" effect="bold">
+Main
+
+</emphasis>
+ method in 
+
+
+<link id="a1137" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ will assure that the 
+
+<emphasis id="strong1042" effect="bold">
+Dispose
+
+</emphasis>
+ method is called to free 
+up all of the memory occupied by the 
+
+<emphasis id="strong1043" effect="bold">
+Game1
+
+</emphasis>
+ object when control 
+reaches the closing curly brace following the 
+
+<emphasis id="strong1044" effect="bold">
+using
+
+</emphasis>
+ keyword.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Dont_modify_the_file_named_Programcs" effect="bold">
+
+Don't modify the file named Program.cs
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+As an XNA game programmer, you shouldn't normally have any reason to modify 
+the contents of the file named 
+
+<emphasis id="strong1045" effect="bold">
+Program.cs
+
+</emphasis>
+. We need to leave it 
+alone and modify the file named 
+
+<emphasis id="strong1046" effect="bold">
+Game1.cs
+
+</emphasis>
+ instead.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31011">
+<title>
+<emphasis id="The_Game1_class" effect="bold">
+
+The Game1 class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1039">
+I told you earlier that when you create a new 
+
+<emphasis id="strong1047" effect="bold">
+Windows Game
+
+</emphasis>
+ 
+project, the file named 
+
+<emphasis id="strong1048" effect="bold">
+Game1.cs
+
+</emphasis>
+ is opened in the editor pane. 
+
+
+<link id="a1138" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ shows the contents of that file.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1040">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Initial contents of the file named Game1.cs.
+
+</para>
+
+
+
+
+
+<code id="pre1002" display="block">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+namespace WindowsGame2
+{
+    /// &lt;summary&gt;
+    /// This is the main type for your game
+    /// &lt;/summary&gt;
+    public class Game1 : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        /// &lt;summary&gt;
+        /// Allows the game to perform any initialization 
+        /// it needs to before starting to run.
+        /// This is where it can query for any required 
+        /// services and load any non-graphic
+        /// related content.  Calling base.Initialize 
+        /// will enumerate through any components
+        /// and initialize them as well.
+        /// &lt;/summary&gt;
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+
+            base.Initialize();
+        }
+
+        /// &lt;summary&gt;
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// &lt;/summary&gt;
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // TODO: use this.Content to load your game content here
+        }
+
+        /// &lt;summary&gt;
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// &lt;/summary&gt;
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        /// &lt;summary&gt;
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// &lt;/summary&gt;
+        /// &lt;param name="gameTime"&gt;Provides a snapshot of timing values.&lt;/param&gt;
+        protected override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Back==ButtonState.Pressed)
+                this.Exit();
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
+        }
+
+        /// &lt;summary&gt;
+        /// This is called when the game should draw itself.
+        /// &lt;/summary&gt;
+        /// &lt;param name="gameTime"&gt;Provides a snapshot of timing values.&lt;/param&gt;
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
+        }
+    }
+}
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+</section>
+<section id="h31012">
+<title>
+<emphasis id="How_to_create_a_game_" effect="bold">
+
+How to create a game
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+I will begin with a simplified explanation of how to create games using XNA.
+
+</para>
+
+
+
+
+
+<section id="h41005">
+<title>
+<emphasis id="Game1_extends_Game" effect="bold">
+
+Game1 extends Game
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+To begin with, note that the 
+
+<emphasis id="strong1049" effect="bold">
+Game1
+
+</emphasis>
+ class extends the 
+
+<emphasis id="strong1050" effect="bold">
+
+Game
+
+</emphasis>
+ class. We do not modify the 
+
+<emphasis id="strong1051" effect="bold">
+Game
+
+</emphasis>
+ class. Instead, 
+we 
+
+<emphasis id="em1005" effect="italics">
+modify the behavior
+
+</emphasis>
+ of the 
+
+<emphasis id="strong1052" effect="bold">
+Game
+
+</emphasis>
+ class by extending 
+it and overriding some of its methods.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Main_method_calls_the_Run_method" effect="bold">
+
+Main method calls the Run method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+As you saw earlier in 
+
+<link id="a1139" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+, the 
+
+<emphasis id="strong1053" effect="bold">
+Main
+
+</emphasis>
+ method in the file 
+named 
+
+<emphasis id="strong1054" effect="bold">
+Program.cs
+
+</emphasis>
+ instantiates an object of the 
+
+<emphasis id="strong1055" effect="bold">
+Game1
+
+</emphasis>
+ 
+class (shown in 
+
+<link id="a1140" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+) and calls the 
+
+<emphasis id="strong1056" effect="bold">
+Run
+
+</emphasis>
+ method on that 
+object. That starts the program running.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="The_Run_method" effect="bold">
+
+The Run method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+The class named 
+
+<emphasis id="strong1057" effect="bold">
+Game1
+
+</emphasis>
+ does not define and does not override 
+a method named 
+
+<emphasis id="strong1058" effect="bold">
+Run
+
+</emphasis>
+. However, it does inherit a method named
+
+
+<emphasis id="strong1059" effect="bold">
+Run
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1060" effect="bold">
+Game
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<para id="p1045">
+Therefore, when the 
+
+<emphasis id="strong1061" effect="bold">
+Run
+
+</emphasis>
+ method is called on the object of 
+the 
+
+<emphasis id="strong1062" effect="bold">
+Game1
+
+</emphasis>
+ class, the version of the 
+
+<emphasis id="strong1063" effect="bold">
+Run
+
+</emphasis>
+ method 
+that is defined in the superclass named 
+
+<emphasis id="strong1064" effect="bold">
+Game
+
+</emphasis>
+ is executed.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41008">
+<title>
+<emphasis id="Override_five_methods" effect="bold">
+
+Override five methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+The skeleton code for the 
+
+<emphasis id="strong1065" effect="bold">
+Game1
+
+</emphasis>
+ class in 
+
+<link id="a1141" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ overrides 
+the following five methods inherited from the 
+
+<emphasis id="strong1066" effect="bold">
+Game
+
+</emphasis>
+ class:
+
+</para>
+
+
+
+
+
+<list id="ol1001" list-type="enumerated">
+
+	
+
+<item id="li1134">
+Initialize
+
+</item>
+
+
+	
+
+<item id="li1135">
+LoadContent
+
+</item>
+
+
+	
+
+<item id="li1136">
+UnloadContent
+
+</item>
+
+
+	
+
+<item id="li1137">
+Update
+
+</item>
+
+
+	
+
+<item id="li1138">
+Draw
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h41009">
+<title>
+<emphasis id="Initialization" effect="bold">
+
+Initialization
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+The first three methods contain code that is needed to get everything 
+initialized at the start of the game play and to shut down the program at the 
+end of the game play.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41010">
+<title>
+<emphasis id="The_game_loop" effect="bold">
+
+The game loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1048">
+Once the game is initialized, the 
+
+<emphasis id="strong1067" effect="bold">
+Run
+
+</emphasis>
+ method, or some method 
+called by the 
+
+<emphasis id="strong1068" effect="bold">
+Run
+
+</emphasis>
+ method ping-pongs back and forth between 
+calls to the overridden 
+
+<emphasis id="strong1069" effect="bold">
+Update
+
+</emphasis>
+ method and the overridden
+
+
+<emphasis id="strong1070" effect="bold">
+Draw
+
+</emphasis>
+ method. (Note, however that the two methods don't 
+necessarily take turns executing.)
+
+</para>
+
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="Override_Update_for_game_logic" effect="bold">
+
+Override Update for game logic
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+You override the 
+
+<emphasis id="strong1071" effect="bold">
+Update
+
+</emphasis>
+ method to create the program logic 
+associated with game play. To accomplish this, you will likely need to define 
+other methods, define other classes, instantiate objects of other classes, call 
+methods on those objects, test 
+the keyboard, test the mouse, etc. In other words, at this point 
+
+<emphasis id="strong1072" effect="bold">
+<emphasis id="em1006" effect="italics">
+you need to 
+know how to program in C#
+
+</emphasis>
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="Override_the_Draw_method" effect="bold">
+
+Override the Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1050">
+You override the 
+
+<emphasis id="strong1073" effect="bold">
+Draw
+
+</emphasis>
+ method to cause the various graphics 
+objects in your game to be rendered in the game window shown in 
+
+<link id="a1142" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1051">
+This module includes an explanation of a very simple program that displays a 
+green arrow sprite near the upper-left corner of the game window (see
+
+
+<link id="a1143" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+).
+
+</para>
+
+
+
+	
+
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1052">
+I will create a simple Windows game application that imports the image 
+	shown in 
+
+<link id="a1144" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Note that this is a rectangular image with an (almost) 
+	transparent background. (The values of the alpha bytes outside the blue 
+	elliptical shape are about 5.)
+
+</para>
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1053">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. Raw image with an (almost) transparent background.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="Missing image" display="block">
+<image id="img1001" mime-type="image/png" src="../../media/XNA0118ax.png" width="143" height="107"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1054">
+If you would like to replicate my program using this image, you should be 
+able to right-click on the image in 
+
+<link id="a1145" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+, download it, and save it on your 
+computer. You can save it under any name you choose but the file name extension 
+should be 
+
+<emphasis id="strong1074" effect="bold">
+png
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h21006">
+<title>
+<emphasis id="Program_output" effect="bold">
+
+Program output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+The program displays the image near the upper-left corner of the game window 
+and honors the transparency of the background as shown in 
+
+<link id="a1146" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1056">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. Cropped upper-left corner of the game 
+	window.
+
+</para>
+
+
+
+		
+
+<media id="media1002" alt="Missing image" display="block">
+<image id="img1002" mime-type="image/jpeg" src="../../media/xna0118cx.jpg" width="456" height="214"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="What_if_you_dont_honor_the_transparent_background" effect="bold">
+
+What if you don't honor the transparent background?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1057">
+<link id="a1147" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ shows the result of causing the alpha 
+transparency value to be ignored and allowing the pixels that are almost 
+transparent in 
+
+<link id="a1148" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ to be opaque.
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1058">
+<emphasis id="Figure_4" effect="bold">
+
+Figure 4
+
+</emphasis>
+
+. Cropped upper-left corner of the game window without honoring alpha transparency.
+
+</para>
+
+
+
+		
+
+<media id="media1003" alt="Missing image" display="block">
+<image id="img1003" mime-type="image/jpeg" src="../../media/xna0118dx.jpg" width="235" height="202"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+<para id="p1059">
+Honoring alpha transparency is the default in XNA 4.0. 
+
+<link id="a1149" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ was created by 
+setting the 
+
+<emphasis id="strong1075" effect="bold">
+Premultiply Alpha
+
+</emphasis>
+ property (see 
+
+<link id="a1150" target-id="Figure_7">
+
+
+Figure 7
+
+</link>
+
+) of the image named
+
+
+<emphasis id="strong1076" effect="bold">
+gorightarrow.png
+
+</emphasis>
+ to a value of 
+
+<emphasis id="em1007" effect="italics">
+False
+
+</emphasis>
+ and then re-running the 
+program.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+<emphasis id="Not_a_very_exciting_program" effect="bold">
+
+Not a very exciting program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+This program isn't very exciting because there is no motion and no sound. The 
+program simply draws the same image in the same position during every iteration 
+of the game loop. Despite that, this program will give us the opportunity to 
+drill down into the technical aspects of several areas of the XNA framework.
+
+</para>
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<section id="h21009">
+<title>
+<emphasis id="Creating_a_new_Windows_Game_project" effect="bold">
+
+Creating a new Windows Game project
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+Before getting into the details of the code, I'm going to walk you through 
+the steps involved in creating this Windows Game project using XNA.
+
+</para>
+
+
+
+
+
+<section id="h31013">
+<title>
+<emphasis id="Step_1_Create_a_new_Windows_Game_project_named_XNA0118Proj" effect="bold">
+
+Step 1: Create a new Windows Game project named XNA0118Proj
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+Pull down the Visual C# 
+
+<emphasis id="strong1077" effect="bold">
+File
+
+</emphasis>
+ menu and select 
+
+<emphasis id="strong1078" effect="bold">
+New 
+Project
+
+</emphasis>
+ as shown in 
+
+<link id="a1151" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1063">
+<emphasis id="Figure_5" effect="bold">
+
+Figure 5
+
+</emphasis>
+
+. Select New Project on the Visual C# File menu.
+
+</para>
+
+
+
+		
+
+<media id="media1004" alt="Missing image" display="block">
+<image id="img1004" mime-type="image/jpeg" src="../../media/xna0118ex.jpg" width="311" height="371"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<section id="h41011">
+<title>
+<emphasis id="Select_a_Windows_Game_project" effect="bold">
+
+Select a Windows Game project
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+Select 
+
+<emphasis id="strong1079" effect="bold">
+XNA Game Studio 4.0
+
+</emphasis>
+ in the left pane of the 
+
+<emphasis id="strong1080" effect="bold">
+New Project
+
+</emphasis>
+ 
+dialog. Select the 
+
+<emphasis id="strong1081" effect="bold">
+Windows Game (4.0)
+
+</emphasis>
+ icon and enter the name 
+of your project in the 
+
+<emphasis id="strong1082" effect="bold">
+Name
+
+</emphasis>
+ field. Enter the storage location 
+in the 
+
+<emphasis id="strong1083" effect="bold">
+Location
+
+</emphasis>
+ field and click the 
+
+<emphasis id="strong1084" effect="bold">
+OK
+
+</emphasis>
+ button 
+that is off screen further to the right in 
+
+<link id="a1152" target-id="Figure_6">
+
+Figure 6
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1065">
+<emphasis id="Figure_6" effect="bold">
+
+Figure 6
+
+</emphasis>
+
+. Select a Windows Game project.
+
+</para>
+
+
+
+		
+
+<media id="media1005" alt="Missing image" display="block">
+<image id="img1005" mime-type="image/jpeg" src="../../media/xna0118fx.jpg" width="525" height="658"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31014">
+<title>
+<emphasis id="Step2" effect="bold">
+
+Step 2: Add your image file to the Content 
+folder
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+If necessary, pull down the 
+
+<emphasis id="strong1085" effect="bold">
+View
+
+</emphasis>
+ menu and select 
+
+<emphasis id="strong1086" effect="bold">
+
+Other Windows
+
+</emphasis>
+. Then select 
+
+<emphasis id="strong1087" effect="bold">
+
+Solution Explorer
+
+</emphasis>
+ and/or 
+
+<emphasis id="strong1088" effect="bold">
+Properties Window
+
+</emphasis>
+ so that 
+they are exposed on the right side of the IDE as shown in 
+
+<link id="a1153" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+. (Note 
+that the initial view of the 
+
+<emphasis id="strong1089" effect="bold">
+Properties
+
+</emphasis>
+ window is different 
+from that shown in 
+
+<link id="a1154" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+.)
+
+</para>
+
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1067">
+<emphasis id="Figure_7" effect="bold">
+
+Figure 7
+
+</emphasis>
+
+. Solutions explorer and properties window exposed.
+
+</para>
+
+
+
+		
+
+<media id="media1006" alt="Missing image" display="block">
+<image id="img1006" mime-type="image/jpeg" src="../../media/xna0118gx.jpg" width="402" height="944"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<section id="h41012">
+<title>
+<emphasis id="Add_your_image_to_the_Content_folder" effect="bold">
+
+Add your image to the Content folder
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+Assuming that your project is named 
+
+<emphasis id="strong1090" effect="bold">
+XNA0118proj
+
+</emphasis>
+, right click on the 
+
+<emphasis id="strong1091" effect="bold">
+XNA0118projContent (Content)
+
+</emphasis>
+ folder in the 
+
+<emphasis id="strong1092" effect="bold">
+Solution 
+Explorer
+
+</emphasis>
+. Select 
+
+<emphasis id="strong1093" effect="bold">
+Add/Existing Item
+
+</emphasis>
+ in the dialog that 
+follows. Browse to the image file that you are going to use and click the
+
+
+<emphasis id="strong1094" effect="bold">
+Add
+
+</emphasis>
+ button. A copy of the image file should appear in the
+
+
+<emphasis id="strong1095" effect="bold">
+Content
+
+</emphasis>
+ folder.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41013">
+<title>
+<emphasis id="The_Asset_Name" effect="bold">
+
+The Asset Name
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+Click the image file name in the 
+
+<emphasis id="strong1096" effect="bold">
+Content
+
+</emphasis>
+ folder and the 
+information in the 
+
+<emphasis id="strong1097" effect="bold">
+Properties Window
+
+</emphasis>
+ should change to describe 
+that file. Note the value of the 
+
+<emphasis id="strong1098" effect="bold">
+Asset Name
+
+</emphasis>
+ property in the
+
+
+<emphasis id="strong1099" effect="bold">
+Properties Window
+
+</emphasis>
+. You will need it later. (In this example, the value of the
+
+
+<emphasis id="strong1100" effect="bold">
+Asset Name
+
+</emphasis>
+ in 
+
+<link id="a1155" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+ is 
+
+<emphasis id="strong1101" effect="bold">
+gorightarrow
+
+</emphasis>
+.)
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31015">
+<title>
+<emphasis id="Steps_3" effect="bold">
+
+Steps 3, 4, and 5: Write code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+The next three steps involve writing code to upgrade the skeleton version of 
+the class definition of the 
+
+<emphasis id="strong1102" effect="bold">
+Game1
+
+</emphasis>
+ class. I will explain that 
+new code later. For now, the three steps for this example program are:
+
+</para>
+
+
+
+
+
+<list id="ul1034" list-type="bulleted">
+
+	
+
+<item id="li1139">
+Declare two instance variables named 
+
+<emphasis id="strong1103" effect="bold">
+myTexture
+
+</emphasis>
+ and
+	
+
+<emphasis id="strong1104" effect="bold">
+spritePosition
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1140">
+Add a statement to the 
+
+<emphasis id="strong1105" effect="bold">
+LoadContent
+
+</emphasis>
+ method to load the 
+	image.
+
+</item>
+
+
+	
+
+<item id="li1141">
+Add statements to the 
+
+<emphasis id="strong1106" effect="bold">
+Draw
+
+</emphasis>
+ method to cause the image to 
+	be drawn in the game window.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h41014">
+<title>
+<emphasis id="Modify_two_overridden_methods" effect="bold">
+
+Modify two overridden methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+As you saw in 
+
+<link id="a1156" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+, there are five overridden methods in the class 
+definition for the 
+
+<emphasis id="strong1107" effect="bold">
+Game1
+
+</emphasis>
+ class that you can modify to customize 
+the class for your game. This program modifies only two of those methods:
+
+</para>
+
+
+
+
+
+<list id="ul1035" list-type="bulleted">
+
+	
+
+<item id="li1142">
+<emphasis id="strong1108" effect="bold">
+LoadContent
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1143">
+<emphasis id="strong1109" effect="bold">
+Draw
+
+</emphasis>
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1072">
+I will discuss those two methods along with some other material in this 
+module. I will defer a detailed discussion of the other three methods until a 
+future module when I write a program that modifies them.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41015">
+<title>
+<emphasis id="Will_discuss_in_fragments" effect="bold">
+
+Will discuss in fragments
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+A complete listing of the modified definition of the 
+
+<emphasis id="strong1110" effect="bold">
+Game1
+
+</emphasis>
+ 
+class is provided in 
+
+<link id="a1157" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ near the end of the 
+module. I will explain selected code fragments in the following paragraphs.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+</section>
+<section id="h21010">
+<title>
+<emphasis id="Beginning_of_the_class_named_Game1" effect="bold">
+
+Beginning of the class named Game1
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1074">
+The beginning of the class definition for the class named 
+
+<emphasis id="strong1111" effect="bold">
+Game1
+
+</emphasis>
+ 
+is shown in 
+
+<link id="a1158" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1075">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Beginning of the class named Game1.
+
+</para>
+
+
+
+
+
+<code id="pre1003" display="block">
+namespace XNA0118Proj{
+    public class Game1 : Microsoft.Xna.Framework.Game{
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<section id="h31016">
+<title>
+<emphasis id="The_namespace" effect="bold">
+
+The namespace
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+This class definition belongs to the 
+
+<emphasis id="strong1112" effect="bold">
+XNA0118Proj
+
+</emphasis>
+ namespace. 
+This is the name of the folder containing all of the other folders and files in 
+the project tree as shown in the Solution Explorer in 
+
+<link id="a1159" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21011">
+<title>
+<emphasis id="General_information" effect="bold">
+
+General information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h31017">
+<title>
+<emphasis id="The_superclass_named_Game" effect="bold">
+
+The superclass named Game
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+The new class named 
+
+<emphasis id="strong1113" effect="bold">
+Game1
+
+</emphasis>
+ extends the existing class named
+
+
+<emphasis id="strong1114" effect="bold">
+Game
+
+</emphasis>
+. You will find the documentation for the class named
+
+
+<emphasis id="strong1115" effect="bold">
+Game
+
+</emphasis>
+
+
+
+<link id="a1160" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.aspx">
+
+
+here
+
+</link>
+
+. The description of this class in the documentation is fairly 
+modest. It says simply 
+
+</para>
+
+
+
+
+
+<note id="note1013" type="">
+
+
+"Provides basic graphics device initialization, game logic, and rendering 
+code."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31018">
+<title>
+<emphasis id="Overridden_methods" effect="bold">
+
+Overridden methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+As I explained earlier, in order to write a program that runs under the XNA 
+framework, you need to override some or all of five methods that are inherited 
+into the 
+
+<emphasis id="strong1116" effect="bold">
+Game1
+
+</emphasis>
+ class from the 
+
+<emphasis id="strong1117" effect="bold">
+Game
+
+</emphasis>
+ class. 
+Let's see some of what the documentation for the 
+
+<emphasis id="strong1118" effect="bold">
+Game
+
+</emphasis>
+ class has 
+to say about these methods.
+
+</para>
+
+
+
+
+
+<list id="ul1036" list-type="bulleted">
+
+	
+
+<item id="li1144">
+<emphasis id="strong1119" effect="bold">
+Initialize
+
+</emphasis>
+ - Called after the 
+
+<emphasis id="strong1120" effect="bold">
+Game
+
+</emphasis>
+ and
+	
+
+<emphasis id="strong1121" effect="bold">
+GraphicsDevice
+
+</emphasis>
+ are created, but before 
+
+<emphasis id="strong1122" effect="bold">
+LoadContent
+
+</emphasis>
+.Override this method to query for any required services, and load any 
+	non-graphics resources. Use 
+
+<emphasis id="strong1123" effect="bold">
+LoadContent
+
+</emphasis>
+ to load graphics 
+	resources. 
+
+</item>
+
+
+	
+
+<item id="li1145">
+<emphasis id="strong1124" effect="bold">
+LoadContent
+
+</emphasis>
+ - Called when graphics resources need to be 
+	loaded. Override this method to load any game-specific graphics resources.
+	This method is called by 
+
+<emphasis id="strong1125" effect="bold">
+Initialize
+
+</emphasis>
+. Also, it is 
+	called any time the game content needs to be reloaded, such as when the
+	
+
+<emphasis id="strong1126" effect="bold">
+DeviceReset
+
+</emphasis>
+ event occurs. 
+
+</item>
+
+
+	
+
+<item id="li1146">
+<emphasis id="strong1127" effect="bold">
+UnloadContent
+
+</emphasis>
+ - Called when graphics resources need to 
+	be unloaded. Override this method to unload any game-specific graphics 
+	resources. 
+
+</item>
+
+
+	
+
+<item id="li1147">
+<emphasis id="strong1128" effect="bold">
+Update
+
+</emphasis>
+ - Called when the game has determined that game 
+	logic needs to be processed. This might include the management of the game 
+	state, the processing of user input, or the updating of simulation data. 
+	Override this method with game-specific logic.
+
+</item>
+
+
+	
+
+<item id="li1148">
+<emphasis id="strong1129" effect="bold">
+Draw
+
+</emphasis>
+ - Called when the game determines it is time to 
+	draw a frame. Override this method with game-specific rendering code.
+	
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31019">
+<title>
+<emphasis id="TheGameLoop" effect="bold">
+
+The game loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1079">
+According to the documentation for the 
+
+<emphasis id="strong1130" effect="bold">
+Game
+
+</emphasis>
+ class,
+
+</para>
+
+
+
+
+
+<para id="p1080">
+<emphasis id="Update" effect="bold">
+
+"
+
+<emphasis id="strong1131" effect="bold">
+Update
+
+</emphasis>
+ and 
+
+<emphasis id="strong1132" effect="bold">
+Draw
+
+</emphasis>
+</emphasis>
+
+ 
+are called at different rates depending on whether 
+
+<emphasis id="strong1133" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ 
+is true or false.
+
+</para>
+
+
+
+
+
+<para id="p1081">
+If 
+
+<emphasis id="strong1134" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ is false, 
+
+<emphasis id="strong1135" effect="bold">
+Update
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1136" effect="bold">
+Draw
+
+</emphasis>
+ will be called in a continuous loop. 
+
+</para>
+
+
+
+
+
+<para id="p1082">
+If 
+
+<emphasis id="strong1137" effect="bold">
+
+IsFixedTimeStep
+
+</emphasis>
+ is true, 
+
+<emphasis id="strong1138" effect="bold">
+Update
+
+</emphasis>
+ will be called at the 
+interval specified in 
+
+<emphasis id="strong1139" effect="bold">
+TargetElapsedTime
+
+</emphasis>
+, while 
+
+<emphasis id="strong1140" effect="bold">
+Draw
+
+</emphasis>
+ 
+will only be called if an 
+
+<emphasis id="strong1141" effect="bold">
+Update
+
+</emphasis>
+ is not due. 
+
+</para>
+
+
+
+
+
+<para id="p1083">
+If 
+
+<emphasis id="strong1142" effect="bold">
+Draw
+
+</emphasis>
+ 
+is not called, 
+
+<emphasis id="strong1143" effect="bold">
+IsRunningSlowly
+
+</emphasis>
+ will be set to true.
+
+</para>
+
+
+
+
+
+<para id="p1084">
+For 
+more information on fixed-step and variable-step game loops, see
+
+
+<link id="a1161" url="http://msdn.microsoft.com/en-us/library/bb203873.aspx">
+
+Application 
+Model Overview
+
+</link>
+
+."
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31020">
+<title>
+<emphasis id="The_big_picture" effect="bold">
+
+The big picture
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1085">
+Sifting through all of this detail in an attempt to get a big picture view, 
+we see that we should:
+
+</para>
+
+
+
+
+
+<list id="ul1037" list-type="bulleted">
+
+	
+
+<item id="li1149">
+Override 
+
+<emphasis id="strong1144" effect="bold">
+Initialize
+
+</emphasis>
+ for any special initialization and 
+	for loading any non-graphic resources. For example, sound files are 
+	non-graphic resources.
+
+</item>
+
+
+	
+
+<item id="li1150">
+Override 
+
+<emphasis id="strong1145" effect="bold">
+LoadContent
+
+</emphasis>
+ to load all graphic resources.
+
+</item>
+
+
+	
+
+<item id="li1151">
+Override 
+
+<emphasis id="strong1146" effect="bold">
+UnloadContent
+
+</emphasis>
+ if any graphic resources need to 
+	be unloaded.
+
+</item>
+
+
+	
+
+<item id="li1152">
+Override 
+
+<emphasis id="strong1147" effect="bold">
+Update
+
+</emphasis>
+ to implement all of the game logic.
+
+</item>
+
+
+	
+
+<item id="li1153">
+Override 
+
+<emphasis id="strong1148" effect="bold">
+Draw
+
+</emphasis>
+ to draw an individual frame based on 
+	values created and stored by the overridden 
+
+<emphasis id="strong1149" effect="bold">
+Update
+
+</emphasis>
+ method, 
+	such as the current position of a sprite.
+
+</item>
+
+
+	
+
+<item id="li1154">
+Be aware that there are two different approaches to controlling the 
+	timing of the game loop, depending on whether the
+	
+
+<link id="a1162" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.isfixedtimestep.aspx">
+
+
+	IsFixedTimeStep
+
+</link>
+
+ property of the 
+
+<emphasis id="strong1150" effect="bold">
+Game
+
+</emphasis>
+ object is true or 
+	false. The default value is true, meaning that the game will attempt to call 
+	the 
+
+<emphasis id="strong1151" effect="bold">
+Update
+
+</emphasis>
+ method on a fixed time interval even if that 
+	means that the 
+
+<emphasis id="strong1152" effect="bold">
+Draw
+
+</emphasis>
+ method doesn't get called during some 
+	iterations of the game loop.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+
+</section>
+</section>
+<section id="h21012">
+<title>
+<emphasis id="The_constructor_for_the_Game1_class" effect="bold">
+
+The constructor for the Game1 class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1086">
+
+    
+
+<link id="a1163" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ shows the declaration of two instance variables followed by the 
+	constructor for the 
+
+<emphasis id="strong1153" effect="bold">
+Game1
+
+</emphasis>
+ class. One of the instance 
+	variables is used in the constructor and the other is used later in the 
+	program.
+
+</para>
+
+
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1087">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+.  Constructor for the Game1 class.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    public Game1() {
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+    }// end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31021">
+<title>
+<emphasis id="What_is_a_constructor" effect="bold">
+
+What is a constructor?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1088">
+A constructor is a special method-like structure that is executed once and only once during 
+the instantiation of an object.
+
+</para>
+
+
+
+
+
+<para id="p1089">
+The first statement in the 
+
+<emphasis id="strong1154" effect="bold">
+Main
+
+</emphasis>
+ method in 
+
+<link id="a1164" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ 
+uses the 
+
+<emphasis id="strong1155" effect="bold">
+new
+
+</emphasis>
+ operator to cause the constructor to be 
+executed. When the constructor completes its task, it returns a reference to the 
+object just constructed. That reference is stored in the local reference 
+variable of type 
+
+<emphasis id="strong1156" effect="bold">
+Game1
+
+</emphasis>
+ named 
+
+<emphasis id="strong1157" effect="bold">
+game
+
+</emphasis>
+ in 
+
+<link id="a1165" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31022">
+<title>
+<emphasis id="A_new_GraphicsDeviceManager_object" effect="bold">
+
+A new GraphicsDeviceManager object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1090">
+The first statement in the constructor in 
+
+<link id="a1166" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ instantiates a new object 
+of the class
+
+
+<link id="a1167" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphicsdevicemanager.aspx">
+
+
+GraphicsDeviceManager
+
+</link>
+
+ and stores that object's reference in the instance 
+variable named 
+
+<emphasis id="strong1158" effect="bold">
+graphics
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1091">
+The documentation for
+
+
+<link id="a1168" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphicsdevicemanager.aspx">
+
+
+GraphicsDeviceManager
+
+</link>
+
+ isn't very descriptive. Here is some of what 
+Aaron Reed (the author of the 
+
+<emphasis id="em1008" effect="italics">
+Learning XNA
+
+</emphasis>
+ books 
+from O'Reilly) has to say on the topic.
+
+</para>
+
+
+
+
+
+<note id="note1015" type="">
+
+
+"This (GraphicsDeviceManager) is a very important object because it provides 
+you, as a developer, with a way to access the graphics device on your ... The GraphicsDeviceManager object has a property called 
+GraphicsDevice that represents the actual graphics device on your machine."
+
+</note>
+
+
+
+
+
+
+<para id="p1092">
+He goes on to explain how the 
+
+<emphasis id="strong1159" effect="bold">
+GraphicsDevice
+
+</emphasis>
+ object acts as 
+a conduit between your XNA program and the physical graphics device on your 
+machine.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31023">
+<title>
+<emphasis id="Passing_the_this_keyword_as_a_parameter" effect="bold">
+
+Passing the this keyword as a parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1093">
+Note the parameter that is passed to the 
+
+<emphasis id="strong1160" effect="bold">
+GraphicsDeviceManager
+
+</emphasis>
+ 
+constructor in 
+
+<link id="a1169" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. The documentation tells us that the parameter must be 
+of type 
+
+<emphasis id="strong1161" effect="bold">
+Game
+
+</emphasis>
+ and is the 
+
+<emphasis id="strong1162" effect="bold">
+Game
+
+</emphasis>
+ that the 
+
+<emphasis id="strong1163" effect="bold">
+
+GraphicsDeviceManager
+
+</emphasis>
+ should be associated with.
+
+</para>
+
+
+
+
+
+<para id="p1094">
+I don't recall having discussed the keyword 
+
+<emphasis id="em1009" effect="italics">
+<emphasis id="strong1164" effect="bold">
+this
+
+</emphasis>
+</emphasis>
+ 
+earlier in this collection of modules. According to Jesse Liberty (
+
+<link id="a1170" url="http://oreilly.com/catalog/9780596001179">
+
+Programming 
+C#
+
+</link>
+
+ from O'Reilly)
+
+</para>
+
+
+
+
+
+<note id="note1016" type="">
+
+
+the keyword 
+
+<emphasis id="em1010" effect="italics">
+<emphasis id="strong1165" effect="bold">
+this
+
+</emphasis>
+</emphasis>
+ is a variable that references the 
+current instance of a class or struct.
+
+</note>
+
+
+
+
+
+
+<para id="p1095">
+Any time that the code in an instance method needs a reference to the object 
+to which the method belongs, 
+
+<emphasis id="em1011" effect="italics">
+<emphasis id="strong1166" effect="bold">
+this
+
+</emphasis>
+</emphasis>
+ is available as a 
+reference to that object.
+
+</para>
+
+
+
+
+
+<para id="p1096">
+In this case, the code in 
+
+<link id="a1171" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ says to instantiate a new 
+
+<emphasis id="strong1167" effect="bold">
+
+GraphicsDeviceManager
+
+</emphasis>
+ object and to associate it with 
+
+<emphasis id="em1012" effect="italics">
+this
+
+</emphasis>
+ 
+
+<emphasis id="strong1168" effect="bold">
+Game
+
+</emphasis>
+ 
+object.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31024">
+<title>
+<emphasis id="The_ContentManager" effect="bold">
+
+The ContentManager
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1097">
+A 
+
+<emphasis id="strong1169" effect="bold">
+Game
+
+</emphasis>
+ object has a property named 
+
+<emphasis id="strong1170" effect="bold">
+Content
+
+</emphasis>
+ 
+that references an object of the class
+
+
+<link id="a1172" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.content.contentmanager.aspx">
+
+
+ContentManager
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<para id="p1098">
+According to the documentation, the ContentManager 
+
+</para>
+
+
+
+
+
+<note id="note1017" type="">
+
+
+"is the run-time component which loads managed objects from the binary files 
+produced by the design time content pipeline. It also manages the lifespan of 
+the loaded objects..." 
+
+</note>
+
+
+
+
+
+
+<para id="p1099">
+The second statement in the constructor in 
+
+<link id="a1173" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ notifies the 
+
+<emphasis id="strong1171" effect="bold">
+
+ContentManager
+
+</emphasis>
+ that the folder named "
+
+<emphasis id="strong1172" effect="bold">
+Content"
+
+</emphasis>
+ is the 
+root of a directory tree in which content for the game will be stored. In this 
+program, we only have one item of content and it is the image file that was 
+added to the 
+
+<emphasis id="strong1173" effect="bold">
+Content
+
+</emphasis>
+ folder earlier.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31025">
+<title>
+<emphasis id="When_the_constructor_in_Listing_5_terminates" effect="bold">
+
+When the constructor in Listing 5 terminates...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1100">
+When the constructor terminates, the new 
+
+<emphasis id="strong1174" effect="bold">
+Game1
+
+</emphasis>
+ object 
+occupies memory and a reference to the object is stored in the variable named
+
+
+<emphasis id="strong1175" effect="bold">
+game
+
+</emphasis>
+ in 
+
+<link id="a1174" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The code in the 
+
+<emphasis id="strong1176" effect="bold">
+Main
+
+</emphasis>
+ method 
+in 
+
+<link id="a1175" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ immediately calls the 
+
+<emphasis id="strong1177" effect="bold">
+Run
+
+</emphasis>
+ method on the 
+
+<emphasis id="strong1178" effect="bold">
+
+Game1
+
+</emphasis>
+ object's reference.
+
+</para>
+
+
+
+
+
+<para id="p1101">
+The 
+
+<emphasis id="strong1179" effect="bold">
+Game1
+
+</emphasis>
+ class neither defines nor overrides a method named
+
+
+<emphasis id="strong1180" effect="bold">
+Run
+
+</emphasis>
+. However, it does inherit a method named
+
+
+<link id="a1176" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.run.aspx">
+
+
+Run
+
+</link>
+
+ from the 
+
+<emphasis id="strong1181" effect="bold">
+Game
+
+</emphasis>
+ class. Therefore, the method named
+
+
+<emphasis id="strong1182" effect="bold">
+Run
+
+</emphasis>
+ that is defined in the 
+
+<emphasis id="strong1183" effect="bold">
+Game
+
+</emphasis>
+ class is 
+executed.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21013">
+<title>
+<emphasis id="The_Run_method_of_the_Game_class" effect="bold">
+
+The Run method of the Game class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1102">
+Here is what the documentation has to say about this method.
+
+</para>
+
+
+
+
+
+<note id="note1018" type="">
+
+
+"Call this method to initialize the game, begin running the game loop, and 
+start processing events for the game.
+
+</note>
+
+
+
+
+
+
+<para id="p1103">
+This method calls the game 
+
+<emphasis id="strong1184" effect="bold">
+Initialize
+
+</emphasis>
+ and 
+
+<emphasis id="strong1185" effect="bold">
+BeginRun
+
+</emphasis>
+ 
+methods before it begins the game loop and starts processing events for the 
+game."
+
+</para>
+
+
+
+
+
+<section id="h31026">
+<title>
+<emphasis id="The_BeginRun_method" effect="bold">
+
+The BeginRun method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1104">
+We already know about the 
+
+<emphasis id="strong1186" effect="bold">
+Initialize
+
+</emphasis>
+ method. Here is what 
+the
+
+
+<link id="a1177" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.beginrun.aspx">
+
+
+documentation
+
+</link>
+
+ has to say about the 
+
+<emphasis id="strong1187" effect="bold">
+BeginRun
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<note id="note1019" type="">
+
+
+"Called after all components are initialized but before the first update in 
+the game loop."
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h21014">
+<title>
+<emphasis id="theGameLoop2" effect="bold">
+
+The game loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1105">
+At this point, after the 
+
+<emphasis id="strong1188" effect="bold">
+Initialize
+
+</emphasis>
+ and the 
+
+<emphasis id="strong1189" effect="bold">
+
+LoadContent
+
+</emphasis>
+ methods have been called, either the 
+
+<emphasis id="strong1190" effect="bold">
+Run
+
+</emphasis>
+ 
+method or the 
+
+<emphasis id="strong1191" effect="bold">
+BeginRun
+
+</emphasis>
+ method, or perhaps some other method 
+that is called by one of those methods goes into a loop calling the 
+
+<emphasis id="strong1192" effect="bold">
+Update
+
+</emphasis>
+ 
+method and the 
+
+<emphasis id="strong1193" effect="bold">
+Draw
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<para id="p1106">
+The timing and the order in which the two methods are called is determined by 
+the value of 
+
+<emphasis id="strong1194" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ as explained 
+
+<link id="a1178" url="XNA0118revised.htm#Update">
+
+
+earlier
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1107">
+But, we're getting ahead of ourselves. We need to slow down and discuss the 
+overridden 
+
+<emphasis id="strong1195" effect="bold">
+LoadContent
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+	
+
+
+</section>
+<section id="h21015">
+<title>
+<emphasis id="The_overridden_LoadContent_method" effect="bold">
+
+The overridden LoadContent method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1108">
+
+    The overridden 
+
+<emphasis id="strong1196" effect="bold">
+LoadContent
+
+</emphasis>
+ method is shown in its entirety 
+	in 
+
+<link id="a1179" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ along with the declaration of two instance variables.
+
+</para>
+
+
+
+
+
+<note id="note1020" type="">
+
+
+<para id="p1109">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. The overridden LoadContent method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1005" display="block">    //Declare two variables
+    Texture2D myTexture;
+    Vector2 spritePosition = new Vector2(10.0f,15.0f);
+
+    protected override void LoadContent() {
+      // Create a new SpriteBatch, which can be used
+      // to draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+      //Load the image
+      myTexture = 
+              Content.Load&lt;Texture2D&gt;("gorightarrow");
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31027">
+<title>
+<emphasis id="Two_new_instance_variables" effect="bold">
+
+Two new instance variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1110">
+<link id="a1180" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ begins by declaring two new instance variables of types 
+
+<emphasis id="strong1197" effect="bold">
+
+Texture2D
+
+</emphasis>
+ and 
+
+<emphasis id="strong1198" effect="bold">
+Vector2
+
+</emphasis>
+ named 
+
+<emphasis id="strong1199" effect="bold">
+myTexture
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1200" effect="bold">
+spritePosition
+
+</emphasis>
+ respectively.
+
+</para>
+
+
+
+
+
+<para id="p1111">
+The variable named 
+
+<emphasis id="strong1201" effect="bold">
+myTexture
+
+</emphasis>
+ will be used in the 
+
+<emphasis id="strong1202" effect="bold">
+
+LoadContent
+
+</emphasis>
+ method of 
+
+<link id="a1181" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ to store a reference to a 
+
+<emphasis id="strong1203" effect="bold">
+
+Texture2D
+
+</emphasis>
+ object created from the image file with the 
+
+<emphasis id="strong1204" effect="bold">
+Asset 
+Name
+
+</emphasis>
+ of 
+
+<emphasis id="strong1205" effect="bold">
+gorightarrow
+
+</emphasis>
+ (see 
+
+<link id="a1182" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+). It will also be 
+used later in the overridden 
+
+<emphasis id="strong1206" effect="bold">
+Draw
+
+</emphasis>
+ method where it is the sprite 
+being drawn.
+
+</para>
+
+
+
+
+
+<para id="p1112">
+The variable named 
+
+<emphasis id="strong1207" effect="bold">
+spritePosition
+
+</emphasis>
+ will be used later in the 
+overridden 
+
+<emphasis id="strong1208" effect="bold">
+Draw
+
+</emphasis>
+ method to specify the location to draw the 
+sprite. I will have more to say about this variable later.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31028">
+<title>
+<emphasis id="The_Texture2D_class" effect="bold">
+
+The Texture2D class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1113">
+Here is some of what the
+
+
+<link id="a1183" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.texture2d.aspx">
+
+
+documentation
+
+</link>
+
+ has to say about the 
+
+<emphasis id="strong1209" effect="bold">
+Texture2D
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<note id="note1021" type="">
+
+
+"Represents a 2D grid of 
+
+<emphasis id="em1013" effect="italics">
+texels
+
+</emphasis>
+. 
+
+</note>
+
+
+
+
+
+
+<note id="note1022" type="">
+
+
+A 
+
+<emphasis id="em1014" effect="italics">
+texel
+
+</emphasis>
+ represents 
+the smallest unit of a texture that can be read from or written to by the GPU 
+(Graphics Processing Unit). A texel is composed of 1 to 4 components. 
+Specifically, a texel may be any one of the available texture formats 
+represented in the 
+
+<emphasis id="strong1210" effect="bold">
+SurfaceFormat
+
+</emphasis>
+ enumeration.
+
+</note>
+
+
+
+
+
+
+<note id="note1023" type="">
+
+
+A 
+
+<emphasis id="strong1211" effect="bold">
+
+Texture2D
+
+</emphasis>
+ resource contains a 2D grid of texels. Each texel is 
+addressable by a u, v vector. Since it is a texture resource, it may contain 
+mipmap levels."
+
+</note>
+
+
+
+
+
+
+
+
+<para id="p1114">
+You can view a diagram of a texture resource containing a single 3x5 texture 
+with three mipmap levels
+
+
+
+<link id="a1184" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.texture2d.aspx">
+
+here
+
+</link>
+
+. You can read what Wikipedia has to say about mipmaps
+
+
+<link id="a1185" url="http://en.wikipedia.org/wiki/Mipmap">
+
+here
+
+</link>
+
+. The image used in this 
+program doesn't have any mipmaps.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h31029">
+<title>
+<emphasis id="The_SurfaceFormat_enumeration" effect="bold">
+
+The SurfaceFormat enumeration
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1115">
+The 
+
+<emphasis id="strong1212" effect="bold">
+SurfaceFormat
+
+</emphasis>
+ enumeration defines numeric values 
+representing about 50 different types of surface formats such as 
+
+<emphasis id="strong1213" effect="bold">
+Rgba32
+
+</emphasis>
+, 
+which is defined as
+
+</para>
+
+
+
+
+
+
+<note id="note1024" type="">
+
+
+"(Unsigned format) 32-bit 
+
+<emphasis id="em1015" effect="italics">
+RGBA
+
+</emphasis>
+ pixel format with alpha, using 8 bits 
+per channel."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31030">
+<title>
+<emphasis id="The_Texture_Format_of_my_image" effect="bold">
+
+The Texture Format of my image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1116">
+For example, the 
+
+<emphasis id="strong1214" effect="bold">
+Properties Window
+
+</emphasis>
+ in 
+
+<link id="a1186" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+ shows the 
+image that I used for my program to have a 
+
+<emphasis id="strong1215" effect="bold">
+Texture Format
+
+</emphasis>
+ 
+property value of 
+
+<emphasis id="strong1216" effect="bold">
+Color
+
+</emphasis>
+. The definition of the 
+
+<emphasis id="strong1217" effect="bold">
+
+SurfaceFormat
+
+</emphasis>
+ enumeration for 
+
+<emphasis id="strong1218" effect="bold">
+Color
+
+</emphasis>
+ is
+
+</para>
+
+
+
+
+
+<note id="note1025" type="">
+
+
+"(Unsigned format) 32-bit 
+
+<emphasis id="em1016" effect="italics">
+ARGB
+
+</emphasis>
+ pixel format with alpha, using 8 bits 
+per channel." 
+
+</note>
+
+
+
+
+
+
+<para id="p1117">
+Note that this is similar to 
+
+<emphasis id="strong1219" effect="bold">
+Rgba32
+
+</emphasis>
+ except that the position 
+of the alpha byte relative to the other three bytes is different.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21016">
+<title>
+<emphasis id="A_new_SpriteBatch_object" effect="bold">
+
+A new SpriteBatch object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1118">
+The code in the overridden 
+
+<emphasis id="strong1220" effect="bold">
+LoadContent
+
+</emphasis>
+ method of 
+
+<link id="a1187" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ 
+begins by instantiating a new 
+
+<emphasis id="strong1221" effect="bold">
+SpriteBatch
+
+</emphasis>
+ object and saving its 
+reference in the reference variable named 
+
+<emphasis id="strong1222" effect="bold">
+spriteBatch
+
+</emphasis>
+. (That 
+variable is declared at the top of 
+
+<link id="a1188" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.)
+
+</para>
+
+
+
+
+
+<note id="note1026" type="">
+
+
+Note that the statement that instantiates the 
+
+<emphasis id="strong1223" effect="bold">
+SpriteBatch
+
+</emphasis>
+ 
+object in 
+
+<link id="a1189" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is already in the skeleton of the 
+
+<emphasis id="strong1224" effect="bold">
+Game1
+
+</emphasis>
+ 
+class when it first appears in the edit window of the Visual C# IDE. (See 
+
+
+<link id="a1190" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.)
+
+</note>
+
+
+
+
+
+
+<section id="h31031">
+<title>
+<emphasis id="The_SpriteBatch_class" effect="bold">
+
+The SpriteBatch class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1119">
+According to the
+
+
+<link id="a1191" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.spritebatch.aspx">
+
+
+documentation
+
+</link>
+
+, an object of the 
+
+<emphasis id="strong1225" effect="bold">
+SpriteBatch
+
+</emphasis>
+ class
+
+</para>
+
+
+
+
+
+<note id="note1027" type="">
+
+
+"Enables a group of sprites to be drawn using the same settings."
+
+</note>
+
+
+
+
+
+
+<para id="p1120">
+The constructor for an object of the 
+
+<emphasis id="strong1226" effect="bold">
+SpriteBatch
+
+</emphasis>
+ class 
+requires an incoming parameter that is a reference to the 
+
+<emphasis id="strong1227" effect="bold">
+graphicsDevice
+
+</emphasis>
+ 
+of the current platform as type 
+
+<emphasis id="strong1228" effect="bold">
+GraphicsDevice
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h41016">
+<title>
+<emphasis id="This_can_be_confusing" effect="bold">
+
+This can be confusing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1121">
+<emphasis id="strong1229" effect="bold">
+GraphicsDevice
+
+</emphasis>
+ is the name of an XNA class. It is also the 
+name of a property of the 
+
+<emphasis id="strong1230" effect="bold">
+Game
+
+</emphasis>
+ class that is inherited into the
+
+
+<emphasis id="strong1231" effect="bold">
+Game1
+
+</emphasis>
+ class. The parameter that is passed to the constructor 
+for the 
+
+<emphasis id="strong1232" effect="bold">
+SpriteBatch
+
+</emphasis>
+ object in 
+
+<link id="a1192" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is the inherited 
+property.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41017">
+<title>
+<emphasis id="The_inherited_property" effect="bold">
+
+The inherited property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1122">
+The inherited property contains a reference to an object of the class 
+
+<emphasis id="strong1233" effect="bold">
+
+GraphicsDevice
+
+</emphasis>
+, which is apparently populated in conjunction with the 
+instantiation of the 
+
+<emphasis id="strong1234" effect="bold">
+GraphicsDeviceManager
+
+</emphasis>
+ object in the 
+constructor of 
+
+<link id="a1193" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. However it gets populated, it is a reference to the
+
+
+<emphasis id="strong1235" effect="bold">
+graphicsDevice
+
+</emphasis>
+ on the current platform. This causes the new
+
+
+<emphasis id="strong1236" effect="bold">
+SpriteBatch
+
+</emphasis>
+ object to be aware of the 
+
+<emphasis id="strong1237" effect="bold">
+graphicsDevice
+
+</emphasis>
+ 
+on the current platform. It will be used in the 
+
+<emphasis id="strong1238" effect="bold">
+Draw
+
+</emphasis>
+ method 
+later to draw the sprite.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31032">
+<title>
+<emphasis id="The_new_code" effect="bold">
+
+The new code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1123">
+The last statement in 
+
+<link id="a1194" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is the new code that I wrote into the 
+overridden 
+
+<emphasis id="strong1239" effect="bold">
+LoadContent
+
+</emphasis>
+ method. The 
+
+<emphasis id="strong1240" effect="bold">
+Game1
+
+</emphasis>
+ class inherits a 
+property of the 
+
+<emphasis id="strong1241" effect="bold">
+Game
+
+</emphasis>
+ class named 
+
+<emphasis id="strong1242" effect="bold">
+Content
+
+</emphasis>
+. This 
+property contains a reference to the current
+
+
+<link id="a1195" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.content.contentmanager.aspx">
+
+
+ContentManager
+
+</link>
+
+ object.
+
+</para>
+
+
+
+
+
+<para id="p1124">
+Therefore, the new code in 
+
+<link id="a1196" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1243" effect="bold">
+Load
+
+</emphasis>
+ 
+method on the current 
+
+<emphasis id="strong1244" effect="bold">
+ContentManager
+
+</emphasis>
+ object.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31033">
+<title>
+<emphasis id="Generic_methods" effect="bold">
+
+Generic methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1125">
+Some methods in C# are known as
+
+
+<link id="a1197" url="http://msdn.microsoft.com/en-us/library/twcad0zb(VS.80).aspx">
+
+generic 
+methods
+
+</link>
+
+, and the
+
+
+<link id="a1198" url="http://msdn.microsoft.com/en-us/library/bb197848.aspx">
+
+Load
+
+</link>
+
+ method 
+of the 
+
+<emphasis id="strong1245" effect="bold">
+ContentManager
+
+</emphasis>
+ class is one of them. The documentation 
+describes the Load method as follows:
+
+</para>
+
+
+
+
+
+<note id="note1028" type="">
+
+
+"Loads an asset that has been processed by the Content Pipeline."
+
+</note>
+
+
+
+
+
+
+<section id="h41018">
+<title>
+<emphasis id="Required_syntax_for_the_Load_method" effect="bold">
+
+Required syntax for the Load method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1126">
+<link id="a1199" target-id="Figure_8">
+
+Figure 8
+
+</link>
+
+ shows the syntax required for calling the 
+
+<emphasis id="strong1246" effect="bold">
+Load
+
+</emphasis>
+ 
+method. This syntax was taken from the documentation.
+
+</para>
+
+
+
+
+
+
+<note id="note1029" type="">
+
+
+<para id="p1127">
+<emphasis id="Figure_8" effect="bold">
+
+Figure 8
+
+</emphasis>
+
+. The Load method of the ContentManager class.
+
+</para>
+
+
+
+							
+
+<code id="pre1006" display="block">public virtual T Load&lt;T&gt; (string assetName)
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h41019">
+<title>
+<emphasis id="What_do_the_angle_brackets_mean" effect="bold">
+
+What do the angle brackets mean?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1128">
+To call this method, you must replace the T between the angle brackets in 
+
+<link id="a1200" target-id="Figure_8">
+
+Figure 8
+
+</link>
+
+ with the type of asset 
+to be loaded. According to the
+
+
+<link id="a1201" url="http://msdn.microsoft.com/en-us/library/bb197848.aspx">
+
+documentation
+
+</link>
+
+,
+
+
+</para>
+
+
+
+
+
+<note id="note1030" type="">
+
+
+"
+
+<emphasis id="strong1247" effect="bold">
+Model
+
+</emphasis>
+, 
+
+<emphasis id="strong1248" effect="bold">
+Effect
+
+</emphasis>
+, 
+
+<emphasis id="strong1249" effect="bold">
+SpriteFont
+
+</emphasis>
+,
+
+
+<emphasis id="strong1250" effect="bold">
+Texture
+
+</emphasis>
+, 
+
+<emphasis id="strong1251" effect="bold">
+Texture2D
+
+</emphasis>
+, 
+
+<emphasis id="strong1252" effect="bold">
+Texture3D
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1253" effect="bold">
+TextureCube
+
+</emphasis>
+ are all supported by default by the standard 
+Content Pipeline processor, but additional types may be loaded by extending the 
+processor."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41020">
+<title>
+<emphasis id="Calling_the_Load_method_of_the_current_ContentManager" effect="bold">
+
+Calling the Load method of the current ContentManager
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1129">
+<link id="a1202" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1254" effect="bold">
+Load
+
+</emphasis>
+ method, specifying an asset type of
+
+
+<emphasis id="strong1255" effect="bold">
+Texture2D
+
+</emphasis>
+, for the purpose of loading the content identified in 
+
+
+<link id="a1203" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+ with an 
+
+<emphasis id="strong1256" effect="bold">
+Asset Name
+
+</emphasis>
+ property value of 
+
+<emphasis id="strong1257" effect="bold">
+gorightarrow
+
+</emphasis>
+.
+
+
+</para>
+
+
+
+
+
+<para id="p1130">
+You will recall that this is the value given to the 
+
+<emphasis id="strong1258" effect="bold">
+Asset Name
+
+</emphasis>
+ 
+property of the image file named 
+
+<emphasis id="strong1259" effect="bold">
+gorightarrow.png
+
+</emphasis>
+ when it was 
+added to the Content folder earlier in 
+this module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41021">
+<title>
+<emphasis id="Populate_the_variable_named_myTexture" effect="bold">
+
+Populate the variable named myTexture
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1131">
+The value returned from the 
+
+<emphasis id="strong1260" effect="bold">
+Load
+
+</emphasis>
+ method is assigned to the 
+variable named 
+
+<emphasis id="strong1261" effect="bold">
+myTexture
+
+</emphasis>
+ in 
+
+<link id="a1204" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. It will be used later in 
+the 
+
+<emphasis id="strong1262" effect="bold">
+Draw
+
+</emphasis>
+ method to draw the sprite in the game window as shown 
+in 
+
+<link id="a1205" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ and 
+
+<link id="a1206" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1132">
+That completes the definition of the overridden 
+
+<emphasis id="strong1263" effect="bold">
+LoadContent
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31034">
+<title>
+<emphasis id="The_Vector2_structure" effect="bold">
+
+The Vector2 structure
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1133">
+Returning to the variable declarations in 
+
+<link id="a1207" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+,
+
+
+<link id="a1208" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.vector2.aspx">
+
+
+Vector2
+
+</link>
+
+ is a structure (similar to a class with no inheritance capability) 
+containing two components of type 
+
+<emphasis id="strong1264" effect="bold">
+float
+
+</emphasis>
+ named 
+
+<emphasis id="strong1265" effect="bold">
+X
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1266" effect="bold">
+Y
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1134">
+In this program, the structure referred to by 
+
+<emphasis id="strong1267" effect="bold">
+spritePosition
+
+</emphasis>
+ 
+in 
+
+<link id="a1209" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ is used to encapsulate the coordinates of the upper-left corner of 
+the sprite (10.0f,15.0f) when the sprite is drawn in the game window as shown in 
+
+
+<link id="a1210" target-id="Figure_3">
+
+Figure 
+3
+
+</link>
+
+ and more obviously in 
+
+<link id="a1211" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1135">
+This variable will also be used later in the overridden 
+
+<emphasis id="strong1268" effect="bold">
+Draw
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21017">
+<title>
+<emphasis id="The_overridden_GameDraw_method" effect="bold">
+
+The overridden Game.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1136">
+That brings us to the 
+
+<emphasis id="strong1269" effect="bold">
+Draw
+
+</emphasis>
+ method inherited from the 
+
+<emphasis id="strong1270" effect="bold">
+
+Game
+
+</emphasis>
+ class, shown near the bottom of 
+
+<link id="a1212" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. 
+According to the
+
+
+<link id="a1213" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.draw.aspx">
+
+
+documentation
+
+</link>
+
+, this method is
+
+</para>
+
+
+
+
+
+<note id="note1031" type="">
+
+
+"Called when the game determines it is time to draw a frame. Override this 
+method with game-specific rendering code.
+
+</note>
+
+
+
+
+
+
+<para id="p1137">
+Note that significant changes were made to the required contents of the
+
+
+<emphasis id="strong1271" effect="bold">
+Game.Draw
+
+</emphasis>
+ method in XNA 4.0 as compared to XNA 3.1.
+
+</para>
+
+
+
+
+
+<section id="h31035">
+<title>
+<emphasis id="Game_loop_timing" effect="bold">
+
+Game loop timing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1138">
+As you learned earlier, 
+
+<emphasis id="strong1272" effect="bold">
+Update
+
+</emphasis>
+ and 
+
+<emphasis id="strong1273" effect="bold">
+Draw
+
+</emphasis>
+ are called at different rates depending on whether 
+
+<emphasis id="strong1274" effect="bold">
+
+IsFixedTimeStep
+
+</emphasis>
+ is true or false.
+
+</para>
+
+
+
+
+
+<para id="p1139">
+If 
+
+<emphasis id="strong1275" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ is false, 
+
+<emphasis id="strong1276" effect="bold">
+Update
+
+</emphasis>
+ and
+
+
+<emphasis id="strong1277" effect="bold">
+Draw
+
+</emphasis>
+ will be called sequentially as often as possible.
+
+</para>
+
+
+
+
+
+<para id="p1140">
+If 
+
+<emphasis id="strong1278" effect="bold">
+IsFixedTimeStep
+
+</emphasis>
+ is true, 
+
+<emphasis id="strong1279" effect="bold">
+Update
+
+</emphasis>
+ will be 
+called at the interval specified in 
+
+<emphasis id="strong1280" effect="bold">
+TargetElapsedTime
+
+</emphasis>
+, while
+
+
+<emphasis id="strong1281" effect="bold">
+Draw
+
+</emphasis>
+ will continue to be called as often as possible. For more 
+information on fixed-step and variable-step game loops, see
+
+
+<link id="a1214" url="http://msdn.microsoft.com/en-us/library/bb203873.aspx">
+
+Application 
+Model Overview
+
+</link>
+
+."
+
+</para>
+
+
+
+
+
+<para id="p1141">
+Because this program doesn't override the 
+
+<emphasis id="strong1282" effect="bold">
+Update
+
+</emphasis>
+ method, it 
+doesn't matter how often the 
+
+<emphasis id="strong1283" effect="bold">
+Draw
+
+</emphasis>
+ method is called. Each time 
+it is drawn, the sprite is drawn in the same position as shown in 
+
+<link id="a1215" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ and 
+
+
+<link id="a1216" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21018">
+<title>
+<emphasis id="More_general_information" effect="bold">
+
+More general information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h31036">
+<title>
+<emphasis id="What_is_a_sprite" effect="bold">
+
+What is a sprite?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1142">
+According to the
+
+
+<link id="a1217" url="http://msdn.microsoft.com/en-us/library/bb203919.aspx">
+
+2D Graphics 
+Overview
+
+</link>
+
+,
+
+</para>
+
+
+
+
+
+<note id="note1032" type="">
+
+
+"Sprites are 2D bitmaps drawn directly on the screen, as opposed to being 
+drawn in 3D space. Sprites are commonly used to display information such as 
+health bars, number of lives, or text such as scores. Some games, especially 
+older games, are composed entirely of sprites."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31037">
+<title>
+<emphasis id="What_is_a_bitmap" effect="bold">
+
+What is a bitmap?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1143">
+According to the documentation for the
+
+
+<link id="a1218" url="http://msdn.microsoft.com/en-us/library/system.drawing.bitmap.aspx">
+
+
+Bitmap
+
+</link>
+
+ class,
+
+</para>
+
+
+
+
+
+<note id="note1033" type="">
+
+
+"A bitmap consists of the pixel data for a graphics image and its attributes. 
+There are many standard formats for saving a bitmap to a file. GDI+ supports the 
+following file formats: BMP, GIF, EXIG, JPG, PNG and TIFF."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31038">
+<title>
+<emphasis id="What_is_GDI" effect="bold">
+
+What is GDI+?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1144">
+According to the
+
+
+<link id="a1219" url="http://msdn.microsoft.com/en-us/library/ms533798(VS.85).aspx">
+
+
+documentation
+
+</link>
+
+,
+
+</para>
+
+
+
+
+
+<note id="note1034" type="">
+
+
+"Microsoft Windows GDI+ is a class-based API for C/C++ programmers. It 
+enables applications to use graphics and formatted text on both the video 
+display and the printer. Applications based on the Microsoft Win32 API do not 
+access graphics hardware directly. Instead, GDI+ interacts with device drivers 
+on behalf of applications."
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h31039">
+<title>
+<emphasis id="What_about_our_image" effect="bold">
+
+What about our image?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1145">
+Working backwards through the above information, we started with an image 
+file named 
+
+<emphasis id="strong1284" effect="bold">
+gorightarrow.png
+
+</emphasis>
+. We manually added the file to the
+
+
+<emphasis id="strong1285" effect="bold">
+Content
+
+</emphasis>
+ folder producing a game asset with an 
+
+<emphasis id="strong1286" effect="bold">
+Asset 
+Name
+
+</emphasis>
+ of 
+
+<emphasis id="strong1287" effect="bold">
+gorightarrow
+
+</emphasis>
+ (see 
+
+<link id="a1220" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+).
+
+</para>
+
+
+
+
+
+<para id="p1146">
+Then we called the 
+
+<emphasis id="strong1288" effect="bold">
+Load
+
+</emphasis>
+ method in 
+
+<link id="a1221" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ to load the 
+contents of the file into an object of type 
+
+<emphasis id="strong1289" effect="bold">
+Texture2D
+
+</emphasis>
+ and saved 
+that object's reference in the instance variable named 
+
+<emphasis id="strong1290" effect="bold">
+myTexture
+
+</emphasis>
+. 
+At that point in the process, we had converted the contents of our image file 
+into a format that can be thought of as a sprite. The variable named 
+
+<emphasis id="strong1291" effect="bold">
+
+myTexture
+
+</emphasis>
+ contains a reference to our sprite.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21019">
+<title>
+<emphasis id="Beginning_of_the_GameDraw_method" effect="bold">
+
+Beginning of the Game.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1147">
+The 
+
+<emphasis id="strong1292" effect="bold">
+Game.Draw
+
+</emphasis>
+ method begins in 
+
+<link id="a1222" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. I am referring to 
+the method here as 
+
+<emphasis id="strong1293" effect="bold">
+Game.Draw
+
+</emphasis>
+ to distinguish it from the method 
+named 
+
+<emphasis id="strong1294" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+, which we will encounter shortly.
+
+</para>
+
+
+
+
+
+
+<note id="note1035" type="">
+
+
+<para id="p1148">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Beginning of the Game.Draw method.
+
+</para>
+
+
+
+
+
+<code id="pre1007" display="block">
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31040">
+<title>
+<emphasis id="GameTime_information" effect="bold">
+
+GameTime information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1149">
+Each time the 
+
+<emphasis id="strong1295" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is executed, the incoming 
+parameter contains time information encapsulated in an object of type
+
+
+<link id="a1223" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.gametime.aspx">
+
+
+GameTime
+
+</link>
+
+. According to the documentation, the 
+
+<emphasis id="strong1296" effect="bold">
+GameTime
+
+</emphasis>
+ 
+object provides a
+
+</para>
+
+
+
+
+
+<note id="note1036" type="">
+
+
+"Snapshot of the game timing state expressed in values that can be used by 
+variable-step (real time) or fixed-step (game time) games."
+
+</note>
+
+
+
+
+
+
+<para id="p1150">
+We won't be using this information in this module, so I won't pursue it 
+further here. However, we will need the information in future modules when we 
+write code to cause a sprite to be moved and/or animated.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31041">
+<title>
+<emphasis id="The_call_to_the_GraphicsDeviceClear_method" effect="bold">
+
+The call to the GraphicsDevice.Clear method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1151">
+The call to the 
+
+<emphasis id="strong1297" effect="bold">
+GraphicsDevice.Clear
+
+</emphasis>
+ method in 
+
+<link id="a1224" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ is 
+contained in the skeleton code for the 
+
+<emphasis id="strong1298" effect="bold">
+Game1
+
+</emphasis>
+ class as shown in 
+
+
+<link id="a1225" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1152">
+The 
+
+<emphasis id="strong1299" effect="bold">
+GraphicsDevice
+
+</emphasis>
+ class provides overloaded versions 
+of the
+
+
+<link id="a1226" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.graphicsdevice.clear.aspx">
+
+
+Clear
+
+</link>
+
+ method. According to the documentation, the version shown in 
+
+<link id="a1227" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+
+</para>
+
+
+
+
+
+<note id="note1037" type="">
+
+
+"Clears the viewport to a specified color."
+
+</note>
+
+
+
+
+
+
+<para id="p1153">
+This version of the 
+
+<emphasis id="strong1300" effect="bold">
+Clear
+
+</emphasis>
+ method requires a single incoming 
+parameter of type 
+
+<emphasis id="strong1301" effect="bold">
+Color
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31042">
+<title>
+<emphasis id="The_Color_class" effect="bold">
+
+The Color class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1154">
+The documentation describes an object of the
+
+
+<link id="a1228" url="http://msdn.microsoft.com/en-us/library/ms534427(VS.85).aspx">
+
+Color
+
+</link>
+
+ 
+class as follows:
+
+</para>
+
+
+
+
+
+<note id="note1038" type="">
+
+
+"A 
+
+<emphasis id="strong1302" effect="bold">
+Color
+
+</emphasis>
+ object stores a 32-bit value that represents a 
+color. The color value contains four, 8-bit components: alpha, red, green, and 
+blue. The first 8 bits (the most significant) contain the alpha component, the 
+next 8 bits contain the red component, the next 8 bits contain the green 
+component, and the next 8 bits (the least significant) contain the blue 
+component. The 32-bit value is stored in a variable of type ARGB."
+
+</note>
+
+
+
+
+
+
+<section id="h41022">
+<title>
+<emphasis id="Type_ARGB" effect="bold">
+
+Type ARGB
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1155">
+We learned about the ARGB texture format 
+
+<link id="a1229" url="XNA0118revised.htm#Texture">
+
+
+earlier
+
+</link>
+
+. Although ARGB is referred to as a type in the above quotation, it 
+is not a class. Rather, it is a type established using a C-style
+
+
+<link id="a1230" url="http://msdn.microsoft.com/en-us/library/aa911306.aspx">
+
+typedef
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41023">
+<title>
+<emphasis id="Constructors_methods_and_constants" effect="bold">
+
+Constructors, methods, and constants
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1156">
+The 
+
+<emphasis id="strong1303" effect="bold">
+Color
+
+</emphasis>
+ class provides several overloaded constructors and 
+numerous methods that allow you to perform various operations on a 
+
+<emphasis id="strong1304" effect="bold">
+
+Color
+
+</emphasis>
+ object.
+
+</para>
+
+
+
+
+
+<para id="p1157">
+One of the constructors allows you to create a 
+
+<emphasis id="strong1305" effect="bold">
+Color
+
+</emphasis>
+ object 
+that represents the color of your choice by specifying the individual values of 
+the alpha, red, green, and blue color components.
+
+</para>
+
+
+
+
+
+<para id="p1158">
+In addition, the class provides many constants that represent different 
+colors, one of which is named 
+
+<emphasis id="strong1306" effect="bold">
+CornflowerBlue
+
+</emphasis>
+. This is the 
+background color of the game window shown in 
+
+<link id="a1231" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1159">
+You can create 
+
+<emphasis id="strong1307" effect="bold">
+Color
+
+</emphasis>
+ objects representing those colors 
+simply by calling out the name of the class and the name of the color as shown 
+by the code in 
+
+<link id="a1232" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31043">
+<title>
+<emphasis id="Code_to_draw_the_sprite" effect="bold">
+
+Code to draw the sprite
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1160">
+Three statements are required to draw one sprite and twelve statements are 
+required to draw ten sprites with the same settings. The sequence consists of a
+
+
+<emphasis id="strong1308" effect="bold">
+Begin
+
+</emphasis>
+ statement, one or more 
+
+<emphasis id="strong1309" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+statements, and one 
+
+<emphasis id="strong1310" effect="bold">
+End
+
+</emphasis>
+ statement.
+
+</para>
+
+
+
+
+
+<para id="p1161">
+<link id="a1233" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ shows the code that is used to draw our sprite once each time the
+
+
+<emphasis id="strong1311" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is called. Note that the 
+
+<emphasis id="strong1312" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method is called 
+inside the 
+
+<emphasis id="strong1313" effect="bold">
+Game.Draw
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+
+<note id="note1039" type="">
+
+
+<para id="p1162">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Draw the sprite.
+
+</para>
+
+
+
+
+
+<code id="pre1008" display="block">      spriteBatch.Begin();
+      spriteBatch.Draw(
+                    myTexture,spritePosition,Color.White);
+      spriteBatch.End();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+<para id="p1163">
+The image that we used to create the sprite is shown in raw form in 
+
+<link id="a1234" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. 
+This is a rectangular image with the pixels outside the blue area having an 
+alpha value of about 5.
+
+</para>
+
+
+
+
+
+<section id="h41024">
+<title>
+<emphasis id="Honor_the_alpha_values" effect="bold">
+
+Honor the alpha values
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1164">
+As mentioned earlier, the default case is to honor the alpha values in XNA 
+4.0. This produces the output image shown in 
+
+<link id="a1235" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1165">
+Setting the 
+
+<emphasis id="strong1314" effect="bold">
+Premultiply Alpha
+
+</emphasis>
+ property value to False in 
+
+
+<link id="a1236" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+ will cause the alpha value to be ignored. This will produce the output 
+image shown in 
+
+<link id="a1237" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h41025">
+<title>
+<emphasis id="Ignore_the_alpha_values" effect="bold">
+
+Ignore the alpha values
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1166">
+As explained earlier, honoring alpha transparency is the default case in XNA 
+4.0. 
+
+<link id="a1238" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ was created by setting the 
+
+<emphasis id="strong1315" effect="bold">
+Premultiply 
+Alpha
+
+</emphasis>
+ property (see 
+
+<link id="a1239" target-id="Figure_7">
+
+Figure 7
+
+</link>
+
+) of the image named
+
+
+<emphasis id="strong1316" effect="bold">
+gorightarrow.png
+
+</emphasis>
+ to a value of 
+
+<emphasis id="em1017" effect="italics">
+False
+
+</emphasis>
+ and then 
+re-running the program. This causes even the pixels with the very low alpha values to be opaque 
+as shown in 
+
+<link id="a1240" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41026">
+<title>
+<emphasis id="Drawing_the_sprites" effect="bold">
+
+Drawing the sprite(s)
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1167">
+You can draw as many sprites as you need following the call to the 
+
+<emphasis id="strong1317" effect="bold">
+
+Begin
+
+</emphasis>
+ method in 
+
+<link id="a1241" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1168">
+Each sprite drawn will be drawn according to the parameters passed to the
+
+
+<emphasis id="strong1318" effect="bold">
+Begin
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<para id="p1169">
+If you need to draw some sprites with different parameters, call the 
+
+<emphasis id="strong1319" effect="bold">
+
+SpriteBatch.End
+
+</emphasis>
+ method and start the sequence over with a new call to 
+the 
+
+<emphasis id="strong1320" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ method and new parameters.
+
+</para>
+
+
+
+
+
+<para id="p1170">
+In this case we only have one sprite to draw. 
+
+<link id="a1242" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1321" effect="bold">
+
+SpriteBatch.Draw
+
+</emphasis>
+ method to draw that sprite and then calls the 
+
+<emphasis id="strong1322" effect="bold">
+
+SpriteBatch.End
+
+</emphasis>
+ method to end the drawing sequence.
+
+</para>
+
+
+
+	
+
+</section>
+</section>
+<section id="h31044">
+<title>
+<emphasis id="Overloaded_Draw_methods" effect="bold">
+
+Overloaded Draw methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1171">
+There are several overloaded versions of the 
+
+<emphasis id="strong1323" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method. According to the
+
+
+<link id="a1243" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.spritebatch.draw.aspx">
+
+
+documentation
+
+</link>
+
+, the version used in 
+
+<link id="a1244" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+
+</para>
+
+
+
+
+
+<note id="note1040" type="">
+
+
+"Adds a sprite to the batch of sprites to be rendered, specifying the 
+texture, screen position, and color tint. Before any calls to 
+
+<emphasis id="strong1324" effect="bold">
+Draw
+
+</emphasis>
+, 
+you must call 
+
+<emphasis id="strong1325" effect="bold">
+Begin
+
+</emphasis>
+. Once all calls to 
+
+<emphasis id="strong1326" effect="bold">
+Draw
+
+</emphasis>
+ 
+are complete, call 
+
+<emphasis id="strong1327" effect="bold">
+End
+
+</emphasis>
+."
+
+</note>
+
+
+
+
+
+
+<para id="p1172">
+The code in 
+
+<link id="a1245" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ passes three parameters to the Draw method:
+
+</para>
+
+
+
+
+
+<list id="ul1038" list-type="bulleted">
+
+	
+
+<item id="li1155">
+<emphasis id="strong1328" effect="bold">
+myTexture
+
+</emphasis>
+ - The sprite texture. (See 
+
+<link id="a1246" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1156">
+<emphasis id="strong1329" effect="bold">
+spritePosition
+
+</emphasis>
+ - The location, in screen coordinates, 
+	where the sprite will be drawn. (See 
+
+<link id="a1247" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1157">
+<emphasis id="strong1330" effect="bold">
+Color.White
+
+</emphasis>
+ - The color channel modulation to use. (Use Color.White for full color with no tinting.)
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31045">
+<title>
+<emphasis id="The_SpriteBatchEnd_method" effect="bold">
+
+The SpriteBatch.End method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1173">
+According to the
+
+
+<link id="a1248" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.spritebatch.end.aspx">
+
+
+documentation
+
+</link>
+
+, this method
+
+</para>
+
+
+
+
+
+<note id="note1041" type="">
+
+
+"Flushes the sprite batch and restores the device state to how it was before 
+Begin was called. Call End after all calls to Draw are complete."
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h21020">
+<title>
+<emphasis id="Call_GameDraw_on_the_superclass" effect="bold">
+
+Call Game.Draw on the superclass
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1174">
+When you instantiate an object from a class that extends another class and 
+overrides a method from the superclass, the new object contains both the 
+original version and the overridden version of the method.
+
+</para>
+
+
+
+
+
+<section id="h31046">
+<title>
+<emphasis id="Execute_both_versions_of_the_overridden_method" effect="bold">
+
+Execute both 
+versions of the overridden method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1175">
+Often it is desirable or necessary to cause both versions to be executed. The 
+code in 
+
+<link id="a1249" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ shows the syntax used to cause an 
+overridden method to call the original version of the method using the keyword
+
+
+<emphasis id="strong1331" effect="bold">
+base
+
+</emphasis>
+. The keyword 
+
+<emphasis id="strong1332" effect="bold">
+base
+
+</emphasis>
+ is a reference to that 
+portion of the object that represents the properties, events, and methods of the 
+superclass.
+
+</para>
+
+
+
+
+
+	
+
+
+
+<note id="note1042" type="">
+
+
+<para id="p1176">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Call Game.Draw on the superclass.
+
+</para>
+
+
+
+
+
+<code id="pre1009" display="block">
+      base.Draw(gameTime);
+    }//end Draw method
+  }//End class
+}//End namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31047">
+<title>
+<emphasis id="A_required_statement" effect="bold">
+
+A required statement
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1177">
+The statement shown in 
+
+<link id="a1250" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ is already contained 
+in the skeleton code produced by Visual C# (see 
+
+<link id="a1251" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+).
+
+</para>
+
+
+
+
+
+<para id="p1178">
+The
+
+
+<link id="a1252" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.game.draw.aspx">
+
+
+documentation
+
+</link>
+
+ for the 
+
+<emphasis id="strong1333" effect="bold">
+Game.Draw
+
+</emphasis>
+ method contains the 
+following: 
+
+</para>
+
+
+
+
+
+<note id="note1043" type="">
+
+
+"In classes that derive from 
+
+<emphasis id="strong1334" effect="bold">
+Game
+
+</emphasis>
+, it is necessary to make 
+these calls:
+
+</note>
+
+
+
+
+
+
+<note id="note1044" type="">
+
+
+
+	Call 
+
+<emphasis id="strong1335" effect="bold">
+base.Draw
+
+</emphasis>
+ in 
+
+<emphasis id="strong1336" effect="bold">
+Draw
+
+</emphasis>
+ to enumerate 
+	through any graphics components that have been added to 
+
+<emphasis id="strong1337" effect="bold">
+Components
+
+</emphasis>
+. 
+	This method will automatically call the 
+
+<emphasis id="strong1338" effect="bold">
+Initialize
+
+</emphasis>
+ method 
+	for every component that has been added to the collection."
+
+</note>
+
+
+
+
+
+
+<para id="p1179">
+We won't worry about the reason why we must do this at this point. We will 
+simply follow the instructions and make the call.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21021">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1180">
+That completes the explanation for this program. Because of the simplicity of 
+the program, we had no need to override the following methods (see 
+
+<link id="a1253" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+):
+
+</para>
+
+
+
+
+
+<list id="ul1039" list-type="bulleted">
+
+	
+
+<item id="li1158">
+Initialize
+
+</item>
+
+
+	
+
+<item id="li1159">
+UnloadContent
+
+</item>
+
+
+	
+
+<item id="li1160">
+Update
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1181">
+We will develop more complicated programs in future modules and will have a 
+need to override one of more of these methods. I will explain them at that time.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1182">
+I encourage you to copy the code from 
+
+<link id="a1254" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Use that code to create an 
+XNA project. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="strong1339" effect="bold">
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1183">
+Click 
+
+<link id="a1255" url="XNA0118Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1340" effect="bold">
+XNA0118Proj
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1341" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1342" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1343" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1344" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1256" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1184">
+In this module, I used a very simple XNA program to teach you many of the 
+details regarding the incorporation of the XNA framework into the 
+object-oriented C# programming language. I also taught you about constructors, 
+the 
+
+<emphasis id="strong1345" effect="bold">
+this
+
+</emphasis>
+ keyword, the 
+
+<emphasis id="strong1346" effect="bold">
+base
+
+</emphasis>
+ keyword, and some 
+of the differences between a Console Application and a Windows Game application.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1185">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1045" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1347" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1040" list-type="bulleted">
+
+					
+
+<item id="li1161">
+Module name: Xna0118-The XNA Framework and the Game 
+					Class
+
+</item>
+
+
+					
+
+<item id="li1162">
+File: Xna0118.htm
+
+
+</item>
+
+
+					
+
+<item id="li1163">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1046" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1348" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1186">
+<emphasis id="strong1349" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1187">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1188">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1189">
+<emphasis id="strong1350" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1190">
+A complete listing of the XNA program discussed in this module is provided in 
+
+
+<link id="a1257" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+
+
+<note id="note1047" type="">
+
+
+<para id="p1191">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. The Game1 class for the project named XNA0118Proj.
+
+</para>
+
+
+
+
+
+<code id="pre1010" display="block">
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+namespace XNA0118Proj{
+    public class Game1 : Microsoft.Xna.Framework.Game{
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+
+            base.Initialize();
+        }
+
+        //Declare two variables
+        Texture2D myTexture;
+        Vector2 spritePosition = new Vector2(10.0f, 15.0f);
+
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used
+            // to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //Load the image
+            myTexture =
+                    Content.Load&lt;Texture2D&gt;("gorightarrow");
+        }//end LoadContent
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Back==ButtonState.Pressed)
+                this.Exit();
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(myTexture, spritePosition, Color.White);
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }//end Draw method
+    }//End class
+}//End namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+
+<para id="p1192">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

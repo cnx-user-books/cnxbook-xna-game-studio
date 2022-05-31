@@ -1,0 +1,4448 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0116-Runtime Polymorphism and the Object Class</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49506</md:content-id>
+  <md:title>Xna0116-Runtime Polymorphism and the Object Class</md:title>
+  <md:abstract>Baldwin explains the use of the Object class as a completely generic type for storing references to objects of subclass types, and explains how that results in a very useful form of runtime polymorphism.</md:abstract>
+  <md:uuid>1468c90e-d4fb-41a9-b2e5-a9f3e65293d2</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Sat May 07 11:13:14 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="The_generic_type_Object">
+
+The generic type Object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="References_of_type_Object">
+
+References of type Object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Methods_in_the_Object_class">
+
+Methods in the Object class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="The_difference_between_string_and_String">
+
+The difference between string and String
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Every_class_inherits_these_methods">
+
+Every class inherits these methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="To_be_overridden">
+
+To be overridden...
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Calling_methods_of_the_Object_class">
+
+Calling methods of the Object class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="And_the_behavior_will_be">
+
+And the behavior will be...
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1016">
+<link id="a1017" target-id="The_class_named_A">
+
+The class named A
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1017">
+<link id="a1018" target-id="Does_not_override_the_ToString_method">
+
+Does not override the ToString method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="The_class_named_B">
+
+The class named B
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1019">
+<link id="a1020" target-id="Overrides_the_ToString_method">
+
+Overrides the ToString method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Purpose_of_the_ToString_method">
+
+Purpose of the ToString method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="Can_be_overridden">
+
+Can be overridden
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="Behavior_of_the_default_and_overridden_versions">
+
+Behavior of the default and overridden 
+versions
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Will_be_useful_later">
+
+Will be useful later
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="The_class_named_C">
+
+The class named C
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1025">
+<link id="a1026" target-id="Behavior_of_overridden_version">
+
+Behavior of overridden version
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_driver_class">
+
+The driver class
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="A_new_object_of_the_class_A">
+
+A new object of the class A
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1028">
+<link id="a1029" target-id="Call_ToString_method_on_the_reference">
+
+Call ToString method on the reference
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="Display_the_returned_String">
+
+Display the returned String
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="Default_ToString_behavior">
+
+Default ToString behavior
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Class_A_does_not_override_ToString">
+
+Class A does not override ToString
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="A_new_object_of_the_class_B">
+
+A new object of the class B
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="Call_ToString_and_display_the_result">
+
+Call ToString and display the result
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Do_you_recognize_this">
+
+Do you recognize this?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Overridden_version_of_ToString_was_executed">
+
+Overridden version of ToString was 
+executed
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Once_again_what_is_the_rule">
+
+Once again, what is the rule?
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="An_object_of_the_class_C">
+
+An object of the class C
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1038">
+<link id="a1039" target-id="What_will_the_output_look_like">
+
+What will the output look like?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Overridden_version_of_ToString_was_called">
+
+Overridden version of ToString was 
+	called
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="No_downcasting_was_required">
+
+No downcasting was required
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="A_generic_array_object">
+
+A generic array object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Collections">
+
+Collections
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1049" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+
+<emphasis id="em1001" effect="italics">
+ 
+
+</emphasis>
+provided 
+information on how to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+<para id="p1004">
+Object-oriented programs exhibit three main characteristics:
+
+</para>
+
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+
+	
+
+<item id="li1048">
+Encapsulation
+
+</item>
+
+
+	
+
+<item id="li1049">
+Inheritance
+
+</item>
+
+
+	
+
+<item id="li1050">
+Polymorphism
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1005">
+I have explained encapsulation, inheritance, compile-time polymorphism, and 
+runtime polymorphism using method overriding and class inheritance in earlier 
+modules. This module will explain the importance of the 
+
+<emphasis id="strong1001" effect="bold">
+Object
+
+</emphasis>
+ 
+class in polymorphic behavior. I will defer an explanation of polymorphism using 
+interface inheritance until a future module.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1006">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1013" list-type="bulleted">
+
+		
+
+<item id="li1051">
+<link id="a1050" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Text output for ToString method and class A. 
+
+</item>
+
+
+		
+
+<item id="li1052">
+<link id="a1051" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Text output for overridden ToString method and class B. 
+
+</item>
+
+
+		
+
+<item id="li1053">
+<link id="a1052" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Text output for overridden ToString method and class C. 
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1014" list-type="bulleted">
+
+		
+
+<item id="li1054">
+<link id="a1053" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Definition of class A.
+
+</item>
+
+
+		
+
+<item id="li1055">
+<link id="a1054" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Definition of class B.
+
+</item>
+
+
+		
+
+<item id="li1056">
+<link id="a1055" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Definition of class C.
+
+</item>
+
+
+		
+
+<item id="li1057">
+<link id="a1056" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Beginning of the driver class.
+
+</item>
+
+
+		
+
+<item id="li1058">
+<link id="a1057" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. A new object of the class B.
+
+</item>
+
+
+		
+
+<item id="li1059">
+<link id="a1058" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. An object of the class C.
+
+</item>
+
+
+		
+
+<item id="li1060">
+<link id="a1059" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Project Polymorph04.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="The_generic_type_Object" effect="bold">
+
+The generic type Object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+In this module, I will explain the use of the 
+
+<emphasis id="strong1002" effect="bold">
+Object
+
+</emphasis>
+ class 
+as a completely generic type for storing references to objects of subclass 
+types, and will explain how that results in a very useful form of runtime 
+polymorphism.
+
+</para>
+
+
+
+
+
+<para id="p1008">
+I will briefly discuss the default versions of some of the methods defined in the
+
+
+<emphasis id="strong1003" effect="bold">
+Object
+
+</emphasis>
+ class, and will explain that in many cases, those 
+default versions are meant to be overridden.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="References_of_type_Object" effect="bold">
+
+References of type Object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+The 
+
+<emphasis id="strong1004" effect="bold">
+Object
+
+</emphasis>
+ type is a completely generic type that can be 
+used to store a reference to any object that can be instantiated in C#.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Methods_in_the_Object_class" effect="bold">
+
+Methods in the Object class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+The 
+
+<emphasis id="strong1005" effect="bold">
+Object
+
+</emphasis>
+ class defines the following
+
+
+<link id="a1060" url="http://msdn.microsoft.com/en-us/library/system.object_members.aspx">
+
+
+eight methods
+
+</link>
+
+, which are inherited by every other class:
+
+</para>
+
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+
+	
+
+<item id="li1061">
+<emphasis id="strong1006" effect="bold">
+Equals
+
+</emphasis>
+ - Overloaded. Determines whether two 
+
+<emphasis id="strong1007" effect="bold">
+
+	Object
+
+</emphasis>
+ instances are equal.
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1062">
+<emphasis id="strong1008" effect="bold">
+Equals(Object)
+
+</emphasis>
+ - Determines whether the specified
+		
+
+<emphasis id="strong1009" effect="bold">
+Object
+
+</emphasis>
+ is equal to the current 
+
+<emphasis id="strong1010" effect="bold">
+Object
+
+</emphasis>
+.
+
+</item>
+
+
+		
+
+<item id="li1063">
+<emphasis id="strong1011" effect="bold">
+Equals(Object,Object)
+
+</emphasis>
+ - Determines whether the 
+		specified 
+
+<emphasis id="strong1012" effect="bold">
+Object
+
+</emphasis>
+ instances are considered equal.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</item>
+
+
+	
+
+<item id="li1064">
+<emphasis id="strong1013" effect="bold">
+Finalize
+
+</emphasis>
+ - Allows an 
+
+<emphasis id="strong1014" effect="bold">
+Object
+
+</emphasis>
+ to attempt 
+	to free resources and perform other cleanup operations before the 
+
+<emphasis id="strong1015" effect="bold">
+
+	Object
+
+</emphasis>
+ is reclaimed by garbage collection.
+
+</item>
+
+
+	
+
+<item id="li1065">
+<emphasis id="strong1016" effect="bold">
+GetHashCode
+
+</emphasis>
+ - Serves as a hash function for a 
+	particular type. 
+
+</item>
+
+
+	
+
+<item id="li1066">
+<emphasis id="strong1017" effect="bold">
+GetType
+
+</emphasis>
+ - Gets the Type of the current instance.
+
+</item>
+
+
+	
+
+<item id="li1067">
+<emphasis id="strong1018" effect="bold">
+MemberwiseClone
+
+</emphasis>
+ - Creates a shallow copy of the current
+	
+
+<emphasis id="strong1019" effect="bold">
+Object
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1068">
+<emphasis id="strong1020" effect="bold">
+ReferenceEquals
+
+</emphasis>
+ - Determines whether the specified
+	
+
+<emphasis id="strong1021" effect="bold">
+Object
+
+</emphasis>
+ instances are the same instance.
+
+</item>
+
+
+	
+
+<item id="li1069">
+<emphasis id="strong1022" effect="bold">
+ToString
+
+</emphasis>
+ - Returns a 
+
+<emphasis id="strong1023" effect="bold">
+String
+
+</emphasis>
+ that 
+	represents the current 
+
+<emphasis id="strong1024" effect="bold">
+Object
+
+</emphasis>
+.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1011">
+Because these eight methods are inherited by every other class, they are 
+always available for you to use in your code. 
+
+<emphasis id="em1002" effect="italics">
+(Possibly the most frequently 
+used of these methods is the 
+
+<emphasis id="strong1025" effect="bold">
+ToString
+
+</emphasis>
+ method.)
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1012">
+Two of the methods in this list are defined in overloaded versions 
+
+<emphasis id="em1003" effect="italics">
+(same 
+name, different formal argument lists)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="The_difference_between_string_and_String" effect="bold">
+
+The difference between string and String
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1013">
+This
+
+
+<link id="a1061" url="http://stackoverflow.com/questions/7074/in-c-what-is-the-difference-between-string-and-string">
+
+
+author
+
+</link>
+
+ says "string is an alias for System.String. So technically, there is 
+no difference. It's like int vs. System.Int32."
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Every_class_inherits_these_methods" effect="bold">
+
+Every class inherits these methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+Because every class is either a direct or indirect subclass of 
+
+<emphasis id="strong1026" effect="bold">
+Object
+
+</emphasis>
+, 
+every class in C#, 
+
+<emphasis id="em1004" effect="italics">
+(including new classes that you define)
+
+</emphasis>
+, inherit 
+these methods.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="To_be_overridden" effect="bold">
+
+To be overridden...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+Some of these methods are intended to be overridden for various purposes. 
+This includes 
+
+<emphasis id="strong1027" effect="bold">
+Equals
+
+</emphasis>
+, 
+
+<emphasis id="strong1028" effect="bold">
+Finalize
+
+</emphasis>
+, 
+
+<emphasis id="strong1029" effect="bold">
+
+GetHashCode
+
+</emphasis>
+, and 
+
+<emphasis id="strong1030" effect="bold">
+ToString
+
+</emphasis>
+, which are all declared
+
+
+<emphasis id="strong1031" effect="bold">
+virtual
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1016">
+However, some of them, such as 
+
+<emphasis id="strong1032" effect="bold">
+GetType
+
+</emphasis>
+, are not declared
+
+
+<emphasis id="strong1033" effect="bold">
+virtual
+
+</emphasis>
+ and therefore are intended to be used directly without 
+overriding.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Calling_methods_of_the_Object_class" effect="bold">
+
+Calling methods of the Object class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1017">
+You can store a reference to any object in a reference variable of type
+
+
+<emphasis id="strong1034" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1018">
+Because every new class inherits these methods, you can call any of these 
+methods on any reference to any object stored in a reference variable of type
+
+
+<emphasis id="strong1035" effect="bold">
+Object
+
+</emphasis>
+ or in a reference variable of any other type.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+<emphasis id="And_the_behavior_will_be" effect="bold">
+
+And the behavior will be...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+If the class from which the object was instantiated inherits or defines an 
+overridden version of one of the methods in the above list, calling that method 
+on the reference will cause the overridden version to be executed.
+
+</para>
+
+
+
+
+
+<para id="p1020">
+Otherwise, calling that method on the reference will cause the default 
+version defined in the 
+
+<emphasis id="strong1036" effect="bold">
+Object
+
+</emphasis>
+ class to be executed. 
+
+</para>
+
+
+
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1021">
+The behavior described above is illustrated in the sample program named
+
+
+<emphasis id="strong1037" effect="bold">
+Polymorph04
+
+</emphasis>
+, which you can view in its entirety in 
+
+<link id="a1062" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ 
+near the end of this module.
+
+</para>
+
+
+
+
+
+<para id="p1022">
+For purposes of illustration, this program deals specifically with the method 
+named 
+
+<emphasis id="strong1038" effect="bold">
+ToString
+
+</emphasis>
+ from the above list, but could deal with the 
+other virtual methods in the list as well.
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<section id="h21009">
+<title>
+<emphasis id="The_class_named_A" effect="bold">
+
+The class named A
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1023">
+<link id="a1063" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ defines a class named 
+
+<emphasis id="strong1039" effect="bold">
+A,
+
+</emphasis>
+ which explicitly extends 
+the class named 
+
+<emphasis id="strong1040" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1024">
+<emphasis id="em1005" effect="italics">
+(Recall that classes extend 
+
+<emphasis id="strong1041" effect="bold">
+Object
+
+</emphasis>
+ 
+by default. It is not necessary to explicitly show that a class extends 
+
+<emphasis id="strong1042" effect="bold">
+
+Object
+
+</emphasis>
+. I showed that here simply to remind you that all classes in C# 
+are rooted in the class named 
+
+<emphasis id="strong1043" effect="bold">
+Object
+
+</emphasis>
+.)
+
+</emphasis>
+</para>
+
+
+
+	
+
+
+<note id="note1000" type="">
+
+
+<para id="p1025">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Definition of class A.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">using System;
+
+class A : Object {
+  //This class is empty
+}//end class A
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31002">
+<title>
+<emphasis id="Does_not_override_the_ToString_method" effect="bold">
+
+Does not override the ToString method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1026">
+The most important thing to note about the class named 
+
+<emphasis id="strong1044" effect="bold">
+A
+
+</emphasis>
+ is 
+that it does not override any of the methods that it inherits from the class 
+named 
+
+<emphasis id="strong1045" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1027">
+Therefore, it inherits the default version of the method named 
+
+<emphasis id="strong1046" effect="bold">
+
+ToString
+
+</emphasis>
+ from the class named 
+
+<emphasis id="strong1047" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1028">
+<emphasis id="em1006" effect="italics">
+(We will see an example of the behavior of the 
+default version of that method shortly.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21010">
+<title>
+<emphasis id="The_class_named_B" effect="bold">
+
+The class named B
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+<link id="a1064" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ defines the class named 
+
+<emphasis id="strong1048" effect="bold">
+B
+
+</emphasis>
+. This class extends the 
+class named 
+
+<emphasis id="strong1049" effect="bold">
+A
+
+</emphasis>
+. 
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1030">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Definition of class B.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">class B : A {
+  public override String ToString() {
+    return "ToString in class B";
+  }//end overridden ToString()
+}//end class B
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31003">
+<title>
+<emphasis id="Overrides_the_ToString_method" effect="bold">
+
+Overrides the ToString method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+Of particular interest, 
+
+<emphasis id="em1007" effect="italics">
+(for purposes of this module)
+
+</emphasis>
+, is the fact 
+that the class named 
+
+<emphasis id="strong1050" effect="bold">
+B
+
+</emphasis>
+ overrides the inherited 
+
+<emphasis id="strong1051" effect="bold">
+ToString
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+<para id="p1032">
+It inherits the default version of the 
+
+<emphasis id="strong1052" effect="bold">
+
+ToString
+
+</emphasis>
+ method, because its superclass named 
+
+<emphasis id="strong1053" effect="bold">
+A
+
+</emphasis>
+, which 
+extends 
+
+<emphasis id="strong1054" effect="bold">
+Object
+
+</emphasis>
+, does not override the 
+
+<emphasis id="strong1055" effect="bold">
+ToString
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="Purpose_of_the_ToString_method" effect="bold">
+
+Purpose of the ToString method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+The purpose of the 
+
+<emphasis id="strong1056" effect="bold">
+ToString
+
+</emphasis>
+ method is to return a reference 
+to an object of the class 
+
+<emphasis id="strong1057" effect="bold">
+String
+
+</emphasis>
+ that represents an object 
+instantiated from a class that overrides the method.
+
+</para>
+
+
+
+
+
+<para id="p1034">
+Here is part of what Microsoft has to say about the 
+
+<emphasis id="strong1058" effect="bold">
+ToString
+
+</emphasis>
+ 
+method:
+
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+
+
+
+<para id="p1035">
+"This method returns a human-readable string 
+that is culture-sensitive. For example, for an instance of the 
+
+<emphasis id="strong1059" effect="bold">
+Double
+
+</emphasis>
+ 
+class whose value is zero, the implementation of 
+
+<emphasis id="strong1060" effect="bold">
+Double.ToString
+
+</emphasis>
+ 
+might return "0.00" or "0,00" depending on the current UI culture."
+
+</para>
+
+
+
+
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="Can_be_overridden" effect="bold">
+
+Can be overridden
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+The 
+
+<emphasis id="strong1061" effect="bold">
+ToString
+
+</emphasis>
+ method can be overridden in a subclass to 
+return values that are meaningful for that type. Again, according to Microsoft:
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+
+
+
+<para id="p1037">
+"For example, the base data types, such as 
+Int32, implement 
+
+<emphasis id="strong1062" effect="bold">
+ToString
+
+</emphasis>
+ so that it returns the string form of 
+the value that the object represents."
+
+</para>
+
+
+
+
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Behavior_of_the_default_and_overridden_versions" effect="bold">
+
+Behavior of the default and overridden 
+versions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+The default implementation of the 
+
+<emphasis id="strong1063" effect="bold">
+ToString
+
+</emphasis>
+ method, as 
+defined in the 
+
+<emphasis id="strong1064" effect="bold">
+Object
+
+</emphasis>
+ class, returns the fully qualified name 
+of the type of the object.
+
+</para>
+
+
+
+
+
+<para id="p1039">
+I didn't override the 
+
+<emphasis id="strong1065" effect="bold">
+ToString
+
+</emphasis>
+ method in the class named
+
+
+<emphasis id="strong1066" effect="bold">
+A
+
+</emphasis>
+, but I did override it in the class named 
+
+<emphasis id="strong1067" effect="bold">
+B
+
+</emphasis>
+, 
+which is a subclass of 
+
+<emphasis id="strong1068" effect="bold">
+A
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1040">
+The behavior of my overridden version of the method in the class named
+
+
+<emphasis id="strong1069" effect="bold">
+B
+
+</emphasis>
+ returns a reference to a 
+
+<emphasis id="strong1070" effect="bold">
+String
+
+</emphasis>
+ object, 
+containing text that indicates that the overridden version of the method in the 
+class named 
+
+<emphasis id="strong1071" effect="bold">
+B
+
+</emphasis>
+ has been executed.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="Will_be_useful_later" effect="bold">
+
+Will be useful later
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+The reference to the 
+
+<emphasis id="strong1072" effect="bold">
+String
+
+</emphasis>
+ object returned by the 
+overridden version of the method will prove useful later when we need to 
+determine which version of the method is actually executed.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21011">
+<title>
+<emphasis id="The_class_named_C" effect="bold">
+
+The class named C
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+<link id="a1065" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ shows the definition of a class named 
+
+<emphasis id="strong1073" effect="bold">
+C,
+
+</emphasis>
+ which 
+extends the class named 
+
+<emphasis id="strong1074" effect="bold">
+B
+
+</emphasis>
+, and overrides the method named
+
+
+<emphasis id="strong1075" effect="bold">
+ToString
+
+</emphasis>
+ again.
+
+</para>
+
+
+
+
+
+<para id="p1043">
+An inherited virtual method can be overridden 
+by every class that inherits it, resulting in potentially many different 
+overridden versions of a given method in a class hierarchy.
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1044">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Definition of class C.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">class C : B {
+  public override String ToString() {
+    return "ToString in class C";
+  }//end overridden ToString()
+}//end class B
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31008">
+<title>
+<emphasis id="Behavior_of_overridden_version" effect="bold">
+
+Behavior of overridden version
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+The behavior of this overridden version of the method is similar to, but 
+different from the overridden version in the class 
+
+<emphasis id="strong1076" effect="bold">
+B.
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1046">
+In this case, the method returns a reference to a 
+
+<emphasis id="strong1077" effect="bold">
+String
+
+</emphasis>
+ 
+object that can be used to confirm that this overridden version of the method 
+has been executed.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21012">
+<title>
+<emphasis id="The_driver_class" effect="bold">
+
+The driver class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+<link id="a1066" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ shows the beginning of the driver class named 
+
+<emphasis id="strong1078" effect="bold">
+Polymorph04
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1048">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Beginning of the driver class.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">public class Polymorph04 {
+  public static void Main() {
+    Object varA = new A();
+    String v1 = varA.ToString();
+    Console.WriteLine(v1);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31009">
+<title>
+<emphasis id="A_new_object_of_the_class_A" effect="bold">
+
+A new object of the class A
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+The 
+
+<emphasis id="strong1079" effect="bold">
+Main
+
+</emphasis>
+ method of the driver class begins by instantiating 
+a new object of the class 
+
+<emphasis id="strong1080" effect="bold">
+A,
+
+</emphasis>
+ and saving the object's reference 
+in a reference variable of type 
+
+<emphasis id="strong1081" effect="bold">
+Object
+
+</emphasis>
+, named 
+
+<emphasis id="strong1082" effect="bold">
+varA
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1050">
+It is very important to note that even though 
+the object was instantiated from the class named 
+
+<emphasis id="strong1083" effect="bold">
+A
+
+</emphasis>
+, the 
+reference was saved as type 
+
+<emphasis id="strong1084" effect="bold">
+Object
+
+</emphasis>
+, not type 
+
+<emphasis id="strong1085" effect="bold">
+A.
+
+</emphasis>
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="Call_ToString_method_on_the_reference" effect="bold">
+
+Call ToString method on the reference
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+Then the code in 
+
+<link id="a1067" target-id="Listing_4">
+
+ Listing 4
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1086" effect="bold">
+ToString
+
+</emphasis>
+ method on the reference 
+variable named 
+
+<emphasis id="strong1087" effect="bold">
+varA
+
+</emphasis>
+, saving the returned reference to the
+
+
+<emphasis id="strong1088" effect="bold">
+String
+
+</emphasis>
+ object in a reference variable of type 
+
+<emphasis id="strong1089" effect="bold">
+String
+
+</emphasis>
+ 
+named 
+
+<emphasis id="strong1090" effect="bold">
+v1
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="Display_the_returned_String" effect="bold">
+
+Display the returned String
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1052">
+Finally, that reference is passed to the 
+
+<emphasis id="strong1091" effect="bold">
+WriteLine
+
+</emphasis>
+ method, 
+causing the 
+
+<emphasis id="strong1092" effect="bold">
+String
+
+</emphasis>
+ returned by the 
+
+<emphasis id="strong1093" effect="bold">
+ToString
+
+</emphasis>
+ 
+method to be displayed on the computer screen. This causes the text shown in 
+
+
+<link id="a1068" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ to be displayed.
+
+</para>
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1053">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Text output for ToString method and class A.
+
+</para>
+
+
+
+							
+
+<code id="pre1004" display="block">A
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="Default_ToString_behavior" effect="bold">
+
+Default ToString behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+What you are seeing here is the 
+
+<emphasis id="strong1094" effect="bold">
+String
+
+</emphasis>
+ produced by the 
+default version of the 
+
+<emphasis id="strong1095" effect="bold">
+ToString
+
+</emphasis>
+ method, as defined by the class 
+named 
+
+<emphasis id="strong1096" effect="bold">
+Object
+
+</emphasis>
+. The default implementation of the 
+
+<emphasis id="strong1097" effect="bold">
+
+ToString
+
+</emphasis>
+ method returns the fully qualified name of the 
+
+<emphasis id="em1008" effect="italics">
+type
+
+</emphasis>
+ 
+of the object. In this case, the object was instantiated from the class named
+
+
+<emphasis id="strong1098" effect="bold">
+A
+
+</emphasis>
+ 
+
+<emphasis id="em1009" effect="italics">
+(so the type of the object is 
+
+<emphasis id="strong1099" effect="bold">
+A
+
+</emphasis>
+)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="Class_A_does_not_override_ToString" effect="bold">
+
+Class A does not override ToString
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+Recall that our new class named 
+
+<emphasis id="strong1100" effect="bold">
+A
+
+</emphasis>
+ does not override the
+
+
+<emphasis id="strong1101" effect="bold">
+ToString
+
+</emphasis>
+ method. Therefore, when the 
+
+<emphasis id="strong1102" effect="bold">
+ToString
+
+</emphasis>
+ 
+method is called on a reference to an object of the class 
+
+<emphasis id="strong1103" effect="bold">
+A,
+
+</emphasis>
+ 
+the default version of the method is executed, producing the output shown in 
+
+
+<link id="a1069" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31010">
+<title>
+<emphasis id="A_new_object_of_the_class_B" effect="bold">
+
+A new object of the class B
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+Now consider the code shown in 
+
+<link id="a1070" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+, which instantiates a new object of 
+the class named 
+
+<emphasis id="strong1104" effect="bold">
+B
+
+</emphasis>
+, and stores the object's reference in a 
+reference variable of type 
+
+<emphasis id="strong1105" effect="bold">
+Object
+
+</emphasis>
+. 
+
+</para>
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1057">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. A new object of the class B.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">    Object varB = new B();
+    String v2 = varB.ToString();
+    Console.WriteLine(v2);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41004">
+<title>
+<emphasis id="Call_ToString_and_display_the_result" effect="bold">
+
+Call ToString and display the result
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1058">
+The code in 
+
+<link id="a1071" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1106" effect="bold">
+ToString
+
+</emphasis>
+ method on the 
+reference of type 
+
+<emphasis id="strong1107" effect="bold">
+Object
+
+</emphasis>
+, saving the returned reference in the 
+reference variable named 
+
+<emphasis id="strong1108" effect="bold">
+v2
+
+</emphasis>
+. 
+
+<emphasis id="em1010" effect="italics">
+(Recall that the 
+
+<emphasis id="strong1109" effect="bold">
+
+ToString
+
+</emphasis>
+ method is overridden in the class named 
+
+<emphasis id="strong1110" effect="bold">
+B
+
+</emphasis>
+.)
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1059">
+As before, the reference is passed to the 
+
+<emphasis id="strong1111" effect="bold">
+WriteLine
+
+</emphasis>
+ method, 
+which causes the text shown in 
+
+<link id="a1072" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ to be displayed on the computer screen.
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+							
+
+<para id="p1060">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. Text output for overridden ToString method and class B.
+
+</para>
+
+
+
+							
+
+<code id="pre1006" display="block">ToString in class B
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="Do_you_recognize_this" effect="bold">
+
+Do you recognize this?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+You should recognize this as the text that was encapsulated in the 
+
+<emphasis id="strong1112" effect="bold">
+
+String
+
+</emphasis>
+ object returned by the overridden version of the 
+
+<emphasis id="strong1113" effect="bold">
+
+ToString
+
+</emphasis>
+ method defined in the class named 
+
+<emphasis id="strong1114" effect="bold">
+B
+
+</emphasis>
+. 
+
+<emphasis id="em1011" effect="italics">
+(See 
+
+
+<link id="a1073" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Overridden_version_of_ToString_was_executed" effect="bold">
+
+Overridden version of ToString was 
+executed
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+This verifies that even though the reference to the object of the class
+
+
+<emphasis id="strong1115" effect="bold">
+B
+
+</emphasis>
+ was stored in a reference variable of type 
+
+<emphasis id="strong1116" effect="bold">
+Object
+
+</emphasis>
+, 
+the overridden version of the 
+
+<emphasis id="strong1117" effect="bold">
+ToString
+
+</emphasis>
+ method in the class 
+named 
+
+<emphasis id="strong1118" effect="bold">
+B
+
+</emphasis>
+ was executed 
+
+<emphasis id="em1012" effect="italics">
+(instead of the default version 
+defined in the class named Object)
+
+</emphasis>
+. This is 
+
+<emphasis id="strong1119" effect="bold">
+<emphasis id="em1013" effect="italics">
+runtime polymorphic 
+behavior
+
+</emphasis>
+</emphasis>
+, as described in a previous module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="Once_again_what_is_the_rule" effect="bold">
+
+Once again, what is the rule?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+The selection of a method for execution is based on the 
+
+<emphasis id="em1014" effect="italics">
+actual type of 
+object
+
+</emphasis>
+ whose reference is stored in a reference variable, and not on the
+
+
+<emphasis id="em1015" effect="italics">
+type of the reference variable
+
+</emphasis>
+ on which the method is called.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31011">
+<title>
+<emphasis id="An_object_of_the_class_C" effect="bold">
+
+An object of the class C
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+Finally, the code in 
+
+<link id="a1074" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+
+</para>
+
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+
+	
+
+<item id="li1070">
+Instantiates a new object of the class 
+
+<emphasis id="strong1120" effect="bold">
+C
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1071">
+Stores the object's reference in a reference variable of type 
+
+<emphasis id="strong1121" effect="bold">
+
+	Object
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1072">
+Calls the 
+
+<emphasis id="strong1122" effect="bold">
+ToString
+
+</emphasis>
+ method on the reference and saves 
+	the returned string
+
+</item>
+
+
+	
+
+<item id="li1073">
+Displays the returned string on the computer screen
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1065">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. An object of the class C.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">    Object varC = new C();
+    String v3 = varC.ToString();
+    Console.WriteLine(v3);
+
+    //Pause until user presses any key.
+    Console.ReadKey();
+  }//end Main
+}//end class Polymorph04
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41008">
+<title>
+<emphasis id="What_will_the_output_look_like" effect="bold">
+
+What will the output look like?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+By now, you should know what to expect in the way of text appearing on the 
+computer screen. The code in 
+
+<link id="a1075" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ causes the text shown in 
+
+<link id="a1076" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ to be 
+displayed.
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1067">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. Text output for overridden ToString method and class C.
+
+</para>
+
+
+
+							
+
+<code id="pre1008" display="block">ToString in class C
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41009">
+<title>
+<emphasis id="Overridden_version_of_ToString_was_called" effect="bold">
+
+Overridden version of ToString was 
+	called
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+This confirms what you should already have known by now. In particular, even 
+though the reference to the object of the class 
+
+<emphasis id="strong1123" effect="bold">
+C
+
+</emphasis>
+ was stored in 
+a reference variable of type 
+
+<emphasis id="strong1124" effect="bold">
+Object
+
+</emphasis>
+, the overridden version of 
+the 
+
+<emphasis id="strong1125" effect="bold">
+ToString
+
+</emphasis>
+ method defined in the class named 
+
+<emphasis id="strong1126" effect="bold">
+C
+
+</emphasis>
+ 
+was executed. Again, this is 
+
+<emphasis id="em1016" effect="italics">
+<emphasis id="strong1127" effect="bold">
+runtime polymorphic behavior
+
+</emphasis>
+</emphasis>
+ 
+based on class inheritance and method overriding.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21013">
+<title>
+<emphasis id="No_downcasting_was_required" effect="bold">
+
+No downcasting was required
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+It is also very important to note that no downcasting was required in order 
+to call the 
+
+<emphasis id="strong1128" effect="bold">
+ToString
+
+</emphasis>
+ method in any of the cases shown above.
+
+</para>
+
+
+
+
+
+<para id="p1070">
+Because a default version of the 
+
+<emphasis id="strong1129" effect="bold">
+ToString
+
+</emphasis>
+ method is defined 
+in the 
+
+<emphasis id="strong1130" effect="bold">
+Object
+
+</emphasis>
+ class, that method can be called without a 
+requirement for downcasting on a reference to any object stored in a variable of 
+type 
+
+<emphasis id="strong1131" effect="bold">
+Object
+
+</emphasis>
+. This holds true for any of the methods defined in 
+the class named 
+
+<emphasis id="strong1132" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21014">
+<title>
+<emphasis id="A_generic_array_object" effect="bold">
+
+A generic array object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+Therefore, if we create an array object designed to store references of type
+
+
+<emphasis id="strong1133" effect="bold">
+Object
+
+</emphasis>
+, we can store 
+
+<emphasis id="em1017" effect="italics">
+(potentially mixed)
+
+</emphasis>
+ references to 
+any type of object in that array. We can later call any of the methods defined 
+in the 
+
+<emphasis id="strong1134" effect="bold">
+Object
+
+</emphasis>
+ class on any of the references stored in the 
+array.
+
+</para>
+
+
+
+
+
+<para id="p1072">
+The result will be the execution of the overridden version of the method as 
+defined in the class from which the object was instantiated, or the version 
+inherited into that class if the method is not overridden in that class. Current 
+jargon would say that the behavior of the method is 
+
+<emphasis id="em1018" effect="italics">
+appropriate
+
+</emphasis>
+ for the 
+type of object on which it is called.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21015">
+<title>
+<emphasis id="Collections" effect="bold">
+
+Collections
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+The C# library provides a number of generic data structure classes, such as
+
+
+<emphasis id="strong1135" effect="bold">
+Stack
+
+</emphasis>
+, and 
+
+<emphasis id="strong1136" effect="bold">
+Queue
+
+</emphasis>
+, which store and retrieve 
+references to objects as type 
+
+<emphasis id="strong1137" effect="bold">
+Object
+
+</emphasis>
+. These classes can be used 
+to create objects that can store and retrieve objects of any class.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1074">
+I encourage you to copy the code from 
+
+<link id="a1077" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Use that code to create a C# 
+console project. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+Click 
+
+<link id="a1078" url="Polymorph04.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1138" effect="bold">
+Polymorph04
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1139" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1140" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1141" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1142" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1079" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+Polymorphism manifests itself in C# in the form of multiple methods having 
+the same name.
+
+</para>
+
+
+
+
+
+<para id="p1077">
+From a practical programming viewpoint, polymorphism manifests itself in 
+three distinct forms in C#:
+
+</para>
+
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+
+	
+
+<item id="li1074">
+Method overloading
+
+</item>
+
+
+	
+
+<item id="li1075">
+Method overriding through class inheritance
+
+</item>
+
+
+	
+
+<item id="li1076">
+Method overriding through interface inheritance
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1078">
+In this module, I have continued my discussion of the implementation of 
+polymorphism using method overriding through class inheritance, and have 
+concentrated on a special case in that category.
+
+</para>
+
+
+
+
+
+<para id="p1079">
+More specifically, I have discussed the use of the 
+
+<emphasis id="strong1143" effect="bold">
+Object
+
+</emphasis>
+ 
+class as a completely generic type for storing references to objects of subclass 
+types, and have explained how that results in a very useful form of runtime 
+polymorphism.
+
+</para>
+
+
+
+
+
+<para id="p1080">
+I briefly mentioned the default version of the methods defined in the 
+
+<emphasis id="strong1144" effect="bold">
+
+Object
+
+</emphasis>
+ class, and explained that in many cases, those default versions 
+are meant to be overridden.
+
+</para>
+
+
+
+
+
+<para id="p1081">
+I provided a sample program that illustrates the overriding of the 
+
+<emphasis id="strong1145" effect="bold">
+
+ToString
+
+</emphasis>
+ method, which is one of the methods defined in the 
+
+<emphasis id="strong1146" effect="bold">
+
+Object
+
+</emphasis>
+ class. 
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1082">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1011" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1147" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1019" list-type="bulleted">
+
+					
+
+<item id="li1077">
+Module name: Xna0116-Runtime Polymorphism and the Object 
+					Class
+
+</item>
+
+
+					
+
+<item id="li1078">
+File: Xna0116.htm
+
+
+</item>
+
+
+					
+
+<item id="li1079">
+Published: 02/27/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1012" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1148" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1083">
+<emphasis id="strong1149" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1084">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1085">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1086">
+<emphasis id="strong1150" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1087">
+A complete listing of the program discussed in this module is provided in 
+
+<link id="a1080" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+
+<note id="note1013" type="">
+
+
+<para id="p1088">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Project Polymorph04.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">/*Project Polymorph04
+Copyright 2009, R.G.Baldwin
+
+This program illustrates polymorphic behavior
+and the Object class
+
+Program output is:
+  
+A
+ToString in class B
+ToString in class C
+*********************************************************/
+using System;
+
+class A : Object {
+  //This class is empty
+}//end class A
+//======================================================//
+
+class B : A {
+  public override String ToString() {
+    return "ToString in class B";
+  }//end overridden ToString()
+}//end class B
+//======================================================//
+
+class C : B {
+  public override String ToString() {
+    return "ToString in class C";
+  }//end overridden ToString()
+}//end class B
+//======================================================//
+
+public class Polymorph04 {
+  public static void Main() {
+    Object varA = new A();
+    String v1 = varA.ToString();
+    Console.WriteLine(v1);
+
+    Object varB = new B();
+    String v2 = varB.ToString();
+    Console.WriteLine(v2);
+
+    Object varC = new C();
+    String v3 = varC.ToString();
+    Console.WriteLine(v3);
+
+    //Pause until user presses any key.
+    Console.ReadKey();
+  }//end Main
+}//end class Polymorph04
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1089">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

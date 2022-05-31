@@ -1,0 +1,4216 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0108-Inheritance in C#</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49498</md:content-id>
+  <md:title>Xna0108-Inheritance in C#</md:title>
+  <md:abstract>Learn how one class can extend another class and inherit all of the properties, events, and methods defined in that class and all of its superclasses; that even though a class may be extended into another class, it remains viable and can be instantiated in its own right; that inheritance is hierarchical with the overall hierarchy being rooted in a class named Object; that C# does not support multiple inheritance; about the ISA and HASA relationships.</md:abstract>
+  <md:uuid>5110bcac-370e-4180-add9-e8d4d4ee7241</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Thu May 05 14:27:52 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="The_three_main_characteristics_of_an_objectoriented_program">
+
+The three main characteristics of an object-oriented program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1003">
+<link id="a1004" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1004">
+<link id="a1005" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1006">
+<link id="a1007" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1007">
+<link id="a1008" target-id="A_new_class_can_extend_an_existing_class">
+
+A new class can extend an existing class
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1008">
+<link id="a1009" target-id="What_is_inherited">
+
+What is inherited?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="The_superclass_remains_viable">
+
+The superclass remains viable
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="A_hierarchy_of_classes">
+
+A hierarchy of classes
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Members_of_the_SystemObject_class">
+
+Members of the System.Object class
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1012">
+<link id="a1013" target-id="The_Button_class">
+
+The Button class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="The_Object_class_is_the_default_superclass">
+
+The Object class is the default superclass
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="An_orderly_hierarchy">
+
+An orderly hierarchy
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="The_airship_hierarchy">
+
+The airship hierarchy
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1016">
+<link id="a1017" target-id="The_Balloon_class">
+
+The Balloon class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="The_Airplane_class">
+
+The Airplane class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="Three_types_of_objects">
+
+Three types of objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="From_the_general_to_the_specialized">
+
+From the general to the specialized
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Single_and_multiple_inheritance">
+
+Single and multiple inheritance
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="The_ISA_relationship">
+
+The ISA relationship
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="The_HASA_relationship_">
+
+The HASA relationship
+
+
+
+</link>
+
+
+
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1024">
+<link id="a1025" target-id="TheAirshipHierarchy">
+
+The airship hierarchy
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1026">
+<link id="a1027" target-id="Will_explain_in_fragments">
+
+Will explain in fragments
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="Four_class_definitions">
+
+Four class definitions
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1028">
+<link id="a1029" target-id="The_Airship_class">
+
+The Airship class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="TheBaloonClass">
+
+The Balloon class
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1030">
+<link id="a1031" target-id="The_new_material">
+
+The new material
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="The_effect_of_extending_a_class">
+
+The effect of extending a class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="Airship_extends_Object">
+
+Airship extends Object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="The_beginning_of_the_Driver_class">
+
+The beginning of the Driver class
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1034">
+<link id="a1035" target-id="Code_common_to_all_four_classes">
+
+Code common to all four classes
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Instantiate_a_new_Balloon_object">
+
+Instantiate a new Balloon object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Set_properties_in_the_Balloon_object">
+
+Set properties in the Balloon object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Get_and_display_property_values">
+
+Get and display property values
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="The_program_output">
+
+The program output
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="The_remaining_code">
+
+The remaining code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="No_sharing_of_properties">
+
+No sharing of properties
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1047" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on 
+how to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+<section id="h21000">
+<title>
+<emphasis id="The_three_main_characteristics_of_an_objectoriented_program" effect="bold">
+
+The three main characteristics of an object-oriented program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1004">
+Object-oriented programs exhibit three main characteristics:
+
+</para>
+
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+
+	
+
+<item id="li1046">
+Encapsulation
+
+</item>
+
+
+	
+
+<item id="li1047">
+Inheritance
+
+</item>
+
+
+	
+
+<item id="li1048">
+Polymorphism
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1005">
+I will explain and illustrate inheritance along with some related topics in 
+this module.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h21001">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1006">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1013" list-type="bulleted">
+
+		
+
+<item id="li1049">
+<link id="a1048" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Output from the program named Airship01.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1014" list-type="bulleted">
+
+		
+
+<item id="li1050">
+<link id="a1049" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. The Airship class.
+
+</item>
+
+
+		
+
+<item id="li1051">
+<link id="a1050" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The Balloon class.
+
+</item>
+
+
+		
+
+<item id="li1052">
+<link id="a1051" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. The beginning of the Driver class.
+
+</item>
+
+
+		
+
+<item id="li1053">
+<link id="a1052" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. The program named Airship01.
+
+</item>
+
+
+	
+
+</list>
+
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+The first of the three major characteristics of an object-oriented program is 
+
+
+<emphasis id="em1001" effect="italics">
+encapsulation
+
+</emphasis>
+. I explained 
+
+<emphasis id="em1002" effect="italics">
+encapsulation
+
+</emphasis>
+ in an earlier module. The second of the 
+three is 
+
+<emphasis id="em1003" effect="italics">
+inheritance
+
+</emphasis>
+, followed by 
+
+<emphasis id="em1004" effect="italics">
+polymorphism
+
+</emphasis>
+. I will 
+explain 
+
+<emphasis id="em1005" effect="italics">
+inheritance
+
+</emphasis>
+ in this module and will explain 
+
+<emphasis id="em1006" effect="italics">
+polymorphism
+
+</emphasis>
+ in a future 
+module.
+
+</para>
+
+
+
+
+
+<section id="h21002">
+<title>
+<emphasis id="A_new_class_can_extend_an_existing_class" effect="bold">
+
+A new class can extend an existing class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+A class can be defined to inherit the properties, events, and methods of 
+another class. From a syntax viewpoint, this is accomplished using the
+
+
+<emphasis id="strong1001" effect="bold">
+:
+
+</emphasis>
+ 
+
+<emphasis id="em1007" effect="italics">
+(colon)
+
+</emphasis>
+ operator (see 
+
+<link id="a1053" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+).
+
+</para>
+
+
+
+
+
+<para id="p1009">
+The class being extended or inherited from is often called the 
+
+<emphasis id="em1008" effect="italics">
+base class
+
+</emphasis>
+ 
+or the 
+
+<emphasis id="em1009" effect="italics">
+superclass
+
+</emphasis>
+. The new class is often called the 
+
+<emphasis id="em1010" effect="italics">
+derived class
+
+</emphasis>
+ 
+or the 
+
+<emphasis id="em1011" effect="italics">
+subclass
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="What_is_inherited" effect="bold">
+
+What is inherited?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+The subclass inherits the data representation and behavior of the 
+superclass 
+
+<emphasis id="em1012" effect="italics">
+(and all of its superclasses)
+
+</emphasis>
+. However, the subclass can 
+modify the behavior of inherited methods by overriding them, provided that they 
+were declared 
+
+<emphasis id="em1013" effect="italics">
+virtual
+
+</emphasis>
+ by the original author. 
+
+<emphasis id="em1014" effect="italics">
+(That will be 
+one of the topics in a future module on polymorphism.)
+
+</emphasis>
+ The 
+subclass can also add new data representation and behavior that is unique to its 
+own purposes. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="The_superclass_remains_viable" effect="bold">
+
+The superclass remains viable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+A program can instantiate objects of a superclass as well as instantiating 
+objects of its subclasses. 
+From a practical viewpoint, the superclass doesn't even know that it has been 
+extended.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="A_hierarchy_of_classes" effect="bold">
+
+A hierarchy of classes
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1012">
+Inheritance is hierarchical. By that, I mean that a class may be the subclass 
+of one 
+
+<emphasis id="em1015" effect="italics">
+(and only one)
+
+</emphasis>
+ other class and may be the superclass of one or 
+more other classes.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+The overall inheritance hierarchy has a single root in the
+
+
+<link id="a1054" url="http://msdn.microsoft.com/en-us/library/system.object.aspx">
+
+
+System.Object
+
+</link>
+
+ class. In other words, the
+
+
+<link id="a1055" url="http://msdn.microsoft.com/en-us/library/system.object.aspx">
+
+
+System.Object
+
+</link>
+
+ class is the common ancestor for every other class.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Members_of_the_SystemObject_class" effect="bold">
+
+Members of the System.Object class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+The 
+
+<emphasis id="strong1002" effect="bold">
+System.object
+
+</emphasis>
+ class defines the following
+
+
+<link id="a1056" url="http://msdn.microsoft.com/en-us/library/system.object_members.aspx">
+
+
+eight methods
+
+</link>
+
+, which are inherited by every other class:
+
+</para>
+
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+
+	
+
+<item id="li1054">
+<emphasis id="strong1003" effect="bold">
+Equals
+
+</emphasis>
+ - Overloaded. Determines whether two Object 
+	instances are equal.
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1055">
+<emphasis id="strong1004" effect="bold">
+Equals(Object)
+
+</emphasis>
+ - Determines whether the specified 
+		Object is equal to the current Object.
+
+</item>
+
+
+		
+
+<item id="li1056">
+<emphasis id="strong1005" effect="bold">
+Equals(Object,Object)
+
+</emphasis>
+ - Determines whether the 
+		specified Object instances are considered equal.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</item>
+
+
+	
+
+<item id="li1057">
+<emphasis id="strong1006" effect="bold">
+Finalize
+
+</emphasis>
+ - Allows an Object to attempt to free 
+	resources and perform other cleanup operations before the Object is 
+	reclaimed by garbage collection.
+
+</item>
+
+
+	
+
+<item id="li1058">
+<emphasis id="strong1007" effect="bold">
+GetHashCode
+
+</emphasis>
+ - Serves as a hash function for a 
+	particular type. 
+
+</item>
+
+
+	
+
+<item id="li1059">
+<emphasis id="strong1008" effect="bold">
+GetType
+
+</emphasis>
+ - Gets the Type of the current instance.
+
+</item>
+
+
+	
+
+<item id="li1060">
+<emphasis id="strong1009" effect="bold">
+MemberwiseClone
+
+</emphasis>
+ - Creates a shallow copy of the current 
+	Object.
+
+</item>
+
+
+	
+
+<item id="li1061">
+<emphasis id="strong1010" effect="bold">
+ReferenceEquals
+
+</emphasis>
+ - Determines whether the specified 
+	Object instances are the same instance.
+
+</item>
+
+
+	
+
+<item id="li1062">
+<emphasis id="strong1011" effect="bold">
+ToString
+
+</emphasis>
+ - Returns a String that represents the current 
+	Object.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1015">
+Because these eight methods are inherited by every other class, they are 
+always available for you to use in your code. (Possibly the most frequently used 
+of these methods is the 
+
+<emphasis id="strong1012" effect="bold">
+ToString
+
+</emphasis>
+ method.)
+
+</para>
+
+
+
+
+
+<section id="h31005">
+<title>
+<emphasis id="The_Button_class" effect="bold">
+
+The Button class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+Moving down a single path in the inheritance hierarchy, we find that the 
+family tree for the 
+
+<emphasis id="strong1013" effect="bold">
+Button
+
+</emphasis>
+ class in the 
+
+<emphasis id="strong1014" effect="bold">
+System.Windows.Forms
+
+</emphasis>
+ 
+namespace is as follows:
+
+</para>
+
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+
+	
+
+<item id="li1063">
+System.
+
+<emphasis id="strong1015" effect="bold">
+Object
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1064">
+System.MarshalByRefObject
+
+</item>
+
+
+	
+
+<item id="li1065">
+System.ComponentModel.Component
+
+</item>
+
+
+	
+
+<item id="li1066">
+System.Windows.Forms.Control
+
+</item>
+
+
+	
+
+<item id="li1067">
+System.Windows.Forms.ButtonBase
+
+</item>
+
+
+	
+
+<item id="li1068">
+System.Windows.Forms.
+
+<emphasis id="strong1016" effect="bold">
+Button
+
+</emphasis>
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1017">
+If you were to examine the documentation for each of the classes in the
+
+
+<emphasis id="strong1017" effect="bold">
+Button
+
+</emphasis>
+ class' family tree, you would probably find that each 
+class is more specialized than its superclass. For example, the 
+
+<emphasis id="strong1018" effect="bold">
+Object
+
+</emphasis>
+ 
+class is very generic and the 
+
+<emphasis id="strong1019" effect="bold">
+Button
+
+</emphasis>
+ class is very specialized. 
+Generally speaking, classes become more specialized as you move down the 
+hierarchy beginning with the 
+
+<emphasis id="strong1020" effect="bold">
+Object
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="The_Object_class_is_the_default_superclass" effect="bold">
+
+The Object class is the default superclass
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+When you define a new class, it becomes an immediate subclass of the 
+
+<emphasis id="strong1021" effect="bold">
+
+Object
+
+</emphasis>
+ class by default unless you cause your new class to extend some 
+other class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="An_orderly_hierarchy" effect="bold">
+
+An orderly hierarchy
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+The C# inheritance mechanism allows you build an orderly hierarchy of classes 
+to supplement the classes that are already in the class library. 
+
+</para>
+
+
+
+
+
+<para id="p1020">
+When several of your abstract data types have characteristics in common, you 
+can design their commonalities into a single superclass and separate their 
+unique characteristics into unique subclasses. This is one of the purposes of 
+inheritance.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21004">
+<title>
+<emphasis id="The_airship_hierarchy" effect="bold">
+
+The airship hierarchy
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1021">
+For example, suppose you are building a program dealing with airships. All 
+airships have altitude and range properties in common. Therefore, you could 
+build a base 
+
+<emphasis id="strong1022" effect="bold">
+Airship
+
+</emphasis>
+ class containing data and methods having to do with 
+range and altitude. 
+
+</para>
+
+
+
+
+
+<para id="p1022">
+From this superclass, you could derive a 
+
+<emphasis id="strong1023" effect="bold">
+Balloon
+
+</emphasis>
+ class and an 
+
+<emphasis id="strong1024" effect="bold">
+
+Airplane
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<section id="h31008">
+<title>
+<emphasis id="The_Balloon_class" effect="bold">
+
+The Balloon class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1023">
+The 
+
+<emphasis id="strong1025" effect="bold">
+Balloon
+
+</emphasis>
+ class might add properties and methods dealing with 
+passenger capacity and what makes it go up 
+
+<emphasis id="em1016" effect="italics">
+(helium, hydrogen, or hot air)
+
+</emphasis>
+. 
+Objects of the 
+
+<emphasis id="strong1026" effect="bold">
+Balloon
+
+</emphasis>
+ class would then be able to deal with altitude, 
+range, passenger capacity, and what makes it go up.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="The_Airplane_class" effect="bold">
+
+The Airplane class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1024">
+The 
+
+<emphasis id="strong1027" effect="bold">
+Airplane
+
+</emphasis>
+ class might add properties and methods dealing with 
+engine type 
+
+<emphasis id="em1017" effect="italics">
+(jet or propeller)
+
+</emphasis>
+ and cargo capacity. Objects of the 
+
+<emphasis id="strong1028" effect="bold">
+
+Airplane
+
+</emphasis>
+ class could then deal with altitude, range, engine type, and cargo 
+capacity. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+<emphasis id="Three_types_of_objects" effect="bold">
+
+Three types of objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+Having created this hierarchy of classes, you could instantiate objects of 
+type 
+
+<emphasis id="strong1029" effect="bold">
+Airship
+
+</emphasis>
+, 
+
+<emphasis id="strong1030" effect="bold">
+Balloon
+
+</emphasis>
+, and 
+
+<emphasis id="strong1031" effect="bold">
+Airplane
+
+</emphasis>
+ with the objects of 
+each type having properties and methods to deal with those special 
+characteristics of the flying machine indicated by the name of the class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31011">
+<title>
+<emphasis id="From_the_general_to_the_specialized" effect="bold">
+
+From the general to the specialized
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1026">
+You may have noticed that in this hierarchical class structure, inheritance 
+causes the structure to grow in a direction from most general to more 
+specialized. This is typical. 
+
+</para>
+
+
+
+		
+
+</section>
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Single_and_multiple_inheritance" effect="bold">
+
+Single and multiple inheritance
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1027">
+C++ and some other object-oriented programming languages allow for multiple 
+inheritance. This means that a new class can extend more than one superclass. 
+This has advantages in some cases, but can lead to difficulties in other cases.
+
+
+</para>
+
+
+
+
+
+<para id="p1028">
+C# does not support multiple inheritance. Instead it supports a different 
+mechanism called an 
+
+<emphasis id="em1018" effect="italics">
+interface
+
+</emphasis>
+ that provides most of the benefits of 
+multiple inheritance without most of the problems. I will explain the C# 
+interface in a future module.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="The_ISA_relationship" effect="bold">
+
+The ISA relationship
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+You will sometimes hear people speak of the 
+
+<emphasis id="strong1032" effect="bold">
+ISA 
+
+</emphasis>
+relationship when 
+discussing OOP 
+
+<emphasis id="em1019" effect="italics">
+(such as in he 
+
+<emphasis id="strong1033" effect="bold">
+is a
+
+</emphasis>
+ hero)
+
+</emphasis>
+. The source of this terminology is more fundamental than you may 
+at first suspect. 
+
+</para>
+
+
+
+
+
+<para id="p1030">
+Object-oriented designers often strive to use inheritance to model 
+relationships where a subclass 
+
+<emphasis id="em1020" effect="italics">
+"is a kind of"
+
+</emphasis>
+ the superclass. For 
+example, a car 
+
+<emphasis id="em1021" effect="italics">
+"is a kind of"
+
+</emphasis>
+ vehicle. A programmer 
+
+<emphasis id="em1022" effect="italics">
+"is a kind of"
+
+</emphasis>
+ 
+employee which in turn 
+
+<emphasis id="em1023" effect="italics">
+"is a kind of"
+
+</emphasis>
+ person. An airplane 
+
+<emphasis id="em1024" effect="italics">
+"is a kind of"
+
+</emphasis>
+ 
+airship and so is a hot-air balloon.
+
+</para>
+
+
+
+
+
+<para id="p1031">
+This relationship is called the 
+
+<emphasis id="strong1034" effect="bold">
+ISA 
+
+</emphasis>
+relationship. It's that simple.
+
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="The_HASA_relationship_" effect="bold">
+
+The HASA relationship
+
+
+
+</emphasis>
+
+
+
+
+
+</title>
+
+
+
+
+<para id="p1032">
+If you were to define a class that more fully represents an airplane, you 
+might choose to break certain parts of the airplane out into separate objects 
+and to incorporate them by reference into your 
+
+<emphasis id="strong1035" effect="bold">
+Airplane
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<para id="p1033">
+For example, you might incorporate a 
+
+<emphasis id="strong1036" effect="bold">
+Cockpit
+
+</emphasis>
+ object, a
+
+
+<emphasis id="strong1037" effect="bold">
+LandingGear
+
+</emphasis>
+ object, a 
+
+<emphasis id="strong1038" effect="bold">
+Propeller
+
+</emphasis>
+ object, etc. 
+Then, (even though it wouldn't be good grammar), you could say than an object of 
+your 
+
+<emphasis id="strong1039" effect="bold">
+Airplane
+
+</emphasis>
+ class 
+
+<emphasis id="em1025" effect="italics">
+"has a"
+
+</emphasis>
+ 
+
+<emphasis id="strong1040" effect="bold">
+Cockpit
+
+</emphasis>
+ 
+object, 
+
+<emphasis id="em1026" effect="italics">
+"has a"
+
+</emphasis>
+ 
+
+<emphasis id="strong1041" effect="bold">
+LandingGear
+
+</emphasis>
+ object, etc. This is often 
+referred to as a HASA relationship. For example, an airplane ISA airship and 
+HASA cockpit.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21008">
+<title>
+<emphasis id="TheAirshipHierarchy" effect="bold">
+
+The airship hierarchy
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1034">
+A little earlier I explained an airship hierarchy involving an 
+
+<emphasis id="strong1042" effect="bold">
+
+Airship
+
+</emphasis>
+ class, a 
+
+<emphasis id="strong1043" effect="bold">
+Balloon
+
+</emphasis>
+ class, and an 
+
+<emphasis id="strong1044" effect="bold">
+
+Airplane
+
+</emphasis>
+ class. I will present and explain a sample program that 
+implements that hierarchy. The output from the program is shown in 
+
+<link id="a1057" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. 
+I will refer back to 
+
+<link id="a1058" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ in the paragraphs that follow.
+
+</para>
+
+
+
+	
+
+
+<note id="note1000" type="">
+
+
+<para id="p1035">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Output from the program named Airship01.
+
+</para>
+
+
+
+							
+
+<code id="pre1000" display="block">Balloon
+range = 5 miles
+altitude = 500 feet
+passenger capacity = 5
+lift media = Hot Air
+
+Airplane
+range = 5000 miles
+altitude = 35000 feet
+cargo capacity = 20000 pounds
+engine type = jet
+</code>
+
+
+
+
+</note>
+
+
+
+
+
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<section id="h21009">
+<title>
+<emphasis id="strong1045" effect="bold">
+<emphasis id="Will_explain_in_fragments" effect="bold">
+
+Will explain in fragments
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1036">
+I will explain this program in fragments. A complete listing of the program 
+is provided in 
+
+<link id="a1059" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21010">
+<title>
+<emphasis id="Four_class_definitions" effect="bold">
+
+Four class definitions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+This program consists of four class definitions:
+
+</para>
+
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+
+	
+
+<item id="li1069">
+Airship
+
+</item>
+
+
+	
+
+<item id="li1070">
+Balloon
+
+</item>
+
+
+	
+
+<item id="li1071">
+Airplane
+
+</item>
+
+
+	
+
+<item id="li1072">
+Driver
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1038">
+The 
+
+<emphasis id="strong1046" effect="bold">
+Airship
+
+</emphasis>
+ class defines properties that are common to 
+machines that fly:
+
+</para>
+
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+
+	
+
+<item id="li1073">
+Range
+
+</item>
+
+
+	
+
+<item id="li1074">
+Altitude
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1039">
+The 
+
+<emphasis id="strong1047" effect="bold">
+Balloon
+
+</emphasis>
+ class extends the 
+
+<emphasis id="strong1048" effect="bold">
+Airship
+
+</emphasis>
+ class 
+and defines properties that are peculiar to airships that are lighter than air:
+
+</para>
+
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+
+	
+
+<item id="li1075">
+Passenger capacity
+
+</item>
+
+
+	
+
+<item id="li1076">
+Lift Media (hot air, helium, or hydrogen)
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1040">
+The 
+
+<emphasis id="strong1049" effect="bold">
+Airplane
+
+</emphasis>
+ class extends the 
+
+<emphasis id="strong1050" effect="bold">
+Airship
+
+</emphasis>
+ 
+class and defines properties that are peculiar to airplanes:
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1077">
+Cargo capacity
+
+</item>
+
+
+	
+
+<item id="li1078">
+Engine type
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1041">
+The 
+
+<emphasis id="strong1051" effect="bold">
+Driver
+
+</emphasis>
+ class instantiates objects of the 
+
+<emphasis id="strong1052" effect="bold">
+Balloon
+
+</emphasis>
+ 
+class and the 
+
+<emphasis id="strong1053" effect="bold">
+Airplane
+
+</emphasis>
+ class and exercises their 
+
+<emphasis id="strong1054" effect="bold">
+set
+
+</emphasis>
+ 
+and 
+
+<emphasis id="strong1055" effect="bold">
+get
+
+</emphasis>
+ methods.
+
+</para>
+
+
+
+
+
+<section id="h31012">
+<title>
+<emphasis id="strong1056" effect="bold">
+<emphasis id="The_Airship_class" effect="bold">
+
+The Airship class
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1042">
+<link id="a1060" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ shows the 
+
+<emphasis id="strong1057" effect="bold">
+Airship
+
+</emphasis>
+ class in its entirety.
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1043">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. The Airship class.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">  //Define common properties in the base class.
+  class Airship {
+    private int rangeData = 0;
+    private int altitudeData = 0;
+
+    public int range {
+      get {
+        return rangeData;
+      }//end get
+      set {
+        rangeData = value;
+      }//end set
+    }//end range property
+
+    public int altitude {
+      get {
+        return altitudeData;
+      }//end get
+      set {
+        altitudeData = value;
+      }//end set
+    }//end altitude property
+
+  }//end class Airship
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+	
+
+<para id="p1044">
+There is nothing in 
+
+<link id="a1061" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ that you haven't seen in earlier modules. 
+	This class provides 
+
+<emphasis id="strong1058" effect="bold">
+set
+
+</emphasis>
+ and 
+
+<emphasis id="strong1059" effect="bold">
+get
+
+</emphasis>
+ methods 
+	for two properties named 
+
+<emphasis id="strong1060" effect="bold">
+range
+
+</emphasis>
+ and 
+
+<emphasis id="strong1061" effect="bold">
+altitude
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31013">
+<title>
+<emphasis id="TheBaloonClass" effect="bold">
+
+The Balloon class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+<link id="a1062" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ shows the 
+
+<emphasis id="strong1062" effect="bold">
+Balloon
+
+</emphasis>
+ class in its entirety.
+
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1046">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. The Balloon class.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">  //Define unique properties in the subclass.
+  class Balloon : Airship {
+    private int passengerCapacityData;
+    private String liftMediaData;
+
+    public int passengerCapacity {
+      get {
+        return passengerCapacityData;
+      }//end get
+      set {
+        passengerCapacityData = value;
+      }//end set
+    }//end passengerCapacity property
+
+    public String liftMedia {
+      get {
+        return liftMediaData;
+      }//end get
+      set {
+        liftMediaData = value;
+      }//end set
+    }//end liftMedia property
+  }//end Balloon class
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+	
+
+<section id="h41000">
+<title>
+<emphasis id="The_new_material" effect="bold">
+
+The new material
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+The only thing in 
+
+<link id="a1063" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ that is new to this module is the colon that 
+appears between the words 
+
+<emphasis id="em1027" effect="italics">
+Balloon
+
+</emphasis>
+ and 
+
+<emphasis id="em1028" effect="italics">
+Airship
+
+</emphasis>
+ on the second line. This is the C# way of specifying that the class named
+
+
+<emphasis id="strong1063" effect="bold">
+Balloon
+
+</emphasis>
+ extends or inherits from the class named 
+
+<emphasis id="strong1064" effect="bold">
+
+Airship
+
+</emphasis>
+. In this case, the 
+
+<emphasis id="strong1065" effect="bold">
+Balloon
+
+</emphasis>
+ class is the 
+subclass or derived class and the 
+
+<emphasis id="strong1066" effect="bold">
+Airship
+
+</emphasis>
+ class is the 
+superclass or base class, depending on which flavor of jargon you prefer.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="The_effect_of_extending_a_class" effect="bold">
+
+The effect of extending a class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1048">
+The effect of having the 
+
+<emphasis id="strong1067" effect="bold">
+Balloon
+
+</emphasis>
+ class extend the 
+
+<emphasis id="strong1068" effect="bold">
+
+Airship
+
+</emphasis>
+ class is different from anything that you have seen in previous 
+modules. When one class extends another class, the new class inherits all of 
+the properties, events, and methods of the superclass and all of its 
+superclasses.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31014">
+<title>
+<emphasis id="Airship_extends_Object" effect="bold">
+
+Airship extends Object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+In this case, the 
+
+<emphasis id="strong1069" effect="bold">
+Airship
+
+</emphasis>
+ class extends the 
+
+<emphasis id="strong1070" effect="bold">
+Object
+
+</emphasis>
+ 
+class by default. Therefore, an object instantiated from the 
+
+<emphasis id="strong1071" effect="bold">
+Balloon
+
+</emphasis>
+ 
+class contains:
+
+</para>
+
+
+
+
+
+<list id="ul1022" list-type="bulleted">
+
+	
+
+<item id="li1079">
+The two properties defined in the 
+
+<emphasis id="strong1072" effect="bold">
+Balloon
+
+</emphasis>
+ class in 
+	
+
+<link id="a1064" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</item>
+
+
+	
+
+<item id="li1080">
+The two properties defined in the 
+
+<emphasis id="strong1073" effect="bold">
+Airship
+
+</emphasis>
+ class in 
+	
+
+<link id="a1065" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</item>
+
+
+	
+
+<item id="li1081">
+The eight methods defined in the Object class discussed
+	
+
+<link id="a1066" target-id="Members_of_the_SystemObject_class">
+
+earlier
+
+</link>
+
+.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31015">
+<title>
+<emphasis id="The_beginning_of_the_Driver_class" effect="bold">
+
+The beginning of the Driver class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1050">
+At this point, I am going to show and explain the first half of the 
+
+<emphasis id="strong1074" effect="bold">
+
+Driver
+
+</emphasis>
+ class (see 
+
+<link id="a1067" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+) and relate it to the program output shown 
+in 
+
+<link id="a1068" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1051">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. The beginning of the Driver class.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">using System;namespace Airship01 {
+
+  //Define a class to exercise the Balloon class and the
+  // Airplane class.
+  class Driver {
+    static void Main(string[] args) {
+
+      Balloon balloon = new Balloon();
+      balloon.range = 5;
+      balloon.altitude = 500;
+      balloon.passengerCapacity = 5;
+      balloon.liftMedia = "Hot Air";
+
+      Console.WriteLine("Balloon");
+      Console.WriteLine(
+                   "range = " + balloon.range + " miles");
+      Console.WriteLine(
+              "altitude = " + balloon.altitude + " feet");
+      Console.WriteLine("passenger capacity = " 
+                             + balloon.passengerCapacity);
+      Console.WriteLine("lift media = " 
+                                     + balloon.liftMedia);
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+	
+
+<para id="p1052">
+For convenience and because of their small sizes, I elected to define all 
+	four classes in the same file as the file that contains the 
+
+<emphasis id="strong1075" effect="bold">
+Driver
+
+</emphasis>
+ 
+	class with the 
+
+<emphasis id="strong1076" effect="bold">
+Main
+
+</emphasis>
+ method. That is not a requirement, 
+	however, and on large projects you may want to put each class definition in 
+	its own file.
+
+</para>
+
+
+
+
+
+<section id="h41002">
+<title>
+<emphasis id="Code_common_to_all_four_classes" effect="bold">
+
+Code common to all four classes
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1053">
+The single line of code at the very beginning of 
+
+<link id="a1069" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ applies to all four classes. You have seen 
+this before so it should not be new to you.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="Instantiate_a_new_Balloon_object" effect="bold">
+
+Instantiate a new Balloon object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The 
+
+<emphasis id="strong1077" effect="bold">
+Main
+
+</emphasis>
+ method begins by instantiating a new object of the 
+
+<emphasis id="strong1078" effect="bold">
+
+Balloon
+
+</emphasis>
+ class and saving its reference in a reference variable of type
+
+
+<emphasis id="strong1079" effect="bold">
+Balloon
+
+</emphasis>
+ named 
+
+<emphasis id="strong1080" effect="bold">
+balloon
+
+</emphasis>
+. This reference will be 
+used later to access the new object.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Set_properties_in_the_Balloon_object" effect="bold">
+
+Set properties in the Balloon object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+Then the 
+
+<emphasis id="strong1081" effect="bold">
+Main
+
+</emphasis>
+ method calls the four 
+
+<emphasis id="strong1082" effect="bold">
+set
+
+</emphasis>
+ methods 
+belonging to the new 
+
+<emphasis id="strong1083" effect="bold">
+Balloon
+
+</emphasis>
+ object, using them to set values 
+into the four properties belonging to the 
+
+<emphasis id="strong1084" effect="bold">
+Balloon
+
+</emphasis>
+ object.
+
+</para>
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+Remember that the 
+
+<emphasis id="strong1085" effect="bold">
+set
+
+</emphasis>
+ methods that hide two of the 
+properties are defined in the 
+
+<emphasis id="strong1086" effect="bold">
+Airship
+
+</emphasis>
+ class and are inherited 
+into the 
+
+<emphasis id="strong1087" effect="bold">
+Balloon
+
+</emphasis>
+ class. The other two 
+
+<emphasis id="strong1088" effect="bold">
+set
+
+</emphasis>
+ 
+methods are defined in the 
+
+<emphasis id="strong1089" effect="bold">
+Balloon
+
+</emphasis>
+ class.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="Get_and_display_property_values" effect="bold">
+
+Get and display property values
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+After that, the 
+
+<emphasis id="strong1090" effect="bold">
+Main
+
+</emphasis>
+ method calls the four 
+
+<emphasis id="strong1091" effect="bold">
+get
+
+</emphasis>
+ methods 
+belonging to the new 
+
+<emphasis id="strong1092" effect="bold">
+Balloon
+
+</emphasis>
+ object, using them to get and 
+display values from the four properties belonging to the new 
+
+<emphasis id="strong1093" effect="bold">
+Balloon
+
+</emphasis>
+ 
+object.
+
+</para>
+
+
+
+
+
+
+<note id="note1005" type="">
+
+
+The 
+
+<emphasis id="strong1094" effect="bold">
+get
+
+</emphasis>
+ methods that hide two of the properties 
+are defined in the 
+
+<emphasis id="strong1095" effect="bold">
+Airship
+
+</emphasis>
+ class and are inherited into the
+
+
+<emphasis id="strong1096" effect="bold">
+Balloon
+
+</emphasis>
+ class. The other two 
+
+<emphasis id="strong1097" effect="bold">
+get
+
+</emphasis>
+ methods are 
+defined in the 
+
+<emphasis id="strong1098" effect="bold">
+Balloon
+
+</emphasis>
+ class.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="The_program_output" effect="bold">
+
+The program output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1057">
+The code in 
+
+<link id="a1070" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ produces the first five lines of output text shown in 
+
+
+<link id="a1071" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31016">
+<title>
+<emphasis id="The_remaining_code" effect="bold">
+
+The remaining code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1058">
+You can view the remaining code in the 
+
+<emphasis id="strong1099" effect="bold">
+Driver
+
+</emphasis>
+ class and the 
+code in the 
+
+<emphasis id="strong1100" effect="bold">
+Airplane
+
+</emphasis>
+ class in 
+
+<link id="a1072" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. If you understand my explanation of 
+
+<link id="a1073" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+, 
+
+<link id="a1074" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+, and 
+
+<link id="a1075" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ 
+above, you should have no difficulty understanding the behavior of the code in 
+the 
+
+<emphasis id="strong1101" effect="bold">
+Airplane
+
+</emphasis>
+ class and the remaining code in the 
+
+<emphasis id="strong1102" effect="bold">
+Driver
+
+</emphasis>
+ 
+class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31017">
+<title>
+<emphasis id="No_sharing_of_properties" effect="bold">
+
+No sharing of properties
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1059">
+There is an important point to remember, however. Even though the 
+
+<emphasis id="strong1103" effect="bold">
+
+Balloon
+
+</emphasis>
+ and 
+
+<emphasis id="strong1104" effect="bold">
+Airplane
+
+</emphasis>
+ classes each inherit the 
+
+<emphasis id="strong1105" effect="bold">
+
+range
+
+</emphasis>
+ and 
+
+<emphasis id="strong1106" effect="bold">
+altitude
+
+</emphasis>
+ properties from the 
+
+<emphasis id="strong1107" effect="bold">
+Airship
+
+</emphasis>
+ 
+class, objects instantiated from the 
+
+<emphasis id="strong1108" effect="bold">
+Balloon
+
+</emphasis>
+ and 
+
+<emphasis id="strong1109" effect="bold">
+
+Airplane
+
+</emphasis>
+ classes do not physically share these two properties. Instead, 
+each object has its own copy of the 
+
+<emphasis id="strong1110" effect="bold">
+range
+
+</emphasis>
+ property and its own 
+copy of the 
+
+<emphasis id="strong1111" effect="bold">
+altitude
+
+</emphasis>
+ property. The only thing shared by the two 
+objects is part of the blueprint from which each object is constructed.
+
+</para>
+
+
+
+
+
+<para id="p1060">
+Basically there is no sharing of anything among objects until the 
+
+<emphasis id="strong1112" effect="bold">
+
+static
+
+</emphasis>
+ keyword shows up and at that point, some sharing does take 
+place. The use of the 
+
+<emphasis id="strong1113" effect="bold">
+static
+
+</emphasis>
+ keyword is a topic for a future 
+module.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+I encourage you to copy the code from 
+
+<link id="a1076" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Use that code to create a 
+C# console project. Compile and run the project. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that 
+you can explain why your changes behave as they do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+Click 
+
+<link id="a1077" url="Airship01.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1114" effect="bold">
+Airship01
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1115" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1116" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1117" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1118" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1078" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+In this module, you learned how one class can extend another class and 
+inherit all of the properties, events, and methods defined in that class and all 
+of its superclasses. You learned that even though a class may be extended into 
+another class, it remains viable and can be instantiated in its own right. You 
+learned that inheritance is hierarchical with the overall hierarchy being rooted 
+in a class named 
+
+<emphasis id="strong1119" effect="bold">
+Object
+
+</emphasis>
+. You learned that C# does not support 
+multiple inheritance. You learned about the ISA and HASA relationships.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1006" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1120" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1023" list-type="bulleted">
+
+					
+
+<item id="li1082">
+Module name: Xna0108-Inheritance in C#
+
+</item>
+
+
+					
+
+<item id="li1083">
+File: Xna0108.htm
+
+
+</item>
+
+
+					
+
+<item id="li1084">
+Published: 02/27/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+
+	
+
+<note id="note1007" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1121" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1065">
+<emphasis id="strong1122" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1066">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1067">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1068">
+<emphasis id="strong1123" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+A complete listing of the C# program discussed in this module is provided in 
+
+
+<link id="a1079" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1070">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. The program named Airship01.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">/*Project Airship01
+ * Illustrates inheritance
+ * ******************************************************/
+
+using System;
+
+namespace Airship01 {
+
+  //Define a class to exercise the Balloon class and the
+  // Airplane class.
+  class Driver {
+    static void Main(string[] args) {
+      Balloon balloon = new Balloon();
+      balloon.range = 5;
+      balloon.altitude = 500;
+      balloon.passengerCapacity = 5;
+      balloon.liftMedia = "Hot Air";
+
+      Console.WriteLine("Balloon");
+      Console.WriteLine(
+                   "range = " + balloon.range + " miles");
+      Console.WriteLine(
+              "altitude = " + balloon.altitude + " feet");
+      Console.WriteLine("passenger capacity = " 
+                             + balloon.passengerCapacity);
+      Console.WriteLine("lift media = " 
+                                     + balloon.liftMedia);
+
+      Airplane airplane = new Airplane();
+      airplane.range = 5000;
+      airplane.altitude = 35000;
+      airplane.cargoCapacity = 20000;
+      airplane.engineType = "jet";
+
+      Console.WriteLine("");//blank line
+      Console.WriteLine("Airplane");
+      Console.WriteLine(
+                  "range = " + airplane.range + " miles");
+      Console.WriteLine(
+             "altitude = " + airplane.altitude + " feet");
+      Console.WriteLine("cargo capacity = " 
+                    + airplane.cargoCapacity + " pounds");
+      Console.WriteLine("engine type = " 
+                                   + airplane.engineType);
+
+      //Pause and wait for the user to press any key.
+      Console.ReadKey();
+    }//end Main
+  }//end class Driver
+  //====================================================//
+
+  //Define common properties in the base class.
+  class Airship {
+    private int rangeData = 0;
+    private int altitudeData = 0;
+
+    public int range {
+      get {
+        return rangeData;
+      }//end get
+      set {
+        rangeData = value;
+      }//end set
+    }//end range property
+
+    public int altitude {
+      get {
+        return altitudeData;
+      }//end get
+      set {
+        altitudeData = value;
+      }//end set
+    }//end altitude property
+
+  }//end class Airship
+  //====================================================//
+
+  //Define unique properties in the subclass.
+  class Balloon : Airship {
+    private int passengerCapacityData;
+    private String liftMediaData;
+
+    public int passengerCapacity {
+      get {
+        return passengerCapacityData;
+      }//end get
+      set {
+        passengerCapacityData = value;
+      }//end set
+    }//end passengerCapacity property
+
+    public String liftMedia {
+      get {
+        return liftMediaData;
+      }//end get
+      set {
+        liftMediaData = value;
+      }//end set
+    }//end liftMedia property
+  }//end Balloon class
+  //====================================================//
+
+  //Define unique properties in the subclass.
+  class Airplane : Airship {
+    private int cargoCapacityData;
+    private String engineTypeData;
+
+    public int cargoCapacity {
+      get {
+        return cargoCapacityData;
+      }//end get
+      set {
+        cargoCapacityData = value;
+      }//end set
+    }//end cargoCapacity property
+
+    public String engineType {
+      get {
+        return engineTypeData;
+      }//end get
+      set {
+        engineTypeData = value;
+      }//end set
+    }//end engineType property
+  }//end Airplane class
+  //====================================================//
+}//end namespace Airship01
+</code>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+
+
+
+
+
+
+
+<para id="p1071">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

@@ -1,0 +1,5437 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0130-Collision Detection</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49524</md:content-id>
+  <md:title>Xna0130-Collision Detection</md:title>
+  <md:abstract>Learn how to design and create a Sprite class that provides collision detection. Also learn how to write an XNA program that takes advantage of that collision detection capability.</md:abstract>
+  <md:uuid>cb4198a2-2b27-4736-b66f-bebf16bea036</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Mon May 09 18:37:13 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="Another_improvement">
+
+Another improvement
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Definition_of_a_collision">
+
+Definition of a collision
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1009">
+<link id="a1010" target-id="An_epic_battle">
+
+An epic battle
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1010">
+<link id="a1011" target-id="Spider_and_ladybug_motion">
+
+Spider and ladybug motion
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="The_spiders_dont_die_easily">
+
+The spiders don't die easily
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="The_death_blow">
+
+The death blow
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Output_screen_images">
+
+Output screen images
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1014">
+<link id="a1015" target-id="The_top_image">
+
+The top image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="The_middle_image">
+
+The middle image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="The_bottom_image">
+
+The bottom image
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1018">
+<link id="a1019" target-id="The_Sprite_class_">
+
+The Sprite class
+        
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1019">
+<link id="a1020" target-id="A_new_Image_property_accessor_method_">
+
+A new Image property accessor method
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="A_modified_constructor_">
+
+A modified constructor
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="A_modified_SetImage_method_">
+
+A modified SetImage method
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="A_new_method_named_GetRectangle_">
+
+A new method named GetRectangle
+	
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="A_new_method_named_IsCollision_">
+
+A new method named IsCollision 
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1024">
+<link id="a1025" target-id="What_is_a_collision">
+
+What is a collision?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="What_is_the_overall_behavior">
+
+What is the overall behavior?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_IsCollision_method_code">
+
+The IsCollision method code
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="Test_for_a_collision_with_other_sprites">
+
+Test for a collision with other sprites
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="A_while_loop">
+
+A while loop
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="The_first_return_statement">
+
+The first return statement
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="The_second_return_statement">
+
+The second return statement
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="The_end_of_the_Sprite_class">
+
+The end of the Sprite class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="The_Game1_class_">
+
+The Game1 class
+        
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="The_overridden_LoadContent_method">
+
+The overridden LoadContent method
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1034">
+<link id="a1035" target-id="A_background_sprite_with_a_spider_web_image">
+
+A background sprite with a spider web image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Instantiate_the_spider_and_ladybug_Sprite_objects">
+
+Instantiate the spider and ladybug Sprite objects
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="The_overridden_Update_method_">
+
+The overridden Update method
+        
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1037">
+<link id="a1038" target-id="A_for_loop_that_controls_the_collision_testing">
+
+A for loop that controls the collision testing
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1038">
+<link id="a1039" target-id="Not_every_spider_is_tested_during_each_iteration">
+
+Not every spider is tested during each iteration
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Test_for_a_collision">
+
+Test for a collision
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="Return_a_reference_to_a_spider_or_null">
+
+Return a reference to a spider or null
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="If_a_collision_was_detected">
+
+If a collision was detected...
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Why_change_the_spiders_position">
+
+Why change the spider's position?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Spiders_dont_die_easily">
+
+Spiders don't die easily
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="The_Name_property">
+
+The Name property
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Killing_the_brown_spider">
+
+Killing the brown spider
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Is_a_Dispose_Method_needed">
+
+Is a Dispose Method needed?
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="The_end_of_the_Update_method">
+
+The end of the Update method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="The_overridden_GameDraw_method">
+
+The overridden Game.Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1052">
+<link id="a1053" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Whats_next">
+
+What's next?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1057" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1015" list-type="bulleted">
+
+		
+
+<item id="li1056">
+<link id="a1058" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Screen output at three different times while the program was running.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1057">
+<link id="a1059" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. A new Image property accessor method in the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1058">
+<link id="a1060" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. A modified constructor.
+
+</item>
+
+
+		
+
+<item id="li1059">
+<link id="a1061" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. A modified SetImage method.
+
+</item>
+
+
+		
+
+<item id="li1060">
+<link id="a1062" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. A new method named GetRectangle.
+
+</item>
+
+
+		
+
+<item id="li1061">
+<link id="a1063" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Beginning of a new IsCollision method.
+
+</item>
+
+
+		
+
+<item id="li1062">
+<link id="a1064" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Test for a collision with other sprites.
+
+</item>
+
+
+		
+
+<item id="li1063">
+<link id="a1065" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Beginning of the overridden LoadContent method of the Game1 class.
+
+</item>
+
+
+		
+
+<item id="li1064">
+<link id="a1066" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Instantiate the spider and ladybug Sprite objects.
+
+</item>
+
+
+		
+
+<item id="li1065">
+<link id="a1067" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Beginning of the overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1066">
+<link id="a1068" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Beginning of a for loop that controls the collision testing.
+
+</item>
+
+
+		
+
+<item id="li1067">
+<link id="a1069" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. Test for a collision.
+
+</item>
+
+
+		
+
+<item id="li1068">
+<link id="a1070" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+. Spiders don't die easily.
+
+</item>
+
+
+		
+
+<item id="li1069">
+<link id="a1071" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. The overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1070">
+<link id="a1072" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. The Sprite class for the project named XNA0130Proj.
+
+</item>
+
+
+		
+
+<item id="li1071">
+<link id="a1073" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+. The Game1 class for the project named XNA0130Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+While studying the past couple of modules, you have learned how to create and 
+then to improve a class named 
+
+<emphasis id="strong1001" effect="bold">
+Sprite
+
+</emphasis>
+ from which you can 
+instantiate objects that behave as sprites.
+
+</para>
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="Another_improvement" effect="bold">
+
+Another improvement
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1006">
+In this module, we will once again improve the 
+
+<emphasis id="strong1002" effect="bold">
+Sprite
+
+</emphasis>
+ class, 
+this time adding the capability for a sprite to determine if it has collided 
+with another sprite. This capability is critical for game development in many 
+areas.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Definition_of_a_collision" effect="bold">
+
+Definition of a collision
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+Our definition of a collision is based on the bounding rectangles for the 
+images that represent the two sprites. If the rectangles intersect in their 
+current positions, a collision is deemed to have occurred. If they don't 
+intersect, there is no collision.
+
+</para>
+
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+This program is not yet a game because it doesn't provide player interaction. 
+Instead it is a demonstration program that demonstrates sprite collision 
+detection is a rather interesting way.
+
+</para>
+
+
+
+
+
+<para id="p1009">
+<link id="a1074" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows a screen snapshot at three different points in time while the 
+program was running. 
+
+</para>
+
+
+
+
+
+<section id="h21003">
+<title>
+<emphasis id="An_epic_battle" effect="bold">
+
+An epic battle
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+The demonstration program chronicles a battle between spiders and ladybugs. 
+When the program starts, there are 200 black widow spiders and five ladybugs on 
+the web in the game window. (See the top image in 
+
+<link id="a1075" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.)
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="Spider_and_ladybug_motion" effect="bold">
+
+Spider and ladybug motion
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+The spiders move at different speeds in different directions but generally 
+toward the southeast. When a spider goes outside the game window on the right 
+side or the bottom, it reappears on the left side or the top.
+
+</para>
+
+
+
+
+
+<para id="p1012">
+The ladybugs also move at different speeds in different directions but 
+generally toward the northwest. When a ladybug goes outside the game window on 
+the left side or the top, it reappears on the right side or on the bottom.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="The_spiders_dont_die_easily" effect="bold">
+
+The spiders don't die easily
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1013">
+When a ladybug collides with a black widow spider, the spider disappears but 
+is reincarnated as a green spider 128 pixels to the right of its original 
+position.
+
+</para>
+
+
+
+
+
+<para id="p1014">
+When a ladybug collides with a green spider, the spider disappears but is 
+reincarnated again as a small brown spider 128 pixels to the right of its 
+original position.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="The_death_blow" effect="bold">
+
+The death blow
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+Finally, when a ladybug collides with a brown spider, the spider is eaten and 
+is removed from the population of spiders. Therefore, all of the spiders 
+eventually disappear and the ladybugs continue marching on victorious.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Output_screen_images" effect="bold">
+
+Output screen images
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h31005">
+<title>
+<emphasis id="The_top_image" effect="bold">
+
+The top image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+The top image in 
+
+<link id="a1076" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ was taken shortly after the program began running. 
+Therefore, the game window was mostly populated with ladybugs and black widow 
+spiders. There are a few green spiders and I believe I see one brown spider at 
+the very bottom border near the right side.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1017">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Screen output at three different times while the program was running.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0130a.jpg" width="455" height="1020"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="The_middle_image" effect="bold">
+
+The middle image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+The middle image in 
+
+<link id="a1077" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows the program output after the program has 
+been running for awhile. At this point in time, the game window is mainly 
+populated with ladybugs, green spiders, and brown spiders. However, there are a 
+few black widow spiders still in the picture.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="The_bottom_image" effect="bold">
+
+The bottom image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+The bottom image shows the program output at an even later point in time. At 
+this point, the game window is populated with ladybugs, one green spider and a 
+few brown spiders. Given enough time and a little luck, the ladybugs will 
+collide with and destroy even these remaining spiders.
+
+</para>
+
+
+
+
+
+	
+	
+
+</section>
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1020">
+As usual, I will discuss the program in fragments, beginning with the 
+
+<emphasis id="strong1003" effect="bold">
+
+Sprite
+
+</emphasis>
+ class. Furthermore, I will discuss only those portions of the
+
+
+<emphasis id="strong1004" effect="bold">
+Sprite
+
+</emphasis>
+ class that are different from the versions of the
+
+
+<emphasis id="strong1005" effect="bold">
+Sprite
+
+</emphasis>
+ class that I explained in earlier modules.
+
+</para>
+
+
+
+
+
+<para id="p1021">
+A complete listing of the 
+
+<emphasis id="strong1006" effect="bold">
+Sprite
+
+</emphasis>
+ class is provided in 
+
+
+<link id="a1078" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and a complete listing of the 
+
+<emphasis id="strong1007" effect="bold">
+Game1
+
+</emphasis>
+ class is 
+provided in 
+
+<link id="a1079" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+	
+	
+
+
+<section id="h21005">
+<title>
+
+    
+
+<emphasis id="The_Sprite_class_" effect="bold">
+
+The Sprite class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<section id="h31008">
+<title>
+
+    
+
+<emphasis id="A_new_Image_property_accessor_method_" effect="bold">
+
+A new Image property accessor method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1022">
+
+    Scanning down the 
+
+<emphasis id="strong1008" effect="bold">
+Sprite
+
+</emphasis>
+ class definition in 
+
+<link id="a1080" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+, 
+	the first thing that we find that is new to this version is a new read-only
+	
+
+<emphasis id="strong1009" effect="bold">
+Image
+
+</emphasis>
+ property accessor method. The method is shown in 
+	
+
+<link id="a1081" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1023">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. A new Image property accessor method in the Sprite class.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">    //Image property accessor - new to this version.
+    public Texture2D Image {
+      get {
+        return image;
+      }//end get
+    }//end Image property accessor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1024">
+There is nothing unusual about this property accessor method, so it 
+	shouldn't require further explanation. You will learn why it is needed later 
+	when I explain the 
+
+<emphasis id="strong1010" effect="bold">
+Game1
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+
+    
+
+<emphasis id="A_modified_constructor_" effect="bold">
+
+A modified constructor
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1025">
+
+    The 
+	second statement from the end in 
+
+<link id="a1082" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ was added to the 
+	constructor from the previous version of the 
+
+<emphasis id="strong1011" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1026">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. A modified constructor.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">    public Sprite(String assetName,
+                  ContentManager contentManager,
+                  Random random) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;
+      this.random = random;
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1027">
+The new statement assigns the 
+
+<emphasis id="strong1012" effect="bold">
+assetName
+
+</emphasis>
+ to the 
+
+<emphasis id="strong1013" effect="bold">
+
+	Name
+
+</emphasis>
+ property of the 
+
+<emphasis id="strong1014" effect="bold">
+Texture2D
+
+</emphasis>
+ object that 
+	represents the sprite's image. You will see why this modification was needed 
+	later.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+
+    
+
+<emphasis id="A_modified_SetImage_method_" effect="bold">
+
+A modified SetImage method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1028">
+
+    As with the modified constructor, the 
+	last statement in 
+	
+
+<link id="a1083" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ was added to the 
+
+<emphasis id="strong1015" effect="bold">
+SetImage
+
+</emphasis>
+ method from the 
+	previous version of the 
+
+<emphasis id="strong1016" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1029">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. A modified SetImage method.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;
+    }//end SetImage
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1030">
+Once again, the new statement assigns the 
+
+<emphasis id="strong1017" effect="bold">
+assetName
+
+</emphasis>
+ to 
+	the 
+
+<emphasis id="strong1018" effect="bold">
+Name
+
+</emphasis>
+ property of the 
+
+<emphasis id="strong1019" effect="bold">
+Texture2D
+
+</emphasis>
+ object 
+	that represents the sprite's image. You will also see why this modification 
+	was needed later.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31011">
+<title>
+
+    
+
+<emphasis id="A_new_method_named_GetRectangle_" effect="bold">
+
+A new method named GetRectangle
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1031">
+
+    
+
+<link id="a1084" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ shows a new method named 
+
+<emphasis id="strong1020" effect="bold">
+GetRectangle
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1032">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. A new method named GetRectangle.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">    public Rectangle GetRectangle() {
+      return new Rectangle((int)(position.X),
+                           (int)(position.Y),
+                           image.Width,
+                           image.Height);
+    }//end GetRectangle
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1033">
+This method returns the current rectangle occupied by the sprite's image 
+	as type 
+
+<emphasis id="strong1021" effect="bold">
+Rectangle
+
+</emphasis>
+. This rectangle is needed for the 
+	collision detection process. The code in 
+
+<link id="a1085" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ is straightforward and 
+	shouldn't require further explanation.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31012">
+<title>
+
+    
+
+<emphasis id="A_new_method_named_IsCollision_" effect="bold">
+
+A new method named IsCollision 
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1034">
+This version of the 
+
+<emphasis id="strong1022" effect="bold">
+Sprite
+
+</emphasis>
+ class defines a new method named
+
+
+<emphasis id="strong1023" effect="bold">
+IsCollision
+
+</emphasis>
+. The purpose of this new method is to detect a 
+collision between this sprite and some other sprite.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="What_is_a_collision" effect="bold">
+
+What is a collision?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+A collision is called if the rectangle containing this 
+
+<emphasis id="strong1024" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object's image intersects the rectangle containing a target sprite's image.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="What_is_the_overall_behavior" effect="bold">
+
+What is the overall behavior?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+This method receives a list of 
+
+<emphasis id="strong1025" effect="bold">
+Sprite
+
+</emphasis>
+ objects as an incoming 
+parameter. It tests for a collision with each sprite in the list beginning with 
+the sprite at the head of the list. If it detects a collision with a sprite, it 
+stops testing immediately and returns a reference to the 
+
+<emphasis id="strong1026" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object for which it found the collision. If it doesn't find a collision with any 
+sprite in the list, it returns null.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="The_IsCollision_method_code" effect="bold">
+
+The IsCollision method code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+The new method named 
+
+<emphasis id="strong1027" effect="bold">
+IsCollision
+
+</emphasis>
+ begins in 
+
+<link id="a1086" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1038">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Beginning of a new IsCollision method.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">    public Sprite IsCollision(List&lt;Sprite&gt; target) {
+      Rectangle thisRectangle = 
+                         new Rectangle((int)(position.X),
+                                       (int)(position.Y),
+                                       image.Width,
+                                       image.Height);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1039">
+The code in 
+
+<link id="a1087" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ constructs a new 
+
+<emphasis id="strong1028" effect="bold">
+Rectangle
+
+</emphasis>
+ object 
+	that describes the rectangular area currently occupied by the sprite's image 
+	relative to the upper left corner of the game window. The 
+
+<emphasis id="strong1029" effect="bold">
+Rectangle
+
+</emphasis>
+ 
+	object's reference is saved in the local variable named 
+
+<emphasis id="strong1030" effect="bold">
+
+	thisRectangle
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="Test_for_a_collision_with_other_sprites" effect="bold">
+
+Test for a collision with other sprites
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1040">
+<link id="a1088" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ begins by declaring a pair of local variables named 
+
+<emphasis id="strong1031" effect="bold">
+
+targetRectangle
+
+</emphasis>
+ and 
+
+<emphasis id="strong1032" effect="bold">
+cnt
+
+</emphasis>
+. 
+
+</para>
+
+
+
+
+
+<para id="p1041">
+The variable named 
+
+<emphasis id="strong1033" effect="bold">
+targetRectangle
+
+</emphasis>
+ will be used to store a 
+reference to a rectangular area that currently contains a target sprite. The 
+variable named 
+
+<emphasis id="strong1034" effect="bold">
+cnt
+
+</emphasis>
+ will be used as a loop counter.
+
+</para>
+
+
+
+	
+	
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1042">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Test for a collision with other sprites.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">      Rectangle targetRectangle;
+      int cnt = 0;
+
+      while(cnt &lt; target.Count){
+        targetRectangle = target[cnt].GetRectangle();
+        if(thisRectangle.Intersects(targetRectangle)){
+          return target[cnt];
+        }//end if
+        cnt++;
+      }//end while loop
+
+      return null;//no collision detected
+    }//end IsCollision
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="A_while_loop" effect="bold">
+
+A while loop
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+Then 
+
+<link id="a1089" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ executes a 
+
+<emphasis id="strong1035" effect="bold">
+while
+
+</emphasis>
+ loop that:
+
+</para>
+
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+
+	
+
+<item id="li1072">
+Calls the 
+
+<emphasis id="strong1036" effect="bold">
+GetRectangle
+
+</emphasis>
+ method on the next 
+
+<emphasis id="strong1037" effect="bold">
+
+	Sprite
+
+</emphasis>
+ object in the list (see 
+
+<link id="a1090" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+).
+
+</item>
+
+
+	
+
+<item id="li1073">
+Tests to determine if this sprite's rectangle intersects the target 
+	sprite's rectangle.
+
+</item>
+
+
+	
+
+<item id="li1074">
+Returns a reference to the target 
+
+<emphasis id="strong1038" effect="bold">
+Sprite
+
+</emphasis>
+ object if a 
+	collision is detected; keeps looping otherwise.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h51002">
+<title>
+<emphasis id="The_first_return_statement" effect="bold">
+
+The first return statement
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+Executing a 
+
+<emphasis id="strong1039" effect="bold">
+return
+
+</emphasis>
+ statement in the middle of the 
+
+<emphasis id="strong1040" effect="bold">
+
+while
+
+</emphasis>
+ loop terminates the loop and also terminates the method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51003">
+<title>
+<emphasis id="The_second_return_statement" effect="bold">
+
+The second return statement
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+If no collision is detected, the loop terminates when all of the 
+
+<emphasis id="strong1041" effect="bold">
+
+Sprite
+
+</emphasis>
+ objects in the list have been tested.
+
+</para>
+
+
+
+
+
+<para id="p1046">
+At that point, 
+
+<link id="a1091" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ executes a different 
+
+<emphasis id="strong1042" effect="bold">
+return
+
+</emphasis>
+ 
+statement to return 
+
+<emphasis id="strong1043" effect="bold">
+null
+
+</emphasis>
+ and terminate the method. The 
+
+<emphasis id="strong1044" effect="bold">
+
+null
+
+</emphasis>
+ value is returned in place of a reference to a 
+
+<emphasis id="strong1045" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object to signal that no collision was detected.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h31013">
+<title>
+<emphasis id="The_end_of_the_Sprite_class" effect="bold">
+
+The end of the Sprite class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+<link id="a1092" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ signals the end of the 
+
+<emphasis id="strong1046" effect="bold">
+IsCollision
+
+</emphasis>
+ method, which 
+is also the end of the changes made to the 
+
+<emphasis id="strong1047" effect="bold">
+Sprite
+
+</emphasis>
+ class. Once 
+again, you will find a complete listing of the new 
+
+<emphasis id="strong1048" effect="bold">
+Sprite
+
+</emphasis>
+ class 
+in 
+
+<link id="a1093" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h21006">
+<title>
+
+    
+
+<emphasis id="The_Game1_class_" effect="bold">
+
+The Game1 class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1048">
+
+    I will explain only those portions of the 
+
+<emphasis id="strong1049" effect="bold">
+Game1
+
+</emphasis>
+ class that 
+	are substantially new to this program. You will find a complete listing of 
+	the 
+
+<emphasis id="strong1050" effect="bold">
+Game1
+
+</emphasis>
+ class in 
+
+<link id="a1094" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+<section id="h31014">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method" effect="bold">
+
+The overridden LoadContent method
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1049">
+
+    The only code that is substantially new prior to the 
+
+<emphasis id="strong1051" effect="bold">
+LoadContent
+
+</emphasis>
+ 
+	method is the declaration of an instance variable of type 
+
+<emphasis id="strong1052" effect="bold">
+Sprite
+
+</emphasis>
+ 
+	named 
+
+<emphasis id="strong1053" effect="bold">
+spiderWeb
+
+</emphasis>
+. Therefore, I will skip down and begin my 
+	discussion with the overridden 
+
+<emphasis id="strong1054" effect="bold">
+LoadContent
+
+</emphasis>
+ method, which 
+	begins in 
+
+<link id="a1095" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1050">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Beginning of the overridden LoadContent method of the Game1 class.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create a sprite for the background image.
+      spiderWeb = 
+                 new Sprite("spiderwebB",Content,random);
+      spiderWeb.Position = new Vector2(0f,0f);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41003">
+<title>
+<emphasis id="A_background_sprite_with_a_spider_web_image" effect="bold">
+
+A background sprite with a spider web image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+The last two statements in 
+
+<link id="a1096" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ instantiate a new 
+
+<emphasis id="strong1055" effect="bold">
+
+Sprite
+
+</emphasis>
+ object and load it with an image of the spider web shown in 
+
+
+<link id="a1097" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1052">
+The purpose of this sprite is to serve as a background image. Before adding 
+the image of the spider web to the 
+
+<emphasis id="strong1056" effect="bold">
+Content
+
+</emphasis>
+ folder during the 
+design phase, I used an external program to scale the image to the same size as 
+the game window established by the constructor in 
+
+<link id="a1098" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1053">
+The code in 
+
+<link id="a1099" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ positions the upper left corner of the sprite at the 
+upper left corner of the game window so that it just fills the game window as 
+shown in 
+
+<link id="a1100" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Instantiate_the_spider_and_ladybug_Sprite_objects" effect="bold">
+
+Instantiate the spider and ladybug Sprite objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The code in 
+
+<link id="a1101" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ instantiates all of the spider and ladybug 
+
+<emphasis id="strong1057" effect="bold">
+
+Sprite
+
+</emphasis>
+ objects and sets their properties.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1055">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+.  Instantiate the spider and ladybug Sprite objects.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">      //Instantiate all of the spiders and cause them to
+      // move from left to right, top to 
+      // bottom. Pass a reference to the same Random
+      // object to all of the sprites.
+      for(int cnt = 0;cnt &lt; numSpiders;cnt++) {
+        spiders.Add(
+          new Sprite("blackWidowSpider",Content,random));
+
+        //Set the position of the current spider at a
+        // random location within the game window.
+        spiders[cnt].Position = new Vector2(
+           (float)(windowWidth * random.NextDouble()),
+           (float)(windowHeight * random.NextDouble()));
+
+        //Get a direction vector for the current spider.
+        // Make both components positive to cause the
+        // vector to point down and to the right.
+        spiders[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          false,//xNeg
+          false);//yNeg
+
+        //Notify the spider object of the size of the
+        // game window.
+        spiders[cnt].WindowSize =
+                     new Point(windowWidth,windowHeight);
+
+        //Set the speed in moves per second for the
+        // current spider to a random value between
+        // maxSpiderSpeed/2 and maxSpiderSpeed.
+        spiders[cnt].Speed = maxSpiderSpeed / 2
+              + maxSpiderSpeed * random.NextDouble() / 2;
+      }//end for loop
+
+      //Use the same process to instantiate all of the
+      // ladybugs and cause them to move from right to
+      // left, bottom to top.
+      for(int cnt = 0;cnt &lt; numLadybugs;cnt++) {
+        ladybugs.Add(
+                   new Sprite("ladybug",Content,random));
+        ladybugs[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        ladybugs[cnt].Direction = DirectionVector(
+         (float)maxVectorLength,
+         (float)(maxVectorLength * random.NextDouble()),
+         true,//xNeg
+         true);//yNeg
+        ladybugs[cnt].WindowSize =
+                     new Point(windowWidth,windowHeight);
+        ladybugs[cnt].Speed = maxLadybugSpeed / 2
+             + maxLadybugSpeed * random.NextDouble() / 2;
+      }//end for loop
+
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1056">
+The code in 
+
+<link id="a1102" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ is essentially the same as code that I explained in 
+	an earlier module so no explanation beyond the embedded comments should be 
+	necessary.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31015">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1057">
+
+    The overridden 
+
+<emphasis id="strong1058" effect="bold">
+Update
+
+</emphasis>
+ method begins in 
+
+<link id="a1103" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1058">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Beginning of the overridden Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1008" display="block">    protected override void Update(GameTime gameTime) {
+      //Tell all the spiders in the list to move.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the ladybugs in the list to move.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Move(gameTime);
+      }//end for loop
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1059">
+The code in 
+
+<link id="a1104" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ is essentially the same as code that I have 
+	explained in earlier modules, so no further explanation should be necessary.
+
+</para>
+
+
+
+
+
+<section id="h41005">
+<title>
+<emphasis id="A_for_loop_that_controls_the_collision_testing" effect="bold">
+
+A for loop that controls the collision testing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+<link id="a1105" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ shows the beginning of a 
+
+<emphasis id="strong1059" effect="bold">
+for
+
+</emphasis>
+ loop that causes 
+each ladybug 
+
+<emphasis id="strong1060" effect="bold">
+Sprite
+
+</emphasis>
+ object to test for a collision with the 
+spiders in the list of spiders once during each iteration of the game loop.
+
+</para>
+
+
+
+
+
+<para id="p1061">
+If a ladybug detects a collision with a spider, the action described
+
+
+<link id="a1106" target-id="Preview">
+
+earlier
+
+</link>
+
+ is taken.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1010" type="">
+
+
+
+
+
+<para id="p1062">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+.  Beginning of a for loop that controls the collision testing.
+
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<section id="h51004">
+<title>
+<emphasis id="Not_every_spider_is_tested_during_each_iteration" effect="bold">
+
+Not every spider is tested during each iteration
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+If a ladybug detects a collision with a spider, the remaining 
+spiders in the list are not tested by that ladybug during that iteration of the 
+game loop. In other words, if a ladybug's rectangle intersects the rectangles 
+belonging to two or more spiders, only the spider closest to the top of the list 
+will register a collision.
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h51005">
+<title>
+<emphasis id="Test_for_a_collision" effect="bold">
+
+Test for a collision
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+The code that tests for a collision is shown in 
+
+<link id="a1107" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+	
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1065">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. Test for a collision.
+
+</para>
+
+
+
+				
+
+<code id="pre1010" display="block">        //Test for a collision between this ladybug and
+        // all of the spiders in the list of spiders.
+        Sprite target = 
+                      ladybugs[cnt].IsCollision(spiders);
+
+        if(target != null) {
+          //There was a collision. Cause the spider to
+          // move 128 pixels to the right.
+          target.Position = 
+                    new Vector2(target.Position.X + 128,
+                                target.Position.Y);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1066">
+The first statement in 
+
+<link id="a1108" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1061" effect="bold">
+
+	IsCollision
+
+</emphasis>
+ method on the current ladybug object, passing a 
+	reference to the list of spiders as a parameter. As you learned earlier, 
+	this will cause the ladybug object to test each spider in the list for a 
+	collision until either a collision is found or the list is exhausted.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51006">
+<title>
+<emphasis id="Return_a_reference_to_a_spider_or_null" effect="bold">
+
+Return a reference to a spider or null
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1067">
+When the 
+
+<emphasis id="strong1062" effect="bold">
+IsCollision
+
+</emphasis>
+ method returns and control moves to the 
+beginning of the 
+
+<emphasis id="strong1063" effect="bold">
+if
+
+</emphasis>
+ statement, the variable 
+named 
+
+<emphasis id="strong1064" effect="bold">
+target
+
+</emphasis>
+ will either contain 
+
+<emphasis id="strong1065" effect="bold">
+null
+
+</emphasis>
+, 
+(meaning that no collision was detected), or will contain a reference to the 
+spider object involved in a collision.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51007">
+<title>
+<emphasis id="If_a_collision_was_detected" effect="bold">
+
+If a collision was detected...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+The body of the 
+
+<emphasis id="strong1066" effect="bold">
+if
+
+</emphasis>
+ statement shown in 
+
+<link id="a1109" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ is executed 
+if a collision was detected and the 
+
+<emphasis id="strong1067" effect="bold">
+target
+
+</emphasis>
+ variable does not 
+contain null. In this case, the X component of the spider's position vector is 
+increased by a value of 128. This will cause the spider to move 128 pixels to 
+the right the next time it is drawn.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51008">
+<title>
+<emphasis id="Why_change_the_spiders_position" effect="bold">
+
+Why change the spider's position?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+This change is position is necessary to prevent the same ladybug from 
+registering a collision with the same spider during the next iteration of the 
+game loop. The forward movement of the spiders and the ladybugs each time they 
+move is less than the dimensions of the intersecting rectangles. Therefore, 
+without a purposeful shift in position of either the ladybug or the spider, the 
+pair would continue to register collisions until the rectangles finally separate 
+from one another.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51009">
+<title>
+<emphasis id="Spiders_dont_die_easily" effect="bold">
+
+Spiders don't die easily
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+As you read in the 
+
+<link id="a1110" target-id="Preview">
+
+Preview
+
+</link>
+
+ section, 
+if a black widow spider collides with a ladybug, it simply moves 128 pixels to 
+the right and changes into a green spider. If a green spider collides with a 
+ladybug, it simply moves 128 pixels to the right and changes into a brown 
+spider. Finally, if a brown spider collides with a ladybug, it is eaten and 
+removed from the population of spiders. This is accomplished by the code in 
+
+
+<link id="a1111" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1071">
+<emphasis id="Listing_12" effect="bold">
+
+Listing 12
+
+</emphasis>
+
+. Spiders don't die easily.
+
+</para>
+
+
+
+				
+
+<code id="pre1011" display="block">          //If the collision was with a black widow
+          // spider, cause it to reincarnate into a
+          // green spider.
+          if(target.Image.Name == "blackWidowSpider") {
+            target.SetImage("greenspider",Content);
+          }
+           //If the collision was with a green spider,
+           // cause it to reincarnate into a brown
+           // spider.
+          else if(target.Image.Name == "greenspider") {
+            target.SetImage("brownSpider",Content);
+          }
+           //If the collision was with a brown spider,
+           // it gets eaten. Remove it from the list of
+           // spiders.
+          else if(target.Image.Name == "brownSpider") {
+            spiders.Remove(target);
+          }// end else-if
+        }//end if
+      }//end for loop
+
+      base.Update(gameTime);
+    }//end Update method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1072">
+The code in 
+
+<link id="a1112" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ is relatively straightforward.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51010">
+<title>
+<emphasis id="The_Name_property" effect="bold">
+
+The Name property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+The first statement in 
+
+<link id="a1113" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ shows why I 
+needed to set an identifiable string value into the 
+
+<emphasis id="strong1068" effect="bold">
+Name
+
+</emphasis>
+ 
+property of the 
+
+<emphasis id="strong1069" effect="bold">
+Texture2D
+
+</emphasis>
+ object referred to by 
+
+<emphasis id="strong1070" effect="bold">
+image
+
+</emphasis>
+ 
+in 
+
+<link id="a1114" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ and 
+
+<link id="a1115" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. I needed a way to determine the type of spider 
+involved in each collision so that I could take the appropriate action when a 
+collision was detected.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51011">
+<title>
+<emphasis id="Killing_the_brown_spider" effect="bold">
+
+Killing the brown spider
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1074">
+The call to the 
+
+<emphasis id="strong1071" effect="bold">
+spiders.Remove
+
+</emphasis>
+ method in 
+
+<link id="a1116" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ removes the 
+target 
+
+<emphasis id="strong1072" effect="bold">
+Sprite
+
+</emphasis>
+ object's reference from the list of spiders. 
+Since this is the only reference to the 
+
+<emphasis id="strong1073" effect="bold">
+Sprite
+
+</emphasis>
+ object, this 
+action should make the memory occupied by the 
+
+<emphasis id="strong1074" effect="bold">
+Sprite
+
+</emphasis>
+ object 
+eligible for garbage collection.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51012">
+<title>
+<emphasis id="Is_a_Dispose_Method_needed" effect="bold">
+
+Is a Dispose Method needed?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+However, I'm not certain that garbage collection is sufficient to free up all 
+of the resources owned by the now defunct object and its image. It might also be 
+advisable to use a
+
+
+<link id="a1117" url="http://msdn.microsoft.com/en-us/library/fs2xkftw.aspx">
+
+Dispose Method
+
+</link>
+
+. 
+At the time I am writing this, I simply don't know.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41006">
+<title>
+<emphasis id="The_end_of_the_Update_method" effect="bold">
+
+The end of the Update method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+<link id="a1118" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ also signals the end of the overridden 
+
+<emphasis id="strong1075" effect="bold">
+Update
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+<section id="h31016">
+<title>
+
+    
+
+<emphasis id="The_overridden_GameDraw_method" effect="bold">
+
+The overridden Game.Draw method
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1077">
+
+    The overridden 
+
+<emphasis id="strong1076" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is shown in its entirety in 
+	
+
+<link id="a1119" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1013" type="">
+
+
+<para id="p1078">
+<emphasis id="Listing_13" effect="bold">
+
+Listing 13
+
+</emphasis>
+
+. The overridden Game.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1012" display="block">    protected override void Draw(GameTime gameTime) {
+
+      spriteBatch.Begin();
+
+      spiderWeb.Draw(spriteBatch);//draw background 
+
+      //Draw all spiders.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ladybugs.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1079">
+There is nothing new in 
+
+<link id="a1120" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. However, the 
+call to 
+
+<emphasis id="strong1077" effect="bold">
+spiderWeb.Draw
+
+</emphasis>
+ is a little different from the code that you have seen in the 
+	overridden 
+
+<emphasis id="strong1078" effect="bold">
+Game.Draw
+
+</emphasis>
+ methods in the last couple of modules. 
+This code calls the 
+
+<emphasis id="strong1079" effect="bold">
+Sprite.Draw
+
+</emphasis>
+ method, 
+which in turn calls the 
+
+<emphasis id="strong1080" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ method to draw the 
+image of the spider web as a background image in 
+
+<link id="a1121" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21007">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+<link id="a1122" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ also signals the end of the overridden 
+
+<emphasis id="strong1081" effect="bold">
+Game.Draw
+
+</emphasis>
+ 
+method, the end of the 
+
+<emphasis id="strong1082" effect="bold">
+Game1
+
+</emphasis>
+ class, and the end of the program.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1081">
+I encourage you to copy the code from 
+
+<link id="a1123" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and 
+
+<link id="a1124" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+. Use 
+that code to create an XNA project. You should be able to find and 
+download suitable image files from the web. Any small images can be used as 
+substitutes for the spiders and the ladybugs. A larger image can be used for the 
+background.
+
+</para>
+
+
+
+
+
+<para id="p1082">
+Compile and run the project. Experiment with the code, making changes, 
+and observing the results of your changes. Make sure that you can explain 
+why your changes behave as they do.
+
+</para>
+
+
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1083">
+Click 
+
+<link id="a1125" url="XNA0130Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1083" effect="bold">
+XNA0130Proj
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1084" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1085" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1086" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select 
+the file with the extension of 
+
+<emphasis id="strong1087" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled
+
+
+<link id="a1126" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1084">
+You learned how to design and create a 
+
+<emphasis id="strong1088" effect="bold">
+Sprite
+
+</emphasis>
+ class that 
+provides collision detection. You also learned how to write an XNA program that 
+takes advantage of that collision detection capability.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Whats_next" effect="bold">
+
+What's next?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1085">
+The one critical element that is preventing us from using the 
+
+<emphasis id="strong1089" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class to create a 2D arcade style game is the ability of the user to control the 
+motion of one or more sprites using keyboard and/or mouse input. That will be 
+the topic for the next module.
+
+</para>
+
+
+
+
+
+<para id="p1086">
+Once we have that tool, we can write a game where the challenge is to prevent 
+the spiders from successfully navigating across the game window without being 
+eaten by a ladybug. Or, we could write a game where the challenge is to cause 
+the ladybugs to successfully navigate across the game window without being 
+bitten by a spider.
+
+</para>
+
+
+
+
+
+<para id="p1087">
+Beyond that, there are several other tools that will make it possible for us 
+to create more sophisticated and interesting games:
+
+</para>
+
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+
+	
+
+<item id="li1075">
+The ability to play sounds.
+
+</item>
+
+
+	
+
+<item id="li1076">
+The ability to create onscreen text.
+
+</item>
+
+
+	
+
+<item id="li1077">
+The ability to create a game with multiple levels and increasing 
+	difficulty at each level, scorekeeping, etc.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1088">
+I will show you how to create some of those tools later in this series of 
+modules and will leave others as an exercise for the student.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1089">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1014" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1090" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1019" list-type="bulleted">
+
+					
+
+<item id="li1078">
+Module name: Xna0130-Collision Detection
+
+</item>
+
+
+					
+
+<item id="li1079">
+File: Xna0130.htm
+
+
+</item>
+
+
+					
+
+<item id="li1080">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1015" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1091" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1090">
+<emphasis id="strong1092" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1091">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1092">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1093">
+<emphasis id="strong1093" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+	
+
+
+</section>
+<section id="h11010">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1094">
+Complete listings of the program files discussed in this module are provided in 
+
+<link id="a1127" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and 
+
+<link id="a1128" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ below. 
+
+</para>
+
+
+
+	
+
+
+
+
+<note id="note1016" type="">
+
+
+<para id="p1095">
+<emphasis id="Listing_14" effect="bold">
+
+Listing 14
+
+</emphasis>
+
+. The Sprite class for the project named XNA0130Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1013" display="block">/*Project XNA0130Proj
+ * This file defines a Sprite class from which a Sprite
+ * object can be instantiated. This version supports
+ * collision detection based on intersecting rectangles.
+ *******************************************************/
+
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace XNA0130Proj {
+  class Sprite {
+    private Texture2D image;
+    private Vector2 position = new Vector2(0,0);
+    private Vector2 direction = new Vector2(0,0);
+    private Point windowSize;
+    private Random random;
+    double elapsedTime;//in milliseconds
+    //The following value is the inverse of speed in
+    // moves/msec expressed in msec/move.
+    double elapsedTimeTarget;
+    //-------------------------------------------------//
+
+    //Image property accessor - new to this version.
+    public Texture2D Image {
+      get {
+        return image;
+      }//end get
+    }//end Image property accessor
+    //-------------------------------------------------//
+
+    //Position property accessor
+    public Vector2 Position {
+      get {
+        return position;
+      }
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+    //-------------------------------------------------//
+
+    //WindowSize property accessor
+    public Point WindowSize {
+      set {
+        windowSize = value;
+      }//end set
+    }//end WindowSize property accessor
+    //-------------------------------------------------//
+
+    //Direction property accessor
+    public Vector2 Direction {
+      get {
+        return direction;
+      }
+      set {
+        direction = value;
+      }//end set
+    }//end Direction property accessor
+
+    //-------------------------------------------------//
+
+    //Speed property accessor. The set side should be
+    // called with speed in moves/msec. The get side
+    // returns speed moves/msec.
+    public double Speed {
+      get {
+        //Convert from elapsed time in msec/move to
+        // speed in moves/msec.
+        return elapsedTimeTarget/1000;
+      }
+      set {
+        //Convert from speed in moves/msec to
+        // elapsed time in msec/move.
+        elapsedTimeTarget = 1000/value;
+      }//end set
+    }//end Speed property accessor
+    //-------------------------------------------------//
+
+    //This constructor loads an image for the sprite
+    // when it is instantiated. Therefore, it requires
+    // an asset name for the image and a reference to a
+    // ContentManager object.
+    //Requires a reference to a Random object. Should 
+    // use the same Random object for all sprites to
+    // avoid getting the same sequence for different
+    // sprites.
+    public Sprite(String assetName,
+                  ContentManager contentManager,
+                  Random random) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;//new to this version
+      this.random = random;
+    }//end constructor
+    //-------------------------------------------------//
+
+    //This method can be called to load a new image
+    // for the sprite.
+    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;//new to this version
+    }//end SetImage
+    //-------------------------------------------------//
+
+    //This method causes the sprite to move in the 
+    // direction of the direction vector if the elapsed
+    // time since the last move exceeds the elapsed
+    // time target based on the specified speed.
+    public void Move(GameTime gameTime) {
+      //Accumulate elapsed time since the last move.
+      elapsedTime += 
+                  gameTime.ElapsedGameTime.Milliseconds;
+
+      if(elapsedTime &gt; elapsedTimeTarget){
+        //It's time to make a move. Set the elapsed 
+        // time to a value that will attempt to produce
+        // the specified speed on the average.
+        elapsedTime -= elapsedTimeTarget;
+
+        //Add the direction vector to the position
+        // vector to get a new position vector.
+        position = Vector2.Add(position,direction);
+
+        //Check for a collision with an edge of the game
+        // window. If the sprite reaches an edge, cause 
+        // the sprite to wrap around and reappear at the 
+        // other edge, moving at the same speed in a 
+        // different direction within the same quadrant 
+        // as before.
+        if(position.X &lt; -image.Width){
+          position.X = windowSize.X;
+          NewDirection();
+        }//end if
+
+        if(position.X &gt; windowSize.X){
+          position.X = -image.Width/2;
+          NewDirection();
+        }//end if
+
+        if(position.Y &lt; -image.Height) {
+          position.Y = windowSize.Y;
+          NewDirection();
+        }//end if
+
+        if(position.Y &gt; windowSize.Y){
+          position.Y = -image.Height / 2;
+          NewDirection();
+        }//end if on position.Y
+      }//end if on elapsed time
+    }//end Move
+    //-------------------------------------------------//
+
+    //This method determines the length of the current 
+    // direction vector along with the signs of the X 
+    // and Y components of the current direction vector.
+    // It computes a new direction vector of the same 
+    // length with the X and Y components having random
+    // lengths and the same signs.
+    //Note that random.NextDouble returns a 
+    // pseudo-random value, uniformly distributed
+    // between 0.0 and 1.0.
+    private void NewDirection() {
+      //Get information about the current direction
+      // vector.
+      double length = Math.Sqrt(
+                            direction.X * direction.X + 
+                            direction.Y * direction.Y);
+      Boolean xNegative = (direction.X &lt; 0)?true:false;
+      Boolean yNegative = (direction.Y &lt; 0)?true:false;
+
+      //Compute a new X component as a random portion of
+      // the vector length.
+      direction.X = 
+                  (float)(length * random.NextDouble());
+      //Compute a corresponding Y component that will 
+      // keep the same vector length.
+      direction.Y = (float)Math.Sqrt(length*length - 
+                               direction.X*direction.X);
+
+      //Set the signs on the X and Y components to match
+      // the signs from the original direction vector.
+      if(xNegative)
+        direction.X = -direction.X;
+      if(yNegative)
+        direction.Y = -direction.Y;
+    }//end NewDirection
+    //-------------------------------------------------//
+
+    public void Draw(SpriteBatch spriteBatch) {
+      //Call the simplest available version of
+      // SpriteBatch.Draw
+      spriteBatch.Draw(image,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+
+    //This method is new to this version of the Sprite
+    // class.
+    //Returns the current rectangle occupied by the
+    // sprite.
+    public Rectangle GetRectangle() {
+      return new Rectangle((int)(position.X),
+                           (int)(position.Y),
+                           image.Width,
+                           image.Height);
+    }//end GetRectangle
+    //-------------------------------------------------//
+
+    //This method is new to this version of the Sprite
+    // class.
+    //This method receives a list of Sprite objects as
+    // an incoming parameter. It tests for a collision
+    // with the sprites in the list beginning with the
+    // sprite at the head of the list. If it detects a
+    // collision, it stops testing immediately and
+    // returns a reference to the Sprite object for
+    // which it found the collision. If it doesn't find
+    // a collision with any sprite in the list, it
+    // returns null.
+    //A collision is called if the rectangle containing
+    // this object's image intersects the rectangle
+    // containing a target sprite's image.
+    public Sprite IsCollision(List&lt;Sprite&gt; target) {
+      Rectangle thisRectangle = 
+                         new Rectangle((int)(position.X),
+                                       (int)(position.Y),
+                                       image.Width,
+                                       image.Height);
+      Rectangle targetRectangle;
+      int cnt = 0;
+
+      while(cnt &lt; target.Count){
+        targetRectangle = target[cnt].GetRectangle();
+        if(thisRectangle.Intersects(targetRectangle)){
+          return target[cnt];
+        }//end if
+        cnt++;
+      }//end while loop
+
+      return null;//no collision detected
+    }//end IsCollision
+    //-------------------------------------------------//
+
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+<note id="note1017" type="">
+
+
+<para id="p1096">
+<emphasis id="Listing_15" effect="bold">
+
+Listing 15
+
+</emphasis>
+
+. The Game1 class for the project named XNA0130Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1014" display="block">/*Project XNA0130Proj
+ * This project demonstrates how to integrate  
+ * spiders, and ladybugs in a program using
+ * objects of a Sprite class with collision
+ * detection.
+ * *****************************************************/
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using XNA0130Proj;
+
+namespace XNA0130Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //Use the following values to set the size of the
+    // client area of the game window. The actual window
+    // with its frame is somewhat larger depending on
+    // the OS display options. On my machine with its
+    // current display options, these dimensions
+    // produce a 1024x768 game window.
+    int windowWidth = 1017;
+    int windowHeight = 738;
+
+    //This is the length of the greatest distance in
+    // pixels that any sprite will move in a single
+    // frame of the game loop.
+    double maxVectorLength = 5.0;
+
+    Sprite spiderWeb;//reference to a background sprite.
+
+    //References to the spiders are stored in this
+    // List object.
+    List&lt;Sprite&gt; spiders = new List&lt;Sprite&gt;();
+    int numSpiders = 200;//Number of spiders.
+    //The following value should never exceed 60 moves
+    // per second unless the default frame rate is also
+    // increased to more than 60 frames per second.
+    double maxSpiderSpeed = 30;//moves per second
+
+    //References to the Ladybugs are stored in this List.
+    List&lt;Sprite&gt; ladybugs = new List&lt;Sprite&gt;();
+    int numLadybugs = 5;//Max number of ladybugs
+    double maxLadybugSpeed = 15;
+
+    //Random number generator. It is best to use a single
+    // object of the Random class to avoid the 
+    // possibility of using different streams that
+    // produce the same sequence of values.
+    //Note that the random.NextDouble() method produces
+    // a pseudo-random value where the sequence of values
+    // is uniformly distributed between 0.0 and 1.0.
+    Random random = new Random();
+    //-------------------------------------------------//
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = windowWidth;
+      graphics.PreferredBackBufferHeight = windowHeight;
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      //No initialization required.
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create a sprite for the background image.
+      spiderWeb = 
+                 new Sprite("spiderwebB",Content,random);
+      spiderWeb.Position = new Vector2(0f,0f);
+
+
+      //Instantiate all of the spiders and cause them to
+      // move from left to right, top to 
+      // bottom. Pass a reference to the same Random
+      // object to all of the sprites.
+      for(int cnt = 0;cnt &lt; numSpiders;cnt++) {
+        spiders.Add(
+          new Sprite("blackWidowSpider",Content,random));
+
+        //Set the position of the current spider at a
+        // random location within the game window.
+        spiders[cnt].Position = new Vector2(
+           (float)(windowWidth * random.NextDouble()),
+           (float)(windowHeight * random.NextDouble()));
+
+        //Get a direction vector for the current spider.
+        // Make both components positive to cause the
+        // vector to point down and to the right.
+        spiders[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          false,//xNeg
+          false);//yNeg
+
+        //Notify the spider object of the size of the
+        // game window.
+        spiders[cnt].WindowSize =
+                     new Point(windowWidth,windowHeight);
+
+        //Set the speed in moves per second for the
+        // current spider to a random value between
+        // maxSpiderSpeed/2 and maxSpiderSpeed.
+        spiders[cnt].Speed = maxSpiderSpeed / 2
+              + maxSpiderSpeed * random.NextDouble() / 2;
+      }//end for loop
+
+      //Use the same process to instantiate all of the
+      // ladybugs and cause them to move from right to
+      // left, bottom to top.
+      for(int cnt = 0;cnt &lt; numLadybugs;cnt++) {
+        ladybugs.Add(
+                   new Sprite("ladybug",Content,random));
+        ladybugs[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        ladybugs[cnt].Direction = DirectionVector(
+         (float)maxVectorLength,
+         (float)(maxVectorLength * random.NextDouble()),
+         true,//xNeg
+         true);//yNeg
+        ladybugs[cnt].WindowSize =
+                     new Point(windowWidth,windowHeight);
+        ladybugs[cnt].Speed = maxLadybugSpeed / 2
+             + maxLadybugSpeed * random.NextDouble() / 2;
+      }//end for loop
+
+    }//end LoadContent
+    //-------------------------------------------------//
+
+    //This method returns a direction vector given the
+    // length of the vector, the length of the
+    // X component, the sign of the X component, and the
+    // sign of the Y component. Set negX and/or negY to
+    // true to cause them to be negative. By adjusting
+    // the signs on the X and Y components, the vector
+    // can be caused to point into any of the four
+    // quadrants.
+    private Vector2 DirectionVector(float vecLen,
+                                    float xLen,
+                                    Boolean negX,
+                                    Boolean negY) {
+      Vector2 result = new Vector2(xLen,0);
+      result.Y = (float)Math.Sqrt(vecLen * vecLen
+                                          - xLen * xLen);
+      if(negX)
+        result.X = -result.X;
+      if(negY)
+        result.Y = -result.Y;
+      return result;
+    }//end DirectionVector
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      //No content unload required.
+    }//end unloadContent
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+      //Tell all the spiders in the list to move.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the ladybugs in the list to move.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell each ladybug to test for a collision with a
+      // spider and to return a reference to the spider
+      // if there is a collision. Return null if there is
+      // no collision.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+
+        //Test for a collision between this ladybug and
+        // all of the spiders in the list of spiders.
+        Sprite target = 
+                      ladybugs[cnt].IsCollision(spiders);
+        if(target != null) {
+          //There was a collision. Cause the spider to
+          // move 128 pixels to the right.
+          target.Position = 
+                    new Vector2(target.Position.X + 128,
+                                target.Position.Y);
+
+          //If the collision was with a black widow
+          // spider, cause it to reincarnate into a
+          // green spider.
+          if(target.Image.Name == "blackWidowSpider") {
+            target.SetImage("greenspider",Content);
+          }//If the collision was with a green spider,
+           // cause it to reincarnate into a brown
+           // spider.
+          else if(target.Image.Name == "greenspider") {
+            target.SetImage("brownSpider",Content);
+          }//If the collision was with a brown spider,
+           // it gets eaten. Remove it from the list of
+           // spiders.
+          else if(target.Image.Name == "brownSpider") {
+            spiders.Remove(target);
+          }// end else-if
+        }//end if
+      }//end for loop
+
+      base.Update(gameTime);
+    }//end Update method
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+
+      spriteBatch.Begin();
+
+      spiderWeb.Draw(spriteBatch);//draw background 
+
+      //Draw all spiders.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ladybugs.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+<para id="p1097">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

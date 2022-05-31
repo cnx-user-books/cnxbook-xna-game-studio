@@ -1,0 +1,4300 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0114-Runtime Polymorphism through Class Inheritance</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49508</md:content-id>
+  <md:title>Xna0114-Runtime Polymorphism through Class Inheritance</md:title>
+  <md:abstract>With runtime polymorphism, the selection of a method for execution is based on the actual type of the object whose reference is stored in a reference variable, and not on the type of the reference variable on which the method is called.</md:abstract>
+  <md:uuid>f3204e5c-8c8a-4f8d-95b3-2d56fe0f493b</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Fri May 06 15:50:20 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1005">
+<link id="a1006" target-id="What_is_polymorphism">
+
+What is polymorphism?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1006">
+<link id="a1007" target-id="How_does_C_implement_polymorphism">
+
+How does C# implement polymorphism?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="The_essence_of_runtime_polymorphic_behavior">
+
+The essence of runtime polymorphic behavior
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1008">
+<link id="a1009" target-id="The_decision_process">
+
+The decision process
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Late_binding">
+
+Late binding
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Operational_description_of_runtime_polymorphism">
+
+Operational description of runtime polymorphism
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Runtime_polymorphism_is_very_powerful">
+
+Runtime polymorphism is very powerful
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="An_important_attribute_of_runtime_polymorphism">
+
+An important attribute of runtime polymorphism
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Why_is_it_called_runtime_polymorphism">
+
+Why is it called runtime polymorphism?
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1014">
+<link id="a1015" target-id="Why_defer_the_decision">
+
+Why defer the decision?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="Could_be_either_type">
+
+Could be either type
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1018">
+<link id="a1019" target-id="The_class_named_A">
+
+The class named A
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1019">
+<link id="a1020" target-id="A_virtual_method">
+
+A virtual method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Behavior_of_the_virtual_method">
+
+Behavior of the virtual method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="The_class_named_B">
+
+The class named B
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1022">
+<link id="a1023" target-id="The_override_declaration">
+
+The override declaration
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="A_compiler_warning">
+
+A compiler warning
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Overriding_versus_hiding">
+
+Overriding versus hiding
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="Behavior_of_the_overridden_method">
+
+Behavior of the overridden method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_driver_class">
+
+The driver class
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="A_new_object_of_the_class_B">
+
+A new object of the class B
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="Downcast_and_call_the_method">
+
+Downcast and call the method
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1029">
+<link id="a1030" target-id="Which_version_was_executed">
+
+Which version was executed?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="Why_was_this_version_executed">
+
+Why was this version executed?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Not_runtime_polymorphic_behavior">
+
+Not runtime polymorphic behavior
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="This_is_runtime_polymorphic_behavior">
+
+This is runtime polymorphic behavior
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="The_method_output">
+
+The method output
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Very_important">
+
+Very important
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Another_invocation_of_the_method">
+
+Another invocation of the method
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1036">
+<link id="a1037" target-id="Compiler_error">
+
+Compiler error
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Some_important_rules">
+
+Some important rules
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1038">
+<link id="a1039" target-id="Necessary_but_not_sufficient">
+
+Necessary, but not sufficient
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Must_define_or_inherit_the_method">
+
+Must define or inherit the method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="One_additional_scenario">
+
+One additional scenario
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1041">
+<link id="a1042" target-id="A_new_object_of_type_A">
+
+A new object of type A
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Downcast_and_call_the_method">
+
+Downcast and call the method
+
+</link>
+
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="The_output">
+
+The output
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="Not_polymorphic_behavior">
+
+Not polymorphic behavior
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Once_again_what_is_runtime_polymorphism">
+
+Once again, what is runtime polymorphism?
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1052" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+
+<emphasis id="em1001" effect="italics">
+ 
+
+</emphasis>
+provided 
+information on how to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+<para id="p1004">
+Object-oriented programs exhibit three main characteristics:
+
+</para>
+
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+
+	
+
+<item id="li1051">
+Encapsulation
+
+</item>
+
+
+	
+
+<item id="li1052">
+Inheritance
+
+</item>
+
+
+	
+
+<item id="li1053">
+Polymorphism
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1005">
+I have explained encapsulation, inheritance, and compile-time polymorphism in 
+earlier modules. I will continue my explanation of polymorphism in this module 
+with an explanation of runtime polymorphism using method overriding and class 
+inheritance. I will defer an explanation of polymorphism using interface 
+inheritance until a future module.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1006">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1054">
+<link id="a1053" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Class A.
+
+</item>
+
+
+		
+
+<item id="li1055">
+<link id="a1054" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Class B.
+
+</item>
+
+
+		
+
+<item id="li1056">
+<link id="a1055" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Beginning of the driver class.
+
+</item>
+
+
+		
+
+<item id="li1057">
+<link id="a1056" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. This is runtime polymorphic behavior.
+
+</item>
+
+
+		
+
+<item id="li1058">
+<link id="a1057" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. A failed attempt.
+
+</item>
+
+
+		
+
+<item id="li1059">
+<link id="a1058" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Not polymorphic behavior.
+
+</item>
+
+
+		
+
+<item id="li1060">
+<link id="a1059" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Project Polymorph03.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="What_is_polymorphism" effect="bold">
+
+What is polymorphism?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+As you learned in an earlier module, the meaning of the word polymorphism is something like 
+
+<emphasis id="em1002" effect="italics">
+one name, many forms
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="How_does_C_implement_polymorphism" effect="bold">
+
+How does C# implement polymorphism?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1008">
+Also as you learned in an earlier module, polymorphism manifests itself in C# in the form of multiple methods having 
+the same name.
+
+</para>
+
+
+
+
+
+<para id="p1009">
+In some cases, multiple methods have the same name, but different formal 
+argument lists. This is polymorphism implemented using 
+
+<emphasis id="em1003" effect="italics">
+overloaded
+
+</emphasis>
+ methods. I 
+explained this form of polymorphism in an earlier module.
+
+</para>
+
+
+
+
+
+<para id="p1010">
+In other cases, multiple methods have the same name, same return type, and 
+same formal argument list. This is method 
+
+<emphasis id="em1004" effect="italics">
+overriding
+
+</emphasis>
+, which is the main topic of 
+this module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="The_essence_of_runtime_polymorphic_behavior" effect="bold">
+
+The essence of runtime polymorphic behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+Methods are called on references to objects. Typically, those references are 
+stored in reference variables, or in the elements of a collection such as an 
+array, stack, or queue.
+
+</para>
+
+
+
+
+
+<section id="h31001">
+<title>
+<emphasis id="The_decision_process" effect="bold">
+
+The decision process
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1012">
+With runtime polymorphism based on 
+
+<emphasis id="em1005" effect="italics">
+method overriding
+
+</emphasis>
+, the decision regarding 
+which version of a method will be executed is based on the actual 
+
+<emphasis id="strong1001" effect="bold">
+type of the 
+object
+
+</emphasis>
+ whose reference is stored in the reference variable, and 
+
+<emphasis id="strong1002" effect="bold">
+not
+
+</emphasis>
+ on the 
+
+
+<emphasis id="strong1003" effect="bold">
+type 
+of the reference variable
+
+</emphasis>
+ on which the method is called.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+Stated differently, the type of the reference determines which methods 
+
+
+<emphasis id="strong1004" effect="bold">
+can be 
+called
+
+</emphasis>
+. The type of the object determines which method (from that set of 
+allowable methods) 
+
+<emphasis id="strong1005" effect="bold">
+will be called
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31002">
+<title>
+<emphasis id="Late_binding" effect="bold">
+
+Late binding
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+The decision regarding which version of the method to call cannot be made at 
+compile time. That decision must be deferred and made at runtime. This is 
+sometimes referred to as 
+
+<emphasis id="em1006" effect="italics">
+late binding
+
+</emphasis>
+. 
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Operational_description_of_runtime_polymorphism" effect="bold">
+
+Operational description of runtime polymorphism
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+Here is an operational description of runtime polymorphism as implemented in 
+C# through inheritance and method overriding:
+
+</para>
+
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+
+	
+
+<item id="li1061">
+Assume that a class named 
+
+<emphasis id="strong1006" effect="bold">
+SuperClass
+
+</emphasis>
+ defines a method 
+	named 
+
+<emphasis id="strong1007" effect="bold">
+method
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1062">
+Assume that a class named 
+
+<emphasis id="strong1008" effect="bold">
+SubClass
+
+</emphasis>
+ extends 
+
+<emphasis id="strong1009" effect="bold">
+
+	SuperClass
+
+</emphasis>
+ and overrides the method named 
+
+<emphasis id="strong1010" effect="bold">
+method
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1063">
+Assume that a reference to an object of the class named 
+
+<emphasis id="strong1011" effect="bold">
+SubClass
+
+</emphasis>
+ 
+	is assigned to a reference variable named 
+
+<emphasis id="strong1012" effect="bold">
+ref
+
+</emphasis>
+ of type
+	
+
+<emphasis id="strong1013" effect="bold">
+SuperClass
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1064">
+Assume that the method named 
+
+<emphasis id="strong1014" effect="bold">
+method
+
+</emphasis>
+ is then called on 
+	the reference variable using the following syntax: 
+
+<emphasis id="strong1015" effect="bold">
+ref.method()
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1065">
+Result: The version of the method named 
+
+<emphasis id="strong1016" effect="bold">
+method
+
+</emphasis>
+ that 
+	will actually be executed is the overridden version in the class named
+	
+
+<emphasis id="strong1017" effect="bold">
+SubClass
+
+</emphasis>
+. The version that is defined in the class named
+	
+
+<emphasis id="strong1018" effect="bold">
+SuperClass
+
+</emphasis>
+ will not be not executed.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1016">
+This is runtime polymorphism.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Runtime_polymorphism_is_very_powerful" effect="bold">
+
+Runtime polymorphism is very powerful
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1017">
+As you gain more experience with C#, you will learn that much of the power of 
+OOP using C# is centered on runtime polymorphism using class inheritance, 
+interfaces, and method overriding. 
+
+<emphasis id="em1007" effect="italics">
+(The use of interfaces for polymorphism 
+will be discussed in a subsequent module.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="An_important_attribute_of_runtime_polymorphism" effect="bold">
+
+An important attribute of runtime polymorphism
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1018">
+This is worth repeating: 
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+<emphasis id="em1008" effect="italics">
+The decision regarding which version of 
+the method to execute is based on the actual type of object whose reference is 
+stored in the reference variable, and not on the type of the reference variable 
+on which the method is called.
+
+</emphasis>
+</note>
+
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Why_is_it_called_runtime_polymorphism" effect="bold">
+
+Why is it called runtime polymorphism?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+The reason that this type of polymorphism is often referred to as 
+
+<emphasis id="em1009" effect="italics">
+runtime 
+polymorphism
+
+</emphasis>
+ is because the decision regarding which version of the method 
+to execute cannot be made until runtime. The decision cannot be made at compile 
+time 
+
+<emphasis id="em1010" effect="italics">
+(as is the case with overloaded methods).
+
+</emphasis>
+</para>
+
+
+
+
+
+<section id="h31003">
+<title>
+<emphasis id="Why_defer_the_decision" effect="bold">
+
+Why defer the decision?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1020">
+The decision cannot be made at compile time because the compiler has no way 
+of knowing 
+
+<emphasis id="em1011" effect="italics">
+(when the program is compiled)
+
+</emphasis>
+ the actual type of the object 
+whose reference will be stored in the reference variable.
+
+</para>
+
+
+
+
+
+<para id="p1021">
+For example, the type of the object might be the result of a choice made at 
+runtime by a human user among several different possible choices.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="Could_be_either_type" effect="bold">
+
+Could be either type
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+For the situation described earlier, that object could just as easily be of 
+type 
+
+<emphasis id="strong1019" effect="bold">
+SuperClass
+
+</emphasis>
+ as of type 
+
+<emphasis id="strong1020" effect="bold">
+SubClass
+
+</emphasis>
+. In either 
+case, it would be valid to assign the object's reference to the same superclass 
+reference variable.
+
+</para>
+
+
+
+
+
+<para id="p1023">
+If the object were of the 
+
+<emphasis id="strong1021" effect="bold">
+SuperClass
+
+</emphasis>
+ type, then a call to 
+the method named 
+
+<emphasis id="strong1022" effect="bold">
+method
+
+</emphasis>
+ on the reference would cause the 
+version of the method defined in 
+
+<emphasis id="strong1023" effect="bold">
+SuperClass
+
+</emphasis>
+, and not the 
+version defined in 
+
+<emphasis id="strong1024" effect="bold">
+SubClass
+
+</emphasis>
+, to be executed.
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<emphasis id="em1012" effect="italics">
+One more time -- the version that is executed is determined by 
+the type of the object and not by the type of the reference variable containing 
+the reference to the object.
+
+</emphasis>
+</note>
+
+
+
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1024">
+From a practical programming viewpoint, polymorphism manifests itself in 
+	three distinct forms in C#:
+
+</para>
+
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+
+	
+
+<item id="li1066">
+Method overloading
+
+</item>
+
+
+	
+
+<item id="li1067">
+Method overriding through class inheritance
+
+</item>
+
+
+	
+
+<item id="li1068">
+Method overriding through the C# interface inheritance
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1025">
+I covered method 
+
+<emphasis id="em1013" effect="italics">
+overloading
+
+</emphasis>
+ as one form of polymorphism 
+
+<emphasis id="em1014" effect="italics">
+(compile-time 
+polymorphism)
+
+</emphasis>
+ in an earlier module.
+
+</para>
+
+
+
+
+
+<para id="p1026">
+I will begin the discussion of runtime polymorphism through method 
+
+<emphasis id="em1015" effect="italics">
+overriding
+
+</emphasis>
+ 
+and class inheritance in this module. I will cover interfaces in a future 
+module. 
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1027">
+Let's examine a sample program that illustrates runtime 
+	polymorphism using class inheritance and overridden methods. The name of the 
+	program is 
+
+<emphasis id="strong1025" effect="bold">
+Polymorph03
+
+</emphasis>
+. A complete listing of the program 
+	is provided in 
+
+<link id="a1060" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+<section id="h21008">
+<title>
+<emphasis id="The_class_named_A" effect="bold">
+
+The class named A
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1028">
+I will discuss this program in fragments. 
+
+<link id="a1061" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ shows the definition of a 
+class named 
+
+<emphasis id="strong1026" effect="bold">
+A
+
+</emphasis>
+, which extends the class named 
+
+<emphasis id="strong1027" effect="bold">
+Object
+
+</emphasis>
+ 
+by default.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1002" type="">
+
+
+
+
+
+<para id="p1029">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Class A.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">using System;
+
+class A {
+  public virtual void m() {
+    Console.WriteLine("m in class A");
+  }//end method m()
+}//end class A
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1030">
+The class named 
+
+<emphasis id="strong1028" effect="bold">
+A
+
+</emphasis>
+ defines a simple method named 
+
+<emphasis id="strong1029" effect="bold">
+
+	m
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h31005">
+<title>
+<emphasis id="A_virtual_method" effect="bold">
+
+A virtual method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+Note that the method named 
+
+<emphasis id="strong1030" effect="bold">
+m
+
+</emphasis>
+ is declared to be 
+
+<emphasis id="strong1031" effect="bold">
+
+virtual
+
+</emphasis>
+. This means that it is allowable to override this method in a 
+subclass.
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+If you come from a Java programming background, you will note that 
+this is the reverse of the situation in Java. In Java, all methods are virtual 
+by default unless they are declared to be final.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Behavior_of_the_virtual_method" effect="bold">
+
+Behavior of the virtual method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+The behavior of the virtual method, as defined in the class named 
+
+<emphasis id="strong1032" effect="bold">
+A
+
+</emphasis>
+, 
+is to display a message indicating that it has been called, and that it is 
+defined in the class named 
+
+<emphasis id="strong1033" effect="bold">
+A
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1033">
+This message will allow us to determine which version of the method is 
+executed in each case discussed later.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21009">
+<title>
+<emphasis id="strong1034" effect="bold">
+<emphasis id="The_class_named_B" effect="bold">
+
+The class named B
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1034">
+<link id="a1062" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ shows the definition of a class named 
+
+<emphasis id="strong1035" effect="bold">
+B
+
+</emphasis>
+ that 
+extends the class named 
+
+<emphasis id="strong1036" effect="bold">
+A.
+
+</emphasis>
+ 
+
+</para>
+
+
+
+
+
+<note id="note1004" type="">
+
+
+
+
+
+
+<para id="p1035">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Class B.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">class B : A {
+  public override void m() {
+    Console.WriteLine("m in class B");
+  }//end method m()
+}//end 
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1036">
+The class named 
+
+<emphasis id="strong1037" effect="bold">
+B
+
+</emphasis>
+ overrides 
+
+<emphasis id="em1016" effect="italics">
+(redefines)
+
+</emphasis>
+ the 
+	method named 
+
+<emphasis id="strong1038" effect="bold">
+m
+
+</emphasis>
+, which it inherits from the class named
+	
+
+<emphasis id="strong1039" effect="bold">
+A
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h31007">
+<title>
+<emphasis id="The_override_declaration" effect="bold">
+
+The override declaration
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+Note the use of the 
+
+<emphasis id="strong1040" effect="bold">
+override
+
+</emphasis>
+ declaration in 
+
+<link id="a1063" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. In C#, if one method 
+overrides another, it is necessary to declare that fact.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+Once again, if you come from a Java background, you will note that this 
+is just the reverse of the situation in Java. In Java, a method whose name, 
+return type, and formal argument list matches an inherited method will 
+automatically override the inherited method.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31008">
+<title>
+<emphasis id="A_compiler_warning" effect="bold">
+
+A compiler warning
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+If you fail to make the override declaration in 
+
+<link id="a1064" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+, you will get a 
+compiler warning that reads something like the following:
+
+</para>
+
+
+
+
+
+<note id="note1006" type="">
+
+
+
+	
+
+<code id="pre1002" display="block">
+warning CS0114: 'B.m()' hides inherited member 'A.m()'. 
+To make the current member override that implementation, 
+add the override keyword. Otherwise add the new keyword.</code>
+
+
+	
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="Overriding_versus_hiding" effect="bold">
+
+Overriding versus hiding
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1039">
+I'm not going to get into a discussion of the difference between overriding 
+and hiding in this module. Perhaps I will find the time to provide such a 
+discussion in a future module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31010">
+<title>
+<emphasis id="Behavior_of_the_overridden_method" effect="bold">
+
+Behavior of the overridden method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1040">
+Like the inherited version of the method, the overridden version displays a 
+message indicating that it has been called. However, the message is different 
+from the message displayed by the inherited version discussed above. The 
+overridden version tells us that it is defined in the class named 
+
+<emphasis id="strong1041" effect="bold">
+B
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<emphasis id="em1017" effect="italics">
+According to the current jargon, the behavior of the overridden version 
+of the method is appropriate for an object instantiated from the class 
+named 
+
+</emphasis>
+ 
+
+<emphasis id="strong1042" effect="bold">
+<emphasis id="em1018" effect="italics">
+B
+
+</emphasis>
+</emphasis>
+.
+
+</note>
+
+
+
+
+
+
+<para id="p1041">
+Again, this message will allow us to determine which version of the method is 
+executed in each case discussed later.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21010">
+<title>
+<emphasis id="The_driver_class" effect="bold">
+
+The driver class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+<link id="a1065" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ shows the beginning of the driver class named 
+
+<emphasis id="strong1043" effect="bold">
+Polymorph03
+
+</emphasis>
+.
+
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+
+
+
+<para id="p1043">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. Beginning of the driver class.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">public class Polymorph03 {
+  public static void Main() {
+    Object var = new B();
+    //Following will compile and run
+    ((B)var).m();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31011">
+<title>
+<emphasis id="A_new_object_of_the_class_B" effect="bold">
+
+A new object of the class B
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+The code in the 
+
+<emphasis id="strong1044" effect="bold">
+Main
+
+</emphasis>
+ method begins by 
+instantiating a new object of the class named 
+
+<emphasis id="strong1045" effect="bold">
+B
+
+</emphasis>
+, and assigning 
+the object's reference to a reference variable of type 
+
+<emphasis id="strong1046" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<note id="note1009" type="">
+
+
+This is legal because an object's reference can be assigned to any 
+reference variable whose type is a superclass of the class from which the object 
+was instantiated. The class named 
+
+<emphasis id="strong1047" effect="bold">
+Object
+
+</emphasis>
+ is the superclass of 
+all classes.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31012">
+<title>
+<emphasis id="Downcast_and_call_the_method" effect="bold">
+
+Downcast and call the method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+If you have read the module titled
+
+
+<link id="a1066" url="http://cnx.org/contents/GY804-eY:pJQk7xmY">
+
+Xna0112-Type Conversion, Casting, and Assignment Compatibility
+
+</link>
+
+, it will come as no surprise to you that the 
+second statement in the 
+
+<emphasis id="strong1048" effect="bold">
+Main
+
+</emphasis>
+ method, which casts the reference 
+down to type 
+
+<emphasis id="strong1049" effect="bold">
+B
+
+</emphasis>
+ and calls the method named 
+
+<emphasis id="strong1050" effect="bold">
+m
+
+</emphasis>
+ on 
+it, will compile and execute successfully.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="Which_version_was_executed" effect="bold">
+
+Which version was executed?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+The execution of the method produces the following output on the computer 
+screen:
+
+</para>
+
+
+
+
+
+<code id="pre1004" display="block">m in class B</code>
+
+
+
+
+<para id="p1047">
+By examining the output, you can confirm that the version of the method that 
+was overridden in the class named 
+
+<emphasis id="strong1051" effect="bold">
+B
+
+</emphasis>
+ is the version that was 
+executed.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="Why_was_this_version_executed" effect="bold">
+
+Why was this version executed?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1048">
+This should also come as no surprise to you. The cast converts the type of 
+the reference from type 
+
+<emphasis id="strong1052" effect="bold">
+Object
+
+</emphasis>
+ to type 
+
+<emphasis id="strong1053" effect="bold">
+B
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1049">
+You can always call a public method belonging to an object using a reference 
+to the object whose type is the same as the class from which the object was 
+instantiated.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="Not_runtime_polymorphic_behavior" effect="bold">
+
+Not runtime polymorphic behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1050">
+Just for the record, the above invocation of the method does not constitute 
+runtime polymorphism 
+
+<emphasis id="em1019" effect="italics">
+(in my opinion)
+
+</emphasis>
+. I included that invocation of the 
+method to serve as a backdrop for what follows.
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+If this is runtime polymorphism, it is not a very significant example, 
+because there was no requirement for the runtime system to decide between 
+different methods having the same name. The runtime system simply executed a 
+method belonging to an object using a reference of the same type as the object.
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31013">
+<title>
+<emphasis id="This_is_runtime_polymorphic_behavior" effect="bold">
+
+This is runtime polymorphic behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+However, the call to the method in 
+
+<link id="a1067" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ does constitute runtime 
+polymorphism. 
+
+</para>
+
+
+
+
+
+<note id="note1011" type="">
+
+
+
+
+
+<para id="p1052">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. This is runtime polymorphic behavior.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">    //Following will also compile 
+    // and run due to polymorphic
+    // behavior.
+    ((A)var).m();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1053">
+The statement in 
+
+<link id="a1068" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ casts the reference down to type 
+
+<emphasis id="strong1054" effect="bold">
+A
+
+</emphasis>
+ 
+	and calls the method named 
+
+<emphasis id="strong1055" effect="bold">
+m
+
+</emphasis>
+ on that reference.
+
+</para>
+
+
+
+
+
+<section id="h41003">
+<title>
+<emphasis id="The_method_output" effect="bold">
+
+The method output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+Here is the punch line. Not only does the statement in 
+
+<link id="a1069" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ compile and 
+run successfully, it produces the following output, 
+
+<emphasis id="em1020" effect="italics">
+(which is exactly the 
+same output as before)
+
+</emphasis>
+:
+
+</para>
+
+
+
+
+
+<code id="pre1006" display="block">m in class B</code>
+
+
+
+
+<para id="p1055">
+The same method was executed in both cases
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="Very_important" effect="bold">
+
+Very important
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+It is very important to note that this output, 
+
+<emphasis id="em1021" effect="italics">
+(produced by casting the 
+reference variable to type 
+
+<emphasis id="strong1056" effect="bold">
+A
+
+</emphasis>
+ instead of type 
+
+<emphasis id="strong1057" effect="bold">
+B
+
+</emphasis>
+)
+
+</emphasis>
+, 
+is exactly the same as that produced by the earlier call to the method when the 
+reference was cast to type 
+
+<emphasis id="strong1058" effect="bold">
+B
+
+</emphasis>
+. This means that the same version 
+of the method was executed in both cases.
+
+</para>
+
+
+
+
+
+<para id="p1057">
+This confirms that even though the type of the reference was converted to 
+type 
+
+<emphasis id="strong1059" effect="bold">
+A
+
+</emphasis>
+, 
+
+<emphasis id="em1022" effect="italics">
+(rather than type 
+
+<emphasis id="strong1060" effect="bold">
+Object
+
+</emphasis>
+ or type
+
+
+<emphasis id="strong1061" effect="bold">
+B
+
+</emphasis>
+)
+
+</emphasis>
+, the overridden version of the method defined in class
+
+
+<emphasis id="strong1062" effect="bold">
+B
+
+</emphasis>
+ was actually executed.
+
+</para>
+
+
+
+
+
+<para id="p1058">
+<emphasis id="em1023" effect="italics">
+<emphasis id="strong1063" effect="bold">
+This is runtime polymorphic behavior in a nutshell.
+
+</emphasis>
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1059">
+The version of the method that was executed was based on the 
+
+<emphasis id="strong1064" effect="bold">
+actual 
+type of the object, B
+
+</emphasis>
+, and 
+
+<emphasis id="strong1065" effect="bold">
+not
+
+</emphasis>
+ on the 
+
+<emphasis id="strong1066" effect="bold">
+type of 
+the reference, A
+
+</emphasis>
+. This is an extremely powerful and useful concept.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31014">
+<title>
+<emphasis id="Another_invocation_of_the_method" effect="bold">
+
+Another invocation of the method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+Now take a look at the statement in 
+
+<link id="a1070" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Will this statement compile 
+and execute successfully? If so, which version of the method will be executed? 
+
+</para>
+
+
+
+
+
+
+<note id="note1012" type="">
+
+
+				
+
+
+<para id="p1061">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. A failed attempt.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">    //Following will not compile
+    //var.m();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+<para id="p1062">
+<emphasis id="em1024" effect="italics">
+(That was easy. The answer to the question is given in 
+
+
+<link id="a1071" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+)
+
+</emphasis>
+. 
+
+</para>
+
+
+
+
+	
+
+<section id="h41005">
+<title>
+<emphasis id="Compiler_error" effect="bold">
+
+Compiler error
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+The code in 
+
+<link id="a1072" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ attempts, unsuccessfully, to call the method named
+
+
+<emphasis id="strong1067" effect="bold">
+m
+
+</emphasis>
+ using the reference variable named 
+
+<emphasis id="strong1068" effect="bold">
+var
+
+</emphasis>
+, 
+which is of type 
+
+<emphasis id="strong1069" effect="bold">
+Object
+
+</emphasis>
+. The result is a compiler error, which 
+reads something like the following:
+
+</para>
+
+
+
+
+
+<note id="note1013" type="">
+
+
+
+	
+
+<code id="pre1008" display="block">error CS0117: 'object' does not contain a definition for 'm'</code>
+
+
+	
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21011">
+<title>
+<emphasis id="Some_important_rules" effect="bold">
+
+Some important rules
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+The 
+
+<emphasis id="strong1070" effect="bold">
+Object
+
+</emphasis>
+ class does not define a method named 
+
+<emphasis id="strong1071" effect="bold">
+m
+
+</emphasis>
+. 
+Therefore, the overridden method named 
+
+<emphasis id="strong1072" effect="bold">
+m
+
+</emphasis>
+ in the class named
+
+
+<emphasis id="strong1073" effect="bold">
+B
+
+</emphasis>
+ is not an overridden version of a method that is defined in 
+the class named 
+
+<emphasis id="strong1074" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h31015">
+<title>
+<emphasis id="Necessary_but_not_sufficient" effect="bold">
+
+Necessary, but not sufficient
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+Runtime polymorphism based on class inheritance requires that the type of the 
+reference variable be a superclass of the class from which the object 
+
+<emphasis id="em1025" effect="italics">
+(on 
+which the method will be called)
+
+</emphasis>
+ is instantiated.
+
+</para>
+
+
+
+
+
+<note id="note1014" type="">
+
+
+At least this requirement is true if a significant decision among 
+methods is to be made.
+
+</note>
+
+
+
+
+
+
+<para id="p1066">
+However, while necessary, that is not sufficient to ensure runtime 
+polymorphic behavior.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31016">
+<title>
+<emphasis id="Must_define_or_inherit_the_method" effect="bold">
+
+Must define or inherit the method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1067">
+The type of the reference variable must also be the name of a class that 
+either defines or inherits a version of the method that will ultimately be 
+called on the object.
+
+</para>
+
+
+
+
+
+<para id="p1068">
+Since the class named 
+
+<emphasis id="strong1075" effect="bold">
+Object
+
+</emphasis>
+ does not define 
+
+<emphasis id="em1026" effect="italics">
+(or 
+inherit)
+
+</emphasis>
+ the method named 
+
+<emphasis id="strong1076" effect="bold">
+m
+
+</emphasis>
+, a reference of type 
+
+<emphasis id="strong1077" effect="bold">
+
+Object
+
+</emphasis>
+ does not qualify as a participant in runtime polymorphic 
+behavior in this case. The attempt to use it as a participant results in the 
+compiler error given above.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21012">
+<title>
+<emphasis id="One_additional_scenario" effect="bold">
+
+One additional scenario
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+Before leaving this topic, let's look at one additional scenario to help you 
+distinguish what is, and what is not, runtime polymorphism. Consider the code 
+shown in 
+
+<link id="a1073" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<note id="note1015" type="">
+
+
+
+
+
+<para id="p1070">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Not polymorphic behavior.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">    //Instantiate obj of class A
+    var = new A();
+    //Call the method on it
+    ((A)var).m();
+
+    // Pause until the user presses any key.
+    Console.ReadKey();
+  }//end Main
+}//end class Polymorph03
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31017">
+<title>
+<emphasis id="A_new_object_of_type_A" effect="bold">
+
+A new object of type A
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+The code in 
+
+<link id="a1074" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ instantiates a new object of the class named 
+
+<emphasis id="strong1078" effect="bold">
+A
+
+</emphasis>
+, 
+and stores the object's reference in the original reference variable named
+
+
+<emphasis id="strong1079" effect="bold">
+var
+
+</emphasis>
+ of type 
+
+<emphasis id="strong1080" effect="bold">
+Object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<note id="note1016" type="">
+
+
+As a side note, this overwrites the previous contents of the reference 
+variable with a new reference and causes the object whose reference was 
+previously stored there to become eligible for garbage collection.
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h31018">
+<title>
+Downcast and call the method
+
+</title>
+
+
+
+
+<para id="p1072">
+Then the code in 
+
+<link id="a1075" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ casts the reference down to type 
+
+<emphasis id="strong1081" effect="bold">
+A
+
+</emphasis>
+,
+
+
+<emphasis id="em1027" effect="italics">
+(the type of the object to which the reference refers)
+
+</emphasis>
+, and calls the 
+method named 
+
+<emphasis id="strong1082" effect="bold">
+m
+
+</emphasis>
+ on the downcast reference.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31019">
+<title>
+<emphasis id="The_output" effect="bold">
+
+The output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+As you would probably predict, this produces the following output on the 
+computer screen:
+
+</para>
+
+
+
+
+
+<code id="pre1010" display="block">m in class A</code>
+
+
+
+
+<para id="p1074">
+In this case, the version of the method defined in the class named 
+
+<emphasis id="strong1083" effect="bold">
+A
+
+</emphasis>
+,
+
+
+<emphasis id="em1028" effect="italics">
+(not the version defined in B)
+
+</emphasis>
+ was executed.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31020">
+<title>
+<emphasis id="Not_polymorphic_behavior" effect="bold">
+
+Not polymorphic behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+Once again, in my view, this is not runtime polymorphic behavior 
+
+<emphasis id="em1029" effect="italics">
+(at 
+least it isn't a very useful form of polymorphic behavior)
+
+</emphasis>
+. This code 
+simply converts the type of the reference from type 
+
+<emphasis id="strong1084" effect="bold">
+Object
+
+</emphasis>
+ to 
+the type of the class from which the object was instantiated, and calls one of 
+its methods. Nothing special takes place regarding a selection among different 
+versions of the method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21013">
+<title>
+<emphasis id="Once_again_what_is_runtime_polymorphism" effect="bold">
+
+Once again, what is runtime polymorphism?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+As I have discussed in this module, runtime polymorphic behavior based on 
+inheritance occurs when
+
+</para>
+
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+
+	
+
+<item id="li1069">
+The type of the reference is a superclass of the class from which the 
+	object was instantiated.
+
+</item>
+
+
+	
+
+<item id="li1070">
+The version of the method that is executed is the version that is either 
+	defined in, or inherited into, the class from which the object was 
+	instantiated.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1077">
+And that is probably more than you ever wanted to hear about runtime 
+polymorphism based on inheritance.
+
+</para>
+
+
+
+
+
+<para id="p1078">
+A future module will discuss runtime polymorphism based on the C# interface. 
+From a practical viewpoint, you will find the rules to be similar but somewhat 
+different in the case of the C# interface. 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1079">
+I encourage you to copy the code from 
+
+<link id="a1076" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Use that code to create 
+a C# console project. Compile and run the project. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that 
+you can explain why your changes behave as they do.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+Click 
+
+<link id="a1077" url="Polymorph03.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1085" effect="bold">
+Polymorph03
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1086" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1087" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1088" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1089" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+
+<link id="a1078" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1081">
+Polymorphism manifests itself in C# in the form of multiple methods having 
+the same name.
+
+</para>
+
+
+
+
+
+<para id="p1082">
+From a practical programming viewpoint, polymorphism manifests itself in 
+three distinct forms in C#:
+
+</para>
+
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+
+	
+
+<item id="li1071">
+Method overloading
+
+</item>
+
+
+	
+
+<item id="li1072">
+Method overriding through class inheritance
+
+</item>
+
+
+	
+
+<item id="li1073">
+Method overriding through interface inheritance
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1083">
+This module discusses method overriding through class inheritance.
+
+</para>
+
+
+
+
+
+<para id="p1084">
+With runtime polymorphism based on method overriding, the decision regarding 
+which version of a method will be executed is based on the actual type of object 
+whose reference is stored in a reference variable, and not on the type of the 
+reference variable on which the method is called.
+
+</para>
+
+
+
+
+
+<para id="p1085">
+The decision regarding which version of the method to call cannot be made at 
+compile time. That decision must be deferred and made at runtime. This is 
+sometimes referred to as late binding.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1086">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1017" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1090" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1021" list-type="bulleted">
+
+					
+
+<item id="li1074">
+Module name: Xna0114-Runtime Polymorphism through Class 
+					Inheritance
+
+</item>
+
+
+					
+
+<item id="li1075">
+File: Xna0114.htm
+
+
+</item>
+
+
+					
+
+<item id="li1076">
+Published: 02/27/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1018" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1091" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1087">
+<emphasis id="strong1092" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1088">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1089">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1090">
+<emphasis id="strong1093" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1091">
+A complete listing of the program discussed in this module is provided in 
+
+<link id="a1079" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. 
+
+</para>
+
+
+
+	
+
+
+<note id="note1019" type="">
+
+
+
+
+
+<para id="p1092">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Project Polymorph03.
+
+</para>
+
+
+
+				
+
+<code id="pre1011" display="block">/*Project Polymorph03
+Copyright 2009, R.G.Baldwin
+
+This program illustrates downcasting
+and polymorphic behavior
+
+Program output is:
+  
+m in class B
+m in class B
+m in class A
+*********************************************************/
+using System;
+
+class A {
+  public virtual void m() {
+    Console.WriteLine("m in class A");
+  }//end method m()
+}//end class A
+//======================================================//
+
+class B : A {
+  public override void m() {
+    Console.WriteLine("m in class B");
+  }//end method m()
+}//end class B
+//======================================================//
+
+public class Polymorph03 {
+  public static void Main() {
+    Object var = new B();
+    //Following will compile and run
+    ((B)var).m();
+    //Following will also compile 
+    // and run due to polymorphic
+    // behavior.
+    ((A)var).m();
+    //Following will not compile
+    //var.m();
+    //Instantiate obj of class A
+    var = new A();
+    //Call the method on it
+    ((A)var).m();
+
+    // Pause until the user presses any key.
+    Console.ReadKey();
+  }//end Main
+}//end class Polymorph03
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1093">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

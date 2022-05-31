@@ -1,0 +1,7844 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0132-A Simple Game Program with On-Screen Text</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49529</md:content-id>
+  <md:title>Xna0132-A Simple Game Program with On-Screen Text</md:title>
+  <md:abstract>Learn how to write a simple game program involving user input from the keyboard and the mouse. Also learn how to create on-screen text.</md:abstract>
+  <md:uuid>63fc2c37-b983-4282-bc4b-7836fc3af202</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Tue May 10 11:37:12 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1006">
+<link id="a1007" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1007">
+<link id="a1008" target-id="Spider_behavior">
+
+Spider behavior
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="The_ladybugs">
+
+The ladybugs
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Using_the_keyboard">
+
+Using the keyboard
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Using_the_mouse">
+
+Using the mouse
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Difficulty_level">
+
+Difficulty level
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="A_useful_student_project">
+
+A useful student project
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Alternatives_to_the_arrow_keys">
+
+Alternatives to the arrow keys
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="How_to_draw_onScreen_text">
+
+How to draw on-screen text
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1016">
+<link id="a1017" target-id="Font_availability">
+
+Font availability
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1017">
+<link id="a1018" target-id="Identifying_the_font_families">
+
+Identifying the font families
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="Matching_font_families_to_font_files">
+
+Matching font families to font files
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="Getting_ready_to_draw_onScreen_text_">
+
+Getting ready to draw on-screen text
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Drawing_the_onScreen_text_">
+
+Drawing the on-screen text
+    
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="The_project_named_XNA0132ProjA">
+
+The project named XNA0132ProjA
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1022">
+<link id="a1023" target-id="The_overridden_GameDraw_method">
+
+The overridden Game.Draw method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="The_SpriteBatchDrawString_method">
+
+The SpriteBatch.DrawString method
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1024">
+<link id="a1025" target-id="Purpose_of_the_origin_parameter">
+
+Purpose of the origin parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="All_I_need_to_say">
+
+All I need to say
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_Sprite_class_for_XNA0132Proj">
+
+The Sprite class for XNA0132Proj
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1027">
+<link id="a1028" target-id="The_new_code">
+
+The new code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="A_new_readOnly_property_accessor_method_for_the_Edge_property">
+
+A new read-only property accessor method for the Edge property
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="New_version_of_the_Move_method">
+
+New version of the Move method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="End_of_discussion_of_the_Sprite_class">
+
+End of discussion of the Sprite class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="The_Game1_class_for_XNA0132Proj">
+
+The Game1 class for XNA0132Proj
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1032">
+<link id="a1033" target-id="General_information">
+
+General information
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="The_objective_of_the_game">
+
+The objective of the game
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Ladybug_control">
+
+Ladybug control
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Spiders_are_recycled">
+
+Spiders are recycled
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Keeping_score">
+
+Keeping score
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Code_for_the_Game1_Class">
+
+Code for the Game1 Class
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1038">
+<link id="a1039" target-id="The_overridden_LoadContent_method_">
+
+The overridden LoadContent method
+        
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1039">
+<link id="a1040" target-id="The_font_family">
+
+The font family
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="Make_the_mouse_pointer_visible">
+
+Make the mouse pointer visible
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Position_the_onScreen_text">
+
+Position the on-screen text
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="Set_the_initial_position_of_the_mouse_pointer">
+
+Set the initial position of the mouse pointer
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="End_of_the_LoadContent_method">
+
+End of the LoadContent method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="The_overridden_Update_method_">
+
+The overridden Update method
+        
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1045">
+<link id="a1046" target-id="Moving_the_ladybug_objects_using_the_keyboard">
+
+Moving the ladybug objects using the keyboard
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Dragging_the_ladybug_objects_with_the_mouse">
+
+Dragging the ladybug objects with the mouse
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="The_overridden_GameDraw_method_">
+
+The overridden Game.Draw method
+	
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1048">
+<link id="a1049" target-id="The_MeasureString_method">
+
+The MeasureString method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="Overloaded_division_operator">
+
+Overloaded division operator
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1052">
+<link id="a1053" target-id="Run_my_text_program">
+
+Run my text program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Run_my_game_program">
+
+Run my game program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="Whats_next">
+
+What's next?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1056">
+<link id="a1057" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1057">
+<link id="a1058" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1059" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1016" list-type="bulleted">
+
+		
+
+<item id="li1058">
+<link id="a1060" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Reduced view of the game window.
+
+</item>
+
+
+		
+
+<item id="li1059">
+<link id="a1061" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Information on fonts from the XNA documentation.
+
+</item>
+
+
+		
+
+<item id="li1060">
+<link id="a1062" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. Correspondence between font-family names and font file names.
+
+</item>
+
+
+		
+
+<item id="li1061">
+<link id="a1063" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+. Demonstration of on-screen text with the Lindsey font.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1017" list-type="bulleted">
+
+		
+
+<item id="li1062">
+<link id="a1064" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the Game1 class and the overridden LoadContent method for the project named XNA0132ProjA.
+
+</item>
+
+
+		
+
+<item id="li1063">
+<link id="a1065" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Beginning of the overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1064">
+<link id="a1066" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. Remainder of the overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1065">
+<link id="a1067" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. A new read-only property accessor method for the Edge property for the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1066">
+<link id="a1068" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. New version of the Move method.
+
+</item>
+
+
+		
+
+<item id="li1067">
+<link id="a1069" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Abbreviated beginning of the Game1 Class for the XNA0132Proj project.
+
+</item>
+
+
+		
+
+<item id="li1068">
+<link id="a1070" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Abbreviated overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1069">
+<link id="a1071" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Beginning of an abbreviated overridden Update method.
+
+</item>
+
+
+		
+
+<item id="li1070">
+<link id="a1072" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Service the keyboard.
+
+</item>
+
+
+		
+
+<item id="li1071">
+<link id="a1073" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Moving the ladybug objects with the mouse.
+
+</item>
+
+
+		
+
+<item id="li1072">
+<link id="a1074" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. The overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1073">
+<link id="a1075" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+. Game1 class for project XNA0132ProjA.
+
+</item>
+
+
+		
+
+<item id="li1074">
+<link id="a1076" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. Sprite class for project XNA0132Proj.
+
+</item>
+
+
+		
+
+<item id="li1075">
+<link id="a1077" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Game1 class for project XNA0132Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+When we finished the previous module, we were missing one critical element 
+needed to write a simple game program: 
+
+<emphasis id="strong1001" effect="bold">
+<emphasis id="em1001" effect="italics">
+user input
+
+</emphasis>
+</emphasis>
+. 
+We were also lacking some other tools that would make it possible for us to 
+create more interesting 2D arcade-style games including the ability to create 
+on-screen text.
+
+</para>
+
+
+
+
+
+<para id="p1006">
+In this module, you will learn how to program for user input with the 
+keyboard and the mouse. You will also learn how to create on-screen text.
+
+</para>
+
+
+
+
+
+	
+	
+
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1007">
+The program that I will explain in this module is a simple game in which 
+	ten spiders attempt to traverse their web from top to bottom. Two large 
+	ladybugs are there to eat them if possible. (See 
+
+<link id="a1078" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.) The objective of 
+	the game is to prevent as many of the spiders as possible from making it to 
+	the bottom of the game window.
+
+</para>
+
+
+
+
+
+<para id="p1008">
+<link id="a1079" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows a reduced view of the game window shortly after the game is 
+started and before any spiders make it to the bottom.
+
+</para>
+
+
+
+	
+	
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1009">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Reduced view of the game window.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0132a.jpg" width="450" height="338"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="Spider_behavior" effect="bold">
+
+Spider behavior
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+The spiders move at different speeds in different directions but generally 
+towards the southeast. If a spider makes it to the bottom, it is counted as 
+having crossed the finish line. That spider wraps back up to the top and starts 
+the journey again. If a spider hits the right edge of the window, it wraps 
+around to the left edge and continues the journey.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="The_ladybugs" effect="bold">
+
+The ladybugs
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1011">
+The movements of the ladybugs are under the control of the player. If the 
+player causes a ladybug to collide with a spider, the spider is eaten and 
+removed from the spider population.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Using_the_keyboard" effect="bold">
+
+Using the keyboard
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1012">
+The player can move the ladybugs using either the keyboard or the mouse. 
+Pressing the four arrow keys causes one of the ladybugs to move in the 
+corresponding directions. Pressing two arrow keys at the same time causes the 
+ladybug to move in a diagonal direction.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+Holding down the A key and pressing the arrow keys causes the other ladybug 
+to move.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Using_the_mouse" effect="bold">
+
+Using the mouse
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+Pressing the left mouse button makes it possible to drag a ladybug with the 
+mouse. Pressing the right mouse button makes it possible to drag the other 
+ladybug with the mouse. Pressing both mouse buttons makes it possible to drag 
+both ladybugs with the mouse.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Difficulty_level" effect="bold">
+
+Difficulty level
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+The game has only one level. I personally find it very difficult to prevent 
+all ten spiders from making it to the bottom using the arrow keys only. On the 
+other hand, it is easy to defeat the spiders by dragging a ladybug with the 
+mouse.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="A_useful_student_project" effect="bold">
+
+A useful student project
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+A useful student project would be to upgrade the program to provide varying levels of difficulty. This could be accomplished by changing 
+the speed of the spiders, changing the number of spiders, or a combination of 
+the two.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Alternatives_to_the_arrow_keys" effect="bold">
+
+Alternatives to the arrow keys
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1017">
+Another useful student project would be to define alternatives to the arrow 
+keys, such as the keys labeled 4, 8, 6, and 2 on the keypad, or four keys in a 
+diamond pattern on the left side of the keyboard.
+
+</para>
+
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1018">
+As usual, I will break this program down and explain it in fragments. 
+However, I will only explain those portions of the code that are substantially 
+different from code that I have explained in earlier modules.
+
+</para>
+
+
+
+
+
+<para id="p1019">
+Complete listings of the 
+
+<emphasis id="strong1002" effect="bold">
+Sprite
+
+</emphasis>
+ class and the 
+
+<emphasis id="strong1003" effect="bold">
+Game1
+
+</emphasis>
+ 
+class are provided in 
+
+<link id="a1080" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ and 
+
+<link id="a1081" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+<para id="p1020">
+Before getting into the game program, however, I will explain a very short 
+program that illustrates how to draw on-screen text. I personally found the
+
+
+<link id="a1082" url="http://msdn.microsoft.com/en-us/library/bb447673.aspx">
+
+documentation
+
+</link>
+
+ 
+on this topic to be somewhat confusing.
+
+</para>
+
+
+
+	
+	
+
+
+<section id="h21008">
+<title>
+
+    
+    
+
+<emphasis id="How_to_draw_onScreen_text" effect="bold">
+
+How to draw on-screen text
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1021">
+The difficulty that I encountered in drawing on-screen text was not in the 
+writing of program code. Rather, it was in getting ready to write program code.
+
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="Font_availability" effect="bold">
+
+Font availability
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+Before getting into the details, I want to mention that fonts are typically 
+copyrighted items of intellectual property and you must be careful when 
+distributing fonts for which you don't have distribution rights. To assist you 
+in this regard, the information shown in 
+
+<link id="a1083" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ currently appears in the
+
+
+<link id="a1084" url="http://msdn.microsoft.com/en-us/library/bb447673.aspx">
+
+documentation
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1023">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. Information on fonts from the XNA documentation.
+
+</para>
+
+
+
+							The following list of fonts are installed by XNA 
+							Game Studio and are redistributable:
+							
+
+<list id="ul1018" list-type="bulleted">
+
+								
+
+<item id="li1076">
+Kooten.ttf
+
+</item>
+
+
+								
+
+<item id="li1077">
+Linds.ttf
+
+</item>
+
+
+								
+
+<item id="li1078">
+Miramo.ttf
+
+</item>
+
+
+								
+
+<item id="li1079">
+Bold Miramob.ttf
+
+</item>
+
+
+								
+
+<item id="li1080">
+Peric.ttf
+
+</item>
+
+
+								
+
+<item id="li1081">
+Pericl.ttf
+
+</item>
+
+
+								
+
+<item id="li1082">
+Pesca.ttf
+
+</item>
+
+
+								
+
+<item id="li1083">
+Pescab.ttf
+
+</item>
+
+
+							
+
+</list>
+
+
+							
+
+<para id="p1024">
+These OpenType fonts, created by Ascender 
+							Corporation and licensed by Microsoft, are free for 
+							you to use in your XNA Game Studio game. You may 
+							redistribute these fonts in their original format as 
+							part of your game. These fonts were previously 
+							available only on the XNA Creators Club Online 
+							website. 
+
+</para>
+
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41000">
+<title>
+<emphasis id="Identifying_the_font_families" effect="bold">
+
+Identifying the font families
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+You should be able to select 
+
+<emphasis id="strong1004" effect="bold">
+Fonts
+
+</emphasis>
+ in the Windows
+
+<emphasis id="strong1005" effect="bold">
+ Control 
+Panel
+
+</emphasis>
+ and see a list of the font families that are installed on your 
+machine. The problem is that the names of the font families are not an exact 
+match for the file names listed in 
+
+<link id="a1085" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="Matching_font_families_to_font_files" effect="bold">
+
+Matching font families to font files
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1026">
+<link id="a1086" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ shows my best guess as to the correspondence between font-family 
+names and the file names listed in 
+
+<link id="a1087" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. Font family names are on the left 
+and font file names are on the right.
+
+</para>
+
+
+
+	
+
+
+<note id="note1002" type="">
+
+
+<para id="p1027">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. Correspondence between font-family names and font file names.
+
+</para>
+
+
+
+							
+
+<list id="ul1019" list-type="bulleted">
+
+								
+
+<item id="li1084">
+Kootenay - Kooten.ttf
+
+</item>
+
+
+								
+
+<item id="li1085">
+Lindsey - Linds.ttf
+
+</item>
+
+
+								
+
+<item id="li1086">
+Miramonte - Miramo.ttf
+
+</item>
+
+
+								
+
+<item id="li1087">
+Miramonte Bold - Bold 
+								Miramob.ttf
+
+</item>
+
+
+								
+
+<item id="li1088">
+Pericles - Peric.ttf
+
+</item>
+
+
+								
+
+<item id="li1089">
+Pericles Light - Pericl.ttf
+
+</item>
+
+
+								
+
+<item id="li1090">
+Pescadero - Pesca.ttf
+
+</item>
+
+
+								
+
+<item id="li1091">
+Pescadero Bold -Pescab.ttf
+
+</item>
+
+
+							
+
+</list>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1028">
+You will learn shortly why we care about the font-family names.
+
+</para>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h31003">
+<title>
+
+    
+
+<emphasis id="Getting_ready_to_draw_onScreen_text_" effect="bold">
+
+Getting ready to draw on-screen text
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1029">
+Before you can draw on-screen text you must add a 
+
+<emphasis id="strong1006" effect="bold">
+Sprite Font
+
+</emphasis>
+ 
+to your project from the IDE during the design process.
+
+</para>
+
+
+
+
+
+<para id="p1030">
+Here is my interpretation of the steps required to add the 
+
+<emphasis id="strong1007" effect="bold">
+Sprite 
+Font
+
+</emphasis>
+ to your project:
+
+</para>
+
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+
+	
+
+<item id="li1092">
+Open your project in Visual C#.
+
+</item>
+
+
+	
+
+<item id="li1093">
+Right-click your 
+
+<emphasis id="strong1008" effect="bold">
+Content
+
+</emphasis>
+ folder in 
+
+<emphasis id="strong1009" effect="bold">
+Solution 
+	Explorer
+
+</emphasis>
+, select 
+
+<emphasis id="strong1010" effect="bold">
+Add
+
+</emphasis>
+, and then click 
+
+<emphasis id="strong1011" effect="bold">
+New 
+	Item
+
+</emphasis>
+ . 
+
+</item>
+
+
+	
+
+<item id="li1094">
+From the 
+
+<emphasis id="strong1012" effect="bold">
+Add New Item
+
+</emphasis>
+ dialog box, click 
+
+<emphasis id="strong1013" effect="bold">
+Sprite 
+	Font
+
+</emphasis>
+. 
+
+</item>
+
+
+	
+
+<item id="li1095">
+Change the text in the 
+
+<emphasis id="strong1014" effect="bold">
+Name
+
+</emphasis>
+ field to 
+
+<emphasis id="strong1015" effect="bold">
+
+	[Font-Family Name].spritefont
+
+</emphasis>
+, such as 
+
+<emphasis id="strong1016" effect="bold">
+Lindsey.spritefont
+
+</emphasis>
+ 
+	for example.
+
+</item>
+
+
+	
+
+<item id="li1096">
+Click the 
+
+<emphasis id="strong1017" effect="bold">
+Add
+
+</emphasis>
+ button. This will create a new XML file 
+	named 
+
+<emphasis id="strong1018" effect="bold">
+[Font-Family Name].spritefont
+
+</emphasis>
+, which will be opened 
+	in the IDE editor.
+
+</item>
+
+
+	
+
+<item id="li1097">
+Click the file named [
+
+<emphasis id="strong1019" effect="bold">
+Font-Family Name].spritefont
+
+</emphasis>
+ in 
+	the 
+
+<emphasis id="strong1020" effect="bold">
+Solution Explorer
+
+</emphasis>
+ and note the 
+
+<emphasis id="strong1021" effect="bold">
+Asset Name
+
+</emphasis>
+ 
+	that is displayed in the 
+
+<emphasis id="strong1022" effect="bold">
+Properties
+
+</emphasis>
+ window (such as 
+
+<emphasis id="strong1023" effect="bold">
+
+	Lindsey
+
+</emphasis>
+ for example).
+
+</item>
+
+
+	
+
+<item id="li1098">
+The XML file contains an element named 
+
+<emphasis id="strong1024" effect="bold">
+FontName
+
+</emphasis>
+. Change 
+	the contents of that element, if necessary, to match the name of the font 
+	family that you specified.
+
+</item>
+
+
+	
+
+<item id="li1099">
+Change the contents of the 
+
+<emphasis id="strong1025" effect="bold">
+Size
+
+</emphasis>
+ element in the XML file 
+	to the point size you desire for your font. 
+
+</item>
+
+
+	
+
+<item id="li1100">
+Change the contents of the 
+
+<emphasis id="strong1026" effect="bold">
+Style
+
+</emphasis>
+ element in the XML 
+	file to the style of font to import. You can specify 
+
+<emphasis id="strong1027" effect="bold">
+Regular
+
+</emphasis>
+,
+	
+
+<emphasis id="strong1028" effect="bold">
+Bold
+
+</emphasis>
+, 
+
+<emphasis id="strong1029" effect="bold">
+Italic
+
+</emphasis>
+, or 
+
+<emphasis id="strong1030" effect="bold">
+Bold, Italic
+
+</emphasis>
+. 
+	Note that the contents of the XML elements are case sensitive.
+
+</item>
+
+
+	
+
+<item id="li1101">
+Specify the character regions to import for this font. Character regions 
+	specify which characters in the font are rendered by the 
+
+<emphasis id="strong1031" effect="bold">
+SpriteFont
+
+</emphasis>
+. 
+	You can specify the start and end of the region by using the characters 
+	themselves, or by using their decimal values with an ampersand-pound sign prefix. The default 
+	character region includes all the characters between the space and tilde 
+	characters, inclusive.
+
+</item>
+
+
+	
+
+<item id="li1102">
+Follow the instructions in the comments in the XML file to make any 
+	other changes to the contents of the XML elements that are appropriate for 
+	your program.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+
+    
+
+<emphasis id="Drawing_the_onScreen_text_" effect="bold">
+
+Drawing the on-screen text
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1031">
+
+    I will explain the code in the 
+
+<emphasis id="strong1032" effect="bold">
+Game1
+
+</emphasis>
+ class of the project 
+	named 
+
+<emphasis id="strong1033" effect="bold">
+XNA0132ProjA
+
+</emphasis>
+ that produced the screen output shown in 
+	reduced form in 
+
+<link id="a1088" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1032">
+<emphasis id="Figure_4" effect="bold">
+
+Figure 4
+
+</emphasis>
+
+. Demonstration of on-screen text with the Lindsey font.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="missing image" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0132b.jpg" width="500" height="314"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1033">
+As usual, I will explain the code in fragments. A complete listing of the
+
+
+<emphasis id="strong1034" effect="bold">
+Game1
+
+</emphasis>
+ class is provided in 
+
+<link id="a1089" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ near the end of the 
+module.
+
+</para>
+
+
+
+
+
+<para id="p1034">
+Here is my interpretation of the coding steps for displaying on-screen text 
+in the game window.
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1103">
+Add a 
+
+<emphasis id="strong1035" effect="bold">
+Sprite Font
+
+</emphasis>
+ to your project as described above.
+
+</item>
+
+
+	
+
+<item id="li1104">
+Declare an instance variable of type
+	
+
+<link id="a1090" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.spritefont.aspx">
+
+
+	SpriteFont
+
+</link>
+
+ to refer to a 
+
+<emphasis id="strong1036" effect="bold">
+SpriteFont
+
+</emphasis>
+ object. (See
+	
+
+<link id="a1091" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.) 
+
+</item>
+
+
+	
+
+<item id="li1105">
+Declare an instance variable of type 
+
+<emphasis id="strong1037" effect="bold">
+Vector2
+
+</emphasis>
+ to refer 
+	to an object that specifies the position of your text relative to the upper 
+	left corner of the game window. (See 
+
+<link id="a1092" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1106">
+Create a 
+
+<emphasis id="strong1038" effect="bold">
+SpriteFont
+
+</emphasis>
+ object by calling the 
+
+<emphasis id="strong1039" effect="bold">
+
+	ContentManager.Load
+
+</emphasis>
+ method, specifying the 
+
+<emphasis id="strong1040" effect="bold">
+SpriteFont
+
+</emphasis>
+ 
+	class and the 
+
+<emphasis id="strong1041" effect="bold">
+Asset Name
+
+</emphasis>
+ of the imported font in your 
+	overridden 
+
+<emphasis id="strong1042" effect="bold">
+LoadContent
+
+</emphasis>
+ method. Save the object's reference 
+	in the instance variable declared earlier. (See 
+
+<link id="a1093" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1107">
+Instantiate a new 
+
+<emphasis id="strong1043" effect="bold">
+Vector2
+
+</emphasis>
+ object to specify the 
+	position of the text in the game window in the 
+
+<emphasis id="strong1044" effect="bold">
+LoadContent
+
+</emphasis>
+ 
+	method. Save the object's reference in the instance variable declared 
+	earlier. (See 
+
+<link id="a1094" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.) The X and Y 
+	component values of the 
+
+<emphasis id="strong1045" effect="bold">
+Vector2
+
+</emphasis>
+ object can be modified 
+	later in the 
+
+<emphasis id="strong1046" effect="bold">
+Update
+
+</emphasis>
+ method if needed.
+
+</item>
+
+
+	
+
+<item id="li1108">
+Write the typical 
+
+<emphasis id="strong1047" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ and 
+
+<emphasis id="strong1048" effect="bold">
+
+	SpriteBatch.End
+
+</emphasis>
+ method calls in the overridden 
+
+<emphasis id="strong1049" effect="bold">
+Game.Draw
+
+</emphasis>
+ 
+	method. (See 
+
+<link id="a1095" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ and 
+
+<link id="a1096" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1109">
+Create a string in the 
+
+<emphasis id="strong1050" effect="bold">
+LoadContent
+
+</emphasis>
+, 
+
+<emphasis id="strong1051" effect="bold">
+Update
+
+</emphasis>
+, 
+	or 
+
+<emphasis id="strong1052" effect="bold">
+Draw
+
+</emphasis>
+ methods containing the text that will be displayed 
+	in the game window. (See 
+
+<link id="a1097" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1110">
+Instantiate a 
+
+<emphasis id="strong1053" effect="bold">
+Vector2
+
+</emphasis>
+ object in the 
+
+<emphasis id="strong1054" effect="bold">
+LoadContent
+
+</emphasis>
+,
+	
+
+<emphasis id="strong1055" effect="bold">
+Update
+
+</emphasis>
+, or 
+
+<emphasis id="strong1056" effect="bold">
+Draw
+
+</emphasis>
+ methods that specifies the 
+	origin of the text string, which will be drawn at the previously computed 
+	position of the text string. (See 
+
+<link id="a1098" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.)
+
+</item>
+
+
+	
+
+<item id="li1111">
+Compute values for the other parameters to the 
+
+<emphasis id="strong1057" effect="bold">
+
+	SpriteBatch.DrawString
+
+</emphasis>
+ method as needed.
+
+</item>
+
+
+	
+
+<item id="li1112">
+Call the 
+
+<emphasis id="strong1058" effect="bold">
+SpriteBatch.DrawString
+
+</emphasis>
+ method between the
+	
+
+<emphasis id="strong1059" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ and 
+
+<emphasis id="strong1060" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ 
+	methods. (See 
+
+<link id="a1099" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.)
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="The_project_named_XNA0132ProjA" effect="bold">
+
+The project named XNA0132ProjA
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+<link id="a1100" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ shows the beginning of the 
+
+<emphasis id="strong1061" effect="bold">
+Game1
+
+</emphasis>
+ class and the 
+overridden 
+
+<emphasis id="strong1062" effect="bold">
+LoadContent
+
+</emphasis>
+ method for the project named 
+
+<emphasis id="strong1063" effect="bold">
+XNA0132ProjA
+
+</emphasis>
+. This project, which is different 
+from 
+
+<emphasis id="strong1064" effect="bold">
+XNA0132Proj
+
+</emphasis>
+ to be discussed later, demonstrates how to draw onscreen text.
+
+</para>
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1036">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Beginning of the Game1 class and the overridden LoadContent method for the project named XNA0132ProjA.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">namespace XNA0132ProjA {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    SpriteFont Font1;
+    Vector2 FontPos;
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create a new SpriteFont object.
+      Font1 = Content.Load&lt;SpriteFont&gt;("Lindsey");
+
+      //Create a new Vector2 object to center the text
+      // in the game window.
+      FontPos = new Vector2(
+            graphics.GraphicsDevice.Viewport.Width / 2,
+            graphics.GraphicsDevice.Viewport.Height / 2);
+    }//end LoadContent method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1037">
+There is no unusual code in 
+
+<link id="a1101" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. However, if my memory serves me 
+correctly, this is the first time in this series of modules that I have called 
+the 
+
+<emphasis id="strong1065" effect="bold">
+Content.Load
+
+</emphasis>
+ method to load a resource other than an image.
+
+</para>
+
+
+
+
+
+<section id="h41002">
+<title>
+<emphasis id="The_overridden_GameDraw_method" effect="bold">
+
+The overridden Game.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+The 
+
+<emphasis id="strong1066" effect="bold">
+Game.Draw
+
+</emphasis>
+ method begins in 
+
+<link id="a1102" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1039">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Beginning of the overridden Game.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      // Draw Lindsey Font
+      string output = "Lindsey Font";
+
+      // Find the center of the string
+      Vector2 FontOrigin = 
+                         Font1.MeasureString(output) / 2;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1040">
+There is nothing new or unusual in 
+
+<link id="a1103" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1041">
+The remainder of the 
+
+<emphasis id="strong1067" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is shown in 
+
+<link id="a1104" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1042">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+.  Remainder of the overridden Game.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">      //Draw the string with the FontOrigin at the 
+      // position specified by FontPos.
+      spriteBatch.DrawString(
+          Font1,//font to use
+          output,//output text
+          FontPos,//position re upper left corner
+          Color.LightGreen,//color of text
+          -45,//rotation of text
+          FontOrigin,//place this at FontPos
+          2.5f,//scale
+          SpriteEffects.None,
+          0.5f);//z-order layer
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1043">
+There is nothing unusual in the code in 
+
+<link id="a1105" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. However, this is the 
+	first time in this series of modules that I have called the 
+
+<emphasis id="strong1068" effect="bold">
+
+	SpriteBatch.DrawString
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="The_SpriteBatchDrawString_method" effect="bold">
+
+The SpriteBatch.DrawString method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+There are several overloaded versions of the 
+
+<emphasis id="strong1069" effect="bold">
+SpriteBatch.DrawString
+
+</emphasis>
+ 
+method. The different versions depend on the features provided by the 
+parameters. The version called in 
+
+<link id="a1106" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ is one of the most complex. Here is 
+part of what the 
+
+<link id="a1107" url="http://msdn.microsoft.com/en-us/library/dd232003.aspx">
+
+
+documentation
+
+</link>
+
+ has to say about this version of the 
+
+<emphasis id="strong1070" effect="bold">
+DrawString
+
+</emphasis>
+ 
+method:
+
+</para>
+
+
+
+
+
+<para id="p1045">
+<emphasis id="em1002" effect="italics">
+"Adds a mutable sprite string to the batch of sprites to be rendered, 
+specifying the font, output text, screen position, color tint, rotation, origin, 
+scale, and effects. 
+
+</emphasis>
+ 
+
+</para>
+
+
+
+
+
+<para id="p1046">
+<emphasis id="em1003" effect="italics">
+Parameters
+
+</emphasis>
+</para>
+
+
+
+
+
+<list id="ul1022" list-type="bulleted">
+
+	
+
+<item id="li1113">
+<emphasis id="strong1071" effect="bold">
+<emphasis id="em1004" effect="italics">
+spriteFont
+
+</emphasis>
+</emphasis>
+<emphasis id="em1005" effect="italics">
+ - The sprite font.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1114">
+<emphasis id="strong1072" effect="bold">
+<emphasis id="em1006" effect="italics">
+text
+
+</emphasis>
+</emphasis>
+<emphasis id="em1007" effect="italics">
+ - The mutable (read/write) string to draw.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1115">
+<emphasis id="strong1073" effect="bold">
+<emphasis id="em1008" effect="italics">
+position
+
+</emphasis>
+</emphasis>
+<emphasis id="em1009" effect="italics">
+ - The location, in screen coordinates, where 
+	the text will be drawn.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1116">
+<emphasis id="strong1074" effect="bold">
+<emphasis id="em1010" effect="italics">
+color
+
+</emphasis>
+</emphasis>
+<emphasis id="em1011" effect="italics">
+ - The desired color of the text.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1117">
+<emphasis id="strong1075" effect="bold">
+<emphasis id="em1012" effect="italics">
+rotation
+
+</emphasis>
+</emphasis>
+<emphasis id="em1013" effect="italics">
+ - The angle, in radians, to rotate the text 
+	around the origin.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1118">
+<emphasis id="strong1076" effect="bold">
+<emphasis id="em1014" effect="italics">
+origin
+
+</emphasis>
+</emphasis>
+<emphasis id="em1015" effect="italics">
+ - The origin of the string. Specify (0,0) for 
+	the upper-left corner.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1119">
+<emphasis id="strong1077" effect="bold">
+<emphasis id="em1016" effect="italics">
+scale
+
+</emphasis>
+</emphasis>
+<emphasis id="em1017" effect="italics">
+ - Uniform multiple by which to scale the sprite 
+	width and height.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1120">
+<emphasis id="strong1078" effect="bold">
+<emphasis id="em1018" effect="italics">
+effects
+
+</emphasis>
+</emphasis>
+<emphasis id="em1019" effect="italics">
+ - Rotations to apply prior to rendering.
+
+</emphasis>
+</item>
+
+
+	
+
+<item id="li1121">
+<emphasis id="strong1079" effect="bold">
+<emphasis id="em1020" effect="italics">
+layerDepth
+
+</emphasis>
+</emphasis>
+<emphasis id="em1021" effect="italics">
+ - The sorting depth of the sprite, between 0 
+	(front) and 1 (back)."
+
+</emphasis>
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="Purpose_of_the_origin_parameter" effect="bold">
+
+Purpose of the origin parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+Everything in this description is reasonably clear except for the description 
+of the 
+
+<emphasis id="strong1080" effect="bold">
+origin
+
+</emphasis>
+ parameter so I will attempt to clarify it. The 
+origin specifies a point within the text string relative to its upper left 
+corner that will be drawn at the point in the game window specified by the
+
+
+<emphasis id="strong1081" effect="bold">
+position
+
+</emphasis>
+ parameter.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="All_I_need_to_say" effect="bold">
+
+All I need to say
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1048">
+That is probably all I need to say about the on-screen display of 
+text. It's time to move on to an explanation of our simple game program 
+named 
+
+<emphasis id="strong1082" effect="bold">
+XNA0132Proj
+
+</emphasis>
+ beginning with the 
+
+<emphasis id="strong1083" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+</section>
+</section>
+<section id="h21009">
+<title>
+
+    
+
+<emphasis id="The_Sprite_class_for_XNA0132Proj" effect="bold">
+
+The Sprite class for XNA0132Proj
+
+</emphasis>
+
+
+    
+
+</title>
+
+
+
+
+<para id="p1049">
+The 
+
+<emphasis id="strong1084" effect="bold">
+Sprite
+
+</emphasis>
+ class that I used in this program is very similar 
+to the class that I explained in the previous module. Therefore, I won't have a 
+lot to say about the 
+
+<emphasis id="strong1085" effect="bold">
+Sprite
+
+</emphasis>
+ class in this module. A complete 
+listing of the 
+
+<emphasis id="strong1086" effect="bold">
+Sprite
+
+</emphasis>
+ class is provided in 
+
+<link id="a1108" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ near the 
+end of the module.
+
+</para>
+
+
+
+
+
+<para id="p1050">
+This version of the 
+
+<emphasis id="strong1087" effect="bold">
+Sprite
+
+</emphasis>
+ class supports collision 
+detection based on intersecting rectangles. It also provides a new 
+
+<emphasis id="strong1088" effect="bold">
+Edge
+
+</emphasis>
+ 
+property that records and returns the edge number (1, 2, 3, or 4) if a sprite 
+collides with an edge of the game window. However, the edge information is 
+available for only one iteration of the game loop before it changes back to the 
+normal value of 0.
+
+</para>
+
+
+
+
+
+<para id="p1051">
+The value of the 
+
+<emphasis id="strong1089" effect="bold">
+Edge
+
+</emphasis>
+ property temporarily changes to 1, 2, 
+3, or 4 if a sprite collides with the top, right, bottom, or left edge of the 
+game window respectively.
+
+</para>
+
+
+
+
+
+<para id="p1052">
+Since the information regarding the collision with an edge is the only change 
+to this 
+
+<emphasis id="strong1090" effect="bold">
+Sprite
+
+</emphasis>
+ class relative to the version that I explained 
+in a previous module, that is all I will discuss about the 
+
+<emphasis id="strong1091" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class in this module.
+
+</para>
+
+
+
+
+
+<section id="h31006">
+<title>
+<emphasis id="The_new_code" effect="bold">
+
+The new code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1053">
+The first manifestation of change in this version of the 
+
+<emphasis id="strong1092" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class is the simple declaration of an instance variable of type 
+
+<emphasis id="strong1093" effect="bold">
+int
+
+</emphasis>
+ 
+named 
+
+<emphasis id="strong1094" effect="bold">
+edge
+
+</emphasis>
+ near the beginning of the class definition. You can 
+view that statement in 
+
+<link id="a1109" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="A_new_readOnly_property_accessor_method_for_the_Edge_property" effect="bold">
+
+A new read-only property accessor method for the Edge property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The next manifestation is the read-only property accessor method for the new
+
+
+<emphasis id="strong1095" effect="bold">
+Edge
+
+</emphasis>
+ property shown in 
+
+<link id="a1110" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1055">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. A new read-only property accessor method for the Edge property for the Sprite class.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">    public int Edge {
+      get {
+        return edge;
+      }//end get
+    }//end Edge property accessor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31008">
+<title>
+<emphasis id="New_version_of_the_Move_method" effect="bold">
+
+New version of the Move method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+<link id="a1111" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ shows the new version of the 
+
+<emphasis id="strong1096" effect="bold">
+Move
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1057">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. New version of the Move method.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">    //This method causes the sprite to move in the 
+    // direction of the direction vector if the elapsed
+    // time since the last move exceeds the elapsed
+    // time target based on the specified speed.
+    public void Move(GameTime gameTime) {
+
+      //New to this version
+      //Clear the Edge property value. Edge information
+      // is available for only one iteration of the 
+      // game loop.
+      edge = 0;
+
+      //Accumulate elapsed time since the last move.
+      elapsedTime +=
+                  gameTime.ElapsedGameTime.Milliseconds;
+
+      if(elapsedTime &gt; elapsedTimeTarget) {
+        //It's time to make a move. Set the elapsed 
+        // time to a value that will attempt to produce
+        // the specified speed on the average.
+        elapsedTime -= elapsedTimeTarget;
+
+        //Add the direction vector to the position
+        // vector to get a new position vector.
+        position = Vector2.Add(position,direction);
+
+        //Check for a collision with an edge of the game
+        // window. If the sprite reaches an edge, cause 
+        // the sprite to wrap around and reappear at the 
+        // other edge, moving at the same speed in a 
+        // different direction within the same quadrant 
+        // as before. Also set the Edge property to
+        // indicate which edge was involved. 1 is top, 2
+        // is right, 3 is bottom, and 4 is left.
+        // Note that the Edge property will be cleared
+        // to 0 the next time the Move method is called.
+        if(position.X &lt; -image.Width) {
+          position.X = windowSize.X;
+          edge = 4;//collision with the left edge - new
+          NewDirection();
+        }//end if
+
+        if(position.X &gt; windowSize.X) {
+          position.X = -image.Width / 2;
+          edge = 2;//collision with the right edge - new
+          NewDirection();
+        }//end if
+
+        if(position.Y &lt; -image.Height) {
+          position.Y = windowSize.Y;
+          edge = 1;//collision with the top - new
+          NewDirection();
+        }//end if
+
+        if(position.Y &gt; windowSize.Y) {
+          position.Y = -image.Height / 2;
+          edge = 3;//collision with the bottom - new
+          NewDirection();
+        }//end if on position.Y
+      }//end if on elapsed time
+    }//end Move
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1058">
+There is nothing unusual about the code that was added to the 
+
+<emphasis id="strong1097" effect="bold">
+
+	Move
+
+</emphasis>
+ method, so it shouldn't require further explanation beyond the 
+	embedded comments.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31009">
+<title>
+<emphasis id="End_of_discussion_of_the_Sprite_class" effect="bold">
+
+End of discussion of the Sprite class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1059">
+There were no additional changes made to the 
+
+<emphasis id="strong1098" effect="bold">
+Sprite
+
+</emphasis>
+ class 
+other than those identified above, so that will end the discussion of the
+
+
+<emphasis id="strong1099" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+	
+	
+
+
+</section>
+</section>
+<section id="h21010">
+<title>
+
+    
+
+<emphasis id="The_Game1_class_for_XNA0132Proj" effect="bold">
+
+The Game1 class for XNA0132Proj
+
+</emphasis>
+
+
+        
+
+</title>
+
+
+
+
+<section id="h31010">
+<title>
+<emphasis id="General_information" effect="bold">
+
+General information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+This project demonstrates how to write a simple 2D arcade style game.
+
+</para>
+
+
+
+
+
+<para id="p1061">
+Ten spiders try to make it from the top to the bottom of a spider web.
+
+</para>
+
+
+
+
+
+<para id="p1062">
+The bottom of the web is guarded by two large ladybugs that are intent on 
+eating the spiders.
+
+</para>
+
+
+
+
+
+<para id="p1063">
+If a ladybug collides with a spider, the spider gets eaten by the ladybug and 
+removed from the population of spiders. If the player plays long enough, all of 
+the spiders should eventually be eaten.
+
+</para>
+
+
+
+
+
+<section id="h41004">
+<title>
+<emphasis id="The_objective_of_the_game" effect="bold">
+
+The objective of the game
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+The objective of the game is for the player to cause as many spiders as 
+possible to be eaten by the ladybugs before they make it to the bottom of the 
+game window.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="Ladybug_control" effect="bold">
+
+Ladybug control
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+The ladybugs can be moved by the player using either the keyboard or the 
+mouse. Pressing the arrow keys moves one of the ladybugs. Holding down the A key 
+and pressing the arrow keys moves the other ladybug.
+
+</para>
+
+
+
+
+
+<para id="p1066">
+The player can drag one of the ladybugs with the mouse pointer by pressing 
+the left mouse button. The player can drag the other ladybug by pressing the 
+right mouse button.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Spiders_are_recycled" effect="bold">
+
+Spiders are recycled
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1067">
+Even though the game begins with only ten spiders, those that are not eaten 
+before they reach the bottom of the game window are recycled. If a spider makes 
+it from the top to the bottom of the game window without being eaten, the spider 
+wraps around and appears back at the top of the game window ready to start the 
+trip over.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="Keeping_score" effect="bold">
+
+Keeping score
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+A counter keeps track of the number of spiders that cross the bottom of the 
+game window. On-screen text displays that number as the game progresses as shown 
+in 
+
+<link id="a1112" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Note, however, that if two or more spiders cross the bottom edge of 
+the game window during the same iteration of the game loop, only one will be 
+counted. In hindsight, therefore, the elapsed time required to cause the 
+ladybugs to eat all of the spiders might be a better scorekeeping mechanism than 
+counting spider crossings.
+
+</para>
+
+
+
+
+
+<para id="p1069">
+Modifying the program to keep score on the basis of elapsed time might make a 
+good student project.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31011">
+<title>
+<emphasis id="Code_for_the_Game1_Class" effect="bold">
+
+Code for the Game1 Class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+<link id="a1113" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ shows the beginning of the 
+
+<emphasis id="strong1100" effect="bold">
+Game1
+
+</emphasis>
+ class along with 
+the constructor in abbreviated form. By abbreviated form, I mean that much of 
+the code is very similar to code that I have explained in earlier modules so I 
+deleted that code from 
+
+<link id="a1114" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ for brevity. You can view all of the code for 
+the 
+
+<emphasis id="strong1101" effect="bold">
+Game1
+
+</emphasis>
+ class in 
+
+<link id="a1115" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1071">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+.  Abbreviated beginning of the Game1 Class for the XNA0132Proj project.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">namespace XNA0132Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //code deleted for brevity
+
+    //The following variable is used to count the number
+    // of spiders that make it past the ladybugs and
+    // reach the bottom of the game window.
+    int spiderCount = 0;
+
+    SpriteFont Font1;//font for on-screen text
+    Vector2 FontPos;//position of on-screen text
+    //-------------------------------------------------//
+
+    public Game1() {//constructor
+      //code deleted for brevity
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1072">
+The variable declarations near the center of 
+
+<link id="a1116" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ 
+	are new to this module.
+
+</para>
+
+
+
+
+
+<section id="h41008">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method_" effect="bold">
+
+The overridden LoadContent method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1073">
+
+    An abbreviated listing of the 
+
+<emphasis id="strong1102" effect="bold">
+LoadContent
+
+</emphasis>
+ method is shown 
+	in 
+
+<link id="a1117" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1074">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Abbreviated overridden LoadContent method.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">    protected override void Update(GameTime gameTime) {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+      Font1 = Content.Load&lt;SpriteFont&gt;("Kootenay");
+      IsMouseVisible = true;//make mouse visible
+
+      //code deleted for brevity
+
+      //Position the on-screen text.
+      FontPos = new Vector2(windowWidth / 2, 50);
+
+      //Position the mouse pointer in the center of the
+      // game window.
+      Mouse.SetPosition(windowWidth / 2,windowHeight /2);
+
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h51002">
+<title>
+<emphasis id="The_font_family" effect="bold">
+
+The font family
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+To begin with, note that this program displays text on the screen using the 
+font family named 
+
+<emphasis id="strong1103" effect="bold">
+Kootenay
+
+</emphasis>
+ (see 
+
+<link id="a1118" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+ for a reference to this 
+font-family name).
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51003">
+<title>
+<emphasis id="Make_the_mouse_pointer_visible" effect="bold">
+
+Make the mouse pointer visible
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1076">
+By default, the mouse pointer is not visible when it is in the game window. 
+The code in 
+
+<link id="a1119" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ sets the inherited variable named 
+
+<emphasis id="strong1104" effect="bold">
+
+IsMouseVisible
+
+</emphasis>
+ to true, which causes the mouse pointer to be visible.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51004">
+<title>
+<emphasis id="Position_the_onScreen_text" effect="bold">
+
+Position the on-screen text
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+The code in 
+
+<link id="a1120" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ causes the text to be centered horizontally, 50 
+pixels down from the top of the game window as shown in 
+
+<link id="a1121" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51005">
+<title>
+<emphasis id="Set_the_initial_position_of_the_mouse_pointer" effect="bold">
+
+Set the initial position of the mouse pointer
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+The code in 
+
+<link id="a1122" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ causes the initial position of the 
+mouse pointer to be centered in the game window. (I will have more to say about 
+this later.)
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51006">
+<title>
+<emphasis id="End_of_the_LoadContent_method" effect="bold">
+
+End of the LoadContent method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1079">
+<link id="a1123" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ also signals the end of the overridden 
+
+<emphasis id="strong1105" effect="bold">
+LoadContent
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h41009">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1080">
+
+    An abbreviated listing of the overridden 
+
+<emphasis id="strong1106" effect="bold">
+Update
+
+</emphasis>
+ method 
+	begins in 
+
+<link id="a1124" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1081">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Beginning of an abbreviated overridden Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">    protected override void Update(GameTime gameTime) {
+
+      //code deleted for brevity
+
+      //Check to see if any spiders have made it to the
+      // bottom edge.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        if(spiders[cnt].Edge == 3)
+          //One or more made it to the bottom edge.
+          spiderCount += 1;
+      }//end for loop
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1082">
+The code in in 
+
+<link id="a1125" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ counts the number of spiders that 
+	make it to the bottom and collide with the bottom edge of the game window.
+
+</para>
+
+
+
+
+
+<section id="h51007">
+<title>
+<emphasis id="Moving_the_ladybug_objects_using_the_keyboard" effect="bold">
+
+Moving the ladybug objects using the keyboard
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1083">
+The code required to service the keyboard is long, tedious, and repetitive, 
+but is not complicated. That code is shown in 
+
+<link id="a1126" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1084">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Service the keyboard.
+
+</para>
+
+
+
+				
+
+<code id="pre1008" display="block">      //The following code is used to move one or the
+      // other of two ladybugs using the arrow keys.
+      // Press only the arrow keys to move one of the
+      // ladybugs. Press the A plus the arrow keys
+      // to move the other ladybug. 
+      //The ladybugs cannot be moved outside the game
+      // window using the keyboard. 
+      //While an arrow key is pressed, the ladybug moves
+      //five pixels per call to the Update method.
+
+      //Get the state of the keyboard.
+      KeyboardState keyboardState = Keyboard.GetState();
+
+      //Execute moves on one ladybug with arrow keys plus
+      // the A or a key.
+      if(keyboardState.IsKeyDown(Keys.Left) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.X &gt; 0)) {
+        ladybugs[0].Position = new Vector2(
+                              ladybugs[0].Position.X - 5,
+                              ladybugs[0].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Right) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.X &lt; 
+            (windowWidth - ladybugs[1].Image.Width))) {
+        ladybugs[0].Position = new Vector2(
+                              ladybugs[0].Position.X + 5,
+                              ladybugs[0].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Up) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.Y &gt; 0)) {
+        ladybugs[0].Position = new Vector2(
+                             ladybugs[0].Position.X,
+                             ladybugs[0].Position.Y - 5);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Down) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.Y &lt; 
+            (windowHeight - ladybugs[1].Image.Height))) {
+        ladybugs[0].Position = new Vector2(
+                             ladybugs[0].Position.X,
+                             ladybugs[0].Position.Y + 5);
+      }//end if
+
+      //Execute moves on the other ladybug with arrow
+      // keys pressed but the A key not pressed.
+      if(keyboardState.IsKeyDown(Keys.Left) &amp;&amp; 
+            !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+            (ladybugs[1].Position.X &gt; 0)) {
+        ladybugs[1].Position = new Vector2(
+                              ladybugs[1].Position.X - 5,
+                              ladybugs[1].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Right) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.X &lt; 
+            (windowWidth - ladybugs[1].Image.Width))) {
+        ladybugs[1].Position = new Vector2(
+                              ladybugs[1].Position.X + 5,
+                              ladybugs[1].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Up) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.Y &gt; 0)) {
+        ladybugs[1].Position = new Vector2(
+                             ladybugs[1].Position.X,
+                             ladybugs[1].Position.Y - 5);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Down) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.Y &lt; 
+            (windowHeight - ladybugs[1].Image.Height))) {
+        ladybugs[1].Position = new Vector2(
+                             ladybugs[1].Position.X,
+                             ladybugs[1].Position.Y + 5);
+      }//end if
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1085">
+<emphasis id="strong1107" effect="bold">
+Get the state of the keyboard
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1086">
+The code 
+
+<link id="a1127" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ calls the static 
+
+<emphasis id="strong1108" effect="bold">
+
+GetState
+
+</emphasis>
+ method of the 
+
+<emphasis id="strong1109" effect="bold">
+Keyboard
+
+</emphasis>
+ class to get a 
+reference to an object of the 
+
+<emphasis id="strong1110" effect="bold">
+KeyboardState
+
+</emphasis>
+ structure. Here is 
+part of what the
+
+
+<link id="a1128" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.keyboardstate.aspx">
+
+
+documentation
+
+</link>
+
+ for 
+
+<emphasis id="strong1111" effect="bold">
+KeyboardState
+
+</emphasis>
+ has to say:
+
+</para>
+
+
+
+
+
+<note id="note1013" type="">
+
+
+"Represents a state of keystrokes recorded by a keyboard input device."
+
+</note>
+
+
+
+
+
+
+<para id="p1087">
+<emphasis id="strong1112" effect="bold">
+Polling instead of handling events
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1088">
+Most business and scientific programs written using C# would sit idle and 
+wait for a keyboard event to occur. Then the event would be handled, and the 
+program would sit idle and wait for the next event to occur.
+
+</para>
+
+
+
+
+
+<para id="p1089">
+Game programs written using XNA don't sit idle. Such programs are always 
+executing the game loop. Therefore, XNA game programs poll the keyboard and the 
+mouse instead of waiting to handle events fired by the keyboard or the mouse. 
+This represents a major difference in programming philosophy.
+
+</para>
+
+
+
+
+
+<para id="p1090">
+<emphasis id="strong1113" effect="bold">
+Key up or down queries
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1091">
+An object of the 
+
+<emphasis id="strong1114" effect="bold">
+KeyboardState
+
+</emphasis>
+ structure has several 
+methods, including the following two which are of particular interest:
+
+</para>
+
+
+
+
+
+<list id="ul1023" list-type="bulleted">
+
+	
+
+<item id="li1122">
+
+	
+
+<link id="a1129" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.keyboardstate.iskeydown.aspx">
+
+
+	IsKeyDown
+
+</link>
+
+ - Returns whether a specified key is currently being pressed.
+
+</item>
+
+
+	
+
+<item id="li1123">
+
+	
+
+<link id="a1130" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.keyboardstate.iskeyup.aspx">
+
+
+	IsKeyUp
+
+</link>
+
+ - Returns whether a specified key is currently not pressed.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1092">
+In this program, our primary interest is in the first of the two methods.
+
+</para>
+
+
+
+
+
+<para id="p1093">
+<emphasis id="strong1115" effect="bold">
+An incoming parameter of type Keys
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1094">
+Both methods require an incoming parameter of type
+
+
+<link id="a1131" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.keys.aspx">
+
+
+Keys
+
+</link>
+
+, which is an 
+
+<emphasis id="em1022" effect="italics">
+"Enumerated value that specifies the key to query."
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1095">
+The 
+
+<emphasis id="strong1116" effect="bold">
+Keys
+
+</emphasis>
+ Enumeration has many members, each one of which 
+
+
+<emphasis id="em1023" effect="italics">
+"Identifies a particular key on a keyboard."
+
+</emphasis>
+ In this program, we are interested 
+in the following enumerated values:
+
+</para>
+
+
+
+
+
+<list id="ul1024" list-type="bulleted">
+
+	
+
+<item id="li1124">
+<emphasis id="strong1117" effect="bold">
+Down
+
+</emphasis>
+ - DOWN ARROW key
+
+</item>
+
+
+	
+
+<item id="li1125">
+<emphasis id="strong1118" effect="bold">
+Left
+
+</emphasis>
+ - LEFT ARROW key
+
+</item>
+
+
+	
+
+<item id="li1126">
+<emphasis id="strong1119" effect="bold">
+Right
+
+</emphasis>
+ - RIGHT ARROW key
+
+</item>
+
+
+	
+
+<item id="li1127">
+<emphasis id="strong1120" effect="bold">
+Up
+
+</emphasis>
+ - UP ARROW key
+
+</item>
+
+
+	
+
+<item id="li1128">
+<emphasis id="strong1121" effect="bold">
+A
+
+</emphasis>
+ - The A key
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1096">
+These are the enumerated values that we will use to determine if the player 
+is pressing one or more arrow keys and the A key.
+
+</para>
+
+
+
+
+
+<para id="p1097">
+<emphasis id="strong1122" effect="bold">
+Make the test
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1098">
+The code in 
+
+<link id="a1132" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ tests to determine if the 
+player is currently pressing both the LEFT ARROW key and the A key. In addition 
+the code tests to confirm that the current position of the ladybug is not 
+outside the left edge of the game window.
+
+</para>
+
+
+
+
+
+<para id="p1099">
+<emphasis id="strong1123" effect="bold">
+Move the ladybug
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1100">
+If this test returns true, the code in 
+
+<link id="a1133" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ 
+sets the horizontal position for the ladybug to five pixels to the left of its 
+current position. This change in position will be reflected visually in the game 
+window the next time the ladybug is drawn.
+
+</para>
+
+
+
+
+
+<para id="p1101">
+<emphasis id="strong1124" effect="bold">
+Three more tests
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1102">
+Three more similar 
+
+<emphasis id="strong1125" effect="bold">
+if
+
+</emphasis>
+ statements are executed testing for 
+RIGHT ARROW, UP ARROW, and DOWN ARROW and moving the ladybug appropriately if 
+the tests return true.
+
+</para>
+
+
+
+
+
+<para id="p1103">
+<emphasis id="strong1126" effect="bold">
+Not mutually exclusive
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1104">
+Note that these tests are not mutually exclusive. For example, the player can 
+be pressing both the LEFT ARROW key and the UP ARROW key, which will result in 
+the ladybug moving diagonally up and to the left.
+
+</para>
+
+
+
+
+
+<para id="p1105">
+<emphasis id="strong1127" effect="bold">
+Applies to a particular ladybug
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1106">
+The tests performed above and the corresponding moves apply only to the 
+ladybug whose reference is stored at index [1] in the list of ladybugs.
+
+</para>
+
+
+
+
+
+<para id="p1107">
+<emphasis id="strong1128" effect="bold">
+Four more similar tests
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1108">
+Four more very similar tests are applied by the code in 
+
+<link id="a1134" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. These tests and the resulting moves apply only 
+to the ladybug whose reference is stored at index [0] in the list of ladybugs.
+
+</para>
+
+
+
+
+
+<para id="p1109">
+<emphasis id="strong1129" effect="bold">
+Testing for the A key not pressed
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1110">
+Note that in these four tests, I used the logical 
+
+<emphasis id="strong1130" effect="bold">
+not
+
+</emphasis>
+ 
+operator (!) to test for the arrow keys pressed but the A key 
+
+<emphasis id="em1024" effect="italics">
+<emphasis id="strong1131" effect="bold">
+not 
+pressed
+
+</emphasis>
+</emphasis>
+. (I also could have called the 
+
+<emphasis id="strong1132" effect="bold">
+IsKeyUp
+
+</emphasis>
+ 
+method instead of using the logical not operator for these tests.) 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51008">
+<title>
+<emphasis id="Dragging_the_ladybug_objects_with_the_mouse" effect="bold">
+
+Dragging the ladybug objects with the mouse
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1111">
+<link id="a1135" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ shows the code required to drag the ladybug objects with the 
+mouse.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1112">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. Moving the ladybug objects with the mouse.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">      //Get the state of the mouse.
+      MouseState mouseState = Mouse.GetState();
+      //Press the left mouse button to move one ladybug.
+      if(mouseState.LeftButton == ButtonState.Pressed) {
+        ladybugs[0].Position = 
+                  new Vector2(mouseState.X,mouseState.Y);
+      }//end if
+
+      //Press the right mouse button to move the other
+      // ladybug.
+      if(mouseState.RightButton == ButtonState.Pressed) {
+        ladybugs[1].Position = 
+                  new Vector2(mouseState.X,mouseState.Y);
+      }//end if
+
+
+      base.Update(gameTime);
+    }//end Update method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1113">
+<emphasis id="strong1133" effect="bold">
+Relatively simple code
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1114">
+The code in 
+
+<link id="a1136" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ is used to drag one or the other of two ladybug 
+objects with the mouse. As you can see from the amount of code involved, 
+dragging the ladybug objects with the mouse is much simpler than moving them 
+from the keyboard.
+
+</para>
+
+
+
+
+
+<para id="p1115">
+You can drag one of the ladybug objects by pressing the left mouse button and 
+you can drag the other ladybug object by pressing the right mouse button. You can drag 
+them both, one on top of the other by pressing both mouse buttons at the same 
+time.
+
+</para>
+
+
+
+
+
+<para id="p1116">
+<emphasis id="strong1134" effect="bold">
+Get the state of the mouse
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1117">
+As is the case with the keyboard, the code in 
+
+<link id="a1137" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ polls the mouse once 
+during each iteration of the game loop to determine its state.
+
+</para>
+
+
+
+
+
+<para id="p1118">
+<link id="a1138" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ begins by calling the 
+
+<emphasis id="strong1135" effect="bold">
+GetState
+
+</emphasis>
+ method of the
+
+
+<emphasis id="strong1136" effect="bold">
+Mouse
+
+</emphasis>
+ class to get a reference to a 
+
+<emphasis id="strong1137" effect="bold">
+MouseState
+
+</emphasis>
+ 
+object that describes the current state of the mouse.
+
+</para>
+
+
+
+
+
+<para id="p1119">
+<emphasis id="strong1138" effect="bold">
+A MouseState object
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1120">
+According to the
+
+
+<link id="a1139" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.mousestate.aspx">
+
+
+documentation
+
+</link>
+
+, a 
+
+<emphasis id="strong1139" effect="bold">
+MouseState
+
+</emphasis>
+ object 
+
+</para>
+
+
+
+
+
+<note id="note1015" type="">
+
+
+"Represents the state of 
+a mouse input device, including mouse cursor position and buttons pressed."
+
+</note>
+
+
+
+
+
+
+<para id="p1121">
+The object contains several properties including the following:
+
+</para>
+
+
+
+
+
+<list id="ul1025" list-type="bulleted">
+
+	
+
+<item id="li1129">
+<emphasis id="strong1140" effect="bold">
+LeftButton
+
+</emphasis>
+ - Returns the state of the left mouse button 
+	as type 
+
+<emphasis id="strong1141" effect="bold">
+ButtonState
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1130">
+<emphasis id="strong1142" effect="bold">
+RightButton
+
+</emphasis>
+ - Returns the state of the right mouse 
+	button as type 
+
+<emphasis id="strong1143" effect="bold">
+ButtonState
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1131">
+<emphasis id="strong1144" effect="bold">
+X
+
+</emphasis>
+ - Specifies the horizontal position of the mouse 
+	cursor in pixels relative to the upper left corner of the game window.
+
+</item>
+
+
+	
+
+<item id="li1132">
+<emphasis id="strong1145" effect="bold">
+Y
+
+</emphasis>
+ - Specifies the vertical position of the mouse cursor 
+	in pixels relative to the upper left corner of the game window.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1122">
+<emphasis id="strong1146" effect="bold">
+The ButtonState enumeration
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1123">
+According to the
+
+
+<link id="a1140" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.buttonstate(XNAGameStudio.20).aspx">
+
+
+documentation
+
+</link>
+
+, 
+
+<emphasis id="strong1147" effect="bold">
+ButtonState
+
+</emphasis>
+ is an Enumeration that 
+
+
+</para>
+
+
+
+
+
+<note id="note1016" type="">
+
+
+"Identifies the state of a mouse button or Xbox 360 Controller button."
+
+
+</note>
+
+
+
+
+
+
+<para id="p1124">
+It has 
+the following members:
+
+</para>
+
+
+
+
+
+<list id="ul1026" list-type="bulleted">
+
+	
+
+<item id="li1133">
+<emphasis id="strong1148" effect="bold">
+Pressed
+
+</emphasis>
+ - The button is pressed.
+
+</item>
+
+
+	
+
+<item id="li1134">
+<emphasis id="strong1149" effect="bold">
+Released
+
+</emphasis>
+ - The button is released.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1125">
+<emphasis id="strong1150" effect="bold">
+Test for a left mouse button pressed
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1126">
+The code in 
+
+<link id="a1141" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ tests to determine if the left 
+mouse button is pressed. If so, it sets the position of the ladybug object 
+referred to by index [0] in the list of ladybugs to the current position of the 
+mouse pointer.
+
+</para>
+
+
+
+
+
+<para id="p1127">
+<emphasis id="strong1151" effect="bold">
+A change in ladybug position
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1128">
+This change in position becomes visible the next time the ladybug is drawn. 
+This has the effect of causing the ladybug object to follow the mouse pointer 
+throughout the game window. It is even possible for the mouse to drag a ladybug 
+outside the game window and leave it there.
+
+</para>
+
+
+
+
+
+<para id="p1129">
+<emphasis id="strong1152" effect="bold">
+Do the same for the other ladybug object
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1130">
+The code in 
+
+<link id="a1142" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ also does essentially the same thing, 
+but applies the operation to the ladybug object referred to by index [1] in the 
+list of ladybugs.
+
+</para>
+
+
+
+
+
+<para id="p1131">
+<emphasis id="strong1153" effect="bold">
+Methods of the Mouse class
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1132">
+In addition to the 
+
+<emphasis id="strong1154" effect="bold">
+GetState
+
+</emphasis>
+ method mentioned earlier, the
+
+
+<emphasis id="strong1155" effect="bold">
+Mouse
+
+</emphasis>
+ class has one other static method that is not inherited 
+from the 
+
+<emphasis id="strong1156" effect="bold">
+Object
+
+</emphasis>
+ class. It is named
+
+
+<link id="a1143" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.input.mouse.setposition.aspx">
+
+
+SetPosition
+
+</link>
+
+, and it 
+
+</para>
+
+
+
+
+
+<note id="note1017" type="">
+
+
+"Sets the position of the mouse cursor relative to the 
+upper-left corner of the window." 
+
+</note>
+
+
+
+
+
+
+<para id="p1133">
+You saw this method used to place the mouse 
+cursor in the center of the game window in 
+
+<link id="a1144" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1134">
+<emphasis id="strong1157" effect="bold">
+The end of the overridden Update method
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1135">
+<link id="a1145" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ also signals the end of the overridden 
+
+<emphasis id="strong1158" effect="bold">
+Update
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+	
+
+	
+
+
+
+</section>
+</section>
+<section id="h41010">
+<title>
+
+    
+
+<emphasis id="The_overridden_GameDraw_method_" effect="bold">
+
+The overridden Game.Draw method
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1136">
+The overridden 
+
+<emphasis id="strong1159" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is shown in its entirety in 
+
+
+<link id="a1146" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+
+	
+
+
+
+<note id="note1018" type="">
+
+
+<para id="p1137">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. The overridden Game.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1010" display="block">    protected override void Draw(GameTime gameTime) {
+
+      spriteBatch.Begin();
+
+      spiderWeb.Draw(spriteBatch);//draw background 
+
+      //Draw all spiders.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ladybugs.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw the output text.
+      string output = "";
+      if(spiderCount == 0){
+        output = "Congratulations. No spiders made it to"
+                 + " the bottom.";
+      }else{
+        output = "Oops, " + spiderCount + " or more "
+                 + "spiders made it to the bottom.";
+      }//end else
+      
+      // Find the center of the string
+      Vector2 FontOrigin = 
+                         Font1.MeasureString(output) / 2;
+      // Draw the string
+      spriteBatch.DrawString(Font1,
+                             output,
+                             FontPos,
+                             Color.Yellow,
+                             0,//angle
+                             FontOrigin,
+                             1.0f,//scale
+                             SpriteEffects.None,
+                             0.0f);//layer depth
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h51009">
+<title>
+<emphasis id="The_MeasureString_method" effect="bold">
+
+The MeasureString method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1138">
+Other than the
+
+
+<link id="a1147" url="http://msdn.microsoft.com/en-us/library/bb464128.aspx">
+
+MeasureString
+
+</link>
+
+ 
+method of the
+
+
+<link id="a1148" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.spritefont.aspx">
+
+
+SpriteFont
+
+</link>
+
+ class, there is nothing in 
+
+<link id="a1149" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ that I haven't explained 
+before.
+
+</para>
+
+
+
+
+
+<para id="p1139">
+The 
+
+<emphasis id="strong1160" effect="bold">
+MeasureString
+
+</emphasis>
+ method 
+
+</para>
+
+
+
+
+
+<note id="note1019" type="">
+
+
+"Returns the height and width of a 
+given string as a Vector2."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h51010">
+<title>
+<emphasis id="Overloaded_division_operator" effect="bold">
+
+Overloaded division operator
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1140">
+The statement that declares and initializes the variable named 
+
+<emphasis id="strong1161" effect="bold">
+FontOrigin
+
+</emphasis>
+ in 
+
+<link id="a1150" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ is very interesting. Recall that a
+
+
+<emphasis id="strong1162" effect="bold">
+Vector2
+
+</emphasis>
+ object has two fields, X and Y. Note that the code 
+in 
+
+<link id="a1151" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ divides the object by 2. I didn't say that 
+the code extracts the fields and divides them by 2. I said that the code divides 
+the object by 2. This must mean that the division operator (/) is overloaded by 
+the 
+
+<emphasis id="strong1163" effect="bold">
+Vector2
+
+</emphasis>
+ class such that dividing a 
+
+<emphasis id="strong1164" effect="bold">
+Vector2
+
+</emphasis>
+ 
+object by a scalar value divides the fields by the scalar value.
+
+</para>
+
+
+
+
+
+<para id="p1141">
+If you know what I am talking about when I talk about operator overloading, 
+that is good. If not, don't worry about it. That topic is far beyond the 
+technical requirements for the introductory XNA game programming course that I 
+teach.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h31012">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1142">
+<link id="a1152" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ signals the end of the overridden 
+
+<emphasis id="strong1165" effect="bold">
+Game.Draw
+
+</emphasis>
+ 
+method, the end of the 
+
+<emphasis id="strong1166" effect="bold">
+Game1
+
+</emphasis>
+ class, and the end of the program.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1143">
+I encourage you to copy the code from 
+
+<link id="a1153" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ and 
+
+<link id="a1154" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Use that 
+code to create an XNA project. You should be able to download suitable images 
+from the Internet. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_text_program" effect="bold">
+
+Run my text program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1144">
+Click 
+
+<link id="a1155" url="XNA0132ProjA.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program named 
+
+<emphasis id="strong1167" effect="bold">
+XNA0132ProjA
+
+</emphasis>
+. Extract the folder named 
+
+<emphasis id="strong1168" effect="bold">
+XNA0132ProjA
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1169" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1170" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1171" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select 
+the file with the extension of 
+
+<emphasis id="strong1172" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled
+
+
+<link id="a1156" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Run_my_game_program" effect="bold">
+
+Run my game program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1145">
+Click 
+
+<link id="a1157" url="XNA0132Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program named 
+
+<emphasis id="strong1173" effect="bold">
+XNA0132Proj
+
+</emphasis>
+. Extract the folder named 
+
+<emphasis id="strong1174" effect="bold">
+XNA0132Proj
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1175" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1176" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1177" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select 
+the file with the extension of 
+
+<emphasis id="strong1178" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled
+
+
+<emphasis id="strong1179" effect="bold">
+Getting Started
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1146">
+You learned how to write a simple game program involving user input from the 
+keyboard and the mouse. You also learned how to create on-screen text.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Whats_next" effect="bold">
+
+What's next?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1147">
+At this point, the main tool that we are missing for creating more 
+interesting 2D arcade style games is the ability to incorporate sound effects 
+and music into the games. The research and study of that topic will be left as an 
+exercise for the student.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11010">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1148">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1020" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1180" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1027" list-type="bulleted">
+
+					
+
+<item id="li1135">
+Module name: Xna0132-A Simple Game Program with 
+					On-Screen Text
+
+</item>
+
+
+					
+
+<item id="li1136">
+File: Xna0132.htm
+
+
+</item>
+
+
+					
+
+<item id="li1137">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1021" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1181" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1149">
+<emphasis id="strong1182" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1150">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1151">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1152">
+<emphasis id="strong1183" effect="bold">
+Affiliation
+
+</emphasis>
+:: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+	
+
+
+</section>
+<section id="h11011">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+	
+
+
+
+
+<note id="note1022" type="">
+
+
+<para id="p1153">
+<emphasis id="Listing_12" effect="bold">
+
+Listing 12
+
+</emphasis>
+
+. Game1 class for project XNA0132ProjA.
+
+</para>
+
+
+
+				
+
+<code id="pre1011" display="block">/*Project XNA0132ProjA
+********************************************************/
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace XNA0132ProjA {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    SpriteFont Font1;
+    Vector2 FontPos;
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Create a new SpriteFont object.
+      Font1 = Content.Load&lt;SpriteFont&gt;("Lindsey");
+
+      //Create a new Vector2 object to center the text
+      // in the game window.
+      FontPos = new Vector2(
+            graphics.GraphicsDevice.Viewport.Width / 2,
+            graphics.GraphicsDevice.Viewport.Height / 2);
+    }//end LoadContent method
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      // Draw Lindsey Font
+      string output = "Lindsey Font";
+
+      // Find the center of the string
+      Vector2 FontOrigin = 
+                         Font1.MeasureString(output) / 2;
+      //Draw the string with the FontOrigin at the 
+      // position specified by FontPos.
+      spriteBatch.DrawString(
+          Font1,//font to use
+          output,//output text
+          FontPos,//position re upper left corner
+          Color.LightGreen,//color of text
+          -45,//rotation of text
+          FontOrigin,//place this at FontPos
+          2.5f,//scale
+          SpriteEffects.None,
+          0.5f);//z-order layer
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+      // Allows the game to exit
+      if(GamePad.GetState(PlayerIndex.One).
+                     Buttons.Back == ButtonState.Pressed)
+        this.Exit();
+
+      //No special update code required.
+
+      base.Update(gameTime);
+    }//end Update method
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      //Not needed
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+    public Game1() {//Typical constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      //Not needed
+    }//end UnloadContent
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+<note id="note1023" type="">
+
+
+<para id="p1154">
+<emphasis id="Listing_13" effect="bold">
+
+Listing 13
+
+</emphasis>
+
+. Sprite class for project XNA0132Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1012" display="block">/*Project XNA0132Proj
+ * This file defines a Sprite class from which a Sprite
+ * object can be instantiated. This version supports
+ * collision detection based on intersecting rectangles.
+ * It also provides an Edge property that records and
+ * returns the edge number if a sprite collides with an
+ * edge. However, the edge information is available for
+ * only one iteration of the game loop. Normally the
+ * value of Edge is 0. However, it changes to 1,2,3,or4
+ * if a sprite collides with the top, right, bottom, or
+ * left edge of the game window.
+ *******************************************************/
+
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace XNA0132Proj {
+  class Sprite {
+    private int edge = 0;//new to this version
+    private Texture2D image;
+    private Vector2 position = new Vector2(0,0);
+    private Vector2 direction = new Vector2(0,0);
+    private Point windowSize;
+    private Random random;
+    double elapsedTime;//in milliseconds
+    //The following value is the inverse of speed in
+    // moves/msec expressed in msec/move.
+    double elapsedTimeTarget;
+    //-------------------------------------------------//
+
+    //New to this version.
+    //Edge property accessor
+    public int Edge {
+      get {
+        return edge;
+      }//end get
+    }//end Edge property accessor
+    //-------------------------------------------------//
+
+    //Image property accessor
+    public Texture2D Image {
+      get {
+        return image;
+      }//end get
+    }//end Image property accessor
+    //-------------------------------------------------//
+
+    //Position property accessor
+    public Vector2 Position {
+      get {
+        return position;
+      }
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+    //-------------------------------------------------//
+
+    //WindowSize property accessor
+    public Point WindowSize {
+      set {
+        windowSize = value;
+      }//end set
+    }//end WindowSize property accessor
+    //-------------------------------------------------//
+
+    //Direction property accessor
+    public Vector2 Direction {
+      get {
+        return direction;
+      }
+      set {
+        direction = value;
+      }//end set
+    }//end Direction property accessor
+
+    //-------------------------------------------------//
+
+    //Speed property accessor. The set side should be
+    // called with speed in moves/msec. The get side
+    // returns speed moves/msec.
+    public double Speed {
+      get {
+        //Convert from elapsed time in msec/move to
+        // speed in moves/msec.
+        return elapsedTimeTarget / 1000;
+      }
+      set {
+        //Convert from speed in moves/msec to
+        // elapsed time in msec/move.
+        elapsedTimeTarget = 1000 / value;
+      }//end set
+    }//end Speed property accessor
+    //-------------------------------------------------//
+
+    //This constructor loads an image for the sprite
+    // when it is instantiated. Therefore, it requires
+    // an asset name for the image and a reference to a
+    // ContentManager object.
+    //Requires a reference to a Random object. Should 
+    // use the same Random object for all sprites to
+    // avoid getting the same sequence for different
+    // sprites.
+    public Sprite(String assetName,
+                  ContentManager contentManager,
+                  Random random) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;
+      this.random = random;
+    }//end constructor
+    //-------------------------------------------------//
+
+    //This method can be called to load a new image
+    // for the sprite.
+    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      image.Name = assetName;
+    }//end SetImage
+    //-------------------------------------------------//
+
+    //This method causes the sprite to move in the 
+    // direction of the direction vector if the elapsed
+    // time since the last move exceeds the elapsed
+    // time target based on the specified speed.
+    public void Move(GameTime gameTime) {
+
+      //New to this version
+      //Clear the Edge property value. Edge information
+      // is available for only one iteration of the 
+      // game loop.
+      edge = 0;
+
+      //Accumulate elapsed time since the last move.
+      elapsedTime +=
+                  gameTime.ElapsedGameTime.Milliseconds;
+
+      if(elapsedTime &gt; elapsedTimeTarget) {
+        //It's time to make a move. Set the elapsed 
+        // time to a value that will attempt to produce
+        // the specified speed on the average.
+        elapsedTime -= elapsedTimeTarget;
+
+        //Add the direction vector to the position
+        // vector to get a new position vector.
+        position = Vector2.Add(position,direction);
+
+        //Check for a collision with an edge of the game
+        // window. If the sprite reaches an edge, cause 
+        // the sprite to wrap around and reappear at the 
+        // other edge, moving at the same speed in a 
+        // different direction within the same quadrant 
+        // as before. Also set the Edge property to
+        // indicate which edge was involved. 1 is top, 2
+        // is right, 3 is bottom, and 4 is left.
+        // Note that the Edge property will be cleared
+        // to 0 the next time the Move method is called.
+        if(position.X &lt; -image.Width) {
+          position.X = windowSize.X;
+          edge = 4;//collision with the left edge - new
+          NewDirection();
+        }//end if
+
+        if(position.X &gt; windowSize.X) {
+          position.X = -image.Width / 2;
+          edge = 2;//collision with the right edge - new
+          NewDirection();
+        }//end if
+
+        if(position.Y &lt; -image.Height) {
+          position.Y = windowSize.Y;
+          edge = 1;//collision with the top - new
+          NewDirection();
+        }//end if
+
+        if(position.Y &gt; windowSize.Y) {
+          position.Y = -image.Height / 2;
+          edge = 3;//collision with the bottom - new
+          NewDirection();
+        }//end if on position.Y
+      }//end if on elapsed time
+    }//end Move
+    //-------------------------------------------------//
+
+    //This method determines the length of the current 
+    // direction vector along with the signs of the X 
+    // and Y components of the current direction vector.
+    // It computes a new direction vector of the same 
+    // length with the X and Y components having random
+    // lengths and the same signs.
+    //Note that random.NextDouble returns a 
+    // pseudo-random value, uniformly distributed
+    // between 0.0 and 1.0.
+    private void NewDirection() {
+      //Get information about the current direction
+      // vector.
+      double length = Math.Sqrt(
+                            direction.X * direction.X +
+                            direction.Y * direction.Y);
+      Boolean xNegative = 
+                        (direction.X &lt; 0) ? true : false;
+      Boolean yNegative = 
+                        (direction.Y &lt; 0) ? true : false;
+
+      //Compute a new X component as a random portion of
+      // the vector length.
+      direction.X =
+                  (float)(length * random.NextDouble());
+      //Compute a corresponding Y component that will 
+      // keep the same vector length.
+      direction.Y = (float)Math.Sqrt(length * length -
+                              direction.X * direction.X);
+
+      //Set the signs on the X and Y components to match
+      // the signs from the original direction vector.
+      if(xNegative)
+        direction.X = -direction.X;
+      if(yNegative)
+        direction.Y = -direction.Y;
+    }//end NewDirection
+    //-------------------------------------------------//
+
+    public void Draw(SpriteBatch spriteBatch) {
+      //Call the simplest available version of
+      // SpriteBatch.Draw
+      spriteBatch.Draw(image,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+
+    //Returns the current rectangle occupied by the
+    // sprite.
+    public Rectangle GetRectangle() {
+      return new Rectangle((int)(position.X),
+                           (int)(position.Y),
+                           image.Width,
+                           image.Height);
+    }//end GetRectangle
+    //-------------------------------------------------//
+
+    //This method receives a list of Sprite objects as
+    // an incoming parameter. It tests for a collision
+    // with the sprites in the list beginning with the
+    // sprite at the head of the list. If it detects a
+    // collision, it stops testing immediately and
+    // returns a reference to the Sprite object for
+    // which it found the collision. If it doesn't find
+    // a collision with any sprite in the list, it
+    // returns null.
+    //A collision is called if the rectangle containing
+    // this object's image intersects the rectangle
+    // containing a target sprite's image.
+    public Sprite IsCollision(List&lt;Sprite&gt; target) {
+      Rectangle thisRectangle =
+                         new Rectangle((int)(position.X),
+                                       (int)(position.Y),
+                                       image.Width,
+                                       image.Height);
+      Rectangle targetRectangle;
+      int cnt = 0;
+
+      while(cnt &lt; target.Count) {
+        targetRectangle = target[cnt].GetRectangle();
+        if(thisRectangle.Intersects(targetRectangle)) {
+          return target[cnt];
+        }//end if
+        cnt++;
+      }//end while loop
+
+      return null;//no collision detected
+    }//end IsCollision
+    //-------------------------------------------------//
+
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+<note id="note1024" type="">
+
+
+<para id="p1155">
+<emphasis id="Listing_14" effect="bold">
+
+Listing 14
+
+</emphasis>
+
+. Game1 class for project XNA0132Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1013" display="block">/*Project XNA0132Proj
+ * This project demonstrates how to write a simple 2D
+ * arcade style game. Ten spiders try to make it across
+ * a web from top to bottom in opposition to two 
+ * ladybugs. If a ladybug collides with a spider, the 
+ * spider is eaten by the ladybug.
+ * 
+ * The ladybugs can be moved either with the keyboard or
+ * the mouse. Press the arrow keys to move one of the
+ * ladybugs. Press the A key plus the arrow keys to move
+ * the other ladybug.
+ * 
+ * Press the left mouse button to drag one of the 
+ * ladybugs with the mouse. Press the right arrow key
+ * to drag the other ladybug with the mouse.
+ * 
+ * If a spider makes it from the top to the bottom of
+ * the game window, it wraps back to the top and starts
+ * the trip over.
+ * 
+ * On-screen text keeps track of the number of spider
+ * crossings at the bottom of the game window. Note,
+ * however, that if two spiders cross the bottom in
+ * very close proximity, they may not both get counted.
+ * 
+ * This program demonstrates how to display on-screen
+ * text. Note however that it is necessary to create
+ * a font resource before you can display onscreen text.
+ * *****************************************************/
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using XNA0132Proj;
+
+namespace XNA0132Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //Use the following values to set the size of the
+    // client area of the game window. The actual window
+    // with its frame is somewhat larger depending on
+    // the OS display options. On my machine with its
+    // current display options, these dimensions
+    // produce a 1024x768 game window.
+    int windowWidth = 1017;
+    int windowHeight = 738;
+
+    //This is the length of the greatest distance in
+    // pixels that any sprite will move in a single
+    // frame of the game loop.
+    double maxVectorLength = 5.0;
+
+    Sprite spiderWeb;//reference to a background sprite.
+
+    //References to the spiders are stored in this
+    // List object.
+    List&lt;Sprite&gt; spiders = new List&lt;Sprite&gt;();
+    int numSpiders = 10;//Number of spiders.
+    //The following value should never exceed 60 moves
+    // per second unless the default frame rate is also
+    // increased to more than 60 frames per second.
+    double maxSpiderSpeed = 30;//moves per second
+
+    //References to the Ladybugs are stored in this List.
+    List&lt;Sprite&gt; ladybugs = new List&lt;Sprite&gt;();
+    int numLadybugs = 2;//Max number of ladybugs
+
+
+    //Random number generator. It is best to use a single
+    // object of the Random class to avoid the 
+    // possibility of using different streams that
+    // produce the same sequence of values.
+    //Note that the random.NextDouble() method produces
+    // a pseudo-random value where the sequence of values
+    // is uniformly distributed between 0.0 and 1.0.
+    Random random = new Random();
+
+    //The following variable is used to count the number
+    // of spiders that make it past the ladybugs and
+    // reach the bottom of the game window.
+    int spiderCount = 0;
+
+    SpriteFont Font1;//font for on-screen text
+    Vector2 FontPos;//position of on-screen text
+    //-------------------------------------------------//
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = windowWidth;
+      graphics.PreferredBackBufferHeight = windowHeight;
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      //No initialization required.
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+      Font1 = Content.Load&lt;SpriteFont&gt;("Kootenay");
+      IsMouseVisible = true;//make mouse visible
+
+      //Create a sprite for the background image.
+      spiderWeb =
+                 new Sprite("spiderwebB",Content,random);
+      spiderWeb.Position = new Vector2(0f,0f);
+
+
+      //Instantiate all of the spiders and cause them to
+      // move from left to right, top to 
+      // bottom. Pass a reference to the same Random
+      // object to all of the sprites.
+      for(int cnt = 0;cnt &lt; numSpiders;cnt++) {
+        spiders.Add(
+          new Sprite("blackWidowSpider",Content,random));
+
+        //Set the position of the current spider at a
+        // random location within the game window but
+        // near the top of the game window.
+        spiders[cnt].Position = new Vector2(
+           (float)(windowWidth * random.NextDouble()),
+           (float)((windowHeight/10) *
+                                   random.NextDouble()));
+
+        //Get a direction vector for the current spider.
+        // Make both components positive to cause the
+        // vector to point down and to the right.
+        spiders[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          false,//xNeg
+          false);//yNeg
+
+        //Notify the spider object of the size of the
+        // game window.
+        spiders[cnt].WindowSize =
+                     new Point(windowWidth,windowHeight);
+
+        //Set the speed in moves per second for the
+        // current spider to a random value between
+        // maxSpiderSpeed/2 and maxSpiderSpeed.
+        spiders[cnt].Speed = maxSpiderSpeed / 2
+              + maxSpiderSpeed * random.NextDouble() / 2;
+      }//end for loop
+
+      //Instantiate all of the ladybugs.They move under
+      // control of the keyboard or the mouse.
+      for(int cnt = 0;cnt &lt; numLadybugs;cnt++) {
+        ladybugs.Add(
+                   new Sprite("ladybug",Content,random));
+
+        //Position the ladybugs at a random position
+        // near the bottom of the game window.
+        ladybugs[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight - 
+                            ladybugs[cnt].Image.Height));
+      }//end for loop
+
+      //Position the on-screen text.
+      FontPos = new Vector2(windowWidth / 2, 50);
+
+      //Position the mouse pointer in the center of the
+      // game window.
+      Mouse.SetPosition(windowWidth / 2,windowHeight /2);
+
+    }//end LoadContent
+    //-------------------------------------------------//
+
+    //This method returns a direction vector given the
+    // length of the vector, the length of the
+    // X component, the sign of the X component, and the
+    // sign of the Y component. Set negX and/or negY to
+    // true to cause them to be negative. By adjusting
+    // the signs on the X and Y components, the vector
+    // can be caused to point into any of the four
+    // quadrants.
+    private Vector2 DirectionVector(float vecLen,
+                                    float xLen,
+                                    Boolean negX,
+                                    Boolean negY) {
+      Vector2 result = new Vector2(xLen,0);
+      result.Y = (float)Math.Sqrt(vecLen * vecLen
+                                          - xLen * xLen);
+      if(negX)
+        result.X = -result.X;
+      if(negY)
+        result.Y = -result.Y;
+      return result;
+    }//end DirectionVector
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      //No content unload required.
+    }//end unloadContent
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+      //Tell all the spiders in the list to move.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell each ladybug to test for a collision with a
+      // spider and to return a reference to the spider
+      // if there is a collision. Return null if there is
+      // no collision.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+
+        //Test for a collision between this ladybug and
+        // all of the spiders in the list of spiders.
+        Sprite target =
+                      ladybugs[cnt].IsCollision(spiders);
+        if(target != null) {
+          //There was a collision. The spider gets eaten.
+          // Remove it from the list of spiders.
+          spiders.Remove(target);
+        }//end if
+      }//end for loop
+
+      //Check to see if any spiders have made it to the
+      // bottom edge.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        if(spiders[cnt].Edge == 3)
+          //One or more made it to the bottom edge.
+          spiderCount += 1;
+      }//end for loop
+
+      //The following code is used to move one or the
+      // other of two ladybugs using the arrow keys.
+      // Press only the arrow keys to move one of the
+      // ladybugs. Press the A or a plus the arrow keys
+      // to move the other ladybug. 
+      //The ladybugs cannot be moved outside the game
+      // window. 
+      //When an arrow key is pressed, the ladybug moves
+      //five pixels per call to the Update method.
+
+      //Get the state of the keyboard.
+      KeyboardState keyboardState = Keyboard.GetState();
+
+      //Execute moves on one ladybug with arrow keys plus
+      // the A or a key.
+      if(keyboardState.IsKeyDown(Keys.Left) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.X &gt; 0)) {
+        ladybugs[0].Position = new Vector2(
+                              ladybugs[0].Position.X - 5,
+                              ladybugs[0].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Right) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.X &lt; 
+            (windowWidth - ladybugs[1].Image.Width))) {
+        ladybugs[0].Position = new Vector2(
+                              ladybugs[0].Position.X + 5,
+                              ladybugs[0].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Up) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.Y &gt; 0)) {
+        ladybugs[0].Position = new Vector2(
+                             ladybugs[0].Position.X,
+                             ladybugs[0].Position.Y - 5);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Down) &amp;&amp; 
+          (keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[0].Position.Y &lt; 
+            (windowHeight - ladybugs[1].Image.Height))) {
+        ladybugs[0].Position = new Vector2(
+                             ladybugs[0].Position.X,
+                             ladybugs[0].Position.Y + 5);
+      }//end if
+
+      //Execute moves on the other ladybug with arrow
+      // keys pressed but the A key not pressed.
+      if(keyboardState.IsKeyDown(Keys.Left) &amp;&amp; 
+            !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+            (ladybugs[1].Position.X &gt; 0)) {
+        ladybugs[1].Position = new Vector2(
+                              ladybugs[1].Position.X - 5,
+                              ladybugs[1].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Right) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.X &lt; 
+            (windowWidth - ladybugs[1].Image.Width))) {
+        ladybugs[1].Position = new Vector2(
+                              ladybugs[1].Position.X + 5,
+                              ladybugs[1].Position.Y);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Up) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.Y &gt; 0)) {
+        ladybugs[1].Position = new Vector2(
+                             ladybugs[1].Position.X,
+                             ladybugs[1].Position.Y - 5);
+      }//end if
+
+      if(keyboardState.IsKeyDown(Keys.Down) &amp;&amp; 
+          !(keyboardState.IsKeyDown(Keys.A)) &amp;&amp; 
+          (ladybugs[1].Position.Y &lt; 
+            (windowHeight - ladybugs[1].Image.Height))) {
+        ladybugs[1].Position = new Vector2(
+                             ladybugs[1].Position.X,
+                             ladybugs[1].Position.Y + 5);
+      }//end if
+
+
+      //The following code is used to drag one or the
+      // other of two ladybugs using the mouse. Press
+      // the left mouse button to drag one of the
+      // ladybugs. Press the right mouse button to drag
+      // the other ladybug.
+
+      //Get the state of the mouse.
+      MouseState mouseState = Mouse.GetState();
+
+      //Press the left mouse button to move one ladybug.
+      if(mouseState.LeftButton == ButtonState.Pressed) {
+        ladybugs[0].Position = 
+                  new Vector2(mouseState.X,mouseState.Y);
+      }//end if
+
+      //Press the right mouse button to move the other
+      // ladybug.
+      if(mouseState.RightButton == ButtonState.Pressed) {
+        ladybugs[1].Position = 
+                  new Vector2(mouseState.X,mouseState.Y);
+      }//end if
+
+
+      base.Update(gameTime);
+    }//end Update method
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+
+      spriteBatch.Begin();
+
+      spiderWeb.Draw(spriteBatch);//draw background 
+
+      //Draw all spiders.
+      for(int cnt = 0;cnt &lt; spiders.Count;cnt++) {
+        spiders[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ladybugs.
+      for(int cnt = 0;cnt &lt; ladybugs.Count;cnt++) {
+        ladybugs[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw the output text.
+      string output = "";
+      if(spiderCount == 0){
+        output = "Congratulations. No spiders made it to"
+                 + " the bottom.";
+      }else{
+        output = "Oops, " + spiderCount + " or more "
+                 + "spiders made it to the bottom.";
+      }//end else
+      
+      // Find the center of the string
+      Vector2 FontOrigin = 
+                         Font1.MeasureString(output) / 2;
+      // Draw the string
+      spriteBatch.DrawString(Font1,
+                             output,
+                             FontPos,
+                             Color.Yellow,
+                             0,//angle
+                             FontOrigin,
+                             1.0f,//scale
+                             SpriteEffects.None,
+                             0.0f);//layer depth
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+<para id="p1156">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

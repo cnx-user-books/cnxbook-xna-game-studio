@@ -1,0 +1,6886 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0122-Frame Animation using a Sprite Sheet</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49518</md:content-id>
+  <md:title>Xna0122-Frame Animation using a Sprite Sheet</md:title>
+  <md:abstract>In this module you will learn: How to create frame animation using a sprite sheet, how to flip and scale sprite images when they are drawn, how to implement different animation frame rates in the same program, how to work with different groups of sprite images in the same program, and how to change the size of the game window.</md:abstract>
+  <md:uuid>5373afd3-b044-4d77-bcd0-527bd7db3644</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Sun May 08 14:07:44 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="A_sprite_sheet">
+
+A sprite sheet
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="Hundreds_of_sprite_images">
+
+Hundreds of sprite images
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Frame_animation">
+
+Frame animation
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Downloading_the_sprite_sheet">
+
+Downloading the sprite sheet
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1012">
+<link id="a1013" target-id="The_class_named_Game1">
+
+The class named Game1
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="The_modified_constructor_for_the_Game1_class">
+
+The modified constructor for the Game1 class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="The_overridden_LoadContent_method_">
+
+The overridden LoadContent method
+    
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="Load_the_image">
+
+Load the image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="Initialization_of_variables">
+
+Initialization of variables
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1017">
+<link id="a1018" target-id="spriteCol_and_spriteRow">
+
+spriteCol and spriteRow
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1018">
+<link id="a1019" target-id="frameWidth_and_frameHeight">
+
+frameWidth and frameHeight
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="msPerFrame">
+
+msPerFrame
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="spriteEffect">
+
+spriteEffect
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="winWidth">
+
+winWidth
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1022">
+<link id="a1023" target-id="The_overridden_Update_method_">
+
+The overridden Update method
+    
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1023">
+<link id="a1024" target-id="The_update_method_is_fairly_complex">
+
+The update method is fairly 
+complex
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="The_animation_frame_rate">
+
+The animation frame rate
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1025">
+<link id="a1026" target-id="Many_drawings_will_be_repeated">
+
+Many drawings will be repeated
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="The_GameTime_parameter">
+
+The GameTime parameter
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="The_ElapsedGameTime_property">
+
+The ElapsedGameTime property
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="The_TimeSpan_structure">
+
+The TimeSpan structure
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="Accumulate_and_compare_elapsed_time">
+
+Accumulate and compare elapsed time
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1030">
+<link id="a1031" target-id="Compute_the_location_of_the_sprite_to_draw">
+
+Compute the location of the sprite to draw
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="The_overall_animation_cycle">
+
+The overall animation cycle
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1032">
+<link id="a1033" target-id="Two_animation_cycles_from_the_bottom_row_of_sprite_images">
+
+Two animation cycles from the bottom row of sprite images
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="Pause_and_animate_in_the_same_location">
+
+Pause and animate in the same location
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="Some_complex_logic">
+
+Some complex logic
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1035">
+<link id="a1036" target-id="Adjust_column_and_row_counters">
+
+Adjust column and row counters
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Increment_the_column_counter_and_compare">
+
+Increment the column counter and compare
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Execute_the_pause_sequence_if_it_is_time_for_it">
+
+Execute the pause sequence if it is time for it
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="The_conditional_clause">
+
+The conditional clause
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="Set_the_row_counter_to_1">
+
+Set the row counter to 1
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="Increment_the_pauseSequenceCnt">
+
+Increment the pauseSequenceCnt
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Adjust_sprite_position_and_frame_rate">
+
+Adjust sprite position and frame rate
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="More_complex_logic">
+
+More complex logic
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1043">
+<link id="a1044" target-id="Scaling">
+
+Scaling
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="The_slide_variable">
+
+The slide variable
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="The_sign_of_the_variable_named_slide">
+
+The sign of the variable named slide
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Move_the_sprite_image_back_and_forth_across_the_game_window">
+
+Move the sprite image back and forth across the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Test_for_a_collision_with_an_edge">
+
+Test for a collision with an edge
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="The_spriteEffect_variable">
+
+The spriteEffect variable
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="The_overridden_Draw_method_">
+
+The overridden Draw method 
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1050">
+<link id="a1051" target-id="Begin_the_drawing_process">
+
+Begin the drawing process
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="Call_the_SpriteBatchDraw_method">
+
+Call the SpriteBatch.Draw method
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1052">
+<link id="a1053" target-id="The_first_two_parameters">
+
+The first two parameters
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Three_interesting_parameters">
+
+Three interesting parameters
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="The_remaining_four_parameters">
+
+The remaining four parameters
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="The_rectangle">
+
+The rectangle
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1056">
+<link id="a1057" target-id="The_upper_left_corner_of_the_rectangle">
+
+The upper left corner of the rectangle
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1057">
+<link id="a1058" target-id="The_width_and_the_height_of_the_rectangle">
+
+The width and the height of the rectangle
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1058">
+<link id="a1059" target-id="The_horizontal_and_vertical_scale_factors">
+
+The horizontal and vertical scale factors
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1059">
+<link id="a1060" target-id="A_new_object">
+
+A new object
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1060">
+<link id="a1061" target-id="Four_times_larger">
+
+Four times larger
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1061">
+<link id="a1062" target-id="Causing_the_sprite_to_face_in_the_correct_direction">
+
+Causing the sprite to face in the correct direction
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1062">
+<link id="a1063" target-id="Call_the_SpriteBatchEnd_method">
+
+Call the SpriteBatch.End method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1063">
+<link id="a1064" target-id="The_visual_frame_rate">
+
+The visual frame rate
+
+</link>
+
+
+
+
+<list id="ul1016" list-type="bulleted">
+<item id="li1064">
+<link id="a1065" target-id="The_fast_frame_rate_">
+
+The fast frame rate 
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1065">
+<link id="a1066" target-id="The_slow_frame_rate">
+
+The slow frame rate
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1066">
+<link id="a1067" target-id="Avoid_flicker_but_animate_more_slowly">
+
+Avoid flicker but animate more slowly
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1067">
+<link id="a1068" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1068">
+<link id="a1069" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1069">
+<link id="a1070" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1070">
+<link id="a1071" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1071">
+<link id="a1072" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1072">
+<link id="a1073" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1074" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1017" list-type="bulleted">
+
+		
+
+<item id="li1073">
+<link id="a1075" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Sprite sheet used to animate a dog. 
+
+</item>
+
+
+		
+
+<item id="li1074">
+<link id="a1076" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. A top row image.
+
+</item>
+
+
+		
+
+<item id="li1075">
+<link id="a1077" target-id="Figure_3">
+
+Figure 3
+
+</link>
+
+. A bottom row image.
+
+</item>
+
+
+		
+
+<item id="li1076">
+<link id="a1078" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+. A bottom row image flipped horizontally.
+
+</item>
+
+
+		
+
+<item id="li1077">
+<link id="a1079" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+. A top row image flipped horizontally.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1018" list-type="bulleted">
+
+		
+
+<item id="li1078">
+<link id="a1080" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the class named Game1.
+
+</item>
+
+
+		
+
+<item id="li1079">
+<link id="a1081" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The constructor for the Game1 class.
+
+</item>
+
+
+		
+
+<item id="li1080">
+<link id="a1082" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. The overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1081">
+<link id="a1083" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. Beginning of the Update method.
+
+</item>
+
+
+		
+
+<item id="li1082">
+<link id="a1084" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. Compute the location of the sprite to draw.
+
+</item>
+
+
+		
+
+<item id="li1083">
+<link id="a1085" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Adjust column and row counters.
+
+</item>
+
+
+		
+
+<item id="li1084">
+<link id="a1086" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Execute the pause sequence if it is time for it.
+
+</item>
+
+
+		
+
+<item id="li1085">
+<link id="a1087" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Adjust sprite position and frame rate.
+
+</item>
+
+
+		
+
+<item id="li1086">
+<link id="a1088" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Move the sprite image back and forth across the game window.
+
+</item>
+
+
+		
+
+<item id="li1087">
+<link id="a1089" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Beginning of the overridden Draw method.
+
+</item>
+
+
+		
+
+<item id="li1088">
+<link id="a1090" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. Begin the drawing process.
+
+</item>
+
+
+		
+
+<item id="li1089">
+<link id="a1091" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+. Call the SpriteBatch.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1090">
+<link id="a1092" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. The end of the program.
+
+</item>
+
+
+		
+
+<item id="li1091">
+<link id="a1093" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Class Game1 from the project named XNA0122Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+Frame animation typically involves displaying a series of images one at a 
+time in quick succession where each image is similar to but different from the 
+one before it. For example, 
+
+<link id="a1094" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows a series of images of a small dog 
+running, jumping, stopping to answer nature's call, and then scratching the 
+ground as dogs are prone to do.
+
+</para>
+
+
+
+
+
+<note id="note1000" type="">
+
+
+<para id="p1006">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Sprite sheet used to animate a dog.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0122a.jpg" width="435" height="168"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+<note id="note1001" type="">
+
+
+
+	
+
+<para id="p1007">
+Credit for sprite artwork
+
+</para>
+
+
+
+	
+	
+
+<para id="p1008">
+I 
+	have no recollection of when and where I acquired this sprite sheet. If you are the artist that drew these sprites, please contact me and 
+	identify the original source and I will gladly give you credit for the 
+	artwork.
+
+</para>
+
+
+
+
+</note>
+
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="A_sprite_sheet" effect="bold">
+
+A sprite sheet
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+The format that you see in 
+
+<link id="a1095" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ is a small scale version of a format that 
+is commonly known as a sprite sheet. If you Google "animation sprite sheet", you 
+will find hundreds and possibly thousands of examples of animation sprite sheets 
+on the web.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Hundreds_of_sprite_images" effect="bold">
+
+Hundreds of sprite images
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+Many of the sprite sheets that you will find on the web will contain hundreds 
+of individual images usually arranged is several groups. One group may have 
+several images that can be animated to create the illusion of a character 
+running. Another group may have several images that can be animated to create 
+the illusion of the character engaging in a martial arts battle. Other groups 
+can be animated to create the illusion of other activities.
+
+</para>
+
+
+
+
+
+<para id="p1011">
+There are two groups of sprite images in 
+
+<link id="a1096" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. The images in the top row 
+can be animated to show the dog running, jumping, playing and generally having 
+fun.
+
+</para>
+
+
+
+
+
+<para id="p1012">
+The images in the bottom row can be animated to show the dog answering 
+nature's call.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="Frame_animation" effect="bold">
+
+Frame animation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1013">
+By displaying the individual images from a group sequentially with an 
+appropriate time delay between images, you can create the illusion that the 
+character is engaging in some particular activity. When displayed in this 
+manner, each image is often referred to as a frame. The overall process is often 
+referred to as frame animation.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Downloading_the_sprite_sheet" effect="bold">
+
+Downloading the sprite sheet
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+If you would like to replicate my program using the same sprite sheet, you 
+should be able to right-click on 
+
+<link id="a1097" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ and save the image on your disk. Be 
+sure to save it as an image file of type JPEG.
+
+</para>
+
+
+
+	
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1015">
+I will explain a program in this module that causes the dog to run back 
+	and forth across a small game window always facing in the correct direction as 
+	shown in 
+
+<link id="a1098" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+. 
+
+<link id="a1099" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ through 
+
+<link id="a1100" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+ show four random screen shots 
+	taken while the program was running.
+
+</para>
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1016">
+<emphasis id="Figure_2" effect="bold">
+
+Figure 2
+
+</emphasis>
+
+. A top row image.
+
+</para>
+
+
+
+		
+
+<media id="media1001" alt="missing image" display="block">
+<image id="img1001" mime-type="image/jpeg" src="../../media/xna0122b.jpg" width="457" height="130"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1017">
+<emphasis id="Figure_3" effect="bold">
+
+Figure 3
+
+</emphasis>
+
+. A bottom row image.
+
+</para>
+
+
+
+		
+
+<media id="media1002" alt="missing image" display="block">
+<image id="img1002" mime-type="image/jpeg" src="../../media/xna0122c.jpg" width="457" height="130"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1018">
+<emphasis id="Figure_4" effect="bold">
+
+Figure 4
+
+</emphasis>
+
+. A bottom row image flipped horizontally.
+
+</para>
+
+
+
+		
+
+<media id="media1003" alt="missing image" display="block">
+<image id="img1003" mime-type="image/jpeg" src="../../media/xna0122d.jpg" width="457" height="130"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+
+
+<note id="note1005" type="">
+
+
+<para id="p1019">
+<emphasis id="Figure_5" effect="bold">
+
+Figure 5
+
+</emphasis>
+
+. A top row image flipped horizontally.
+
+</para>
+
+
+
+		
+
+<media id="media1004" alt="missing image" display="block">
+<image id="img1004" mime-type="image/jpeg" src="../../media/xna0122e.jpg" width="457" height="130"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1020">
+You should be able to correlate the images of the dog shown in 
+
+<link id="a1101" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ through 
+
+
+<link id="a1102" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+ with the individual images shown in 
+
+<link id="a1103" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Note, however, that the images in 
+
+<link id="a1104" target-id="Figure_4">
+
+Figure 4
+
+</link>
+
+ 
+and 
+
+<link id="a1105" target-id="Figure_5">
+
+Figure 5
+
+</link>
+
+ were flipped horizontally so that the dog would be facing the 
+correct 
+way when moving from left to right across the game window.
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+
+<para id="p1021">
+I will explain the code in this program in fragments, and I will only discuss 
+the code that I modified relative to the skeleton code produced by Visual C# 
+when I created the project. A complete listing of the file named 
+
+<emphasis id="strong1001" effect="bold">
+
+Game1.cs
+
+</emphasis>
+ is shown in 
+
+<link id="a1106" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ near the end of the module.
+
+</para>
+
+
+
+
+
+<section id="h21005">
+<title>
+<emphasis id="The_class_named_Game1" effect="bold">
+
+The class named Game1
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+The class named Game1 begins in 
+
+<link id="a1107" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+<note id="note1006" type="">
+
+
+<para id="p1023">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+.  Beginning of the class named Game1.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">namespace XNA0122Proj {
+  public class Game1 : Microsoft.Xna.Framework.Game {
+
+    //Declare and populate instance variables
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    Texture2D myTexture;
+    Vector2 spritePosition = new Vector2(0.0f,0.0f);
+    int slide = 8;//Used to move sprite across screen.
+    int scale = 4;//Size scale factor.
+    int fast = 175;//Used for fast frame rate.
+    int slow = 525;//Used for slow frame rate.
+    int msPerFrame = 0;//Gets set for fast or slow.
+    int msElapsed;//Time since last new frame.
+    int spriteCol;//Sprite column counter.
+    int spriteColLim = 5;//Number of sprite columns.
+    int spriteRow;//Sprite row counter.
+    int spriteRowLim = 2;//Number of sprite rows.
+    int frameWidth;//Width of an individual image
+    int frameHeight;//Height of an individual image
+    int xStart;//Corner of frame rectangle
+    int yStart;//Corner of frame rectangle
+    SpriteEffects noEffect = SpriteEffects.None;
+    SpriteEffects flipEffect =
+                          SpriteEffects.FlipHorizontally;
+    SpriteEffects spriteEffect;//noEffect or flipEffect
+    int winWidth;//Width of the game window.
+    int funSequenceCnt = 0;
+    int pauseSequenceCnt = 0;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+<para id="p1024">
+<link id="a1108" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ declares a large number of instance variables that are used by code 
+throughout the program. I will explain the purpose of the instance variables 
+when we encounter them in the program code later. 
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+
+    
+
+<emphasis id="The_modified_constructor_for_the_Game1_class" effect="bold">
+
+The modified constructor for the Game1 class
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1025">
+
+    The constructor for the 
+
+<emphasis id="strong1002" effect="bold">
+Game1
+
+</emphasis>
+ class is shown in 
+
+<link id="a1109" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1026">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. The constructor for the Game1 class.
+
+</para>
+
+
+
+				
+
+<code id="pre1001" display="block">    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 100;
+
+    }// end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1027">
+I added the last two statements to the standard constructor 
+	that is generated by Visual C# when you create a new project.
+
+</para>
+
+
+
+
+
+<para id="p1028">
+Although it isn't very clear in the
+
+
+<link id="a1110" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphicsdevicemanager_members.aspx">
+
+
+documentation
+
+</link>
+
+, the values for 
+
+<emphasis id="strong1003" effect="bold">
+PreferredBackBufferWidth
+
+</emphasis>
+ and
+
+
+<emphasis id="strong1004" effect="bold">
+PreferredBackBufferHeight
+
+</emphasis>
+ set the size of the game window 
+provided that they are consistent with the screen resolution. These two 
+statements caused the game window to be small as shown in 
+
+<link id="a1111" target-id="Figure_2">
+
+Figure 2
+
+</link>
+
+ instead of the 
+default size.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method_" effect="bold">
+
+The overridden LoadContent method
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1029">
+
+    The overridden 
+
+<emphasis id="strong1005" effect="bold">
+LoadContent
+
+</emphasis>
+ method is shown in 
+
+<link id="a1112" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1030">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. The overridden LoadContent method.
+
+</para>
+
+
+
+				
+
+<code id="pre1002" display="block">    protected override void LoadContent() {
+      //Create a new SpriteBatch object, which can be
+      // used to draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Load the image
+      myTexture = Content.Load&lt;Texture2D&gt;("dogcropped");
+
+      //Initialize instance variables
+      spriteCol = 0;
+      spriteRow = 0;
+
+      frameWidth = myTexture.Width / spriteColLim;
+      frameHeight = myTexture.Height / spriteRowLim;
+
+      msPerFrame = fast;
+
+      spriteEffect = flipEffect;
+
+      winWidth = Window.ClientBounds.Width;
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31002">
+<title>
+<emphasis id="Load_the_image" effect="bold">
+
+Load the image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1031">
+The code to load the image, which is a sprite sheet, is the same as code that 
+I have explained in earlier modules.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="Initialization_of_variables" effect="bold">
+
+Initialization of variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+Some of the instance variables in 
+
+<link id="a1113" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ were initialized when they were 
+declared. Others couldn't be initialized when they were declared for a variety 
+of reasons.
+
+</para>
+
+
+
+
+
+<para id="p1033">
+Some could have been initialized in the constructor and others couldn't 
+because the required information wasn't yet available.
+
+</para>
+
+
+
+
+
+<para id="p1034">
+I elected to initialize variables in the 
+
+<emphasis id="strong1006" effect="bold">
+LoadContent
+
+</emphasis>
+ method. 
+By the time the 
+
+<emphasis id="strong1007" effect="bold">
+LoadContent
+
+</emphasis>
+ method executes, all of the 
+information necessary to initialize the variables is available.
+
+</para>
+
+
+
+
+
+<section id="h41000">
+<title>
+<emphasis id="spriteCol_and_spriteRow" effect="bold">
+
+spriteCol and spriteRow
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+The variables named 
+
+<emphasis id="strong1008" effect="bold">
+spriteCol
+
+</emphasis>
+ and 
+
+<emphasis id="strong1009" effect="bold">
+spriteRow
+
+</emphasis>
+ 
+will be used as counters to keep track of and to specify the column and row for 
+a particular sprite image as shown in 
+
+<link id="a1114" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. The columns are numbered from 0 
+through 4 (five columns) and the rows are numbered from 0 through 1 (two rows).
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="frameWidth_and_frameHeight" effect="bold">
+
+frameWidth and frameHeight
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+These two variables specify the width and the height of an individual sprite 
+image (see 
+
+<link id="a1115" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+). The width and the height of the individual sprite images 
+are computed by dividing the total width of the image loaded in 
+
+<link id="a1116" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ by the 
+number of sprite images in a row and by dividing the total height of the image 
+loaded in 
+
+<link id="a1117" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ by the number of sprite images in a column.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41002">
+<title>
+<emphasis id="msPerFrame" effect="bold">
+
+msPerFrame
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+<link id="a1118" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ declares two variables named 
+
+<emphasis id="strong1010" effect="bold">
+fast
+
+</emphasis>
+ and 
+
+<emphasis id="strong1011" effect="bold">
+slow
+
+</emphasis>
+ 
+and initializes their values to 175 milliseconds and 525 milliseconds 
+respectively. These two values are used to switch the animation frame rate 
+between a fast rate and a slow rate by assigning one or the other value to the 
+variable named 
+
+<emphasis id="strong1012" effect="bold">
+msPerFrame
+
+</emphasis>
+. The 
+
+<emphasis id="strong1013" effect="bold">
+fast
+
+</emphasis>
+ value is 
+assigned to 
+
+<emphasis id="strong1014" effect="bold">
+msPerFrame
+
+</emphasis>
+ in 
+
+<link id="a1119" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ to specify a fast frame 
+rate when the animation begins.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="spriteEffect" effect="bold">
+
+spriteEffect
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+The 
+
+<emphasis id="strong1015" effect="bold">
+SpriteEffects
+
+</emphasis>
+ enumeration lists the following effects 
+that can be applied to a sprite when it is drawn:
+
+</para>
+
+
+
+
+
+<list id="ul1019" list-type="bulleted">
+
+	
+
+<item id="li1092">
+FlipHorizontally
+
+</item>
+
+
+	
+
+<item id="li1093">
+FlipVertically
+
+</item>
+
+
+	
+
+<item id="li1094">
+None
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1039">
+The images in the raw sprite sheet shown in 
+
+<link id="a1120" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ are all facing to the 
+left. The 
+
+<emphasis id="strong1016" effect="bold">
+FlipHorizontally
+
+</emphasis>
+ enumeration value will be used to 
+cause the images to face to the right when the dog is moving from left to right 
+across the game window. The 
+
+<emphasis id="strong1017" effect="bold">
+None
+
+</emphasis>
+ enumeration value will be used 
+to cause the images to face to the left (the default) when the dog is moving 
+from right to left across the game window.
+
+</para>
+
+
+
+
+
+<para id="p1040">
+This is accomplished with the variables named 
+
+<emphasis id="strong1018" effect="bold">
+spriteEffect
+
+</emphasis>
+,
+
+
+<emphasis id="strong1019" effect="bold">
+flipEffect
+
+</emphasis>
+, and 
+
+<emphasis id="strong1020" effect="bold">
+noEffect
+
+</emphasis>
+. The value of 
+
+<emphasis id="strong1021" effect="bold">
+
+spriteEffect
+
+</emphasis>
+ is initialized to 
+
+<emphasis id="strong1022" effect="bold">
+flipEffect
+
+</emphasis>
+ in 
+
+<link id="a1121" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ 
+because the dog starts off moving from left to right.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41004">
+<title>
+<emphasis id="winWidth" effect="bold">
+
+winWidth
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1041">
+The variable named 
+
+<emphasis id="strong1023" effect="bold">
+winWidth
+
+</emphasis>
+ is set to the width of the game 
+window. The value 
+
+<emphasis id="strong1024" effect="bold">
+Window.ClientBounds.Width
+
+</emphasis>
+ could have been 
+used everywhere that 
+
+<emphasis id="strong1025" effect="bold">
+winWidth
+
+</emphasis>
+ is used but the length of the 
+expression created some formatting problems when attempting to format the source 
+code for this narrow publication format.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21008">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1042">
+You will recall that after initialization, the XNA game loop switches back 
+and forth between calling the 
+
+<emphasis id="strong1026" effect="bold">
+Update
+
+</emphasis>
+ method and the 
+
+<emphasis id="strong1027" effect="bold">
+
+Draw
+
+</emphasis>
+ method. The 
+
+<emphasis id="strong1028" effect="bold">
+Update
+
+</emphasis>
+ method is overridden to 
+implement the game logic and the 
+
+<emphasis id="strong1029" effect="bold">
+Draw
+
+</emphasis>
+ method is overridden to 
+render the current state of the game on the computer screen. 
+
+</para>
+
+
+
+
+
+<note id="note1009" type="">
+
+
+There are some subtle timing issues 
+	that I explained in earlier modules and I won't get into them here.
+
+</note>
+
+
+
+
+
+
+<section id="h31004">
+<title>
+<emphasis id="The_update_method_is_fairly_complex" effect="bold">
+
+The update method is fairly 
+complex
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+The 
+
+<emphasis id="strong1030" effect="bold">
+Update
+
+</emphasis>
+ method in the earlier modules has been fairly 
+simple. That is not the case in this module. The 
+
+<emphasis id="strong1031" effect="bold">
+Update
+
+</emphasis>
+ method 
+in this module, which begins in 
+
+<link id="a1122" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+, contains some fairly complex logic.
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+<para id="p1044">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. Beginning of the Update method.
+
+</para>
+
+
+
+				
+
+<code id="pre1003" display="block">    protected override void Update(GameTime gameTime) {
+      // Allows the game to exit
+      if(GamePad.GetState(PlayerIndex.One).Buttons.Back
+                                  == ButtonState.Pressed)
+        this.Exit();
+      //-----------------------------------------------//
+
+      //New code begins here.
+      msElapsed += gameTime.ElapsedGameTime.Milliseconds;
+      if(msElapsed &gt; msPerFrame){
+        //Reset the elapsed time and draw the new frame.
+        msElapsed = 0;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="The_animation_frame_rate" effect="bold">
+
+The animation frame rate
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+The code at the beginning of 
+
+<link id="a1123" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ is the standard code that is generated 
+by Visual C# when you create a new Windows Game project.
+
+</para>
+
+
+
+
+
+<para id="p1046">
+The new code in 
+
+<link id="a1124" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ deals with the 
+
+<emphasis id="em1001" effect="italics">
+animation frame rate
+
+</emphasis>
+. The 
+animation frame rate needs to be much slower than the default repetition rate of 
+the game loop, which is 60 iterations per second. Otherwise the dog would run 
+around so fast that it wouldn't look natural.
+
+</para>
+
+
+
+
+
+<section id="h41005">
+<title>
+<emphasis id="Many_drawings_will_be_repeated" effect="bold">
+
+Many drawings will be repeated
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1047">
+Therefore, we won't change the drawing parameters during every iteration of 
+the game loop. Instead, we will cause the sprite to be drawn in the game window 
+sixty times per second, but many of those drawings will look exactly like the 
+previous drawing.
+
+</para>
+
+
+
+
+
+<para id="p1048">
+We will accomplish this by changing the drawing parameters only once every
+
+
+<emphasis id="strong1032" effect="bold">
+msPerFrame
+
+</emphasis>
+ milliseconds. (Recall that 
+
+<emphasis id="strong1033" effect="bold">
+msPerFrame
+
+</emphasis>
+ 
+can have either of two values: 
+
+<emphasis id="strong1034" effect="bold">
+fast
+
+</emphasis>
+ and 
+
+<emphasis id="strong1035" effect="bold">
+slow
+
+</emphasis>
+.)
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="The_GameTime_parameter" effect="bold">
+
+The GameTime parameter
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+Each time the 
+
+<emphasis id="strong1036" effect="bold">
+Update
+
+</emphasis>
+ method is called, an incoming parameter 
+contains information in an object of type 
+
+<emphasis id="strong1037" effect="bold">
+GameTime
+
+</emphasis>
+ that allows 
+us to determine the number of milliseconds that have elapsed since the last time 
+the 
+
+<emphasis id="strong1038" effect="bold">
+Update
+
+</emphasis>
+ method was called.
+
+</para>
+
+
+
+
+
+<para id="p1050">
+The documentation for the
+
+
+<link id="a1125" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.gametime.aspx">
+
+
+GameTime
+
+</link>
+
+ class has this to say:
+
+</para>
+
+
+
+
+
+<note id="note1011" type="">
+
+
+"Snapshot of the game timing state expressed in values that can be used by 
+variable-step (real time) or fixed-step (game time) games."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41007">
+<title>
+<emphasis id="The_ElapsedGameTime_property" effect="bold">
+
+The ElapsedGameTime property
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+The 
+
+<emphasis id="strong1039" effect="bold">
+GameTime
+
+</emphasis>
+ object has several properties, one of which is 
+named
+
+
+<link id="a1126" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.gametime.elapsedgametime.aspx">
+
+
+ElapsedGameTime
+
+</link>
+
+. This property, which is a structure of type 
+
+<emphasis id="strong1040" effect="bold">
+
+TimeSpan
+
+</emphasis>
+ provides:
+
+</para>
+
+
+
+
+
+<note id="note1012" type="">
+
+
+"The amount of elapsed game time since the last update."
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h41008">
+<title>
+<emphasis id="The_TimeSpan_structure" effect="bold">
+
+The TimeSpan structure
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1052">
+A 
+
+<link id="a1127" url="http://msdn.microsoft.com/en-us/library/system.timespan.aspx">
+
+
+TimeSpan
+
+</link>
+
+ structure has a large number of properties including one named
+
+
+<link id="a1128" url="http://msdn.microsoft.com/en-us/library/system.timespan.milliseconds.aspx">
+
+
+Milliseconds
+
+</link>
+
+. This property:
+
+</para>
+
+
+
+
+
+<note id="note1013" type="">
+
+
+"Gets the milliseconds component of the time interval represented by the 
+current TimeSpan structure."
+
+</note>
+
+
+
+
+
+
+<para id="p1053">
+Therefore, the first line of new code in 
+
+<link id="a1129" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ returns the 
+elapsed time in milliseconds since the last call to the 
+
+<emphasis id="strong1041" effect="bold">
+Update
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41009">
+<title>
+<emphasis id="Accumulate_and_compare_elapsed_time" effect="bold">
+
+Accumulate and compare elapsed time
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+<link id="a1130" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ adds the value in milliseconds to an accumulator variable named
+
+
+<emphasis id="strong1042" effect="bold">
+msElapsed
+
+</emphasis>
+ each time the 
+
+<emphasis id="strong1043" effect="bold">
+Update
+
+</emphasis>
+ method is 
+called.
+
+</para>
+
+
+
+
+
+<para id="p1055">
+<link id="a1131" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ also compares the accumulated value with the desired animation 
+interval stored in 
+
+<emphasis id="strong1044" effect="bold">
+msElapsed
+
+</emphasis>
+. If the accumulated value exceeds 
+the desired animation interval, the accumulated value is set to zero and the 
+body of the 
+
+<emphasis id="strong1045" effect="bold">
+if
+
+</emphasis>
+ statement that begins in 
+
+<link id="a1132" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+ is executed to 
+modify the drawing parameters.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Compute_the_location_of_the_sprite_to_draw" effect="bold">
+
+Compute the location of the sprite to draw
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+The code in 
+
+<link id="a1133" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+ computes the location in pixel coordinates of the 
+sprite image that needs to be drawn the next time the 
+
+<emphasis id="strong1046" effect="bold">
+Draw
+
+</emphasis>
+ 
+method is called.
+
+</para>
+
+
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1057">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. Compute the location of the sprite to draw.
+
+</para>
+
+
+
+				
+
+<code id="pre1004" display="block">        xStart = spriteCol * frameWidth;
+        yStart = spriteRow * frameHeight;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1058">
+That sprite image is identified by the intersection of the 
+
+<emphasis id="strong1047" effect="bold">
+
+	spriteCol
+
+</emphasis>
+ column and the 
+
+<emphasis id="strong1048" effect="bold">
+spriteRow
+
+</emphasis>
+ row in 
+
+<link id="a1134" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1059">
+The column and row values are used in conjunction with the width and height 
+of the sprite images to compute the coordinates of the upper-left corner of the 
+sprite image to be drawn. These values are stored in 
+
+<emphasis id="strong1049" effect="bold">
+xStart
+
+</emphasis>
+ and
+
+
+<emphasis id="strong1050" effect="bold">
+yStart
+
+</emphasis>
+, which will be used in the 
+
+<emphasis id="strong1051" effect="bold">
+Draw
+
+</emphasis>
+ method 
+to select the correct image from I
+
+<link id="a1135" target-id="Figure_1">
+
+mage 1
+
+</link>
+
+ and to draw that image.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="The_overall_animation_cycle" effect="bold">
+
+The overall animation cycle
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+The program plays five animation cycles of the five sprite images in the top 
+row of 
+
+<link id="a1136" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. These five cycles are played with the 
+
+<emphasis id="strong1052" effect="bold">
+fast
+
+</emphasis>
+ 
+animation frame rate discussed earlier. This is controlled by a counter variable 
+named 
+
+<emphasis id="strong1053" effect="bold">
+funSequenceCnt
+
+</emphasis>
+. (This name was chosen because these 
+images portray the dog running and jumping and having fun.)
+
+</para>
+
+
+
+
+
+<section id="h41010">
+<title>
+<emphasis id="Two_animation_cycles_from_the_bottom_row_of_sprite_images" effect="bold">
+
+Two animation cycles from the bottom row of sprite images
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+Then the program plays two animation cycles of the five sprite images in the 
+bottom row of 
+
+<link id="a1137" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. These five cycles are played with the 
+
+<emphasis id="strong1054" effect="bold">
+slow
+
+</emphasis>
+ 
+animation frame rate discussed earlier.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41011">
+<title>
+<emphasis id="Pause_and_animate_in_the_same_location" effect="bold">
+
+Pause and animate in the same location
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+During this period, the dog doesn't move across the game window but rather 
+the animation cycles are played with the dog remaining in the same location. 
+This is controlled by a counter variable named 
+
+<emphasis id="strong1055" effect="bold">
+pauseSequenceCnt
+
+</emphasis>
+. 
+(This name was chosen because the dog pauses and animates in the same location.)
+
+</para>
+
+
+
+
+
+<para id="p1063">
+After that, the overall cycle repeats.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31008">
+<title>
+<emphasis id="Some_complex_logic" effect="bold">
+
+Some complex logic
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+This is where the logic becomes a little complex and it remains to be seen 
+how well I can explain it. However, my students are supposed to have the 
+prerequisite knowledge that prepares them to dissect and understand complex 
+logic directly from source code.
+
+</para>
+
+
+
+
+
+<section id="h41012">
+<title>
+<emphasis id="Adjust_column_and_row_counters" effect="bold">
+
+Adjust column and row counters
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+The drawing parameters have already been established to identity the sprite 
+image that will be drawn the next time the 
+
+<emphasis id="strong1056" effect="bold">
+Draw
+
+</emphasis>
+ method is 
+called. The code that follows is preparing for the sprite selection that will 
+take place after that one.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41013">
+<title>
+<emphasis id="Increment_the_column_counter_and_compare" effect="bold">
+
+Increment the column counter and compare
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+<link id="a1138" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ increments the column counter and compares it with the number of 
+columns in the sprite sheet in 
+
+<link id="a1139" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. If they match, 
+
+<link id="a1140" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ resets the 
+column counter to 0 and increments the 
+
+<emphasis id="strong1057" effect="bold">
+funSequenceCnt
+
+</emphasis>
+ to 
+indicate that another one of the five cycles through the five images in the top 
+row of 
+
+<link id="a1141" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ has been completed.
+
+</para>
+
+
+
+
+
+<note id="note1015" type="">
+
+
+<para id="p1067">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Adjust column and row counters.
+
+</para>
+
+
+
+				
+
+<code id="pre1005" display="block">        if(++spriteCol == spriteColLim){
+          //Column limit has been hit, reset the
+          // column counter and increment the
+          // funSequenceCnt.
+          spriteCol = 0;
+
+          funSequenceCnt++;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41014">
+<title>
+<emphasis id="Execute_the_pause_sequence_if_it_is_time_for_it" effect="bold">
+
+Execute the pause sequence if it is time for it
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+The last statement in 
+
+<link id="a1142" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ increments the 
+
+<emphasis id="strong1058" effect="bold">
+funSequenceCnt
+
+</emphasis>
+. 
+The first statement in 
+
+<link id="a1143" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ tests to see if it has a value of 5. If so, all 
+five cycles of the fun sequence have been executed and the code in the body of 
+the 
+
+<emphasis id="strong1059" effect="bold">
+if
+
+</emphasis>
+ statement that begins at the top of 
+
+<link id="a1144" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ will be 
+executed. The purpose of this code is to execute two cycles of the pause 
+sequence.
+
+</para>
+
+
+
+
+
+<note id="note1016" type="">
+
+
+<para id="p1069">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+.  Execute the pause sequence if it is time for it.
+
+</para>
+
+
+
+				
+
+<code id="pre1006" display="block">          if((funSequenceCnt == 5) || (spriteRow == 1)){
+            spriteRow = 1;//advance to second row
+            //Increment the pause sequence counter.
+            pauseSequenceCnt++;
+            //After two cycles in the pause mode, reset
+            // variables and start the overall cycle
+            // again.
+            if(pauseSequenceCnt == 3){
+              spriteRow = 0;
+              funSequenceCnt = 0;
+              pauseSequenceCnt = 0;
+            }//end if on pauseSequenceCnt
+          }//end if on funSequenceCnt
+
+        }//end if on spriteColLim in </code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41015">
+<title>
+<emphasis id="The_conditional_clause" effect="bold">
+
+The conditional clause
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1070">
+The conditional clause in the 
+
+<emphasis id="strong1060" effect="bold">
+if
+
+</emphasis>
+ statement at the top of 
+
+
+<link id="a1145" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ also tests to see if the row counter is pointing to row 1. If so, this 
+means that the pause cycle has already begun and should be continued. Therefore, 
+the body of that 
+
+<emphasis id="strong1061" effect="bold">
+if
+
+</emphasis>
+ statement will be executed. In other words, 
+the body of the 
+
+<emphasis id="strong1062" effect="bold">
+if
+
+</emphasis>
+ statement will be executed if the 
+
+<emphasis id="strong1063" effect="bold">
+
+funSequenceCnt
+
+</emphasis>
+ is equal to 
+
+<emphasis id="strong1064" effect="bold">
+5
+
+</emphasis>
+ or the 
+
+<emphasis id="strong1065" effect="bold">
+spriteRow
+
+</emphasis>
+ 
+is equal to 1.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41016">
+<title>
+<emphasis id="Set_the_row_counter_to_1" effect="bold">
+
+Set the row counter to 1
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+The first statement in the body of the 
+
+<emphasis id="strong1066" effect="bold">
+if
+
+</emphasis>
+ statement sets the 
+row counter to 1. This is necessary because control may have just entered the 
+body of the 
+
+<emphasis id="strong1067" effect="bold">
+if
+
+</emphasis>
+ statement for the first time following 
+completion of five cycles using the sprites in row 0 (the top row in 
+
+<link id="a1146" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+).
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41017">
+<title>
+<emphasis id="Increment_the_pauseSequenceCnt" effect="bold">
+
+Increment the pauseSequenceCnt
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1072">
+Then 
+
+<link id="a1147" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ increments the 
+
+<emphasis id="strong1068" effect="bold">
+pauseSequenceCnt
+
+</emphasis>
+ and compares 
+it with the literal value 3. If there is a match, two cycles of animation using 
+the sprite images in the bottom row of 
+
+<link id="a1148" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ have been completed and it's time 
+to return to the five cycles using the sprite images in the top row of 
+
+<link id="a1149" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<para id="p1073">
+To accomplish this, the row counter, the 
+
+<emphasis id="strong1069" effect="bold">
+funSequenceCnt
+
+</emphasis>
+, and 
+the 
+
+<emphasis id="strong1070" effect="bold">
+pauseSequenceCnt
+
+</emphasis>
+ are all set to 0. This will cause five 
+cycles using the sprite images in the top row of 
+
+<link id="a1150" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ to be executed before 
+control will once again enter the code in 
+
+<link id="a1151" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41018">
+<title>
+<emphasis id="Adjust_sprite_position_and_frame_rate" effect="bold">
+
+Adjust sprite position and frame rate
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1074">
+The code that we have examined so far mainly deals with selecting the sprite 
+image to draw each time the 
+
+<emphasis id="strong1071" effect="bold">
+Draw
+
+</emphasis>
+ method is called. We haven't 
+dealt with the location where the sprite will be drawn in the game window, the 
+orientation of the sprite when it is drawn, and the frame animation rate of
+
+
+<emphasis id="strong1072" effect="bold">
+fast
+
+</emphasis>
+ versus 
+
+<emphasis id="strong1073" effect="bold">
+slow
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1075">
+<link id="a1152" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ adjusts these drawing parameters.
+
+</para>
+
+
+
+
+
+
+<note id="note1017" type="">
+
+
+<para id="p1076">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Adjust sprite position and frame rate.
+
+</para>
+
+
+
+				
+
+<code id="pre1007" display="block">        if((spriteRow == 0) || 
+                ((spriteRow == 1) &amp;&amp; (spriteCol == 0))) {
+          msPerFrame = fast;
+          spritePosition.X += frameWidth * scale / slide;
+        }
+        else if ((spriteRow == 1) ||
+                 ((spriteRow == 0) &amp;&amp; (spriteCol == 0))){
+          //Stop and display images.
+          msPerFrame = slow;
+        }//end if-else
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+</section>
+<section id="h31009">
+<title>
+<emphasis id="More_complex_logic" effect="bold">
+
+More complex logic
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+The logic in 
+
+<link id="a1153" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ is fairly complex due mainly to the need to adjust the 
+frame rate from fast to slow or from slow to fast when transitioning between the 
+two rows of sprites in 
+
+<link id="a1154" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Rather than to try to explain this logic, I am 
+going to leave it as an exercise for the student to analyze the code and 
+to determine where the frame rate transitions occur.
+
+</para>
+
+
+
+
+
+<section id="h41019">
+<title>
+<emphasis id="Scaling" effect="bold">
+
+Scaling
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+Although I haven't mentioned it before, the 
+
+<emphasis id="strong1074" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method (not the 
+
+<emphasis id="strong1075" effect="bold">
+Game.Draw
+
+</emphasis>
+ method) that will be used to draw the 
+sprites in the game window has a scaling parameter that can be used to scale the 
+images before drawing them. 
+
+</para>
+
+
+
+
+
+<para id="p1079">
+<link id="a1155" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ declares a variable named 
+
+<emphasis id="strong1076" effect="bold">
+scale
+
+</emphasis>
+ and sets its value 
+to 4. This will be used as a scale factor when the sprite images are drawn.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41020">
+<title>
+<emphasis id="The_slide_variable" effect="bold">
+
+The slide variable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+<link id="a1156" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ also declares a variable named 
+
+<emphasis id="strong1077" effect="bold">
+slide
+
+</emphasis>
+ and sets its 
+value to 8. This variable is used to control how far the sprite moves each time 
+it is drawn.
+
+</para>
+
+
+
+
+
+<para id="p1081">
+That distance, along with the new sprite position, is computed in 
+
+<link id="a1157" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ 
+as the product of the width of the sprite image and the scale factor divided by 
+the value of 
+
+<emphasis id="strong1078" effect="bold">
+slide
+
+</emphasis>
+. This is a distance that I determined 
+experimentally to cause the animation to look like I wanted it to look.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41021">
+<title>
+<emphasis id="The_sign_of_the_variable_named_slide" effect="bold">
+
+The sign of the variable named slide
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+It is worth noting that the sign of the variable named 
+
+<emphasis id="strong1079" effect="bold">
+slide
+
+</emphasis>
+ 
+determines whether the incremental distance is positive or negative.
+
+</para>
+
+
+
+
+
+<para id="p1083">
+It is also worth noting that the change in 
+
+<emphasis id="strong1080" effect="bold">
+spritePosition.X
+
+</emphasis>
+ 
+only occurs when sprites from the top row in 
+
+<link id="a1158" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ are being drawn. When 
+sprites from the bottom row in 
+
+<link id="a1159" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ are being drawn, the sprite is animated 
+in place.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41022">
+<title>
+<emphasis id="Move_the_sprite_image_back_and_forth_across_the_game_window" effect="bold">
+
+Move the sprite image back and forth across the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1084">
+The code in 
+
+<link id="a1160" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ causes the sprite image to move back and forth across 
+the game window always facing in the correct direction.
+
+</para>
+
+
+
+
+
+<note id="note1018" type="">
+
+
+<para id="p1085">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Move the sprite image back and forth across the game window.
+
+</para>
+
+
+
+				
+
+<code id="pre1008" display="block">        if(spritePosition.X &gt; 
+                         winWidth - frameWidth * scale) {
+          slide *= -1;
+          spriteEffect = noEffect;
+        }//end if
+
+        if(spritePosition.X &lt; 0){
+          slide *= -1;
+          spriteEffect = flipEffect;
+        }//end if
+
+      }//end if
+      
+      //-----------------------------------------------//
+      //New code ends here.
+      base.Update(gameTime);
+    }//end Update
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h41023">
+<title>
+<emphasis id="Test_for_a_collision_with_an_edge" effect="bold">
+
+Test for a collision with an edge
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1086">
+<link id="a1161" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ tests for a collision between the sprite and the right edge or the 
+left edge of the game window. If the sprite collides with the right edge, the 
+sign on the variable named 
+
+<emphasis id="strong1081" effect="bold">
+slide
+
+</emphasis>
+ is changed to cause future incremental distance 
+movements to be negative (from right to left).
+
+</para>
+
+
+
+
+
+<para id="p1087">
+If the sprite collides with the left edge, the sign on the variable named 
+
+
+<emphasis id="strong1082" effect="bold">
+slide
+
+</emphasis>
+ is changed to cause future incremental distance movements to be positive 
+(from left to right).
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41024">
+<title>
+<emphasis id="The_spriteEffect_variable" effect="bold">
+
+The spriteEffect variable
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1088">
+In addition, when the sprite collides with one edge or the other, the value 
+of the 
+
+<emphasis id="strong1083" effect="bold">
+spriteEffect
+
+</emphasis>
+ variable is set such that the dog will be 
+facing the correct direction as it moves toward the other edge of the game window.
+
+</para>
+
+
+
+
+
+<para id="p1089">
+That concludes the explanation of the overridden 
+
+<emphasis id="strong1084" effect="bold">
+Update
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21009">
+<title>
+
+    
+
+<emphasis id="The_overridden_Draw_method_" effect="bold">
+
+The overridden Draw method 
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1090">
+The overridden 
+
+<emphasis id="strong1085" effect="bold">
+Draw
+
+</emphasis>
+ method selects the correct sprite image 
+by extracting a rectangular area from the sprite sheet and draws the rectangle 
+containing the sprite image at a specified location in the game window.
+
+</para>
+
+
+
+
+
+<para id="p1091">
+Note in 
+
+<link id="a1162" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ that the sprite sheet has a white non-transparent background. 
+The game window is also caused to have a white background so that the white 
+background of the rectangle containing the sprite image can't be distinguished 
+from the game window background.
+
+</para>
+
+
+
+
+
+<para id="p1092">
+The overridden 
+
+<emphasis id="strong1086" effect="bold">
+Draw
+
+</emphasis>
+ method begins in 
+
+<link id="a1163" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<note id="note1019" type="">
+
+
+<para id="p1093">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+. Beginning of the overridden Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1009" display="block">    protected override void Draw(GameTime gameTime) {
+
+      GraphicsDevice.Clear(Color.White);//Background
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1094">
+The statement in 
+
+<link id="a1164" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ erases everything in the game window by 
+	painting over it with a solid white background.
+
+</para>
+
+
+
+
+
+<section id="h31010">
+<title>
+<emphasis id="Begin_the_drawing_process" effect="bold">
+
+Begin the drawing process
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1095">
+You learned in an earlier module that the drawing process consists of a 
+minimum of three statements.
+
+</para>
+
+
+
+
+
+<para id="p1096">
+The first statement is a call to the 
+
+<emphasis id="strong1087" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ 
+method. This is followed by one or more calls to the 
+
+<emphasis id="strong1088" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method. This is followed by a call to the 
+
+<emphasis id="strong1089" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ 
+method.
+
+</para>
+
+
+
+
+
+<para id="p1097">
+There are four overloaded versions of the 
+
+<emphasis id="strong1090" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ 
+method. The parameters for the different versions establish drawing parameters 
+that apply to all of the subsequent calls to the 
+
+<emphasis id="strong1091" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method until there is a call to the 
+
+<emphasis id="strong1092" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+<para id="p1098">
+This program uses the simplest version of the 
+
+<emphasis id="strong1093" effect="bold">
+SpriteBatch.Begin
+
+</emphasis>
+ 
+method with no parameters as shown in 
+
+<link id="a1165" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. This version simply:
+
+</para>
+
+
+
+
+
+<note id="note1020" type="">
+
+
+"Prepares the graphics device for drawing sprites." 
+
+</note>
+
+
+
+
+
+
+	
+
+
+
+<note id="note1021" type="">
+
+
+<para id="p1099">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. Begin the drawing process.
+
+</para>
+
+
+
+				
+
+<code id="pre1010" display="block">      spriteBatch.Begin();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h31011">
+<title>
+<emphasis id="Call_the_SpriteBatchDraw_method" effect="bold">
+
+Call the SpriteBatch.Draw method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1100">
+This program makes a single call to the 
+
+<emphasis id="strong1094" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method followed by a call to the 
+
+<emphasis id="strong1095" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ method each 
+time the 
+
+<emphasis id="strong1096" effect="bold">
+Game.Draw
+
+</emphasis>
+ method is called.
+
+</para>
+
+
+
+
+
+<para id="p1101">
+There are several overloaded versions of the 
+
+<emphasis id="strong1097" effect="bold">
+SpriteBatch.Draw
+
+</emphasis>
+ 
+method and the one shown in 
+
+<link id="a1166" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ is one of the most complex. It was 
+necessary to use this version to cause the sprite to be scaled by the value of 
+the variable named 
+
+<emphasis id="strong1098" effect="bold">
+scale
+
+</emphasis>
+ when it is drawn.
+
+</para>
+
+
+
+
+
+<note id="note1022" type="">
+
+
+<para id="p1102">
+<emphasis id="Listing_12" effect="bold">
+
+Listing 12
+
+</emphasis>
+
+. Call the SpriteBatch.Draw method.
+
+</para>
+
+
+
+				
+
+<code id="pre1011" display="block">      spriteBatch.Draw(myTexture,//sprite sheet
+                       spritePosition,//position to draw
+                       //Specify rectangular area of the
+                       // sprite sheet.
+                       new Rectangle(
+                         xStart,//Upper left corner
+                         yStart,// of rectangle.
+                         frameWidth,  //Width and height
+                         frameHeight),// of rectangle
+                       Color.White,//Don't tint sprite
+                       0.0f,//Don't rotate sprite
+                       //Origin of sprite. Can offset re
+                       // position above.
+                       new Vector2(0.0f,0.0f),
+                       //X and Y scale size scale factor.
+                       new Vector2(scale,scale),
+                       spriteEffect,//Face correctly
+                       0);//Layer number
+      spriteBatch.End();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1103">
+The nine parameters required for this version of the method are 
+	identified in the
+	
+
+<link id="a1167" url="http://msdn.microsoft.com/en-us/library/bb196420.aspx">
+
+
+	documentation
+
+</link>
+
+ as shown below. 
+
+<emphasis id="em1002" effect="italics">
+(Note that square brackets were 
+	substituted for angle brackets in the following list to avoid problems in 
+	creating the cnxml format required for the OpenStax website.)
+
+</emphasis>
+</para>
+
+
+
+
+
+<list id="ul1020" list-type="bulleted">
+
+	
+
+<item id="li1095">
+Texture2D texture
+
+</item>
+
+
+	
+
+<item id="li1096">
+Vector2 position
+
+</item>
+
+
+	
+
+<item id="li1097">
+Nullable[Rectangle] sourceRectangle
+
+</item>
+
+
+	
+
+<item id="li1098">
+Color color
+
+</item>
+
+
+	
+
+<item id="li1099">
+float rotation
+
+</item>
+
+
+	
+
+<item id="li1100">
+Vector2 origin
+
+</item>
+
+
+	
+
+<item id="li1101">
+Vector2 scale
+
+</item>
+
+
+	
+
+<item id="li1102">
+SpriteEffects effects
+
+</item>
+
+
+	
+
+<item id="li1103">
+float layerDepth
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h41025">
+<title>
+<emphasis id="The_first_two_parameters" effect="bold">
+
+The first two parameters
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1104">
+The first two parameters that identify the sprite sheet and the position at 
+which to draw the image are the same as the version that I explained in an 
+earlier module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41026">
+<title>
+<emphasis id="Three_interesting_parameters" effect="bold">
+
+Three interesting parameters
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1105">
+Three of the parameters shown in the above list 
+and in 
+
+<link id="a1168" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ are parameters that are new to this module and in which I have 
+an interest.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41027">
+<title>
+<emphasis id="The_remaining_four_parameters" effect="bold">
+
+The remaining four parameters
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1106">
+Four of the parameters shown in the above list 
+and in 
+
+<link id="a1169" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ are new to this module, but I don't have any 
+interest in them. The program simply passes "harmless" values to them.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41028">
+<title>
+<emphasis id="The_rectangle" effect="bold">
+
+The rectangle
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1107">
+The first thing that is new to this module in 
+
+<link id="a1170" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ is the passing of a 
+new object of type 
+
+<emphasis id="strong1099" effect="bold">
+Rectangle
+
+</emphasis>
+ as the third parameter.
+
+</para>
+
+
+
+
+
+<para id="p1108">
+With this version of the 
+
+<emphasis id="strong1100" effect="bold">
+Draw
+
+</emphasis>
+ method, only the contents of 
+the sprite sheet that fall within that rectangle are drawn. The size and 
+position of the rectangle are specified with:
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1104">
+The coordinates of the upper left corner of the rectangle
+
+</item>
+
+
+	
+
+<item id="li1105">
+The width and the height of the rectangle
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="The_upper_left_corner_of_the_rectangle" effect="bold">
+
+The upper left corner of the rectangle
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1109">
+The upper left corner of the rectangle is specified in 
+
+<link id="a1171" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ by the 
+contents of the variables named 
+
+<emphasis id="strong1101" effect="bold">
+xStart
+
+</emphasis>
+ and 
+
+<emphasis id="strong1102" effect="bold">
+yStart
+
+</emphasis>
+. 
+The values in these two variables were assigned in 
+
+<link id="a1172" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. They specify the 
+coordinates of the upper left corner of a small rectangle that contains one of 
+the sprite images shown in 
+
+<link id="a1173" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="The_width_and_the_height_of_the_rectangle" effect="bold">
+
+The width and the height of the rectangle
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1110">
+The width and the height are specified by the contents of the variables named
+
+
+<emphasis id="strong1103" effect="bold">
+frameWidth
+
+</emphasis>
+ and 
+
+<emphasis id="strong1104" effect="bold">
+frameHeight
+
+</emphasis>
+. The values in 
+these two variables were assigned in 
+
+<link id="a1174" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+ as the width and height of the 
+small rectangle that contains one of the sprite images in 
+
+<link id="a1175" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41029">
+<title>
+<emphasis id="The_horizontal_and_vertical_scale_factors" effect="bold">
+
+The horizontal and vertical scale factors
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1111">
+The seventh parameter requires a 
+
+<emphasis id="strong1105" effect="bold">
+Vector2D
+
+</emphasis>
+ object containing 
+the scale factors to be applied to the horizontal and vertical sizes of the 
+sprite before it is drawn. (You learned about the Vector2D class in an earlier 
+module.)
+
+</para>
+
+
+
+
+
+<section id="h51002">
+<title>
+<emphasis id="A_new_object" effect="bold">
+
+A new object
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1112">
+<link id="a1176" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ instantiates a new object of the 
+
+<emphasis id="strong1106" effect="bold">
+Vector2D
+
+</emphasis>
+ class 
+that encapsulates the value stored in the variable named 
+
+<emphasis id="strong1107" effect="bold">
+scale
+
+</emphasis>
+ 
+for the horizontal and vertical scale factors.
+
+</para>
+
+
+
+
+
+<para id="p1113">
+A value of 4 was assigned to the variable named 
+
+<emphasis id="strong1108" effect="bold">
+scale
+
+</emphasis>
+ when 
+it was initialized in 
+
+<link id="a1177" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51003">
+<title>
+<emphasis id="Four_times_larger" effect="bold">
+
+Four times larger
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1114">
+Therefore, the sprite images that are drawn in the game window are actually 
+four times larger than the sprite images in the sprite sheet shown in 
+
+<link id="a1178" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. 
+(
+
+<emphasis id="Note_that_the_images" effect="bold">
+
+Note that the images
+
+</emphasis>
+
+ were also scaled in 
+
+<link id="a1179" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ for display purposes in order 
+to make them more visible. You need to take that into account if you download 
+the sprite sheet and use it to replicate this program.)
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41030">
+<title>
+<emphasis id="Causing_the_sprite_to_face_in_the_correct_direction" effect="bold">
+
+Causing the sprite to face in the correct direction
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1115">
+The eighth parameter to the 
+
+<emphasis id="strong1109" effect="bold">
+Draw
+
+</emphasis>
+ method in 
+
+<link id="a1180" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ 
+requires an object of type 
+
+<emphasis id="strong1110" effect="bold">
+SpriteEffects
+
+</emphasis>
+. The contents of the 
+variable named 
+
+<emphasis id="strong1111" effect="bold">
+spriteEffect
+
+</emphasis>
+ are passed as this parameter. The 
+contents of this variable were set to one of the following two values by the 
+code in 
+
+<link id="a1181" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+:
+
+</para>
+
+
+
+
+
+<list id="ul1022" list-type="bulleted">
+
+	
+
+<item id="li1106">
+noEffect - SpriteEffects.None
+
+</item>
+
+
+	
+
+<item id="li1107">
+flipEffect - SpriteEffects.FlipHorizontally
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1116">
+The purpose of this parameter is to cause the sprite to face in the correct 
+direction.
+
+</para>
+
+
+
+
+
+<para id="p1117">
+The sprite needs to face to the left when it is moving from right to left. 
+This is the default state of the sprite sheet shown in 
+
+<link id="a1182" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ so no flip is 
+required. 
+
+</para>
+
+
+
+
+
+<para id="p1118">
+The sprite needs to face to the right when it is moving from left to right. 
+This requires a horizontal flip on the sprite images shown in 
+
+<link id="a1183" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31012">
+<title>
+<emphasis id="Call_the_SpriteBatchEnd_method" effect="bold">
+
+Call the SpriteBatch.End method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1119">
+The last statement in 
+
+<link id="a1184" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ calls the 
+
+<emphasis id="strong1112" effect="bold">
+SpriteBatch.End
+
+</emphasis>
+ 
+method to terminate the drawing process for the current iteration of the game 
+loop.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21010">
+<title>
+<emphasis id="The_visual_frame_rate" effect="bold">
+
+The visual frame rate
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1120">
+By default, the 
+
+<emphasis id="strong1113" effect="bold">
+Update
+
+</emphasis>
+ and 
+
+<emphasis id="strong1114" effect="bold">
+Draw
+
+</emphasis>
+ methods are 
+each called approximately 60 times per second or approximately once every 16.67 
+milliseconds. This can be changed by program code but it was not changed in this 
+program.
+
+</para>
+
+
+
+
+
+<section id="h31013">
+<title>
+<emphasis id="The_fast_frame_rate_" effect="bold">
+
+The fast frame rate 
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1121">
+When the program is drawing the sprite images in the top row of 
+
+<link id="a1185" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+, a 
+new sprite image is selected for drawing only once every 175 milliseconds (see 
+the variable named 
+
+<emphasis id="strong1115" effect="bold">
+fast
+
+</emphasis>
+). Therefore, the same sprite image is 
+drawn during ten or eleven successive iterations of the game loop.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31014">
+<title>
+<emphasis id="The_slow_frame_rate" effect="bold">
+
+The slow frame rate
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1122">
+When the program is drawing the sprite images in the bottom row of 
+
+<link id="a1186" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+, a 
+new sprite image is selected for drawing only once every 525 milliseconds (see 
+the variable named 
+
+<emphasis id="strong1116" effect="bold">
+slow
+
+</emphasis>
+). Therefore, each of the sprites in the 
+bottom row is drawn during about 33 successive iterations of the game loop.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31015">
+<title>
+<emphasis id="Avoid_flicker_but_animate_more_slowly" effect="bold">
+
+Avoid flicker but animate more slowly
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1123">
+By drawing the sprite images 60 times per second, the image can be maintained 
+on the computer screen with no visible flicker. By drawing the same image 
+multiple times in succession, the overall visual frame rate can be slowed down 
+to produce a pleasing animation effect.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21011">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1124">
+<link id="a1187" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+ shows the required call to the superclass of the 
+
+<emphasis id="strong1117" effect="bold">
+Draw
+
+</emphasis>
+ 
+method, the end of the 
+
+<emphasis id="strong1118" effect="bold">
+Draw
+
+</emphasis>
+ method, the end of the class, and 
+the end of the namespace.
+
+</para>
+
+
+
+
+
+<note id="note1023" type="">
+
+
+<para id="p1125">
+<emphasis id="Listing_13" effect="bold">
+
+Listing 13
+
+</emphasis>
+
+. The end of the program.
+
+</para>
+
+
+
+				
+
+<code id="pre1012" display="block">      //Required standard code.
+      base.Draw(gameTime);
+    }//end Draw method
+  }//End class
+}//End namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1126">
+I encourage you to copy the code from 
+
+<link id="a1188" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Use that code to create an 
+XNA project. Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. Be sure to take the scale factor 
+into account as mentioned 
+
+<link id="a1189" target-id="Note_that_the_images">
+
+earlier
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="strong1119" effect="bold">
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</emphasis>
+</title>
+
+
+
+
+<para id="p1127">
+Click 
+
+<link id="a1190" url="XNA0122Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1120" effect="bold">
+XNA0122Proj
+
+</emphasis>
+ from the 
+zip file and save it somewhere on your disk. Start 
+
+<emphasis id="strong1121" effect="bold">
+Visual C# 2010 
+Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1122" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1123" effect="bold">
+
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select the file with the 
+extension of 
+
+<emphasis id="strong1124" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project to open and be 
+ready to run or debug as described in the earlier module titled 
+
+<link id="a1191" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1128">
+Among other things, you learned:
+
+</para>
+
+
+
+
+
+<list id="ul1023" list-type="bulleted">
+
+	
+
+<item id="li1108">
+How to create frame animation using a sprite sheet.
+
+</item>
+
+
+	
+
+<item id="li1109">
+How to flip and scale sprite images when they are drawn.
+
+</item>
+
+
+	
+
+<item id="li1110">
+How to implement different animation frame rates in the same program.
+
+</item>
+
+
+	
+
+<item id="li1111">
+How to work with different groups of sprite images in the same program.
+
+</item>
+
+
+	
+
+<item id="li1112">
+How to change the size of the game window.
+
+</item>
+
+
+	
+
+<item id="li1113">
+How to create a Rectangle object.
+
+</item>
+
+
+
+
+</list>
+
+
+	
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1129">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1024" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1125" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+	
+				
+
+<list id="ul1024" list-type="bulleted">
+
+					
+
+<item id="li1114">
+Module name: Xna0122-Frame Animation using a Sprite 
+					Sheet
+
+</item>
+
+
+					
+
+<item id="li1115">
+File: Xna0122.htm
+
+
+</item>
+
+
+					
+
+<item id="li1116">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1025" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1126" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1130">
+<emphasis id="strong1127" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1131">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1132">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1133">
+<emphasis id="strong1128" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1134">
+A complete listing of the XNA program discussed in this module is provided in 
+
+<link id="a1192" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+<note id="note1026" type="">
+
+
+<para id="p1135">
+<emphasis id="Listing_14" effect="bold">
+
+Listing 14
+
+</emphasis>
+
+. Class Game1 from the project named XNA0122Proj.
+
+</para>
+
+
+
+				
+
+<code id="pre1013" display="block">/*Project XNA0122Proj
+R.G.Baldwin, 12/28/09
+Animation demonstration. Animates a dog running, jumping,
+and stopping to ponder and scratch the ground. Uses two 
+different frame rates and a 5x2 sprite sheet. Runs back
+and forth across the game window always facing in the
+right direction.
+********************************************************/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.Storage;
+
+namespace XNA0122Proj {
+  public class Game1 : Microsoft.Xna.Framework.Game {
+
+    //Declare and populate instance variables
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    Texture2D myTexture;
+    Vector2 spritePosition = new Vector2(0.0f,0.0f);
+    int slide = 8;//Used to move sprite across screen.
+    int scale = 4;//Size scale factor.
+    int fast = 175;//Used for fast frame rate.
+    int slow = 525;//Used for slow frame rate.
+    int msPerFrame = 0;//Gets set for fast or slow.
+    int msElapsed;//Time since last new frame.
+    int spriteCol;//Sprite column counter.
+    int spriteColLim = 5;//Number of sprite columns.
+    int spriteRow;//Sprite row counter.
+    int spriteRowLim = 2;//Number of sprite rows.
+    int frameWidth;//Width of an individual image
+    int frameHeight;//Height of an individual image
+    int xStart;//Corner of frame rectangle
+    int yStart;//Corner of frame rectangle
+    SpriteEffects noEffect = SpriteEffects.None;
+    SpriteEffects flipEffect =
+                          SpriteEffects.FlipHorizontally;
+    SpriteEffects spriteEffect;//noEffect or flipEffect
+    int winWidth;//Width of the game window.
+    int funSequenceCnt = 0;
+    int pauseSequenceCnt = 0;
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = 450;
+      graphics.PreferredBackBufferHeight = 100;
+
+    }// end constructor
+
+    protected override void Initialize() {
+      //No special initialization needed
+      base.Initialize();
+    }//end Initialize
+
+    protected override void LoadContent() {
+      //Create a new SpriteBatch object, which can be
+      // used to draw textures.
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Load the image
+      myTexture = Content.Load&lt;Texture2D&gt;("dogcropped");
+
+      //Initialize instance variables
+      spriteCol = 0;
+      spriteRow = 0;
+
+      frameWidth = myTexture.Width / spriteColLim;
+      frameHeight = myTexture.Height / spriteRowLim;
+
+      msPerFrame = fast;
+
+      spriteEffect = flipEffect;
+
+      winWidth = Window.ClientBounds.Width;
+    }//end LoadContent
+
+    protected override void UnloadContent() {
+      //No unload code needed.
+    }//end UnloadContent
+
+    protected override void Update(GameTime gameTime) {
+      // Allows the game to exit
+      if(GamePad.GetState(PlayerIndex.One).Buttons.Back
+                                  == ButtonState.Pressed)
+        this.Exit();
+      //-----------------------------------------------//
+
+      //New code begins here.
+
+      //Compute the elapsed time since the last new 
+      // frame. Draw a new frame only if this time 
+      // exceeds the desired frame interval given by
+      // msPerFrame
+      msElapsed += gameTime.ElapsedGameTime.Milliseconds;
+      if(msElapsed &gt; msPerFrame){
+        //Reset the elapsed time and draw the new frame.
+        msElapsed = 0;
+
+        //Compute the location of the next sprite to 
+        // draw from the sprite sheet.
+        xStart = spriteCol * frameWidth;
+        yStart = spriteRow * frameHeight;
+
+        //Adjust sprite column and row counters to 
+        // prepare for the next iteration.
+        if(++spriteCol == spriteColLim){
+          //Column limit has been hit, reset the
+          // column counter
+          spriteCol = 0;
+          //Increment the funSequenceCnt. The program 
+          // plays five cycles of the fun sequence with 
+          // the dog running and jumping using sprites 
+          // from row 0 of the sprite sheet. Then it 
+          // plays two cycles of the pause sequence 
+          // using sprites from row 1 of the sprite
+          // sheet. Then the entire cycle repeats.
+          funSequenceCnt++;
+          if((funSequenceCnt == 5) || (spriteRow == 1)){
+            spriteRow = 1;//advance to second row
+            //Increment the pause sequence counter.
+            pauseSequenceCnt++;
+            //After two cycles in the pause mode, reset
+            // variables and start the overall cycle
+            // again.
+            if(pauseSequenceCnt == 3){
+              spriteRow = 0;
+              funSequenceCnt = 0;
+              pauseSequenceCnt = 0;
+            }//end if
+          }//end if
+        }//end if-else
+
+        //Adjust position of sprite in the output window.
+        //Also adjust the animation frame rate between
+        // fast and slow depending on which set of five
+        // sprite images will be drawn.
+        if((spriteRow == 0) || 
+                ((spriteRow == 1) &amp;&amp; (spriteCol == 0))) {
+          msPerFrame = fast;
+          spritePosition.X += frameWidth * scale / slide;
+        }
+        else if ((spriteRow == 1) ||
+                 ((spriteRow == 0) &amp;&amp; (spriteCol == 0))){
+          //Stop and display images.
+          msPerFrame = slow;
+        }//end if-else
+
+        //Cause the image to move back and forth across
+        // the game window always facing in the right
+        // direction.
+        if(spritePosition.X &gt; 
+                         winWidth - frameWidth * scale) {
+          slide *= -1;
+          spriteEffect = noEffect;
+        }//end if
+
+        if(spritePosition.X &lt; 0){
+          slide *= -1;
+          spriteEffect = flipEffect;
+        }//end if
+
+      }//end if
+      
+      //-----------------------------------------------//
+      //New code ends here.
+      base.Update(gameTime);
+    }//end Update
+
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.White);//Background
+
+      //Select the sprite image from a rectangular area
+      // on the sprite sheet and draw it in the game
+      // window. Note that this sprite sheet has a white
+      // non-transparent background.
+      spriteBatch.Begin();
+
+      spriteBatch.Draw(myTexture,//sprite sheet
+                       spritePosition,//position to draw
+                       //Specify rectangular area of the
+                       // sprite sheet.
+                       new Rectangle(
+                         xStart,//Upper left corner
+                         yStart,// of rectangle.
+                         frameWidth,  //Width and height
+                         frameHeight),// of rectangle
+                       Color.White,//Don't tint sprite
+                       0.0f,//Don't rotate sprite
+                       //Origin of sprite. Can offset re
+                       // position above.
+                       new Vector2(0.0f,0.0f),
+                       //X and Y scale size scale factor.
+                       new Vector2(scale,scale),
+                       spriteEffect,//Face correctly
+                       0);//Layer number
+      spriteBatch.End();
+
+      //Required standard code.
+      base.Draw(gameTime);
+    }//end Draw method
+  }//End class
+}//End namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1136">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

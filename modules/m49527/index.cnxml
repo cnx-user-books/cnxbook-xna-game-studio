@@ -1,0 +1,6831 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0128-Improving the Sprite Class</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49527</md:content-id>
+  <md:title>Xna0128-Improving the Sprite Class</md:title>
+  <md:abstract>Learn how to make improvements to the Sprite class that was introduced in an earlier lesson.</md:abstract>
+  <md:uuid>d7f6fc91-a5cc-4a1a-88ac-f4ecb1862c16</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Mon May 09 17:04:23 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="General_background_information">
+
+General 
+	background information
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1006">
+<link id="a1007" target-id="Preview">
+
+Preview
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1007">
+<link id="a1008" target-id="The_screen_output">
+
+The screen output
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="Lots_and_lots_of_sprites">
+
+Lots and lots of sprites
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1010">
+<link id="a1011" target-id="The_Sprite_class_">
+
+The Sprite class
+        
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1011">
+<link id="a1012" target-id="Properties_">
+
+Properties
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Other_instance_variables">
+
+Other instance variables
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="The_first_three_property_accessor_methods">
+
+The first three property accessor methods
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="The_property_accessor_method_for_Speed">
+
+The property accessor method for Speed
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1015">
+<link id="a1016" target-id="The_set_side">
+
+The set side
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="The_get_side">
+
+The get side
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="The_constructor_">
+
+The constructor
+        
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1018">
+<link id="a1019" target-id="Load_an_image">
+
+Load an image
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="A_random_number_generator">
+
+A random number generator
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="The_SetImage_method_">
+
+The SetImage method
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1021">
+<link id="a1022" target-id="The_Move_method_">
+
+The Move method
+        
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1022">
+<link id="a1023" target-id="To_move_or_not_to_move">
+
+To move or not to move
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="Keeping_up_on_the_average">
+
+Keeping up on the average
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Code_in_the_body_of_the_if_statement">
+
+Code in the body of the if statement
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1025">
+<link id="a1026" target-id="Add_the_direction_vector_to_the_position_vector">
+
+Add the direction vector to the position vector
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1026">
+<link id="a1027" target-id="A_collision_with_an_edge_of_the_game_window">
+
+A collision with an edge of the game window
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="Modify_the_position_and_call_the_NewDirection_method">
+
+Modify the position and call the NewDirection method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="The_end_of_the_Move_method">
+
+The end of the Move method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="The_method_named_NewDirection">
+
+The method named NewDirection
+
+</link>
+
+
+
+
+<list id="ul1010" list-type="bulleted">
+<item id="li1030">
+
+	
+
+
+<link id="a1031" target-id="The_length_of_the_direction_vector_and_the_signs_of_the_components">
+
+The length of the direction vector and the signs of the 
+	components
+
+</link>
+
+
+
+
+<list id="ul1011" list-type="bulleted">
+<item id="li1031">
+<link id="a1032" target-id="Compute_the_hypotenuse">
+
+Compute the hypotenuse
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="Use_the_conditional_operator">
+
+Use the conditional operator
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1033">
+<link id="a1034" target-id="Compute_components_of_a_new_direction_vector">
+
+Compute components of a new direction vector
+
+</link>
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+<item id="li1034">
+<link id="a1035" target-id="Compute_a_new_random_value_for_the_X_component">
+
+Compute a new random value for the X component
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="Compute_a_consistent_value_for_the_Y_component">
+
+Compute a consistent value for the Y component
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Adjust_the_signs_of_the_X_and_Y_components">
+
+Adjust the signs of the X and Y components
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="A_new_direction_vector_with_the_same_length_in_the_same_quadrant">
+
+A new direction vector with the same length in the same quadrant
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="The_Draw_method_">
+
+The Draw method
+    
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="The_end_of_the_Sprite_class">
+
+The end of the Sprite class
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="The_Game1_class_">
+
+The Game1 class
+        
+
+</link>
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+<item id="li1041">
+<link id="a1042" target-id="Instance_variables">
+
+Instance variables
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="The_modified_constructor_">
+
+The modified constructor
+        
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="The_overridden_LoadContent_method_">
+
+The overridden LoadContent method
+        
+
+</link>
+
+
+
+
+<list id="ul1014" list-type="bulleted">
+<item id="li1044">
+<link id="a1045" target-id="Instantiate_all_of_the_space_rock_sprites">
+
+Instantiate all of the space rock sprites
+
+</link>
+
+
+
+
+<list id="ul1015" list-type="bulleted">
+<item id="li1045">
+<link id="a1046" target-id="Call_the_Sprite_constructor">
+
+Call the Sprite constructor
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Set_the_property_values">
+
+Set the property values
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="Instantiate_and_set_properties_on_the_power_pills_and_the_UFOs">
+
+Instantiate and set properties on the power pills and the UFOs
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="The_private_DirectionVector_method">
+
+The private DirectionVector method
+
+</link>
+
+
+
+
+<list id="ul1016" list-type="bulleted">
+<item id="li1049">
+<link id="a1050" target-id="Return_a_direction_vector">
+
+Return a direction vector
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="The_signs_of_the_components">
+
+The signs of the components
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="The_overridden_Update_method_">
+
+The overridden Update method
+        
+
+</link>
+
+
+
+
+<list id="ul1017" list-type="bulleted">
+<item id="li1052">
+<link id="a1053" target-id="Very_simple_code">
+
+Very simple code
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="To_move_or_not_to_move_that_is_the_question">
+
+To move or not to move, that is the question
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1054">
+<link id="a1055" target-id="A_characteristic_of_an_objectoriented_program">
+
+A characteristic of an object-oriented program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1055">
+<link id="a1056" target-id="The_overridden_GameDraw_method_">
+
+The overridden Game.Draw method
+	
+
+</link>
+
+
+
+
+<list id="ul1018" list-type="bulleted">
+<item id="li1056">
+<link id="a1057" target-id="Erase_and_redraw_the_entire_game_window">
+
+Erase and redraw the entire game window
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1057">
+<link id="a1058" target-id="Not_the_same_approach_as_some_other_game_engines">
+
+Not the same approach as some other game engines
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1058">
+<link id="a1059" target-id="The_end_of_the_program">
+
+The end of the program
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1059">
+<link id="a1060" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1060">
+<link id="a1061" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1061">
+<link id="a1062" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1062">
+<link id="a1063" target-id="Whats_next">
+
+What's next?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1063">
+<link id="a1064" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1064">
+<link id="a1065" target-id="Complete_program_listing">
+
+Complete program listing
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1066" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information on how 
+to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1019" list-type="bulleted">
+
+		
+
+<item id="li1065">
+<link id="a1067" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Screen shot of the running program.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1020" list-type="bulleted">
+
+		
+
+<item id="li1066">
+<link id="a1068" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Beginning of the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1067">
+<link id="a1069" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. The first three property accessor methods.
+
+</item>
+
+
+		
+
+<item id="li1068">
+<link id="a1070" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+. The property accessor method for Speed.
+
+</item>
+
+
+		
+
+<item id="li1069">
+<link id="a1071" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+. The constructor for the Sprite class.
+
+</item>
+
+
+		
+
+<item id="li1070">
+<link id="a1072" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+. The SetImage method.
+
+</item>
+
+
+		
+
+<item id="li1071">
+<link id="a1073" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+. Beginning of the Move method.
+
+</item>
+
+
+		
+
+<item id="li1072">
+<link id="a1074" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+. Add the direction vector to the position vector.
+
+</item>
+
+
+		
+
+<item id="li1073">
+<link id="a1075" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+. Process a collision with an edge of the game window.
+
+</item>
+
+
+		
+
+<item id="li1074">
+<link id="a1076" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+. Beginning of the method named NewDirection.
+
+</item>
+
+
+		
+
+<item id="li1075">
+<link id="a1077" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+. Compute components of a new direction vector.
+
+</item>
+
+
+		
+
+<item id="li1076">
+<link id="a1078" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+. The Sprite.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1077">
+<link id="a1079" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+. Beginning of the Game1 class.
+
+</item>
+
+
+		
+
+<item id="li1078">
+<link id="a1080" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+. The modified constructor.
+
+</item>
+
+
+		
+
+<item id="li1079">
+<link id="a1081" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+. Beginning of the overridden LoadContent method.
+
+</item>
+
+
+		
+
+<item id="li1080">
+<link id="a1082" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+. Instantiate and set properties on the power pills and the UFOs.
+
+</item>
+
+
+		
+
+<item id="li1081">
+<link id="a1083" target-id="Listing_16">
+
+Listing 16
+
+</link>
+
+. The private DirectionVector method.
+
+</item>
+
+
+		
+
+<item id="li1082">
+<link id="a1084" target-id="Listing_17">
+
+Listing 17
+
+</link>
+
+. Tell the sprites to move.
+
+</item>
+
+
+		
+
+<item id="li1083">
+<link id="a1085" target-id="Listing_18">
+
+Listing 18
+
+</link>
+
+. The overridden Game.Draw method.
+
+</item>
+
+
+		
+
+<item id="li1084">
+<link id="a1086" target-id="Listing_19">
+
+Listing 19
+
+</link>
+
+. The class named Sprite for the project named XNA0128Proj.
+
+</item>
+
+
+		
+
+<item id="li1085">
+<link id="a1087" target-id="Listing_20">
+
+Listing 20
+
+</link>
+
+. The class named Game1 for the project named XNA0128Proj.
+
+</item>
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="General_background_information" effect="bold">
+
+General 
+	background information
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+You learned how to design, create, and use a simple 
+
+<emphasis id="strong1001" effect="bold">
+Sprite
+
+</emphasis>
+ 
+class in an earlier module. You also learned to use a generic 
+
+<emphasis id="strong1002" effect="bold">
+List
+
+</emphasis>
+ 
+object to store references to objects of the 
+
+<emphasis id="strong1003" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Preview" effect="bold">
+
+Preview
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1006">
+I will explain improvements made to the 
+
+<emphasis id="strong1004" effect="bold">
+Sprite
+
+</emphasis>
+ class and 
+	will show you how to write a 
+
+<emphasis id="strong1005" effect="bold">
+Game1
+
+</emphasis>
+ class that takes 
+	advantage of those improvements.
+
+</para>
+
+
+
+
+
+<section id="h21001">
+<title>
+<emphasis id="The_screen_output" effect="bold">
+
+The screen output
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+<link id="a1088" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows a reduced screen shot of the program while it is running.
+
+</para>
+
+
+
+	
+	
+
+
+<note id="note1000" type="">
+
+
+<para id="p1008">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Screen shot of the running program.
+
+</para>
+
+
+
+		
+
+<media id="media1000" alt="missing image" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0128a.jpg" width="450" height="338"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="Lots_and_lots_of_sprites" effect="bold">
+
+Lots and lots of sprites
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1009">
+When this screen shot was taken, the program had 24 space rocks, 12 red power 
+pills and six UFOs all navigating in the game window.
+
+</para>
+
+
+
+
+	
+	
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+As usual, I will discuss and explain the program code in fragments. A 
+complete listing of the 
+
+<emphasis id="strong1006" effect="bold">
+Sprite
+
+</emphasis>
+ class is provided in 
+
+<link id="a1089" target-id="Listing_19">
+
+Listing 19
+
+</link>
+
+ 
+and a complete listing of the 
+
+<emphasis id="strong1007" effect="bold">
+Game1
+
+</emphasis>
+ class is provided in 
+
+
+<link id="a1090" target-id="Listing_20">
+
+Listing 20
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+<section id="h21003">
+<title>
+
+    
+
+<emphasis id="The_Sprite_class_" effect="bold">
+
+The Sprite class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1011">
+
+    The 
+
+<emphasis id="strong1008" effect="bold">
+Sprite
+
+</emphasis>
+ class begins in 
+
+<link id="a1091" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ with the declaration of several 
+	instance variables.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1012">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Beginning of the Sprite class.
+
+</para>
+
+
+
+				
+
+<code id="pre1000" display="block">namespace XNA0128Proj {
+  class Sprite {
+    private Texture2D image;
+    private Vector2 position = new Vector2(0,0);
+    private Vector2 direction = new Vector2(0,0);
+    private Point windowSize;
+    private Random random;
+    double elapsedTime;//in milliseconds
+    //The following value is the inverse of speed in
+    // moves/msec expressed in msec/move.
+    double elapsedTimeTarget;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1013">
+The purpose of these instance variables will become clear later in the 
+	discussion.
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+
+    
+
+<emphasis id="Properties_" effect="bold">
+
+Properties
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1014">
+This class has the following properties:
+
+</para>
+
+
+
+
+
+<list id="ul1021" list-type="bulleted">
+
+	
+
+<item id="li1086">
+<emphasis id="strong1009" effect="bold">
+Position
+
+</emphasis>
+ - position of the sprite in the game window 
+	relative to the upper left corner of the game window. The X and Y values are 
+	saved as type 
+
+<emphasis id="strong1010" effect="bold">
+Vector2
+
+</emphasis>
+ in the instance variable named
+	
+
+<emphasis id="strong1011" effect="bold">
+position
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1087">
+<emphasis id="strong1012" effect="bold">
+WindowSize
+
+</emphasis>
+ - The dimensions of the game window. The 
+	width and height values are saved as type 
+
+<emphasis id="strong1013" effect="bold">
+Point
+
+</emphasis>
+ in the 
+	instance variable named 
+
+<emphasis id="strong1014" effect="bold">
+windowSize
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1088">
+<emphasis id="strong1015" effect="bold">
+Direction
+
+</emphasis>
+ - Direction of motion of the sprite expressed 
+	as a 2D vector with an X and a Y component. The length of this vector is the 
+	distance that the sprite moves each time it moves. The values are saved as 
+	type 
+
+<emphasis id="strong1016" effect="bold">
+Vector2
+
+</emphasis>
+ in the instance variable named 
+
+<emphasis id="strong1017" effect="bold">
+
+	direction
+
+</emphasis>
+.
+
+</item>
+
+
+	
+
+<item id="li1089">
+<emphasis id="strong1018" effect="bold">
+Speed
+
+</emphasis>
+ - Speed of the sprite expressed in moves per 
+	millisecond. The actual speed in pixels per millisecond is the product of 
+	this value and the length of the direction vector.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="Other_instance_variables" effect="bold">
+
+Other instance variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+In addition, the class has the following instance variables that are set 
+either by the constructor or by a method:
+
+</para>
+
+
+
+
+
+<list id="ul1022" list-type="bulleted">
+
+	
+
+<item id="li1090">
+<emphasis id="strong1019" effect="bold">
+image
+
+</emphasis>
+ - the image that is drawn to represent the sprite 
+	in the game window. The image can be modified as the game progresses through 
+	calls to the 
+
+<emphasis id="strong1020" effect="bold">
+SetImage
+
+</emphasis>
+ method.
+
+</item>
+
+
+	
+
+<item id="li1091">
+<emphasis id="strong1021" effect="bold">
+random
+
+</emphasis>
+ - a reference to a random number generator.
+
+</item>
+
+
+	
+
+<item id="li1092">
+<emphasis id="strong1022" effect="bold">
+elapsedTime
+
+</emphasis>
+ - used to keep track of the amount of 
+	elapsed time in milliseconds since the last time that the sprite was 
+	actually moved.
+
+</item>
+
+
+	
+
+<item id="li1093">
+<emphasis id="strong1023" effect="bold">
+elapsedTimeTarget
+
+</emphasis>
+ - will be explained later.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+<emphasis id="The_first_three_property_accessor_methods" effect="bold">
+
+The first three property accessor methods
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1016">
+The first three property accessor methods are shown in 
+
+<link id="a1092" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1017">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. The first three property accessor methods.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1001" display="block">    //Position property accessor
+    public Vector2 Position {
+      get {
+        return position;
+      }
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+    //-------------------------------------------------//
+
+    //WindowSize property accessor
+    public Point WindowSize {
+      set {
+        windowSize = value;
+      }//end set
+    }//end WindowSize property accessor
+    //-------------------------------------------------//
+
+    //Direction property accessor
+    public Vector2 Direction {
+      get {
+        return direction;
+      }
+      set {
+        direction = value;
+      }//end set
+    }//end Direction property accessor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1018">
+These three accessor methods are straightforward and shouldn't require 
+	further explanation.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31005">
+<title>
+<emphasis id="The_property_accessor_method_for_Speed" effect="bold">
+
+The property accessor method for Speed
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+Humans usually find it easier to think in terms of speed such as 
+
+<emphasis id="em1001" effect="italics">
+miles 
+per hour
+
+</emphasis>
+ while it is sometimes easier to write computer programs that deal 
+with the reciprocal of speed such as 
+
+<emphasis id="em1002" effect="italics">
+hours per mile
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1020">
+The property accessor method for the property named 
+
+<emphasis id="strong1024" effect="bold">
+Speed
+
+</emphasis>
+ is 
+shown in 
+
+<link id="a1093" target-id="Listing_3">
+
+Listing 3
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1003" type="">
+
+
+<para id="p1021">
+<emphasis id="Listing_3" effect="bold">
+
+Listing 3
+
+</emphasis>
+
+. The property accessor method for Speed.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1002" display="block">    //Speed property accessor. The set side should be
+    // called with speed in moves/msec. The get side
+    // returns speed moves/msec.
+    public double Speed {
+      get {
+        //Convert from elapsed time in msec/move to
+        // speed in moves/msec.
+        return elapsedTimeTarget/1000;
+      }
+      set {
+        //Convert from speed in moves/msec to
+        // elapsed time in milliseconds/move.
+        elapsedTimeTarget = 1000/value;
+      }//end set
+    }//end Speed property accessor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41000">
+<title>
+<emphasis id="The_set_side" effect="bold">
+
+The set side
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+The 
+
+<emphasis id="strong1025" effect="bold">
+set
+
+</emphasis>
+ side of the property accessor method for the 
+
+<emphasis id="strong1026" effect="bold">
+
+Speed
+
+</emphasis>
+ property receives the incoming value as 
+
+<emphasis id="em1003" effect="italics">
+moves per millisecond
+
+</emphasis>
+. 
+The code converts this value to 
+
+<emphasis id="em1004" effect="italics">
+milliseconds per move
+
+</emphasis>
+ and saves it in 
+the instance variable named 
+
+<emphasis id="strong1027" effect="bold">
+elapsedTimeTarget
+
+</emphasis>
+ mentioned 
+earlier.
+
+</para>
+
+
+
+
+
+<para id="p1023">
+This is the target for the elapsed time in milliseconds from one movement to 
+the next movement of the sprite in the game window. Every time a sprite moves, 
+it moves the same distance. Therefore, the apparent speed of sprite movement as 
+seen by the viewer can be controlled by controlling the elapsed time between 
+movements.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41001">
+<title>
+<emphasis id="The_get_side" effect="bold">
+
+The get side
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1024">
+The 
+
+<emphasis id="strong1028" effect="bold">
+get
+
+</emphasis>
+ side of the property accessor method for the 
+
+<emphasis id="strong1029" effect="bold">
+
+Speed
+
+</emphasis>
+ property converts the returned value from 
+
+<emphasis id="em1005" effect="italics">
+milliseconds per 
+move
+
+</emphasis>
+ back to 
+
+<emphasis id="em1006" effect="italics">
+moves per millisecond
+
+</emphasis>
+.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h31006">
+<title>
+
+    
+
+<emphasis id="The_constructor_" effect="bold">
+
+The constructor
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1025">
+
+    The constructor for the Sprite class is shown in 
+
+<link id="a1094" target-id="Listing_4">
+
+Listing 4
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+<para id="p1026">
+<emphasis id="Listing_4" effect="bold">
+
+Listing 4
+
+</emphasis>
+
+. The constructor for the Sprite class.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1003" display="block">    public Sprite(String assetName,
+                  ContentManager contentManager,
+                  Random random) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      this.random = random;
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41002">
+<title>
+<emphasis id="Load_an_image" effect="bold">
+
+Load an image
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1027">
+The constructor loads an image for the sprite when it is instantiated. 
+Therefore, it requires an 
+
+<emphasis id="strong1030" effect="bold">
+Asset Name
+
+</emphasis>
+ for the image and a 
+reference to a 
+
+<emphasis id="strong1031" effect="bold">
+ContentManager
+
+</emphasis>
+ object.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41003">
+<title>
+<emphasis id="A_random_number_generator" effect="bold">
+
+A random number generator
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1028">
+The constructor also requires a reference to a 
+
+<emphasis id="strong1032" effect="bold">
+Random
+
+</emphasis>
+ object 
+capable of generating a sequence of pseudo random values of type 
+
+<emphasis id="strong1033" effect="bold">
+double
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<note id="note1005" type="">
+
+
+The purpose of the random number 
+	generator will become clear later.
+
+</note>
+
+
+
+
+
+
+<para id="p1029">
+The program should use the same 
+
+<emphasis id="strong1034" effect="bold">
+Random
+
+</emphasis>
+ object for all 
+sprites to avoid getting the same sequence of values for different sprites when 
+two or more sprites are instantiated in a very short period of time.
+
+</para>
+
+
+
+	
+
+
+</section>
+</section>
+<section id="h31007">
+<title>
+
+    
+
+<emphasis id="The_SetImage_method_" effect="bold">
+
+The SetImage method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1030">
+
+    The 
+
+<emphasis id="strong1035" effect="bold">
+SetImage
+
+</emphasis>
+ method is shown in 
+
+<link id="a1095" target-id="Listing_5">
+
+Listing 5
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+<note id="note1006" type="">
+
+
+<para id="p1031">
+<emphasis id="Listing_5" effect="bold">
+
+Listing 5
+
+</emphasis>
+
+. The SetImage method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1004" display="block">    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end SetImage
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1032">
+This method can be called to load a new image for an existing sprite. The 
+	method is essentially the same as a method having the same name that I 
+	explained in an earlier module, so no further explanation should be 
+	required.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h31008">
+<title>
+
+    
+
+<emphasis id="The_Move_method_" effect="bold">
+
+The Move method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1033">
+This method causes the sprite to move in the direction of the direction 
+vector if the elapsed time since the last move exceeds the elapsed time target 
+based on the specified speed.
+
+</para>
+
+
+
+
+
+<para id="p1034">
+The 
+
+<emphasis id="strong1036" effect="bold">
+Move
+
+</emphasis>
+ method begins in 
+
+<link id="a1096" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1007" type="">
+
+
+<para id="p1035">
+<emphasis id="Listing_6" effect="bold">
+
+Listing 6
+
+</emphasis>
+
+. Beginning of the Move method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1005" display="block">    public void Move(GameTime gameTime) {
+      //Accumulate elapsed time since the last move.
+      elapsedTime += 
+                  gameTime.ElapsedGameTime.Milliseconds;
+
+      if(elapsedTime &gt; elapsedTimeTarget){
+        //It's time to make a move. Set the elapsed 
+        // time to a value that will attempt to produce
+        // the specified speed on the average.
+        elapsedTime -= elapsedTimeTarget;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1036">
+The sprite doesn't necessarily move every time the 
+
+<emphasis id="strong1037" effect="bold">
+Move
+
+</emphasis>
+ 
+	method is called. Instead, it uses the incoming parameter to compute the 
+	elapsed time since the last time that it actually moved.
+
+</para>
+
+
+
+
+
+<section id="h41004">
+<title>
+<emphasis id="To_move_or_not_to_move" effect="bold">
+
+To move or not to move
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+If that elapsed time exceeds the target that is based on the specified speed 
+in 
+
+<emphasis id="em1007" effect="italics">
+moves/millisecond
+
+</emphasis>
+, then it reduces the elapsed time value by the 
+target value and makes an adjustment to the 
+
+<emphasis id="strong1038" effect="bold">
+position
+
+</emphasis>
+ value. 
+Changing the 
+
+<emphasis id="strong1039" effect="bold">
+position
+
+</emphasis>
+ value will cause the sprite to move in 
+the game window the next time it is drawn.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41005">
+<title>
+<emphasis id="Keeping_up_on_the_average" effect="bold">
+
+Keeping up on the average
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1038">
+By reducing the elapsed time by the target time instead of setting it to 
+zero, the sprite attempts to achieve the target speed 
+
+<emphasis id="em1008" effect="italics">
+on the average
+
+</emphasis>
+. 
+For example, assume that for some reason, there is a long delay between calls to 
+the 
+
+<emphasis id="strong1040" effect="bold">
+Move
+
+</emphasis>
+ method and the elapsed time value is two or three 
+times greater than the target time. This means that the sprite has gotten behind and is not in the position that 
+it should be in. In that case, the sprite will move every time the 
+
+<emphasis id="strong1041" effect="bold">
+Move
+
+</emphasis>
+ 
+method is called for several successive calls to the 
+
+<emphasis id="strong1042" effect="bold">
+Move
+
+</emphasis>
+ 
+method. (In other words, the sprite will experience a short spurt in speed.) 
+This should cause it to catch up and be in the correct position once it does 
+catch up.
+
+</para>
+
+
+
+
+
+<para id="p1039">
+Of course, if the elapsed time between calls to the 
+
+<emphasis id="strong1043" effect="bold">
+Move
+
+</emphasis>
+ 
+method is greater than the target time over the long term, the sprite will never 
+be able to keep up.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41006">
+<title>
+<emphasis id="Code_in_the_body_of_the_if_statement" effect="bold">
+
+Code in the body of the if statement
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1040">
+If the conditional expression for the 
+
+<emphasis id="strong1044" effect="bold">
+if
+
+</emphasis>
+ statement in 
+
+<link id="a1097" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ returns 
+true, then the last statement in 
+
+<link id="a1098" target-id="Listing_6">
+
+Listing 6
+
+</link>
+
+ along with the remainder of the body 
+of the 
+
+<emphasis id="strong1045" effect="bold">
+if
+
+</emphasis>
+ statement will be executed. Otherwise, that statement 
+and the remaining body of the 
+
+<emphasis id="strong1046" effect="bold">
+if
+
+</emphasis>
+ statement will be skipped.
+
+</para>
+
+
+
+
+
+<para id="p1041">
+The remaining body of the 
+
+<emphasis id="strong1047" effect="bold">
+if
+
+</emphasis>
+ statement begins in 
+
+<link id="a1099" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+<section id="h51000">
+<title>
+<emphasis id="Add_the_direction_vector_to_the_position_vector" effect="bold">
+
+Add the direction vector to the position vector
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+One of the advantages of treating the position and the direction as 2D 
+vectors based on the structure named
+
+
+<link id="a1100" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.vector2.aspx">
+
+
+Vector2
+
+</link>
+
+ is that the 
+
+<emphasis id="strong1048" effect="bold">
+Vector2
+
+</emphasis>
+ structure provides various
+
+
+<link id="a1101" url="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.vector2_methods.aspx">
+
+
+methods
+
+</link>
+
+ that can be used to manipulate vectors.
+
+</para>
+
+
+
+
+
+<para id="p1043">
+The code in 
+
+<link id="a1102" target-id="Listing_7">
+
+Listing 7
+
+</link>
+
+ calls the
+
+
+<link id="a1103" url="http://msdn.microsoft.com/en-us/library/bb194948.aspx">
+
+Add
+
+</link>
+
+ method 
+of the 
+
+<emphasis id="strong1049" effect="bold">
+Vector2
+
+</emphasis>
+ class to add the direction vector to the position vector 
+returning the sum of the two vectors. The sum is saved as the new position 
+vector.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1008" type="">
+
+
+<para id="p1044">
+<emphasis id="Listing_7" effect="bold">
+
+Listing 7
+
+</emphasis>
+
+. Add the direction vector to the position vector.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1006" display="block">        position = Vector2.Add(position,direction);
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1045">
+In case you are unfamiliar with the addition of 2D vectors, if you add a pair 
+of 2D vectors, the X component of the sum is the sum of the X components and the 
+Y component of the sum is the sum of the Y components.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51001">
+<title>
+<emphasis id="A_collision_with_an_edge_of_the_game_window" effect="bold">
+
+A collision with an edge of the game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1046">
+The code in 
+
+<link id="a1104" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ checks for a collision with an edge of the game window.
+
+
+</para>
+
+
+
+
+
+<para id="p1047">
+If the sprite collides with an edge, the code in 
+
+<link id="a1105" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ causes the sprite 
+to wrap around and reappear at the opposite edge, moving at the same speed in a 
+different direction within the same quadrant as before. In other words, if a sprite is moving down and to the right and collides with 
+the right edge of the window, it will reappear at the left edge, still moving 
+down and to the right but not in exactly the same direction down and to the 
+right.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1009" type="">
+
+
+<para id="p1048">
+<emphasis id="Listing_8" effect="bold">
+
+Listing 8
+
+</emphasis>
+
+. Process a collision with an edge of the game window.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1007" display="block">        if(position.X &lt; -image.Width){
+          position.X = windowSize.X;
+          NewDirection();
+        }//end if
+
+        if(position.X &gt; windowSize.X){
+          position.X = -image.Width/2;
+          NewDirection();
+        }//end if
+
+        if(position.Y &lt; -image.Height) {
+          position.Y = windowSize.Y;
+          NewDirection();
+        }//end if
+
+        if(position.Y &gt; windowSize.Y){
+          position.Y = -image.Height / 2;
+          NewDirection();
+        }//end if on position.Y
+      }//end if on elapsed time
+    }//end Move
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+<section id="h51002">
+<title>
+<emphasis id="Modify_the_position_and_call_the_NewDirection_method" effect="bold">
+
+Modify the position and call the NewDirection method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1049">
+In all cases shown in 
+
+<link id="a1106" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+, if a collision occurs, the position of the 
+sprite is modified to position the sprite at the opposite edge. Then the method 
+named 
+
+<emphasis id="strong1050" effect="bold">
+NewDirection
+
+</emphasis>
+ is called to modify the direction pointed to 
+by the direction vector. 
+
+</para>
+
+
+
+
+
+<note id="note1010" type="">
+
+
+The NewDirection method is declared 
+
+<emphasis id="em1009" effect="italics">
+private
+
+</emphasis>
+ 
+	to prevent it from being accessible to code outside the Sprite class because 
+	it has no meaning outside the Sprite class.
+
+</note>
+
+
+
+
+
+
+</section>
+</section>
+<section id="h41007">
+<title>
+<emphasis id="The_end_of_the_Move_method" effect="bold">
+
+The end of the Move method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1050">
+<link id="a1107" target-id="Listing_8">
+
+Listing 8
+
+</link>
+
+ signals the end of the 
+
+<emphasis id="strong1051" effect="bold">
+Move
+
+</emphasis>
+ method.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h31009">
+<title>
+<emphasis id="The_method_named_NewDirection" effect="bold">
+
+The method named NewDirection
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1051">
+The method named 
+
+<emphasis id="strong1052" effect="bold">
+NewDirection
+
+</emphasis>
+ begins in 
+
+<link id="a1108" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1011" type="">
+
+
+<para id="p1052">
+<emphasis id="Listing_9" effect="bold">
+
+Listing 9
+
+</emphasis>
+
+. Beginning of the method named NewDirection.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1008" display="block">    private void NewDirection() {
+      double length = Math.Sqrt(
+                            direction.X * direction.X + 
+                            direction.Y * direction.Y);
+
+      Boolean xNegative = (direction.X &lt; 0)?true:false;
+      Boolean yNegative = (direction.Y &lt; 0)?true:false;
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41008">
+<title>
+
+	
+
+<emphasis id="The_length_of_the_direction_vector_and_the_signs_of_the_components" effect="bold">
+
+The length of the direction vector and the signs of the 
+	components
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1053">
+<link id="a1109" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ begins by determining the length of the current direction vector 
+along with the signs of the X and Y components of the vector.
+
+</para>
+
+
+
+
+
+<section id="h51003">
+<title>
+<emphasis id="Compute_the_hypotenuse" effect="bold">
+
+Compute the hypotenuse
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1054">
+The first statement in the method in 
+
+<link id="a1110" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ calls the
+
+
+<link id="a1111" url="http://msdn.microsoft.com/en-us/library/system.math.sqrt.aspx">
+
+
+Math.Sqrt
+
+</link>
+
+ method and uses the
+
+
+<link id="a1112" url="http://en.wikipedia.org/wiki/Pythagorean_theorem">
+
+Pythagorean Theorem
+
+</link>
+
+ 
+to compute the length of the hypotenuse of the right triangle formed by the X 
+and Y components of the direction vector. This is the 
+
+<emphasis id="strong1053" effect="bold">
+length
+
+</emphasis>
+ of 
+the direction vector.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51004">
+<title>
+<emphasis id="Use_the_conditional_operator" effect="bold">
+
+Use the conditional operator
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1055">
+Then the last two statements in 
+
+<link id="a1113" target-id="Listing_9">
+
+Listing 9
+
+</link>
+
+ use 
+the 
+
+<link id="a1114" url="http://msdn.microsoft.com/en-us/library/ty67wk28.aspx">
+
+conditional 
+operator
+
+</link>
+
+ to determine if the signs of the components are negative. If so, 
+the variables named 
+
+<emphasis id="strong1054" effect="bold">
+xNegative
+
+</emphasis>
+ and/or 
+
+<emphasis id="strong1055" effect="bold">
+yNegative
+
+</emphasis>
+ 
+are set to true.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41009">
+<title>
+<emphasis id="Compute_components_of_a_new_direction_vector" effect="bold">
+
+Compute components of a new direction vector
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1056">
+Having accomplished that task, the code in 
+
+<link id="a1115" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ computes the components 
+for a new direction vector of the 
+
+<emphasis id="em1010" effect="italics">
+<emphasis id="strong1056" effect="bold">
+same length
+
+</emphasis>
+</emphasis>
+ with the 
+X and Y components having random (but consistent) lengths and the same signs as 
+before.
+
+</para>
+
+
+
+
+
+<section id="h51005">
+<title>
+<emphasis id="Compute_a_new_random_value_for_the_X_component" effect="bold">
+
+Compute a new random value for the X component
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1057">
+For the code in 
+
+<link id="a1116" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ to make any sense at all, you must know that the 
+call to 
+
+<emphasis id="strong1057" effect="bold">
+random
+
+</emphasis>
+.
+
+<link id="a1117" url="http://msdn.microsoft.com/en-us/library/system.random.nextdouble.aspx">
+
+NextDouble
+
+</link>
+
+ 
+returns a pseudo-random value, uniformly distributed between 0.0 and 1.0.
+
+</para>
+
+
+
+	
+
+
+
+<note id="note1012" type="">
+
+
+<para id="p1058">
+<emphasis id="Listing_10" effect="bold">
+
+Listing 10
+
+</emphasis>
+
+.  Compute components of a new direction vector.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1009" display="block">      //Compute a new X component as a random portion of
+      // the vector length.
+      direction.X = 
+                  (float)(length * random.NextDouble());
+
+      //Compute a corresponding Y component that will 
+      // keep the same vector length.
+      direction.Y = (float)Math.Sqrt(length*length - 
+                               direction.X*direction.X);
+
+      //Set the signs on the X and Y components to match
+      // the signs from the original direction vector.
+      if(xNegative)
+        direction.X = -direction.X;
+      if(yNegative)
+        direction.Y = -direction.Y;
+    }//end NewDirection
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1059">
+The first statement in 
+
+<link id="a1118" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ computes a 
+new value for the X component of the current direction vector, which is a random 
+portion of the 
+
+<emphasis id="strong1058" effect="bold">
+length
+
+</emphasis>
+ of the current direction vector ranging 
+from 0 to the full length of the vector.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51006">
+<title>
+<emphasis id="Compute_a_consistent_value_for_the_Y_component" effect="bold">
+
+Compute a consistent value for the Y component
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+Then the second statement in 
+
+<link id="a1119" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ uses the
+
+
+<emphasis id="strong1059" effect="bold">
+Sqrt
+
+</emphasis>
+ method along with the 
+
+<emphasis id="strong1060" effect="bold">
+Pythagorean Theorem
+
+</emphasis>
+ 
+to compute a new value for the Y component, which when combined with the new X 
+component will produce a direction vector having the same 
+
+<emphasis id="strong1061" effect="bold">
+length
+
+</emphasis>
+ 
+as before. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51007">
+<title>
+<emphasis id="Adjust_the_signs_of_the_X_and_Y_components" effect="bold">
+
+Adjust the signs of the X and Y components
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+Finally, the last two statements in 
+
+<link id="a1120" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ 
+use the information gleaned earlier to cause the signs of the new X and Y 
+components to match the signs of the original components.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51008">
+<title>
+<emphasis id="A_new_direction_vector_with_the_same_length_in_the_same_quadrant" effect="bold">
+
+A new direction vector with the same length in the same quadrant
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1062">
+By modifying the lengths of the X and Y components, the code in 
+
+<link id="a1121" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+ 
+causes the direction pointed to by the new vector to be different from the 
+direction pointed to by the original direction vector.
+
+</para>
+
+
+
+
+
+<para id="p1063">
+By causing the X and Y components to have the same signs, the code in 
+
+<link id="a1122" target-id="Listing_10">
+
+ Listing 10
+
+</link>
+
+ 
+causes the new direction vector to point into the same quadrant as before.
+
+</para>
+
+
+
+	
+
+	
+
+
+</section>
+</section>
+</section>
+<section id="h31010">
+<title>
+
+    
+
+<emphasis id="The_Draw_method_" effect="bold">
+
+The Draw method
+    
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1064">
+
+    The 
+
+<emphasis id="strong1062" effect="bold">
+Sprite.Draw
+
+</emphasis>
+ method is shown in its entirety in 
+	
+
+<link id="a1123" target-id="Listing_11">
+
+Listing 
+	11
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+
+
+<note id="note1013" type="">
+
+
+<para id="p1065">
+<emphasis id="Listing_11" effect="bold">
+
+Listing 11
+
+</emphasis>
+
+. The Sprite.Draw method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1010" display="block">    public void Draw(SpriteBatch spriteBatch) {
+      //Call the simplest available version of
+      // SpriteBatch.Draw
+      spriteBatch.Draw(image,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end Sprite class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1066">
+This 
+
+<emphasis id="strong1063" effect="bold">
+Draw
+
+</emphasis>
+ method is essentially the same as the 
+
+<emphasis id="strong1064" effect="bold">
+
+	Draw
+
+</emphasis>
+ method that I explained in an earlier module so it shouldn't 
+	require further explanation.
+
+</para>
+
+
+
+
+
+<para id="p1067">
+To avoid becoming confused, however, you should keep in mind that this 
+program deals with the following three methods having the name 
+
+<emphasis id="strong1065" effect="bold">
+Draw
+
+</emphasis>
+:
+
+</para>
+
+
+
+
+
+<list id="ul1023" list-type="bulleted">
+
+	
+
+<item id="li1094">
+Overridden Game.Draw method.
+
+</item>
+
+
+	
+
+<item id="li1095">
+Sprite.Draw method.
+
+</item>
+
+
+	
+
+<item id="li1096">
+SpriteBatch.Draw method.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+</section>
+<section id="h31011">
+<title>
+<emphasis id="The_end_of_the_Sprite_class" effect="bold">
+
+The end of the Sprite class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+<link id="a1124" target-id="Listing_11">
+
+Listing 11
+
+</link>
+
+ also signals the end of the 
+
+<emphasis id="strong1066" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+<section id="h21004">
+<title>
+
+    
+
+<emphasis id="The_Game1_class_" effect="bold">
+
+The Game1 class
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1069">
+
+    The 
+
+<emphasis id="strong1067" effect="bold">
+Game1
+
+</emphasis>
+ class begins in 
+
+<link id="a1125" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1014" type="">
+
+
+<para id="p1070">
+<emphasis id="Listing_12" effect="bold">
+
+Listing 12
+
+</emphasis>
+
+. Beginning of the Game1 class.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1011" display="block">namespace XNA0128Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //Use the following values to set the size of the
+    // client area of the game window. The actual window
+    // with its frame is somewhat larger depending on
+    // the OS display options. On my machine with its
+    // current display options, these dimensions
+    // produce a 1024x768 game window.
+    int windowWidth = 1017;
+    int windowHeight = 738;
+
+    //This is the length of the greatest distance in
+    // pixels that any sprite will move in a single
+    // frame of the game loop.
+    double maxVectorLength = 5.0;
+
+    //References to the space rocks are stored in this
+    // List object.
+    List&lt;Sprite&gt; rocks = new List&lt;Sprite&gt;();
+    int numRocks = 24;//Number of rocks.
+    //The following value should never exceed 60 moves
+    // per second unless the default frame rate is also
+    // increased to more than 60 frames per second.
+    double maxRockSpeed = 50;//moves per second
+
+    //References to the power pills are stored in 
+    // this List.
+    List&lt;Sprite&gt; pills = new List&lt;Sprite&gt;();
+    int numPills = 12;//Number of pills.
+    double maxPillSpeed = 40;//moves per second
+
+    //References to the UFOs are stored in this List.
+    List&lt;Sprite&gt; ufos = new List&lt;Sprite&gt;();
+    int numUfos = 6;//Max number of ufos
+    double maxUfoSpeed = 30;
+
+    //Random number generator. It is best to use a single
+    // object of the Random class to avoid the 
+    // possibility of using different streams that
+    // produce the same sequence of values.
+    //Note that the random.NextDouble() method produces
+    // a pseudo-random value where the sequence of values
+    // is uniformly distributed between 0.0 and 1.0.
+    Random random = new Random();
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h31012">
+<title>
+<emphasis id="Instance_variables" effect="bold">
+
+Instance variables
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1071">
+<link id="a1126" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ declares several instance variables. Comments are provided to 
+explain most of the instance variables. No explanation beyond the comments in 
+
+
+<link id="a1127" target-id="Listing_12">
+
+Listing 12
+
+</link>
+
+ should be required.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+<section id="h31013">
+<title>
+
+    
+
+<emphasis id="The_modified_constructor_" effect="bold">
+
+The modified constructor
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1072">
+
+    The constructor is shown in its entirety in 
+
+<link id="a1128" target-id="Listing_13">
+
+Listing 13
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1015" type="">
+
+
+<para id="p1073">
+<emphasis id="Listing_13" effect="bold">
+
+Listing 13
+
+</emphasis>
+
+. The modified constructor.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1012" display="block">    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = windowWidth;
+      graphics.PreferredBackBufferHeight = windowHeight;
+    }//end constructor
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1074">
+Nothing in this constructor is new to this module. Therefore, no further 
+	explanation should be required.
+
+</para>
+
+
+
+
+
+
+</section>
+<section id="h31014">
+<title>
+
+    
+
+<emphasis id="The_overridden_LoadContent_method_" effect="bold">
+
+The overridden LoadContent method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1075">
+
+    The overridden 
+
+<emphasis id="strong1068" effect="bold">
+LoadContent
+
+</emphasis>
+ method begins in 
+
+<link id="a1129" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1016" type="">
+
+
+<para id="p1076">
+<emphasis id="Listing_14" effect="bold">
+
+Listing 14
+
+</emphasis>
+
+. Beginning of the overridden LoadContent method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1013" display="block">    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      for(int cnt = 0;cnt &lt; numRocks;cnt++){
+        rocks.Add(new Sprite("Rock",Content,random));
+
+        //Set the position of the current rock at a
+        // random location within the game window.
+        rocks[cnt].Position = new Vector2(
+           (float)(windowWidth * random.NextDouble()),
+           (float)(windowHeight * random.NextDouble()));
+
+        //Get a direction vector for the current rock.
+        // Make both components positive to cause the
+        // vector to point down and to the right.
+        rocks[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          false,//xNeg
+          false);//yNeg
+
+        //Notify the Sprite object of the size of the
+        // game window.
+        rocks[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+
+        //Set the speed in moves per second for the
+        // current sprite to a random value between
+        // maxRockSpeed/2 and maxRockSpeed.
+        rocks[cnt].Speed = maxRockSpeed/2 
+                 + maxRockSpeed * random.NextDouble()/2;
+      }//end for loop
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41010">
+<title>
+<emphasis id="Instantiate_all_of_the_space_rock_sprites" effect="bold">
+
+Instantiate all of the space rock sprites
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+The code in 
+
+<link id="a1130" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ uses a 
+
+<emphasis id="strong1069" effect="bold">
+for
+
+</emphasis>
+ loop to instantiate all of 
+the space rocks and to prepare them to move from left to right, top to bottom 
+across the game window.
+
+</para>
+
+
+
+
+
+<section id="h51009">
+<title>
+<emphasis id="Call_the_Sprite_constructor" effect="bold">
+
+Call the Sprite constructor
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+The 
+
+<emphasis id="strong1070" effect="bold">
+for
+
+</emphasis>
+ loop begins with a call to the 
+
+<emphasis id="strong1071" effect="bold">
+Sprite
+
+</emphasis>
+ 
+constructor to construct a new 
+object of the 
+
+<emphasis id="strong1072" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+
+
+<note id="note1017" type="">
+
+
+As mentioned earlier, you should pass a reference to the same 
+
+<emphasis id="strong1073" effect="bold">
+Random
+
+</emphasis>
+ 
+object each time you make a call to the 
+
+<emphasis id="strong1074" effect="bold">
+Sprite
+
+</emphasis>
+ constructor.
+
+</note>
+
+
+
+
+
+
+<para id="p1079">
+Each new 
+
+<emphasis id="strong1075" effect="bold">
+Sprite
+
+</emphasis>
+ object's reference is added to the list 
+referred to by the instance variable named 
+
+<emphasis id="strong1076" effect="bold">
+rocks
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h51010">
+<title>
+<emphasis id="Set_the_property_values" effect="bold">
+
+Set the property values
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1080">
+Once the new 
+
+<emphasis id="strong1077" effect="bold">
+Sprite
+
+</emphasis>
+ object is constructed, the object's 
+reference is accessed and used to set the following property values:
+
+</para>
+
+
+
+
+
+<list id="ul1024" list-type="bulleted">
+
+	
+
+<item id="li1097">
+The 
+
+<emphasis id="strong1078" effect="bold">
+
+	Position
+
+</emphasis>
+ property of each rock is set to a random position within the game 
+	window.
+
+</item>
+
+
+	
+
+<item id="li1098">
+The 
+
+<emphasis id="strong1079" effect="bold">
+
+	Direction
+
+</emphasis>
+ property for each rock is set to a value obtained by calling the 
+	private 
+
+<emphasis id="strong1080" effect="bold">
+DirectionVector
+
+</emphasis>
+ method. (I will explain the 
+
+<emphasis id="strong1081" effect="bold">
+
+	DirectionVector
+
+</emphasis>
+ method later.) 
+
+</item>
+
+
+	
+
+<item id="li1099">
+The 
+
+<emphasis id="strong1082" effect="bold">
+
+	WindowSize
+
+</emphasis>
+ property for each rock 
+	is set to the common 
+
+<emphasis id="strong1083" effect="bold">
+windowWidth
+
+</emphasis>
+ and 
+
+<emphasis id="strong1084" effect="bold">
+windowHeight
+
+</emphasis>
+ 
+	values.
+
+</item>
+
+
+	
+
+<item id="li1100">
+The 
+
+<emphasis id="strong1085" effect="bold">
+
+	Speed
+
+</emphasis>
+ property for each rock 
+	is set to a bounded random value.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1081">
+Except for the call to the 
+
+<emphasis id="strong1086" effect="bold">
+DirectionVector
+
+</emphasis>
+ method, the code 
+in 
+
+<link id="a1131" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ is straightforward and should not require an explanation beyond 
+the embedded comments. I will explain the 
+
+<emphasis id="strong1087" effect="bold">
+DirectionVector
+
+</emphasis>
+ 
+method shortly.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h41011">
+<title>
+<emphasis id="Instantiate_and_set_properties_on_the_power_pills_and_the_UFOs" effect="bold">
+
+Instantiate and set properties on the power pills and the UFOs
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+<link id="a1132" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ uses essentially the same code to instantiate and set the property 
+values on the power pill sprites and the UFO sprites.
+
+</para>
+
+
+
+	
+
+
+
+
+<note id="note1018" type="">
+
+
+<para id="p1083">
+<emphasis id="Listing_15" effect="bold">
+
+Listing 15
+
+</emphasis>
+
+. Instantiate and set properties on the power pills and the UFOs.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1014" display="block">      //Use the same process to instantiate all of the
+      // power pills and cause them to move from right
+      // to left, top to bottom.
+      for(int cnt = 0;cnt &lt; numPills;cnt++) {
+        pills.Add(new Sprite("ball",Content,random));
+        pills[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        pills[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          true,//xNeg
+          false);//yNeg
+        pills[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+        pills[cnt].Speed = maxPillSpeed/2 
+                  + maxPillSpeed * random.NextDouble()/2;
+      }//end for loop
+
+      //Use the same process to instantiate all of the
+      // ufos and cause them to move from right to left,
+      // bottom to top.
+      for(int cnt = 0;cnt &lt; numUfos;cnt++) {
+        ufos.Add(new Sprite("ufo",Content,random));
+        ufos[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        ufos[cnt].Direction = DirectionVector(
+         (float)maxVectorLength,
+         (float)(maxVectorLength * random.NextDouble()),
+         true,//xNeg
+         true);//yNeg
+        ufos[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+        ufos[cnt].Speed = maxUfoSpeed/2 
+                   + maxUfoSpeed * random.NextDouble()/2;
+      }//end for loop
+
+    }//end LoadContent
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+</section>
+</section>
+<section id="h31015">
+<title>
+<emphasis id="The_private_DirectionVector_method" effect="bold">
+
+The private DirectionVector method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1084">
+The 
+
+<emphasis id="strong1088" effect="bold">
+DirectionVector
+
+</emphasis>
+ method shown in 
+
+<link id="a1133" target-id="Listing_16">
+
+Listing 16
+
+</link>
+
+ is called 
+each time the code in 
+
+<link id="a1134" target-id="Listing_14">
+
+Listing 14
+
+</link>
+
+ and 
+
+<link id="a1135" target-id="Listing_15">
+
+Listing 15
+
+</link>
+
+ needs to set the 
+
+<emphasis id="strong1089" effect="bold">
+
+Direction
+
+</emphasis>
+ property on a sprite. This method is declared private because 
+it has no meaning outside the 
+
+<emphasis id="strong1090" effect="bold">
+Sprite
+
+</emphasis>
+ class.
+
+</para>
+
+
+
+	
+
+
+
+
+<note id="note1019" type="">
+
+
+<para id="p1085">
+<emphasis id="Listing_16" effect="bold">
+
+Listing 16
+
+</emphasis>
+
+. The private DirectionVector method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1015" display="block">    private Vector2 DirectionVector(float vecLen,
+                                    float xLen,
+                                    Boolean negX,
+                                    Boolean negY){
+      Vector2 result = new Vector2(xLen,0);
+      result.Y = (float)Math.Sqrt(vecLen*vecLen
+                                           - xLen*xLen);
+      if(negX)
+        result.X = -result.X;
+      if(negY)
+        result.Y = -result.Y;
+      return result;
+    }//end DirectionVector
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41012">
+<title>
+<emphasis id="Return_a_direction_vector" effect="bold">
+
+Return a direction vector
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1086">
+The 
+
+<emphasis id="strong1091" effect="bold">
+DirectionVector
+
+</emphasis>
+ method returns a direction vector as 
+type 
+
+<emphasis id="strong1092" effect="bold">
+Vector2
+
+</emphasis>
+ given the length of the vector, the length of the 
+X component of the vector, the sign of the X component, and the sign of the Y 
+component.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41013">
+<title>
+<emphasis id="The_signs_of_the_components" effect="bold">
+
+The signs of the components
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1087">
+You should set 
+
+<emphasis id="strong1093" effect="bold">
+negX
+
+</emphasis>
+ and/or 
+
+<emphasis id="strong1094" effect="bold">
+negY
+
+</emphasis>
+ to true to 
+cause them to be negative.
+
+</para>
+
+
+
+
+
+<para id="p1088">
+By adjusting the signs on the X and Y components, the vector can be caused to 
+point into any of the four quadrants. The relationships between these two values 
+and the direction of motion of the sprite are as follows:
+
+</para>
+
+
+
+
+
+<list id="ul1025" list-type="bulleted">
+
+	
+
+<item id="li1101">
+false, false = down and to the right.
+
+</item>
+
+
+	
+
+<item id="li1102">
+true, false = down and to the left
+
+</item>
+
+
+	
+
+<item id="li1103">
+true, true = up and to the left
+
+</item>
+
+
+	
+
+<item id="li1104">
+false, true = up and to the right
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1089">
+The code in 
+
+<link id="a1136" target-id="Listing_16">
+
+Listing 16
+
+</link>
+
+ is very similar to the code that I explained earlier 
+in 
+
+<link id="a1137" target-id="Listing_10">
+
+Listing 10
+
+</link>
+
+, so the code in 
+
+<link id="a1138" target-id="Listing_16">
+
+Listing 16
+
+</link>
+
+ should not require further explanation.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+<section id="h31016">
+<title>
+
+    
+
+<emphasis id="The_overridden_Update_method_" effect="bold">
+
+The overridden Update method
+        
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1090">
+
+    The overridden 
+
+<emphasis id="strong1095" effect="bold">
+Update
+
+</emphasis>
+ method is shown in its entirety in 
+	
+
+<link id="a1139" target-id="Listing_17">
+
+Listing 17
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1020" type="">
+
+
+<para id="p1091">
+<emphasis id="Listing_17" effect="bold">
+
+Listing 17
+
+</emphasis>
+
+. Tell the sprites to move.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1016" display="block">    protected override void Update(GameTime gameTime) {
+      //Tell all the rocks in the list to move.
+      for(int cnt = 0;cnt &lt; rocks.Count;cnt++) {
+        rocks[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the power pills in the list to move.
+      for(int cnt = 0;cnt &lt; pills.Count;cnt++) {
+        pills[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the ufos in the list to move.
+      for(int cnt = 0;cnt &lt; ufos.Count;cnt++) {
+        ufos[cnt].Move(gameTime);
+      }//end for loop
+
+      base.Update(gameTime);
+    }//end Update method
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41014">
+<title>
+<emphasis id="Very_simple_code" effect="bold">
+
+Very simple code
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1092">
+Because the code to instantiate the 
+
+<emphasis id="strong1096" effect="bold">
+Sprite
+
+</emphasis>
+ objects and set 
+their properties was placed in the 
+
+<emphasis id="strong1097" effect="bold">
+LoadContent
+
+</emphasis>
+ method in this 
+program, the code in the overridden 
+
+<emphasis id="strong1098" effect="bold">
+Update
+
+</emphasis>
+ method is very 
+simple.
+
+</para>
+
+
+
+
+
+<para id="p1093">
+The code in 
+
+<link id="a1140" target-id="Listing_17">
+
+Listing 17
+
+</link>
+
+ uses 
+
+<emphasis id="strong1099" effect="bold">
+for
+
+</emphasis>
+ loops to access the 
+references and call the 
+
+<emphasis id="strong1100" effect="bold">
+Move
+
+</emphasis>
+ method on every 
+
+<emphasis id="strong1101" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41015">
+<title>
+<emphasis id="To_move_or_not_to_move_that_is_the_question" effect="bold">
+
+To move or not to move, that is the question
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1094">
+As you learned earlier, when the 
+
+<emphasis id="strong1102" effect="bold">
+Move
+
+</emphasis>
+ method is called on an 
+individual 
+
+<emphasis id="strong1103" effect="bold">
+Sprite
+
+</emphasis>
+ object, the sprite may or it may not actually 
+move depending on the value of its 
+
+<emphasis id="strong1104" effect="bold">
+Speed
+
+</emphasis>
+ property and the 
+elapsed time since its last actual move.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h41016">
+<title>
+<emphasis id="A_characteristic_of_an_objectoriented_program" effect="bold">
+
+A characteristic of an object-oriented program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1095">
+One of the characteristics of an object-oriented program is that the 
+individual objects know how to behave with minimal supervision. In effect, a 
+call to the 
+
+<emphasis id="strong1105" effect="bold">
+Sprite.Move
+
+</emphasis>
+ method in 
+
+<link id="a1141" target-id="Listing_17">
+
+Listing 17
+
+</link>
+
+ tells the object 
+to make its own decision and to move if it is time for it to move.
+
+</para>
+
+
+
+	
+
+
+
+</section>
+</section>
+<section id="h31017">
+<title>
+
+    
+
+<emphasis id="The_overridden_GameDraw_method_" effect="bold">
+
+The overridden Game.Draw method
+	
+
+</emphasis>
+
+
+
+
+</title>
+
+
+
+
+<para id="p1096">
+
+    
+
+<link id="a1142" target-id="Listing_18">
+
+Listing 18
+
+</link>
+
+ shows the overridden 
+
+<emphasis id="strong1106" effect="bold">
+Game.Draw
+
+</emphasis>
+ method in its 
+	entirety.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1021" type="">
+
+
+<para id="p1097">
+<emphasis id="Listing_18" effect="bold">
+
+Listing 18
+
+</emphasis>
+
+. The overridden Game.Draw method.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1017" display="block">    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      //Draw all rocks.
+      for(int cnt = 0;cnt &lt; rocks.Count;cnt++) {
+        rocks[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all power pills.
+      for(int cnt = 0;cnt &lt; pills.Count;cnt++) {
+        pills[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ufos.
+      for(int cnt = 0;cnt &lt; ufos.Count;cnt++) {
+        ufos[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<section id="h41017">
+<title>
+<emphasis id="Erase_and_redraw_the_entire_game_window" effect="bold">
+
+Erase and redraw the entire game window
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1098">
+<link id="a1143" target-id="Listing_18">
+
+Listing 18
+
+</link>
+
+ begins by painting over everything in the game window with 
+CornflowerBlue pixels. Then it uses 
+
+<emphasis id="strong1107" effect="bold">
+for
+
+</emphasis>
+ loops to access and 
+call the 
+
+<emphasis id="strong1108" effect="bold">
+Sprite.Draw
+
+</emphasis>
+ method on every 
+
+<emphasis id="strong1109" effect="bold">
+Sprite
+
+</emphasis>
+ 
+object.
+
+</para>
+
+
+
+
+
+<para id="p1099">
+Each call to a 
+
+<emphasis id="strong1110" effect="bold">
+Sprite
+
+</emphasis>
+ object's 
+
+<emphasis id="strong1111" effect="bold">
+Draw
+
+</emphasis>
+ method 
+in 
+
+<link id="a1144" target-id="Listing_18">
+
+Listing 18
+
+</link>
+
+ is a notification to the 
+
+<emphasis id="strong1112" effect="bold">
+Sprite
+
+</emphasis>
+ object that it 
+should cause itself to be redrawn in the appropriate position with the 
+appropriate image in the game window.
+
+</para>
+
+
+
+
+
+<note id="note1022" type="">
+
+
+This is another manifestation of an 
+	object knowing how to behave with minimal supervision. The overridden 
+	Game.Draw method doesn't know and doesn't care where the Sprite object 
+	should be positioned or what image it should draw to represent itself. The 
+	Game.Draw method simply knows that every Sprite object must redraw itself at 
+	the appropriate position with the appropriate image at this point in time. 
+	Decisions regarding position and image are left up to the Sprite object.
+
+</note>
+
+
+
+
+
+
+<para id="p1100">
+Regardless of whether or not a sprite has decided to move, it should cause 
+itself to be redrawn in the game window because its image has just been replaced 
+by a bunch of CornflowerBlue pixels.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Not_the_same_approach_as_some_other_game_engines" effect="bold">
+
+Not the same approach as some other game engines
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1101">
+Some game engines take a different approach and in the interest of speed, 
+redraw only those portions of the game window that have changed. This can lead 
+to a great deal of complexity and it is often the responsibility of the game 
+programmer to manage that complexity.
+
+</para>
+
+
+
+
+
+<para id="p1102">
+That is not the case with XNA. From the viewpoint of the XNA game programmer, 
+the entire game window is redrawn once during every iteration of the game loop. 
+This causes XNA to be easier to program than some other game engines. On the 
+other hand, it might be argued that XNA sacrifices speed for simplicity.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="The_end_of_the_program" effect="bold">
+
+The end of the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1103">
+<link id="a1145" target-id="Listing_18">
+
+Listing 18
+
+</link>
+
+ also signals the end of the overridden 
+
+<emphasis id="strong1113" effect="bold">
+Game.Draw
+
+</emphasis>
+ 
+method, the end of the 
+
+<emphasis id="strong1114" effect="bold">
+Game1
+
+</emphasis>
+ class, and the end of the program.
+
+</para>
+
+
+
+	
+
+
+
+
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1104">
+I encourage you to copy the code from 
+
+<link id="a1146" target-id="Listing_19">
+
+Listing 19
+
+</link>
+
+ and 
+
+<link id="a1147" target-id="Listing_20">
+
+Listing 20
+
+</link>
+
+. Use that 
+code to create an XNA project. (You should be able to use any small image files 
+as sprites.) Compile and run the project. Experiment with the code, making 
+changes, and observing the results of your changes. Make certain that you can 
+explain why your changes behave as they do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1105">
+Click 
+
+<link id="a1148" url="XNA0128Proj.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1115" effect="bold">
+XNA0128Proj
+
+</emphasis>
+ from the zip file and save it somewhere on 
+your disk. Start 
+
+<emphasis id="strong1116" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select 
+
+<emphasis id="strong1117" effect="bold">
+Open 
+Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1118" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate to the project folder and select 
+the file with the extension of 
+
+<emphasis id="strong1119" effect="bold">
+.sln
+
+</emphasis>
+. This should cause the project 
+to open and be ready to run or debug as described in the earlier module titled
+
+
+<link id="a1149" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1106">
+In this module, you learned how to add more sophistication to the 
+
+<emphasis id="strong1120" effect="bold">
+
+Sprite
+
+</emphasis>
+ class that was introduced in an earlier module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Whats_next" effect="bold">
+
+What's next?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1107">
+We're getting very close to being able to write a 2D arcade style game 
+involving UFOs, space rocks, and power pills. There are just a few more tools 
+that we need and I will show you how to create those tools in the upcoming 
+modules.
+
+</para>
+
+
+
+
+
+<para id="p1108">
+The critical tools are:
+
+</para>
+
+
+
+
+
+<list id="ul1026" list-type="bulleted">
+
+	
+
+<item id="li1105">
+The ability to detect collisions between sprites.
+
+</item>
+
+
+	
+
+<item id="li1106">
+The ability to control the movement of one or more sprites using the 
+	keyboard or the mouse.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1109">
+Once we have those tools, we can write a game where the challenge is to cause 
+the UFO to successfully navigate across the game window without colliding with a 
+space rock, so I will concentrate on those two tools in the next few modules. 
+(There are probably other games that we could also create using those tools.)
+
+</para>
+
+
+
+
+
+<para id="p1110">
+Beyond that, there are several other tools that will make it possible for us 
+to create more sophisticated and interesting games:
+
+</para>
+
+
+
+
+
+<list id="ul1027" list-type="bulleted">
+
+	
+
+<item id="li1107">
+The ability to play sounds.
+
+</item>
+
+
+	
+
+<item id="li1108">
+The ability to create onscreen text.
+
+</item>
+
+
+	
+
+<item id="li1109">
+The ability to create a game with multiple levels, increasing difficulty 
+	at each level, scorekeeping, etc.
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1111">
+I may show you how to create some of those tools later in this series of modules. 
+On the other hand, I may decide to leave that as an exercise for the student.
+
+</para>
+
+
+
+
+	
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1112">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1023" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1121" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+
+				
+
+<list id="ul1028" list-type="bulleted">
+
+					
+
+<item id="li1110">
+Module name: Xna0128-Improving the Sprite Class
+
+</item>
+
+
+					
+
+<item id="li1111">
+File: Xna0128.htm
+
+
+</item>
+
+
+					
+
+<item id="li1112">
+Published: 02/28/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1024" type="">
+
+
+		
+
+
+			
+
+
+
+
+
+
+
+<emphasis id="strong1122" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1113">
+<emphasis id="strong1123" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1114">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1115">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1116">
+<emphasis id="strong1124" effect="bold">
+Affiliation
+
+</emphasis>
+:: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+	
+
+
+</section>
+<section id="h11010">
+<title>
+<emphasis id="Complete_program_listing" effect="bold">
+
+Complete program listing
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1117">
+Complete listings of the XNA program files discussed in this module are provided in 
+
+<link id="a1150" target-id="Listing_19">
+
+Listing 19
+
+</link>
+
+ and 
+
+<link id="a1151" target-id="Listing_20">
+
+Listing 20
+
+</link>
+
+. 
+
+</para>
+
+
+
+
+
+
+
+<note id="note1025" type="">
+
+
+<para id="p1118">
+<emphasis id="Listing_19" effect="bold">
+
+Listing 19
+
+</emphasis>
+
+. The class named Sprite for the project named XNA0128Proj.
+
+</para>
+
+
+
+
+				
+				
+
+<code id="pre1018" display="block">/*Project XNA0128Proj
+ * This file defines a Sprite class from which a Sprite
+ * object can be instantiated.
+ *******************************************************/
+
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace XNA0128Proj {
+  class Sprite {
+    private Texture2D image;
+    private Vector2 position = new Vector2(0,0);
+    private Vector2 direction = new Vector2(0,0);
+    private Point windowSize;
+    private Random random;
+    double elapsedTime;//in milliseconds
+    //The following value is the inverse of speed in
+    // moves/msec expressed in msec/move.
+    double elapsedTimeTarget;
+    //-------------------------------------------------//
+
+    //Position property accessor
+    public Vector2 Position {
+      get {
+        return position;
+      }
+      set {
+        position = value;
+      }//end set
+    }//end Position property accessor
+    //-------------------------------------------------//
+
+    //WindowSize property accessor
+    public Point WindowSize {
+      set {
+        windowSize = value;
+      }//end set
+    }//end WindowSize property accessor
+    //-------------------------------------------------//
+
+    //Direction property accessor
+    public Vector2 Direction {
+      get {
+        return direction;
+      }
+      set {
+        direction = value;
+      }//end set
+    }//end Direction property accessor
+    //-------------------------------------------------//
+
+    //Speed property accessor. The set side should be
+    // called with speed in moves/msec. The get side
+    // returns speed moves/msec.
+    public double Speed {
+      get {
+        //Convert from elapsed time in msec/move to
+        // speed in moves/msec.
+        return elapsedTimeTarget/1000;
+      }
+      set {
+        //Convert from speed in moves/msec to
+        // elapsed time in msec/move.
+        elapsedTimeTarget = 1000/value;
+      }//end set
+    }//end Speed property accessor
+    //-------------------------------------------------//
+
+    //This constructor loads an image for the sprite
+    // when it is instantiated. Therefore, it requires
+    // an asset name for the image and a reference to a
+    // ContentManager object.
+    //Requires a reference to a Random object. Should 
+    // use the same Random object for all sprites to
+    // avoid getting the same sequence for different
+    // sprites.
+    public Sprite(String assetName,
+                  ContentManager contentManager,
+                  Random random) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+      this.random = random;
+    }//end constructor
+    //-------------------------------------------------//
+
+    //This method can be called to load a new image
+    // for the sprite.
+    public void SetImage(String assetName,
+                         ContentManager contentManager) {
+      image = contentManager.Load&lt;Texture2D&gt;(assetName);
+    }//end SetImage
+    //-------------------------------------------------//
+
+    //This method causes the sprite to move in the 
+    // direction of the direction vector if the elapsed
+    // time since the last move exceeds the elapsed
+    // time target based on the specified speed.
+    public void Move(GameTime gameTime) {
+      //Accumulate elapsed time since the last move.
+      elapsedTime += 
+                  gameTime.ElapsedGameTime.Milliseconds;
+
+      if(elapsedTime &gt; elapsedTimeTarget){
+        //It's time to make a move. Set the elapsed 
+        // time to a value that will attempt to produce
+        // the specified speed on the average.
+        elapsedTime -= elapsedTimeTarget;
+
+        //Add the direction vector to the position
+        // vector to get a new position vector.
+        position = Vector2.Add(position,direction);
+
+        //Check for a collision with an edge of the game
+        // window. If the sprite reaches an edge, cause 
+        // the sprite to wrap around and reappear at the 
+        // other edge, moving at the same speed in a 
+        // different direction within the same quadrant 
+        // as before.
+        if(position.X &lt; -image.Width){
+          position.X = windowSize.X;
+          NewDirection();
+        }//end if
+
+        if(position.X &gt; windowSize.X){
+          position.X = -image.Width/2;
+          NewDirection();
+        }//end if
+
+        if(position.Y &lt; -image.Height) {
+          position.Y = windowSize.Y;
+          NewDirection();
+        }//end if
+
+        if(position.Y &gt; windowSize.Y){
+          position.Y = -image.Height / 2;
+          NewDirection();
+        }//end if on position.Y
+      }//end if on elapsed time
+    }//end Move
+    //-------------------------------------------------//
+
+    //This method determines the length of the current 
+    // direction vector along with the signs of the X 
+    // and Y components of the current direction vector.
+    // It computes a new direction vector of the same 
+    // length with the X and Y components having random
+    // lengths and the same signs.
+    //Note that random.NextDouble returns a 
+    // pseudo-random value, uniformly distributed
+    // between 0.0 and 1.0.
+    private void NewDirection() {
+      //Get information about the current direction
+      // vector.
+      double length = Math.Sqrt(
+                            direction.X * direction.X + 
+                            direction.Y * direction.Y);
+      Boolean xNegative = (direction.X &lt; 0)?true:false;
+      Boolean yNegative = (direction.Y &lt; 0)?true:false;
+
+      //Compute a new X component as a random portion of
+      // the vector length.
+      direction.X = 
+                  (float)(length * random.NextDouble());
+      //Compute a corresponding Y component that will 
+      // keep the same vector length.
+      direction.Y = (float)Math.Sqrt(length*length - 
+                               direction.X*direction.X);
+
+      //Set the signs on the X and Y components to match
+      // the signs from the original direction vector.
+      if(xNegative)
+        direction.X = -direction.X;
+      if(yNegative)
+        direction.Y = -direction.Y;
+    }//end NewDirection
+    //-------------------------------------------------//
+
+    public void Draw(SpriteBatch spriteBatch) {
+      //Call the simplest available version of
+      // SpriteBatch.Draw
+      spriteBatch.Draw(image,position,Color.White);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+        
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+<note id="note1026" type="">
+
+
+<para id="p1119">
+<emphasis id="Listing_20" effect="bold">
+
+Listing 20
+
+</emphasis>
+
+. The class named Game1 for the project named XNA0128Proj.
+
+</para>
+
+
+
+
+				
+
+<code id="pre1019" display="block">/*Project XNA0128Proj
+ * This project demonstrates how to integrate space 
+ * rocks, power pills, and ufos in a program using
+ * objects of a Sprite class. This could be the 
+ * beginnings of a space game.
+ * *****************************************************/
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using XNA0128Proj;
+
+namespace XNA0128Proj {
+
+  public class Game1 : Microsoft.Xna.Framework.Game {
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+
+    //Use the following values to set the size of the
+    // client area of the game window. The actual window
+    // with its frame is somewhat larger depending on
+    // the OS display options. On my machine with its
+    // current display options, these dimensions
+    // produce a 1024x768 game window.
+    int windowWidth = 1017;
+    int windowHeight = 738;
+
+    //This is the length of the greatest distance in
+    // pixels that any sprite will move in a single
+    // frame of the game loop.
+    double maxVectorLength = 5.0;
+
+    //References to the space rocks are stored in this
+    // List object.
+    List&lt;Sprite&gt; rocks = new List&lt;Sprite&gt;();
+    int numRocks = 24;//Number of rocks.
+    //The following value should never exceed 60 moves
+    // per second unless the default frame rate is also
+    // increased to more than 60 frames per second.
+    double maxRockSpeed = 50;//frames per second
+
+    //References to the power pills are stored in 
+    // this List.
+    List&lt;Sprite&gt; pills = new List&lt;Sprite&gt;();
+    int numPills = 12;//Number of pills.
+    double maxPillSpeed = 40;//moves per second
+
+    //References to the UFOs are stored in this List.
+    List&lt;Sprite&gt; ufos = new List&lt;Sprite&gt;();
+    int numUfos = 6;//Max number of ufos
+    double maxUfoSpeed = 30;
+
+    //Random number generator. It is best to use a single
+    // object of the Random class to avoid the 
+    // possibility of using different streams that
+    // produce the same sequence of values.
+    //Note that the random.NextDouble() method produces
+    // a pseudo-random value where the sequence of values
+    // is uniformly distributed between 0.0 and 1.0.
+    Random random = new Random();
+    //-------------------------------------------------//
+
+    public Game1() {//constructor
+      graphics = new GraphicsDeviceManager(this);
+      Content.RootDirectory = "Content";
+
+      //Set the size of the game window.
+      graphics.PreferredBackBufferWidth = windowWidth;
+      graphics.PreferredBackBufferHeight = windowHeight;
+    }//end constructor
+    //-------------------------------------------------//
+
+    protected override void Initialize() {
+      //No initialization required.
+      base.Initialize();
+    }//end Initialize
+    //-------------------------------------------------//
+
+    protected override void LoadContent() {
+      spriteBatch = new SpriteBatch(GraphicsDevice);
+
+      //Instantiate all of the rocks and cause them to
+      // move from left to right, top to 
+      // bottom. Pass a reference to the same Random
+      // object to all of the sprites.
+      for(int cnt = 0;cnt &lt; numRocks;cnt++){
+        rocks.Add(new Sprite("Rock",Content,random));
+
+        //Set the position of the current rock at a
+        // random location within the game window.
+        rocks[cnt].Position = new Vector2(
+           (float)(windowWidth * random.NextDouble()),
+           (float)(windowHeight * random.NextDouble()));
+
+        //Get a direction vector for the current rock.
+        // Make both components positive to cause the
+        // vector to point down and to the right.
+        rocks[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          false,//xNeg
+          false);//yNeg
+
+        //Notify the Sprite object of the size of the
+        // game window.
+        rocks[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+
+        //Set the speed in moves per second for the
+        // current sprite to a random value between
+        // maxRockSpeed/2 and maxRockSpeed.
+        rocks[cnt].Speed = maxRockSpeed/2 
+                 + maxRockSpeed * random.NextDouble()/2;
+      }//end for loop
+
+      //Use the same process to instantiate all of the
+      // power pills and cause them to move from right
+      // to left, top to bottom.
+      for(int cnt = 0;cnt &lt; numPills;cnt++) {
+        pills.Add(new Sprite("ball",Content,random));
+        pills[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        pills[cnt].Direction = DirectionVector(
+          (float)maxVectorLength,
+          (float)(maxVectorLength * random.NextDouble()),
+          true,//xNeg
+          false);//yNeg
+        pills[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+        pills[cnt].Speed = maxPillSpeed/2 
+                  + maxPillSpeed * random.NextDouble()/2;
+      }//end for loop
+
+      //Use the same process to instantiate all of the
+      // ufos and cause them to move from right to left,
+      // bottom to top.
+      for(int cnt = 0;cnt &lt; numUfos;cnt++) {
+        ufos.Add(new Sprite("ufo",Content,random));
+        ufos[cnt].Position = new Vector2(
+            (float)(windowWidth * random.NextDouble()),
+            (float)(windowHeight * random.NextDouble()));
+        ufos[cnt].Direction = DirectionVector(
+         (float)maxVectorLength,
+         (float)(maxVectorLength * random.NextDouble()),
+         true,//xNeg
+         true);//yNeg
+        ufos[cnt].WindowSize = 
+                     new Point(windowWidth,windowHeight);
+        ufos[cnt].Speed = maxUfoSpeed/2 
+                   + maxUfoSpeed * random.NextDouble()/2;
+      }//end for loop
+
+    }//end LoadContent
+    //-------------------------------------------------//
+
+    //This method returns a direction vector given the
+    // length of the vector, the length of the
+    // X component, the sign of the X component, and the
+    // sign of the Y component. Set negX and/or negY to
+    // true to cause them to be negative. By adjusting
+    // the signs on the X and Y components, the vector
+    // can be caused to point into any of the four
+    // quadrants.
+    private Vector2 DirectionVector(float vecLen,
+                                    float xLen,
+                                    Boolean negX,
+                                    Boolean negY){
+      Vector2 result = new Vector2(xLen,0);
+      result.Y = (float)Math.Sqrt(vecLen*vecLen
+                                           - xLen*xLen);
+      if(negX)
+        result.X = -result.X;
+      if(negY)
+        result.Y = -result.Y;
+      return result;
+    }//end DirectionVector
+    //-------------------------------------------------//
+
+    protected override void UnloadContent() {
+      //No content unload required.
+    }//end unloadContent
+    //-------------------------------------------------//
+
+    protected override void Update(GameTime gameTime) {
+      //Tell all the rocks in the list to move.
+      for(int cnt = 0;cnt &lt; rocks.Count;cnt++) {
+        rocks[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the power pills in the list to move.
+      for(int cnt = 0;cnt &lt; pills.Count;cnt++) {
+        pills[cnt].Move(gameTime);
+      }//end for loop
+
+      //Tell all the ufos in the list to move.
+      for(int cnt = 0;cnt &lt; ufos.Count;cnt++) {
+        ufos[cnt].Move(gameTime);
+      }//end for loop
+
+      base.Update(gameTime);
+    }//end Update method
+    //-------------------------------------------------//
+
+    protected override void Draw(GameTime gameTime) {
+      GraphicsDevice.Clear(Color.CornflowerBlue);
+
+      spriteBatch.Begin();
+
+      //Draw all rocks.
+      for(int cnt = 0;cnt &lt; rocks.Count;cnt++) {
+        rocks[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all power pills.
+      for(int cnt = 0;cnt &lt; pills.Count;cnt++) {
+        pills[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      //Draw all ufos.
+      for(int cnt = 0;cnt &lt; ufos.Count;cnt++) {
+        ufos[cnt].Draw(spriteBatch);
+      }//end for loop
+
+      spriteBatch.End();
+
+      base.Draw(gameTime);
+    }//end Draw method
+    //-------------------------------------------------//
+  }//end class
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1120">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>

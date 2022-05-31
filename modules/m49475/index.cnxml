@@ -1,0 +1,4004 @@
+<document xmlns="http://cnx.rice.edu/cnxml"> 
+<title>Xna0104-What is OOP and Why Should You Care?</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m49475</md:content-id>
+  <md:title>Xna0104-What is OOP and Why Should You Care?</md:title>
+  <md:abstract>Learn about object-oriented programming in general. Also learn about the structure and syntax of an object-oriented C# program by taking a simple program apart and examining the elements of the program.</md:abstract>
+  <md:uuid>b006305b-5770-4ab3-85c8-ba421a85edfc</md:uuid>
+</metadata>
+
+<content>
+
+
+
+
+
+
+<para id="p1000">
+Revised: Wed May 04 17:44:09 CDT 2016
+
+</para>
+
+
+
+
+<para id="p1001">
+<emphasis id="em1000" effect="italics">
+This page is part of a Book titled 
+
+
+<link id="a1000" url="http://cnx.org/contents/GY804-eY">
+
+XNA Game Studio 
+
+</link>
+
+.
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h11000">
+<title>
+<emphasis id="Table_of_Contents" effect="bold">
+
+Table of Contents
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<list id="ul1000" list-type="bulleted">
+<item id="li1000">
+<link id="a1001" target-id="Table_of_Contents">
+
+Table of Contents
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1001">
+<link id="a1002" target-id="Preface">
+
+Preface
+
+</link>
+
+
+
+
+<list id="ul1001" list-type="bulleted">
+<item id="li1002">
+<link id="a1003" target-id="Viewing_tip">
+
+Viewing tip
+
+</link>
+
+
+
+
+<list id="ul1002" list-type="bulleted">
+<item id="li1003">
+<link id="a1004" target-id="Figures">
+
+Figures
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1004">
+<link id="a1005" target-id="Listings">
+
+Listings
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1005">
+<link id="a1006" target-id="What_is_OOP">
+
+What is OOP?
+
+</link>
+
+
+
+
+<list id="ul1003" list-type="bulleted">
+<item id="li1006">
+<link id="a1007" target-id="What_is_objectoriented_programming_OOP">
+
+What is object-oriented programming (OOP)?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1007">
+<link id="a1008" target-id="My_answer">
+
+My answer
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1008">
+<link id="a1009" target-id="An_anecdotal_description">
+
+An anecdotal description
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1009">
+<link id="a1010" target-id="Atomic_and_nonatomic_objects">
+
+Atomic and non-atomic objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1010">
+<link id="a1011" target-id="Your_jobassemble_the_objects">
+
+Your job - assemble the objects
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1011">
+<link id="a1012" target-id="Objects_working_together">
+
+Objects working together
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1012">
+<link id="a1013" target-id="Creating_a_model">
+
+Creating a model
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1013">
+<link id="a1014" target-id="Objects_must_be_designed_and_manufactured">
+
+Objects must be designed and manufactured
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1014">
+<link id="a1015" target-id="A_class_is_analogous_to_manufacturing_drawings">
+
+A class is analogous to manufacturing drawings
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1015">
+<link id="a1016" target-id="A_large_library_of_classes">
+
+A large library of classes
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1016">
+<link id="a1017" target-id="Classes_of_your_own_design">
+
+Classes of your own design
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1017">
+<link id="a1018" target-id="Why_should_you_care_about_OOP">
+
+Why should you care about OOP?
+
+</link>
+
+
+
+
+<list id="ul1004" list-type="bulleted">
+<item id="li1018">
+<link id="a1019" target-id="The_XNA_documentation_package_is_huge">
+
+The XNA documentation package is huge
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1019">
+<link id="a1020" target-id="The_good_news">
+
+The good news
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1020">
+<link id="a1021" target-id="Three_important_concepts">
+
+Three important concepts
+
+</link>
+
+
+
+
+<list id="ul1005" list-type="bulleted">
+<item id="li1021">
+<link id="a1022" target-id="Encapsulation_example">
+
+Encapsulation example
+
+</link>
+
+
+
+
+<list id="ul1006" list-type="bulleted">
+<item id="li1022">
+<link id="a1023" target-id="Only_the_interface_is_exposed">
+
+Only the interface is exposed
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1023">
+<link id="a1024" target-id="How_is_it_implemented">
+
+How is it implemented?
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1024">
+<link id="a1025" target-id="Expose_the_interface_and_hide_the_implementation">
+
+Expose the interface and hide the 
+implementation
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1025">
+<link id="a1026" target-id="Inheritance_example">
+
+Inheritance example
+
+</link>
+
+
+
+
+<list id="ul1007" list-type="bulleted">
+<item id="li1026">
+<link id="a1027" target-id="OOP_lingo">
+
+OOP lingo
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1027">
+<link id="a1028" target-id="Extending_the_Game_class">
+
+Extending the Game class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1028">
+<link id="a1029" target-id="Reuse_dont_reinvent">
+
+Reuse, don't reinvent
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1029">
+<link id="a1030" target-id="Polymorphism_example">
+
+Polymorphism example
+
+</link>
+
+
+
+
+<list id="ul1008" list-type="bulleted">
+<item id="li1030">
+<link id="a1031" target-id="Select_Drive_to_go_forward">
+
+Select Drive to go forward
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1031">
+<link id="a1032" target-id="Objectoriented_programming_vocabulary">
+
+Object-oriented programming vocabulary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1032">
+<link id="a1033" target-id="Discussion_and_sample_code">
+
+Discussion and sample code
+
+</link>
+
+
+
+
+<list id="ul1009" list-type="bulleted">
+<item id="li1033">
+<link id="a1034" target-id="You_can_learn_a_lot">
+
+You can learn a lot...
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1034">
+<link id="a1035" target-id="A_new_class_definition">
+
+A new class definition
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1035">
+<link id="a1036" target-id="The_Main_method">
+
+The Main method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1036">
+<link id="a1037" target-id="Methods_versus_functions">
+
+Methods versus functions
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1037">
+<link id="a1038" target-id="Definition_of_the_Main_method">
+
+Definition of the Main method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1038">
+<link id="a1039" target-id="The_WriteLine_method">
+
+The WriteLine method
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1039">
+<link id="a1040" target-id="The_Console_class">
+
+The Console class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1040">
+<link id="a1041" target-id="The_System_namespace">
+
+The System namespace
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1041">
+<link id="a1042" target-id="Members_of_the_Console_class">
+
+Members of the Console class
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1042">
+<link id="a1043" target-id="The_dot_operator">
+
+The dot operator
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1043">
+<link id="a1044" target-id="Namespaces">
+
+Namespaces
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1044">
+<link id="a1045" target-id="The_using_declaration">
+
+The "using" declaration
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1045">
+<link id="a1046" target-id="Not_much_help_in_this_case">
+
+Not much help in this case
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1046">
+<link id="a1047" target-id="Defining_your_own_namespace">
+
+Defining your own namespace
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1047">
+<link id="a1048" target-id="The_project_file_structure">
+
+The project file structure
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1048">
+<link id="a1049" target-id="The_Hello01_namespace">
+
+The Hello01 namespace
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1049">
+<link id="a1050" target-id="The_call_to_the_ReadKey_method">
+
+The call to the ReadKey method
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+</item>
+
+
+<item id="li1050">
+<link id="a1051" target-id="Run_the_program">
+
+Run the program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1051">
+<link id="a1052" target-id="Run_my_program">
+
+Run my program
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1052">
+<link id="a1053" target-id="Summary">
+
+Summary
+
+</link>
+
+
+
+
+</item>
+
+
+<item id="li1053">
+<link id="a1054" target-id="Miscellaneous">
+
+Miscellaneous
+
+</link>
+
+
+
+
+</item>
+
+
+</list>
+
+
+
+
+	
+
+</section>
+<section id="h11001">
+<title>
+<emphasis id="Preface" effect="bold">
+
+Preface
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1002">
+This module is one in a collection of modules designed primarily for 
+	teaching 
+
+<emphasis id="strong1000" effect="bold">
+GAME 1343 Game and Simulation Programming I
+
+</emphasis>
+ at 
+	Austin Community College in Austin, TX. These modules are intended to 
+	supplement and not to replace the textbook.
+
+</para>
+
+
+
+
+
+
+
+
+
+<para id="p1003">
+An earlier module titled 
+
+
+<link id="a1055" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+Getting Started
+
+</link>
+
+ provided information 
+on how to get started programming with Microsoft's XNA Game Studio.
+
+</para>
+
+
+
+	
+
+<section id="h21000">
+<title>
+<emphasis id="Viewing_tip" effect="bold">
+
+Viewing tip
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1004">
+I recommend that you open another copy of this module in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.
+
+</para>
+
+
+
+	
+
+<section id="h31000">
+<title>
+<emphasis id="Figures" effect="bold">
+
+Figures
+
+</emphasis>
+
+
+</title>
+
+
+
+	
+
+<list id="ul1010" list-type="bulleted">
+
+		
+
+<item id="li1054">
+<link id="a1056" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Project file structure.
+
+</item>
+
+
+
+	
+
+</list>
+
+
+	
+
+</section>
+<section id="h31001">
+<title>
+<emphasis id="Listings" effect="bold">
+
+Listings
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<list id="ul1011" list-type="bulleted">
+
+		
+
+<item id="li1055">
+<link id="a1057" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+. Extending the Game class.
+
+</item>
+
+
+		
+
+<item id="li1056">
+<link id="a1058" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Hello World in C#.
+
+</item>
+
+
+	
+
+</list>
+
+
+
+	
+
+</section>
+</section>
+</section>
+<section id="h11002">
+<title>
+<emphasis id="What_is_OOP" effect="bold">
+
+What is OOP?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<section id="h21001">
+<title>
+
+
+
+<emphasis id="What_is_objectoriented_programming_OOP" effect="bold">
+
+What is object-oriented programming (OOP)?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1005">
+If you Google this question, you will get hundreds of answers. Here is one of 
+those answers.
+
+</para>
+
+
+
+
+
+<para id="p1006">
+According to
+Wikipedia,
+
+</para>
+
+
+
+
+
+
+
+<note id="note1000" type="">
+
+
+"Object-oriented programming (OOP) is a programming 
+paradigm that uses "objects" - data structures consisting of data fields and 
+methods together with their interactions - to design applications and computer 
+programs. Programming techniques may include features such as information 
+hiding, data abstraction, encapsulation, modularity, polymorphism, and 
+inheritance."
+
+</note>
+
+
+
+
+
+
+
+
+</section>
+<section id="h21002">
+<title>
+<emphasis id="My_answer" effect="bold">
+
+My answer
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1007">
+Here is my answer along with an anecdotal description. Unlike earlier 
+programming styles, object-oriented programming is a programming style that 
+mimics the way most people think and work.
+
+</para>
+
+
+
+
+
+<para id="p1008">
+An OOP solution to a problem should resemble the problem, and observers of 
+the solution should be able to recognize the problem without necessarily knowing 
+about it in advance.
+
+</para>
+
+
+
+
+
+<para id="p1009">
+For example, an OO program that deals with banking transactions should be 
+recognizable on the basis of the objects that it uses, such as deposit objects, 
+withdrawal objects, account objects, etc.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21003">
+<title>
+<emphasis id="An_anecdotal_description" effect="bold">
+
+An anecdotal description
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1010">
+If you have ever assembled a playscape in your back yard, this should sound 
+familiar to you.
+
+</para>
+
+
+
+
+
+<para id="p1011">
+When you opened the large boxes containing the playscape, hundreds of objects 
+spilled onto the ground. Those objects may have consisted of braces, chains, 
+swing seats, slides, screws, nuts, bolts, washers, climbing ropes, ladder rungs, 
+and other assorted objects.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21004">
+<title>
+<emphasis id="Atomic_and_nonatomic_objects" effect="bold">
+
+Atomic and non-atomic objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1012">
+I will refer to 
+
+<emphasis id="em1001" effect="italics">
+(most of)
+
+</emphasis>
+ the kinds of object that I have described in the 
+above list as atomic objects. What I mean by that is that they can't be easily 
+subdivided into smaller objects without destroying their functionality.
+
+</para>
+
+
+
+
+
+<para id="p1013">
+If you were lucky, some of the objects in the box may not have been atomic 
+objects. Instead they may have been pre-assembled arrangements of atomic objects 
+such as an assembly of seats and braces representing a object on which two 
+children can swing together.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21005">
+<title>
+<emphasis id="Your_jobassemble_the_objects" effect="bold">
+
+Your job - assemble the objects
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1014">
+Your job was to assemble those hundreds of atomic and non-atomic objects into 
+a final object which you proudly referred to as 
+
+<emphasis id="em1002" effect="italics">
+"The Playscape."
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21006">
+<title>
+<emphasis id="Objects_working_together" effect="bold">
+
+Objects working together
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1015">
+It has been said that a successful object-oriented program consists of a 
+bunch of cooperating software objects working together to achieve a specified 
+behavior.
+
+</para>
+
+
+
+
+
+<para id="p1016">
+The overall behavior of the program is the combination of behaviors of the 
+individual objects. For example, some objects may acquire input data, other 
+objects may compute and produce output data, while other objects may display the 
+output data.
+
+</para>
+
+
+
+
+
+<para id="p1017">
+It could also be said that a playscape consists of a bunch of hardware 
+objects working together to achieve a specified behavior. The overall behavior 
+of the playscape is the combination of behaviors of the individual objects. For 
+example, the behavior of some of the braces is to stand strong and not bend, 
+while the behavior of a swing chain is to be flexible and move in a prescribed 
+way.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21007">
+<title>
+<emphasis id="Creating_a_model" effect="bold">
+
+Creating a model
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+
+<para id="p1018">
+One of the tasks often faced by an object-oriented programmer is to assemble 
+software objects into a model that represents something that exists in the real 
+world. As a very visual example, you might be asked to create an advertising web 
+page showing an animated software model of the playscape that you assembled in 
+your back yard. With the playscape, you were simply required to assemble the 
+existing objects. However, in the object-oriented programming world, you must do 
+more than just assemble objects.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21008">
+<title>
+
+
+
+<emphasis id="Objects_must_be_designed_and_manufactured" effect="bold">
+
+Objects must be designed and manufactured
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1019">
+Getting back to the playscape, each of the objects for the playscape was 
+manufactured before being shipped to you. Even before that, each object was 
+designed by someone and a set of manufacturing drawings was probably created so 
+that the object could be mass produced.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21009">
+<title>
+
+
+
+<emphasis id="A_class_is_analogous_to_manufacturing_drawings" effect="bold">
+
+A class is analogous to manufacturing drawings
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1020">
+In OOP, there is a direct analogy to the manufacturing drawings of the 
+hardware world. We call it a 
+
+<emphasis id="em1003" effect="italics">
+class
+
+</emphasis>
+. A class documents the 
+specifications for the construction of a particular type of software object. For 
+example, there is probably a set of classes that describe the specifications for 
+each of the button objects and menu objects at the top of the browser in which 
+you are currently viewing this module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21010">
+<title>
+<emphasis id="A_large_library_of_classes" effect="bold">
+
+A large library of classes
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1021">
+As an object-oriented programmer, you will typically have access to a large 
+library of existing classes from which you can construct different types of 
+software objects, such as buttons, sliders, etc. For example, you will find 
+links to the various XNA classes
+
+
+<link id="a1059" url="http://msdn.microsoft.com/en-us/library/bb203940.aspx">
+
+here
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21011">
+<title>
+<emphasis id="Classes_of_your_own_design" effect="bold">
+
+Classes of your own design
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1022">
+In addition, you will often need to design and define new classes from which 
+you can construct new types of objects.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h11003">
+<title>
+<emphasis id="Why_should_you_care_about_OOP" effect="bold">
+
+Why should you care about OOP?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1023">
+You need to care about OOP because the language of XNA is C# and C# is an 
+object-oriented programming language. It is not possible to write a C# program 
+without dealing with the object-oriented nature of the language.
+
+</para>
+
+
+
+
+
+<para id="p1024">
+For most humans, it is also not possible to write credible XNA programs without frequent 
+reference to the XNA documentation. Although the use of the XNA framework will 
+shield you from some of the difficulties of object-oriented programming, you 
+will still have both feet in the OOP sandbox as soon as you consult the 
+documentation.
+
+</para>
+
+
+
+
+
+<section id="h21012">
+<title>
+
+
+
+<emphasis id="The_XNA_documentation_package_is_huge" effect="bold">
+
+The XNA documentation package is huge
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1025">
+For example, the
+
+
+<link id="a1060" url="http://msdn.microsoft.com/en-us/library/bb203940.aspx">
+
+XNA Framework 
+Class Library
+
+</link>
+
+ lists about a dozen namespaces 
+
+<emphasis id="em1004" effect="italics">
+(over and above the namespaces in the 
+standard C# library)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1026">
+One of those namespaces is named 
+
+<emphasis id="strong1001" effect="bold">
+Microsoft.Xna.Framework.Graphics
+
+</emphasis>
+. 
+That namespace lists about 175 different classes.
+
+</para>
+
+
+
+
+
+<para id="p1027">
+One of those classes is the 
+
+<emphasis id="strong1002" effect="bold">
+SpriteBatch
+
+</emphasis>
+ 
+class. The 
+
+<emphasis id="strong1003" effect="bold">
+SpriteBatch
+
+</emphasis>
+ class lists 
+several members including one constructor, four public properties, nine public 
+methods, two protected methods, and one event.
+
+</para>
+
+
+
+
+
+<para id="p1028">
+The 
+
+<emphasis id="strong1004" effect="bold">
+SpriteBatch
+
+</emphasis>
+ class is probably one of the most commonly 
+used classes in the XNA framework so you will need to be able to understand the 
+documentation for all or at least most of the members of that class.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21013">
+<title>
+<emphasis id="The_good_news" effect="bold">
+
+The good news
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1029">
+The good news is that the documentation also provides numerous code samples 
+and explanatory notes to help you use the documentation to write your code 
+correctly.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h11004">
+<title>
+<emphasis id="Three_important_concepts" effect="bold">
+
+Three important concepts
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1030">
+Any object-oriented language must support three very important concepts:
+
+</para>
+
+
+
+
+
+<list id="ul1012" list-type="bulleted">
+
+	
+
+<item id="li1057">
+Encapsulation
+
+</item>
+
+
+	
+
+<item id="li1058">
+Inheritance
+
+</item>
+
+
+	
+
+<item id="li1059">
+Polymorphism
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1031">
+We use these three concepts extensively as we attempt to model the real-world 
+problems that we are trying to solve with our object-oriented programs. I will 
+provide brief descriptions of these concepts in this module and then explain 
+each concept in detail in future modules.
+
+</para>
+
+
+
+
+
+<section id="h21014">
+<title>
+<emphasis id="Encapsulation_example" effect="bold">
+
+Encapsulation example
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1032">
+Consider the steering mechanism of a car as a real-world example of 
+encapsulation. During the past eighty years or so, the steering mechanism for 
+the automobile has evolved into an object in the OOP sense.
+
+</para>
+
+
+
+
+
+<section id="h31002">
+<title>
+<emphasis id="Only_the_interface_is_exposed" effect="bold">
+
+Only the interface is exposed
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1033">
+In particular, most of us know how to use the steering mechanism of an 
+automobile without having any idea whatsoever how it is implemented. All most of 
+us care about is the interface, which we refer to as a steering wheel. We know 
+that if we turn the steering wheel clockwise, the car will turn to the right, 
+and if we turn it counterclockwise, the car will turn to the left.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31003">
+<title>
+<emphasis id="How_is_it_implemented" effect="bold">
+
+How is it implemented?
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1034">
+Most of us don't know, and don't really care, how the steering mechanism is 
+actually implemented "under the hood." In fact, there are probably a number of 
+different implementations for various brands and models of automobiles. 
+Regardless of the brand and model, however, the human interface is pretty much 
+the same. Clockwise turns to the right, counterclockwise turns to the left.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31004">
+<title>
+
+
+
+<emphasis id="Expose_the_interface_and_hide_the_implementation" effect="bold">
+
+Expose the interface and hide the 
+implementation
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1035">
+As in the steering mechanism for a car, a common approach in OOP is to 
+
+<emphasis id="em1005" effect="italics">
+"hide 
+the implementation"
+
+</emphasis>
+ and to 
+
+<emphasis id="em1006" effect="italics">
+"expose the interface"
+
+</emphasis>
+ through encapsulation.
+
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21015">
+<title>
+<emphasis id="Inheritance_example" effect="bold">
+
+Inheritance example
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1036">
+Another important aspect of OOP is inheritance. Let's form an analogy with 
+the teenager who is building a hotrod. That teenager doesn't normally start with 
+a large chunk of steel and carve an engine out of it. Rather, the teenager will 
+usually start with an existing engine and make improvements to it.
+
+</para>
+
+
+
+
+
+<section id="h31005">
+<title>
+<emphasis id="OOP_lingo" effect="bold">
+
+OOP lingo
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1037">
+In OOP lingo, that teenager 
+
+<emphasis id="em1007" effect="italics">
+extends
+
+</emphasis>
+ the existing engine, 
+
+<emphasis id="em1008" effect="italics">
+derives
+
+</emphasis>
+ 
+from the existing engine, 
+
+<emphasis id="em1009" effect="italics">
+inherits
+
+</emphasis>
+ from the existing engine, or 
+
+<emphasis id="em1010" effect="italics">
+
+subclasses
+
+</emphasis>
+ the existing engine 
+
+<emphasis id="em1011" effect="italics">
+(depending on which author is describing the 
+process)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1038">
+Just like in 
+
+<emphasis id="em1012" effect="italics">
+"souping up"
+
+</emphasis>
+ an engine for a hotrod, a very common practice in 
+OOP is to create new improved classes and objects by extending existing class 
+definitions.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31006">
+<title>
+<emphasis id="Extending_the_Game_class" effect="bold">
+
+Extending the Game class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1039">
+When you use Visual C# to create a new XNA game project, the IDE creates 
+skeleton code for a new class. As you will learn later in this course, it is 
+then up to you to put some meat on the skeleton and turn it into a game. The 
+first executable statement in the skeleton code is shown in 
+
+<link id="a1061" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+.
+
+</para>
+
+
+
+
+
+
+
+<note id="note1001" type="">
+
+
+<para id="p1040">
+<emphasis id="Listing_1" effect="bold">
+
+Listing 1
+
+</emphasis>
+
+. Extending the Game class.
+
+</para>
+
+
+
+
+
+<code id="pre1000" display="block">
+public class Game1 : Microsoft.Xna.Framework.Game
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+	
+
+<para id="p1041">
+The code in 
+
+<link id="a1062" target-id="Listing_1">
+
+Listing 1
+
+</link>
+
+ is the first executable statement in the definition 
+	of a new class named 
+
+<emphasis id="strong1005" effect="bold">
+Game1
+
+</emphasis>
+ 
+
+<emphasis id="em1013" effect="italics">
+(or whatever name you give the 
+	new project)
+
+</emphasis>
+. The definition of the new class extends an existing class 
+	named 
+
+<emphasis id="strong1006" effect="bold">
+Game
+
+</emphasis>
+, which resides in the 
+
+<emphasis id="strong1007" effect="bold">
+
+	Microsoft.Xna.Framework
+
+</emphasis>
+ namespace. The existing class named 
+
+<emphasis id="strong1008" effect="bold">
+
+	Game
+
+</emphasis>
+, is the main controller for your new game. I will have much 
+	more to say about the 
+
+<emphasis id="strong1009" effect="bold">
+Game
+
+</emphasis>
+ class in a future module.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h31007">
+<title>
+<emphasis id="Reuse_dont_reinvent" effect="bold">
+
+Reuse, don't reinvent
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1042">
+One of the major arguments in favor of OOP is that it provides a formal 
+mechanism that encourages the reuse of existing programming elements. One of the 
+mottos of OOP is 
+
+<emphasis id="em1014" effect="italics">
+"reuse, don't reinvent."
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+</section>
+<section id="h21016">
+<title>
+<emphasis id="Polymorphism_example" effect="bold">
+
+Polymorphism example
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1043">
+A third important aspect of OOP is polymorphism. This is a Greek word meaning 
+something like 
+
+<emphasis id="em1015" effect="italics">
+one name, many forms
+
+</emphasis>
+. This is a little more difficult to 
+explain in non-programming terminology. However, we will stretch our imagination 
+a little and say that polymorphism is somewhat akin to the automatic 
+transmission in your car. In my Honda, for example, the automatic transmission 
+has four different methods or functions known collectively as Drive 
+
+<emphasis id="em1016" effect="italics">
+(in addition 
+to the functions of Reverse, Park, and Neutral)
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<section id="h31008">
+<title>
+<emphasis id="Select_Drive_to_go_forward" effect="bold">
+
+Select Drive to go forward
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1044">
+As an operator of the automobile, I simply select Drive 
+
+<emphasis id="em1017" effect="italics">
+(meaning go forward)
+
+</emphasis>
+. 
+Depending on various conditions at runtime, the automatic transmission system 
+decides which version of the Drive function to use in every specific situation. 
+The specific version of the function that is used is based on the current 
+conditions 
+
+<emphasis id="em1018" effect="italics">
+(speed, incline, etc.)
+
+</emphasis>
+. This is somewhat analogous to what we will 
+refer to in a subsequent tutorial module as runtime polymorphism.
+
+</para>
+
+
+
+
+
+
+
+
+</section>
+</section>
+</section>
+<section id="h11005">
+<title>
+<emphasis id="Objectoriented_programming_vocabulary" effect="bold">
+
+Object-oriented programming vocabulary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1045">
+OOP involves a whole new vocabulary 
+
+<emphasis id="em1019" effect="italics">
+(or jargon)
+
+</emphasis>
+ which is different from or 
+supplemental to the vocabulary of procedural programming.
+
+</para>
+
+
+
+
+
+<para id="p1046">
+For example the object-oriented programmer defines an 
+
+<emphasis id="em1020" effect="italics">
+abstract data type
+
+</emphasis>
+ 
+by encapsulating its implementation and its interface in a class.
+
+</para>
+
+
+
+
+
+<para id="p1047">
+One or more 
+
+<emphasis id="em1021" effect="italics">
+instances
+
+</emphasis>
+ of the class can then be created or 
+
+<emphasis id="em1022" effect="italics">
+
+instantiated
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1048">
+An 
+
+<emphasis id="em1023" effect="italics">
+instance
+
+</emphasis>
+ of a class is known as an 
+
+<emphasis id="em1024" effect="italics">
+object
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1049">
+Every object has 
+
+<emphasis id="em1025" effect="italics">
+state
+
+</emphasis>
+ and 
+
+<emphasis id="em1026" effect="italics">
+behavior
+
+</emphasis>
+ where the state is 
+determined by the current values stored in the object's 
+
+<emphasis id="em1027" effect="italics">
+instance variables
+
+</emphasis>
+ 
+and the behavior is determined by the 
+
+<emphasis id="em1028" effect="italics">
+instance methods
+
+</emphasis>
+ belonging to the 
+object.
+
+</para>
+
+
+
+
+
+<para id="p1050">
+Inherited abstract data types are 
+
+<emphasis id="em1029" effect="italics">
+derived
+
+</emphasis>
+ classes or 
+
+<emphasis id="em1030" effect="italics">
+subclasses
+
+</emphasis>
+ 
+of 
+
+<emphasis id="em1031" effect="italics">
+base
+
+</emphasis>
+ classes or 
+
+<emphasis id="em1032" effect="italics">
+super
+
+</emphasis>
+ classes. We 
+
+<emphasis id="em1033" effect="italics">
+extend
+
+</emphasis>
+ super 
+classes to create subclasses.
+
+</para>
+
+
+
+
+
+<para id="p1051">
+Within the program the code 
+
+<emphasis id="em1034" effect="italics">
+instantiates
+
+</emphasis>
+ objects 
+
+<emphasis id="em1035" effect="italics">
+(creates instances of 
+classes)
+
+</emphasis>
+ and 
+
+<emphasis id="em1036" effect="italics">
+sends messages
+
+</emphasis>
+ to the objects by calling the class's 
+
+<emphasis id="em1037" effect="italics">
+
+methods
+
+</emphasis>
+ 
+
+<emphasis id="em1038" effect="italics">
+(or member functions
+
+</emphasis>
+).
+
+</para>
+
+
+
+
+
+<para id="p1052">
+If a program is "object oriented", it uses 
+
+<emphasis id="em1039" effect="italics">
+encapsulation
+
+</emphasis>
+, 
+
+<emphasis id="em1040" effect="italics">
+
+inheritance
+
+</emphasis>
+, and 
+
+<emphasis id="em1041" effect="italics">
+polymorphism
+
+</emphasis>
+. It defines abstract data types, 
+encapsulates those abstract data types into classes, instantiates objects from 
+the classes, and sends messages to the objects.
+
+</para>
+
+
+
+
+
+<para id="p1053">
+The members of a class fall generally into one of the following categories:
+
+</para>
+
+
+
+
+
+<list id="ul1013" list-type="bulleted">
+
+	
+
+<item id="li1060">
+Constructors
+
+</item>
+
+
+	
+
+<item id="li1061">
+Properties
+
+</item>
+
+
+	
+
+<item id="li1062">
+Methods
+
+</item>
+
+
+	
+
+<item id="li1063">
+Events
+
+</item>
+
+
+
+
+</list>
+
+
+
+
+<para id="p1054">
+The individual members of a class can be 
+
+<emphasis id="em1042" effect="italics">
+public
+
+</emphasis>
+, 
+
+<emphasis id="em1043" effect="italics">
+private
+
+</emphasis>
+, 
+or 
+
+<emphasis id="em1044" effect="italics">
+protected
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+<para id="p1055">
+To make things even more confusing, almost every item or action used in the 
+OOP jargon has evolved to be described by several different terms. For example, 
+we can cause an object to 
+
+<emphasis id="em1045" effect="italics">
+change its state
+
+</emphasis>
+ by sending it a message, 
+calling its methods, or calling its member functions. The term being used often 
+depends on the author who wrote the specific book that you happen to be reading 
+at the time.
+
+</para>
+
+
+
+
+
+<para id="p1056">
+Hopefully most of this terminology will become clear as we pursue these 
+modules
+
+</para>
+
+
+
+	
+	
+
+</section>
+<section id="h11006">
+<title>
+<emphasis id="Discussion_and_sample_code" effect="bold">
+
+Discussion and sample code
+
+</emphasis>
+
+
+</title>
+
+
+	
+	
+
+<para id="p1057">
+I usually try to provide some code in each module that you can compile 
+	and execute. 
+
+<link id="a1063" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ contains the C# code for a simple program that will 
+	display the words "Hello C# World" on the system console screen when you 
+	compile and run it. 
+
+<emphasis id="em1046" effect="italics">
+(The system console screen will probably appear as a 
+	black window when you run the program.)
+
+</emphasis>
+</para>
+
+
+
+
+
+
+<note id="note1002" type="">
+
+
+<para id="p1058">
+<emphasis id="Listing_2" effect="bold">
+
+Listing 2
+
+</emphasis>
+
+. Hello World in C#.
+
+</para>
+
+
+
+
+
+<code id="pre1001" display="block">
+//File Program.cs
+using System;
+namespace Hello01{
+
+    class Hello01{
+
+        static void Main(string[] args){
+            Console.WriteLine("Hello C# World");
+            //Press any key to dismiss console screen.
+            Console.ReadKey();
+        }//end Main
+
+    }//end class definition
+
+}//end namespace
+</code>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<section id="h21017">
+<title>
+<emphasis id="You_can_learn_a_lot" effect="bold">
+
+You can learn a lot...
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1059">
+You may be surprised at how much you can learn about the structure and syntax 
+of an object-oriented program in C# by taking this simple program apart and 
+examining the elements of the program. Note, however, that this program is 
+strictly class based. It 
+
+<emphasis id="does" effect="bold">
+
+does not instantiate any 
+objects
+
+</emphasis>
+
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21018">
+<title>
+<emphasis id="A_new_class_definition" effect="bold">
+
+A new class definition
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1060">
+The central block of code beginning with the word 
+
+<emphasis id="strong1010" effect="bold">
+class
+
+</emphasis>
+ defines a new class 
+named 
+
+<emphasis id="strong1011" effect="bold">
+Hello01
+
+</emphasis>
+.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21019">
+<title>
+<emphasis id="The_Main_method" effect="bold">
+
+The Main method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1061">
+You probably learned that every C++ program requires a function named 
+
+<emphasis id="strong1012" effect="bold">
+
+main
+
+</emphasis>
+. Execution of the C++ program begins and ends in the 
+
+<emphasis id="strong1013" effect="bold">
+main
+
+</emphasis>
+ 
+function.
+
+</para>
+
+
+
+
+
+<para id="p1062">
+The same is true in C#. Every C# program requires a method named 
+
+<emphasis id="strong1014" effect="bold">
+Main
+
+</emphasis>
+
+
+
+<emphasis id="em1047" effect="italics">
+(note the upper-case "M")
+
+</emphasis>
+. However, unlike in C++, the 
+
+<emphasis id="strong1015" effect="bold">
+Main
+
+</emphasis>
+ 
+method in C# must be defined inside of a class definition.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21020">
+<title>
+<emphasis id="Methods_versus_functions" effect="bold">
+
+Methods versus functions
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1063">
+Methods in C# are analogous to the functions defined inside a class in C++. 
+However, they are called methods instead of functions in C#.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21021">
+<title>
+<emphasis id="Definition_of_the_Main_method" effect="bold">
+
+Definition of the Main method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1064">
+The 
+
+<emphasis id="strong1016" effect="bold">
+Main
+
+</emphasis>
+ method in 
+
+<link id="a1064" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ begins with the keyword 
+
+<emphasis id="strong1017" effect="bold">
+
+static
+
+</emphasis>
+ and ends with the comment "end Main".
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21022">
+<title>
+<emphasis id="The_WriteLine_method" effect="bold">
+
+The WriteLine method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1065">
+As you may have guessed already, the call to the 
+
+<emphasis id="strong1018" effect="bold">
+WriteLine
+
+</emphasis>
+ 
+method inside the 
+
+<emphasis id="strong1019" effect="bold">
+Main
+
+</emphasis>
+ method causes the 
+
+<emphasis id="strong1020" effect="bold">
+WriteLine
+
+</emphasis>
+ 
+method's argument to be displayed on the system console.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21023">
+<title>
+<emphasis id="The_Console_class" effect="bold">
+
+The Console class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1066">
+<link id="a1065" url="http://msdn.microsoft.com/en-us/library/system.console.aspx">
+
+Console
+
+</link>
+
+ 
+is the name of a 
+
+<emphasis id="em1048" effect="italics">
+static
+
+</emphasis>
+ class in the
+
+
+<link id="a1066" url="http://msdn.microsoft.com/en-us/library/system.aspx">
+
+System
+
+</link>
+
+ 
+namespace. The significance of the class being static is that 
+
+<emphasis id="em1049" effect="italics">
+"You do not need 
+to declare an instance of a static class in order to access its members." 
+
+</emphasis>
+Therefore, as I mentioned earlier, this 
+program doesn't purposely instantiate any new objects.
+
+</para>
+
+
+
+
+
+<para id="p1067">
+According to the
+
+
+<link id="a1067" url="http://msdn.microsoft.com/en-us/library/system.console.aspx">
+
+
+documentation
+
+</link>
+
+, the 
+
+<emphasis id="strong1021" effect="bold">
+Console
+
+</emphasis>
+ class 
+
+<emphasis id="em1050" effect="italics">
+"Represents the standard input, output, and 
+error streams for console applications. This class cannot be inherited."
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21024">
+<title>
+<emphasis id="The_System_namespace" effect="bold">
+
+The System namespace
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1068">
+The 
+
+<link id="a1068" url="http://msdn.microsoft.com/en-us/library/system.aspx">
+
+System
+
+</link>
+
+ 
+namespace actually belongs to the Microsoft .NET framework and the classes in 
+the namespace are available for use by several different programming languages 
+that also belong to the framework such as C#, VB.NET, etc. 
+
+<emphasis id="em1051" effect="italics">
+(See the online
+
+
+</emphasis>
+
+
+
+<emphasis id="strong1022" effect="bold">
+<emphasis id="em1052" effect="italics">
+.NET Framework Class Library
+
+</emphasis>
+</emphasis>
+
+
+
+<link id="a1069" url="http://msdn.microsoft.com/en-us/library/ms229335.aspx">
+
+
+<emphasis id="em1053" effect="italics">
+here
+
+</emphasis>
+</link>
+
+
+<emphasis id="em1054" effect="italics">
+.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21025">
+<title>
+<emphasis id="Members_of_the_Console_class" effect="bold">
+
+Members of the Console class
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1069">
+The 
+
+<emphasis id="strong1023" effect="bold">
+Console
+
+</emphasis>
+ class has many members, about nineteen of which 
+are overloaded versions of the method named
+
+
+<link id="a1070" url="http://msdn.microsoft.com/en-us/library/system.console.writeline.aspx">
+
+
+WriteLine
+
+</link>
+
+. 
+
+<emphasis id="em1055" effect="italics">
+(Method overloading means that the same method name can be used 
+two or more times in the same scope as long as the argument list differs from 
+one version to the next.)
+
+</emphasis>
+</para>
+
+
+
+
+
+<para id="p1070">
+The version of the 
+
+<emphasis id="strong1024" effect="bold">
+WriteLine
+
+</emphasis>
+ method that is called in 
+
+
+<link id="a1071" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ requires a 
+
+<emphasis id="strong1025" effect="bold">
+string
+
+</emphasis>
+ object as an incoming parameter. 
+According to the documentation, the behavior of this version of the method is:
+
+</para>
+
+
+
+
+
+<note id="note1003" type="">
+
+
+
+
+
+<para id="p1071">
+"Writes the specified string value, followed by the 
+current line terminator, to the standard output stream."
+
+</para>
+
+
+
+
+
+</note>
+
+
+
+
+
+
+</section>
+<section id="h21026">
+<title>
+<emphasis id="The_dot_operator" effect="bold">
+
+The dot operator
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1072">
+Note the period that joins the name of the class and the name of the method 
+in 
+
+<emphasis id="strong1026" effect="bold">
+Console.WriteLine
+
+</emphasis>
+. When used in this way, the period is 
+often referred to as the 
+
+<emphasis id="em1056" effect="italics">
+dot operator
+
+</emphasis>
+. The dot operator is used in a 
+variety of similar but different ways in C#. In this case, it tells the compiler 
+to look in the 
+
+<emphasis id="strong1027" effect="bold">
+Console
+
+</emphasis>
+ class for a method named 
+
+<emphasis id="strong1028" effect="bold">
+
+WriteLine
+
+</emphasis>
+ that requires an incoming parameter of type 
+
+<emphasis id="strong1029" effect="bold">
+string
+
+</emphasis>
+. 
+
+
+<emphasis id="em1057" effect="italics">
+(It is actually the type of parameter being passed to the method, 
+
+</emphasis>
+<emphasis id="strong1030" effect="bold">
+
+
+
+<emphasis id="em1058" effect="italics">
+string
+
+</emphasis>
+</emphasis>
+<emphasis id="em1059" effect="italics">
+, 
+that specifies which version of the 
+
+</emphasis>
+ 
+
+<emphasis id="strong1031" effect="bold">
+<emphasis id="em1060" effect="italics">
+WriteLine
+
+</emphasis>
+</emphasis>
+<emphasis id="em1061" effect="italics">
+ method will be 
+executed.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21027">
+<title>
+<emphasis id="Namespaces" effect="bold">
+
+Namespaces
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1073">
+Briefly, namespaces provide a way to partition the class library and the new 
+classes defined in a program so that it is possible to reference two classes 
+with the same name in the same scope as long as they are in different 
+namespaces. Therefore, whenever you reference a class name in your code, you 
+must tell the compiler which namespace it resides in. This can be done in two 
+ways. One way is to write the namespace in front of the class name joined by the 
+dot 
+
+<emphasis id="operator_as_in" effect="bold">
+
+operator as in
+
+</emphasis>
+
+
+</para>
+
+
+
+
+
+<code id="pre1002" display="block">System.Console</code>
+
+
+
+
+<para id="p1074">
+or 
+
+</para>
+
+
+
+
+
+<code id="pre1003" display="block">Microsoft.Xna.Framework.Graphics.SpriteBatch</code>
+
+
+
+
+</section>
+<section id="h21028">
+<title>
+<emphasis id="The_using_declaration" effect="bold">
+
+The "using" declaration
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1075">
+The second way to tell the compiler which namespace the class resides in is 
+through the use of a 
+
+<emphasis id="em1062" effect="italics">
+"using"
+
+</emphasis>
+ declaration.
+
+</para>
+
+
+
+
+
+<para id="p1076">
+As long as it won't create name conflicts, you can tell the compiler that you 
+are 
+
+<emphasis id="em1063" effect="italics">
+"using"
+
+</emphasis>
+ the namespace as shown by the first line following the initial 
+comment 
+in 
+
+<link id="a1072" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Then you don't need to refer to the namespace when you reference a 
+class belonging to that namespace in your code.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21029">
+<title>
+<emphasis id="Not_much_help_in_this_case" effect="bold">
+
+Not much help in this case
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1077">
+In this case, since the 
+
+<emphasis id="strong1032" effect="bold">
+Console
+
+</emphasis>
+ class was referenced only 
+once, it would have been simpler to join the class name with the namespace name 
+using the dot operator and to omit the "using" declaration. However, in those 
+cases where the class name is referenced more than once in the code, it is 
+simpler to declare the namespace at the beginning to avoid having to type it 
+more than once. This is particularly true in the case of the 
+
+<emphasis id="strong1033" effect="bold">
+SpriteBatch
+
+</emphasis>
+ 
+class shown above where the 
+namespace name contains several levels separated by periods.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21030">
+<title>
+<emphasis id="Defining_your_own_namespace" effect="bold">
+
+Defining your own namespace
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1078">
+When you define a new class, you should always define the namespace in which 
+it resides. 
+
+<emphasis id="em1064" effect="italics">
+(I believe this is a requirement when developing projects using 
+Visual C#.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21031">
+<title>
+<emphasis id="The_project_file_structure" effect="bold">
+
+The project file structure
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1079">
+<link id="a1073" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+ shows the project file structure for the 
+
+<emphasis id="strong1034" effect="bold">
+Hello01
+
+</emphasis>
+ 
+project. 
+
+<emphasis id="em1065" effect="italics">
+(
+
+<link id="a1074" target-id="Figure_1">
+
+ Figure 1
+
+</link>
+
+ was captured from the 
+
+</emphasis>
+ 
+
+<emphasis id="strong1035" effect="bold">
+<emphasis id="em1066" effect="italics">
+Solution Explorer
+
+</emphasis>
+</emphasis>
+<emphasis id="em1067" effect="italics">
+ 
+window in the Visual C# IDE.)
+
+</emphasis>
+</para>
+
+
+
+
+
+
+
+
+<note id="note1004" type="">
+
+
+
+
+
+<para id="p1080">
+<emphasis id="Figure_1" effect="bold">
+
+Figure 1
+
+</emphasis>
+
+. Project file structure.
+
+</para>
+
+
+
+
+
+<media id="media1000" alt="Missing Figure" display="block">
+<image id="img1000" mime-type="image/jpeg" src="../../media/xna0104a.jpg" width="399" height="524"/>
+</media>
+
+
+
+
+</note>
+
+
+
+
+
+
+
+<para id="p1081">
+The class definition shown in 
+
+<link id="a1075" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ is contained in the file named
+
+
+<emphasis id="strong1036" effect="bold">
+Program.cs
+
+</emphasis>
+ at the bottom of the tree in 
+
+<link id="a1076" target-id="Figure_1">
+
+Figure 1
+
+</link>
+
+. Note that this 
+file is contained in the folder named 
+
+<emphasis id="strong1037" effect="bold">
+Hello01
+
+</emphasis>
+. Also note that 
+the folder named 
+
+<emphasis id="strong1038" effect="bold">
+Hello01
+
+</emphasis>
+ is a child of another folder named
+
+
+<emphasis id="strong1039" effect="bold">
+Hello01
+
+</emphasis>
+ at the top of the project tree. 
+
+<emphasis id="em1068" effect="italics">
+(There are two folders 
+named 
+
+</emphasis>
+ 
+
+<emphasis id="strong1040" effect="bold">
+<emphasis id="em1069" effect="italics">
+Hello01
+
+</emphasis>
+</emphasis>
+<emphasis id="em1070" effect="italics">
+ in the project tree.)
+
+</emphasis>
+</para>
+
+
+
+
+
+</section>
+<section id="h21032">
+<title>
+<emphasis id="The_Hello01_namespace" effect="bold">
+
+The Hello01 namespace
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1082">
+The second line following the initial comment in 
+
+<link id="a1077" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ defines the namespace 
+in which the new class resides. Note that it is the name of the folder in which 
+the file resides. Note also that it is specified relative to the top of the 
+project tree.
+
+</para>
+
+
+
+
+
+<para id="p1083">
+If the folder containing the class happened to be more than one level down in 
+the project tree, as is the case of the 
+
+<emphasis id="strong1041" effect="bold">
+Graphics
+
+</emphasis>
+ folder that 
+contains the 
+
+<emphasis id="strong1042" effect="bold">
+SpriteBatch
+
+</emphasis>
+ class, it would be necessary to use 
+periods to trace down the tree.
+
+</para>
+
+
+
+
+
+</section>
+<section id="h21033">
+<title>
+<emphasis id="The_call_to_the_ReadKey_method" effect="bold">
+
+The call to the ReadKey method
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1084">
+<link id="a1078" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+ also contains a call to a method named 
+
+<emphasis id="strong1043" effect="bold">
+ReadKey
+
+</emphasis>
+, 
+which also belongs to the 
+
+<emphasis id="strong1044" effect="bold">
+Console
+
+</emphasis>
+ class. The purpose of this 
+call is to cause the execution of the program to block and wait until the user 
+presses any key. Otherwise, the console window would appear on the computer 
+screen momentarily and then disappear almost as soon as it appears.
+
+</para>
+
+
+
+
+
+
+
+</section>
+</section>
+<section id="h11007">
+<title>
+<emphasis id="Run_the_program" effect="bold">
+
+Run the program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+
+<para id="p1085">
+I encourage you to copy the code from 
+
+<link id="a1079" target-id="Listing_2">
+
+Listing 2
+
+</link>
+
+. Use that code to create a 
+Visual C# 
+
+<emphasis id="strong1045" effect="bold">
+Console Application
+
+</emphasis>
+ project. Build and run the 
+project. Experiment with the code, making changes, and observing the results of 
+your changes. Make certain that you can explain why your changes behave as they 
+do. 
+
+</para>
+
+
+
+
+
+</section>
+<section id="h11008">
+<title>
+<emphasis id="Run_my_program" effect="bold">
+
+Run my program
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1086">
+Click 
+
+<link id="a1080" url="Hello01.zip">
+
+here
+
+</link>
+
+ to download a zip file containing my 
+version of the program. Extract the folder named 
+
+<emphasis id="strong1046" effect="bold">
+Hello01
+
+</emphasis>
+ from the zip file and save it 
+somewhere on your disk. Start 
+
+<emphasis id="strong1047" effect="bold">
+Visual C# 2010 Express
+
+</emphasis>
+ and select
+
+
+<emphasis id="strong1048" effect="bold">
+Open Project...
+
+</emphasis>
+ from the 
+
+<emphasis id="strong1049" effect="bold">
+File
+
+</emphasis>
+ menu. Navigate 
+to the project folder and select the file with the extension of 
+
+<emphasis id="strong1050" effect="bold">
+.sln
+
+</emphasis>
+. 
+This should cause the project to open and be ready to run or debug as described 
+in the earlier module titled
+
+
+<link id="a1081" url="http://cnx.org/contents/GY804-eY:g-5oRzQu">
+
+
+Getting Started
+
+</link>
+
+.
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11009">
+<title>
+<emphasis id="Summary" effect="bold">
+
+Summary
+
+</emphasis>
+
+
+</title>
+
+
+
+
+<para id="p1087">
+You learned something about object-oriented programming in general in this 
+module. You also learned quite a bit about the structure and syntax of an 
+object-oriented C# program by taking a simple program apart and examining the 
+elements of the program. 
+
+</para>
+
+
+
+	
+
+</section>
+<section id="h11010">
+<title>
+<emphasis id="Miscellaneous" effect="bold">
+
+Miscellaneous
+
+</emphasis>
+
+
+</title>
+
+
+	
+
+<para id="p1088">
+This section contains a variety of miscellaneous information.
+
+</para>
+
+
+
+
+
+	
+
+<note id="note1005" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1051" effect="bold">
+Housekeeping material
+
+</emphasis>
+
+				
+
+<list id="ul1014" list-type="bulleted">
+
+					
+
+<item id="li1064">
+Module name: Xna0104-What is OOP and Why Should You 
+					Care?
+
+</item>
+
+
+					
+
+<item id="li1065">
+File: Xna0104.htm
+
+
+</item>
+
+
+					
+
+<item id="li1066">
+Published: 02/24/14
+
+</item>
+
+
+				
+
+</list>
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+	
+
+<note id="note1006" type="">
+
+
+		
+
+
+			
+
+
+				
+
+<emphasis id="strong1052" effect="bold">
+Disclaimers:
+
+</emphasis>
+<para id="p1089">
+<emphasis id="strong1053" effect="bold">
+Financial
+
+</emphasis>
+: Although the Connexions
+site makes it possible for you to download a PDF file for this
+module at no charge, and also makes it possible for you to
+purchase a pre-printed version of the PDF file, you should be
+aware that some of the HTML elements in this module may not translate well into
+PDF.
+
+</para>
+
+
+
+				
+
+<para id="p1090">
+I also want you to know that, I receive no financial compensation from the Connexions website even if you purchase 
+	the PDF version of the module.
+
+</para>
+
+
+
+				
+
+<para id="p1091">
+In the past, unknown individuals have copied my modules from cnx.org, converted them to Kindle books, and 
+				placed them for sale on Amazon.com showing me as the author. I 
+				neither receive compensation for those sales nor do I know who does 
+				receive compensation. If you purchase such a book, please be 
+				aware that it is a copy of a module that is freely 
+				available on cnx.org and that it was made and published without 
+				my prior knowledge.
+
+</para>
+
+
+
+				
+
+<para id="p1092">
+<emphasis id="strong1054" effect="bold">
+Affiliation
+
+</emphasis>
+: I am a professor of Computer Information 
+	Technology at Austin Community College in Austin, TX.
+	
+
+</para>
+
+
+
+				
+
+</note>
+
+			
+
+
+		
+
+
+
+	
+
+
+
+
+
+
+<para id="p1093">
+-end- 
+
+</para>
+
+
+
+
+
+
+
+</section>
+</content>
+
+
+
+
+</document>
