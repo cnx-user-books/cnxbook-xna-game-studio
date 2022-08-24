@@ -1,12 +1,13 @@
-<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en" authors="Richard Baldwin">
   <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
     <md:content-id>col11634</md:content-id>
     <md:title>XNA Game Studio</md:title>
     <md:language>en</md:language>
     <md:license url="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License</md:license>
     <md:uuid>198f34e3-e798-4853-9a0e-d2c3daafa491</md:uuid>
-<md:slug>xna-game-studio</md:slug>
-</metadata>
+    <md:slug>xna-game-studio</md:slug>
+  </metadata>
   <col:content>
     <col:module document="m49466"/>
     <col:module document="m49467"/>
